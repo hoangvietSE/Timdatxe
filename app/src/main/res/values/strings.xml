@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AnotherTimDatXe</string>
+
+    <string name="login_text_welcome">Chào mừng đến với</string>
+    <string name="login_text_welcomeTwo">Timdatxe</string>
+    <string name="login_text_welcomeThree">Hệ thống tìm xe tiện chuyến lớn nhất Việt Nam</string>
+    <string name="login_edittext_inputEmail">Số điện thoại hoặc Email</string>
+    <string name="login_edittext_password">Mật khẩu</string>
+    <string name="login_btn_name">Đăng nhập</string>
+    <string name="login_btn_quenmatkhau">Quên mật khẩu</string>
+    <string name="login_textView">Đăng nhập bằng</string>
+
+</resources>

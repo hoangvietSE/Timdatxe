@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="content_padding_normal">16dp</dimen>
+
+    <dimen name="margin_edittext">40dp</dimen>
+    <dimen name="margin_edittext_Top">20dp</dimen>
+    <dimen name="margin_btn">40dp</dimen>
+    <dimen name="margin_btn_Top">30dp</dimen>
+    <dimen name="padding_btn_login">10dp</dimen>
+
+    <dimen name="margin_login_linear">40dp</dimen>
+    <dimen name="margin_login_linear_top">20dp</dimen>
+    <dimen name="radius_login_quenmatkhau">22dp</dimen>
+    <dimen name="padding_login">5dp</dimen>
+
+
+</resources>
