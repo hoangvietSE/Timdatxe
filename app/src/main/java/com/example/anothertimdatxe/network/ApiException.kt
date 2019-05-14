@@ -2,9 +2,9 @@ package com.example.anothertimdatxe.network
 
 import android.util.Log
 
-class ApiException(var message: String = "") {
+class ApiException(var msg: String = "") {
     // var message: both init properties and declare primary constructor
-    fun ApiError() {
-        Log.d("myLog", message)
+    fun apiError() {
+        Log.d("myLogError", msg)
     }
 }

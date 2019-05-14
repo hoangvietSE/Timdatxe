@@ -5,41 +5,30 @@ import com.google.gson.annotations.SerializedName
 class UserData {
     @SerializedName("id")
     var id: Int = 0
-
     @SerializedName("email")
-    var email: String? = ""
-
+    var email: String = " "
     @SerializedName("user_name")
-    var userName: String = ""
-
+    var user_name: String = " "
     @SerializedName("birthday")
-    var birthday: String? = ""
-
+    var birthday: String = " "
     @SerializedName("address")
-    var address: String? = ""
-
+    var address: String = " "
     @SerializedName("full_name")
-    var fullName: String? = null
-
+    var full_name: String = " "
     @SerializedName("role_id")
-    var roleId: Int = 1
-
+    var role_id: Int = 0
     @SerializedName("role_name")
-    var roleName: String = ""
-
+    var role_name: String = " "
     @SerializedName("role_display_name")
-    var roleDisplayName: String = ""
-
+    var role_display_name: String = " "
     @SerializedName("phone")
-    var phone: String? = ""
-
+    var phone: String = " "
     @SerializedName("avatar")
-    var avatar: String = ""
-
+    var avatar: String = " "
     @SerializedName("session_token")
-    var session_token: String = ""
-
+    var session_token: String = " "
     @SerializedName("gender")
-    var gender: String = ""
+    var gender: String = " "
+
 
 }

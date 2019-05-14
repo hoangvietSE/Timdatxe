@@ -28,7 +28,7 @@ class LoginPresenterImpl : LoginPresenter {
         request.email = email
         request.password = password
         request.remember = 1
-        val disposable = RetrofitManager.loginUser(object : ICallBack<UserData>{
+        RetrofitManager.loginUser(object : ICallBack<UserData>{
             override fun onSuccess(result: UserData?) {
                 var content = StringBuilder("")
                 content.append("Email: ${result?.email}")
@@ -37,7 +37,7 @@ class LoginPresenterImpl : LoginPresenter {
             }
 
             override fun onError(e: ApiException) {
-                Log.d("myLog",e.message)
+                Log.d("myLog",e.msg)
             }
 
         }, request)

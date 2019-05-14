@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.network
 
+import android.support.annotation.MainThread
 import android.text.TextUtils
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.request.LoginRequest
@@ -16,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 //singleton
 object RetrofitManager {
-    fun createRetrofit(baseUrl: String): Retrofit {
+    private fun createRetrofit(baseUrl: String): Retrofit {
         var retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -25,12 +26,12 @@ object RetrofitManager {
         return retrofit
     }
 
-    private val apiService = createRetrofit("http://api.timdatxe.com/").create(ApiService::class.java)
+    private val apiService = RetrofitManager.createRetrofit("http://api.timdatxe.com/").create(ApiService::class.java)
 
-    fun loginUser(callBack: ICallBack<UserData>, request: LoginRequest): Disposable {
-        val subscriber = getSubcribler(callBack)
-        var requestBody = createPostRequest(request)
-        var disposable: Disposable = apiService.loginUser(requestBody)
+    fun loginUser(callBack: ICallBack<UserData>, request: LoginRequest) {
+        var requestBody = RetrofitManager.createPostRequest(request)
+        var subscribe = getSubcribler(callBack)
+                apiService.loginUser(requestBody)
                 //Observable: I/O thread
                 //Observer: Main Thread
                 //get return data in main thread
@@ -39,12 +40,11 @@ object RetrofitManager {
                 //request will be execute in I/O thread
                 //Schedulers.io(): network call, file, database...
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(subscriber)
-        return disposable
+                .subscribeWith(subscribe)
     }
 
     private fun <T> getSubcribler(callBack: ICallBack<T>): DisposableSingleObserver<BaseResult<T>> {
-         return object : DisposableSingleObserver<BaseResult<T>>() {
+        return object : DisposableSingleObserver<BaseResult<T>>() {
             override fun onSuccess(t: BaseResult<T>) {
                 if (t.status == 200)
                     callBack.onSuccess(t.data)
@@ -52,17 +52,17 @@ object RetrofitManager {
                     if (TextUtils.isEmpty(t.msg))
                         callBack.onError(ApiException(""))
                     else callBack.onError(ApiException(t.msg.toString()))
-
             }
 
             override fun onError(e: Throwable) {
-                callBack.onError(ApiException(e.message!!))
+                callBack.onError(ApiException(e.message.toString()))
             }
-         }
+        }
     }
 
     private fun createPostRequest(request: Any): RequestBody {
-        val jsonInString = Gson().toJson(request)
-        return RequestBody.create(MultipartBody.FORM, jsonInString)//data is divided to many part
+        var stringInJson = Gson().toJson(request)
+        var requestBody: RequestBody = RequestBody.create(MultipartBody.FORM, stringInJson)//data is divided to many part
+        return requestBody
     }
 }
