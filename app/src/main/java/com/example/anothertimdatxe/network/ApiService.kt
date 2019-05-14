@@ -10,6 +10,8 @@ import io.reactivex.Single
 
 interface ApiService {
     //login with user
+    //Observable
+    //Single Observable: only value or error
     @POST("/v1/user_sessions")
     @Headers("Content-Type: application/json")
     fun loginUser(@Body requestBody: RequestBody): Single<BaseResult<UserData>>

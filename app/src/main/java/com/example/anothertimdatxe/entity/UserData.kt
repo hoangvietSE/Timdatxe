@@ -41,4 +41,5 @@ class UserData {
 
     @SerializedName("gender")
     var gender: String = ""
+
 }
