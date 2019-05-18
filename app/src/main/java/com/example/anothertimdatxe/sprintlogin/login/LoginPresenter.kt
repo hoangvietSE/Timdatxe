@@ -1,6 +1,6 @@
 package com.example.anothertimdatxe.sprintlogin.login
 
-import com.example.anothertimdatxe.mvp.BasePresenter
+import com.example.anothertimdatxe.base.mvp.BasePresenter
 
 interface LoginPresenter : BasePresenter {
     fun login(email: String, password: String)

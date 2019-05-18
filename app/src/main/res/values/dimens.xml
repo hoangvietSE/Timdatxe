@@ -13,5 +13,8 @@
     <dimen name="radius_login_quenmatkhau">22dp</dimen>
     <dimen name="padding_login">5dp</dimen>
 
-
+    //textSize
+    <dimen name="textSize_small">13sp</dimen>
+    <dimen name="textSize_normal">15sp</dimen>
+    <dimen name="textSize_large">17sp</dimen>
 </resources>

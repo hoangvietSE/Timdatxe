@@ -1,23 +1,16 @@
 package com.example.anothertimdatxe.sprintlogin.login
 
-import android.util.Log
-import com.example.anothertimdatxe.R
+import android.content.Context
+import android.support.design.widget.BaseTransientBottomBar.LENGTH_LONG
+import android.widget.Toast
+import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 import com.example.anothertimdatxe.entity.UserData
-import com.example.anothertimdatxe.network.ApiException
-import com.example.anothertimdatxe.network.ICallBack
-import com.example.anothertimdatxe.network.RetrofitManager
+import com.example.anothertimdatxe.base.network.ApiException
+import com.example.anothertimdatxe.base.network.ICallBack
+import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.request.LoginRequest
-import java.lang.StringBuilder
 
-class LoginPresenterImpl : LoginPresenter {
-    override fun start() {
-
-    }
-
-    override fun destroy() {
-
-    }
-
+class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView), LoginPresenter {
     override fun login(email: String, password: String) {
         //do-something
     }
@@ -28,23 +21,19 @@ class LoginPresenterImpl : LoginPresenter {
         request.email = email
         request.password = password
         request.remember = 1
-        RetrofitManager.loginUser(object : ICallBack<UserData>{
-            override fun onSuccess(result: UserData?) {
-                var content = StringBuilder("")
-                content.append("Email: ${result?.email}")
-                content.append("Email: ${result?.phone}")
-                Log.d("myLog",content.toString())
-            }
-
+        var disposable = RetrofitManager.loginUser(object : ICallBack<UserData> {
             override fun onError(e: ApiException) {
-                Log.d("myLog",e.msg)
+                Toast.makeText(mView as Context, e.message, LENGTH_LONG).show()
             }
 
+            override fun onSuccess(result: UserData?) {
+                Toast.makeText(mView as Context, "Login Success", LENGTH_LONG).show()
+            }
         }, request)
     }
 
     override fun loginDriver(email: String, password: String) {
         //do-something
-        Log.d("myLog", "Success")
+
     }
 }

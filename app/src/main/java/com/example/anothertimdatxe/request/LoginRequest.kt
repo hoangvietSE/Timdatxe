@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 class LoginRequest {
     @SerializedName("email")
-    var email:String?=null
+    var email: String = ""
     @SerializedName("password")
-    var password:String?=null
+    var password: String = ""
     @SerializedName("remember")
-    var remember:Int?=0
+    var remember: Int = 0
 }

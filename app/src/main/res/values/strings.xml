@@ -10,4 +10,7 @@
     <string name="login_btn_quenmatkhau">Quên mật khẩu</string>
     <string name="login_textView">Đăng nhập bằng</string>
 
+    //dialog_loading
+    <string name="tvLoading">Loading</string>
+
 </resources>

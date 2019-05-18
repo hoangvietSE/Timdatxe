@@ -2,31 +2,30 @@ package com.example.anothertimdatxe.sprintlogin.login
 
 import android.app.Dialog
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.activity.BaseActivity
+import com.example.anothertimdatxe.base.mvp.BaseView
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidEmail
 import com.example.anothertimdatxe.extension.isValidPhone
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.dialog_direct_login.*
 
-class LoginActivity : TimdatxeBaseActivity<LoginPresenter>() {
+class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView {
+    override fun goToNextScreen() {
+        
+    }
+
     override fun getPresenter(): LoginPresenter {
         //do-something
-        return LoginPresenterImpl()
+        return LoginPresenterImpl(this)
     }
 
     override val layoutRes: Int
         get() = R.layout.activity_login
+
 
     override public fun initView() {
         btn_login.setOnClickListener(View.OnClickListener {
