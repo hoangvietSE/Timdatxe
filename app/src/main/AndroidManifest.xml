@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.anothertimdatxe">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".application.CarBookingApplication"
         android:allowBackup="true"
+        android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".sprintlogin.login.LoginActivity">
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
+        <activity
+            android:name=".sprintlogin.login.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".sprintlogin.login.LoginActivity" />-->
+        <activity
+            android:name=".sprinthome.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprintlogin.register.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprintlogin.confirm.ConfirmActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

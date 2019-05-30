@@ -1,25 +1,67 @@
 package com.example.anothertimdatxe.base.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.base.mvp.BaseView
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
     protected abstract val layoutRes: Int
     protected var mPresenter: T? = null
+    protected var toolBar: View? = null
+    protected var leftbutton: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
         mPresenter = getPresenter()
-        //initView
-        mPresenter.let {
-            it!!.onStart()
+        initToolBar()
+        mPresenter?.let {
+            it.start()
         }
     }
 
     abstract fun getPresenter(): T
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter!!.let {
+            it.destroy()
+        }
+    }
+
+    override fun hideLoading() {
+
+    }
+
+    override fun showLoading() {
+
+    }
+
+    fun initToolBar() {
+        toolBar = findViewById(R.id.toolbar)
+        leftbutton = findViewById(R.id.btn_left)
+        leftbutton?.let {
+            it.setOnClickListener {
+                onMenuLeftCLick()
+            }
+        }
+    }
+
+    open fun onMenuLeftCLick() {
+        this.finish()
+    }
+
+    fun startActivityAndClearTask(mActivity: AppCompatActivity, cls: Class<*>) {
+        startActivity(Intent(mActivity, cls).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
+    }
 }

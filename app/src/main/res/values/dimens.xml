@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="element_padding_normal">8dp</dimen>
     <dimen name="content_padding_normal">16dp</dimen>
+    <dimen name="content_padding_large">32dp</dimen>
+    <dimen name="content_padding_resend">8dp</dimen>
+    <dimen name="content_padding_extraLarge">64dp</dimen>
 
     <dimen name="margin_edittext">40dp</dimen>
     <dimen name="margin_edittext_Top">20dp</dimen>
@@ -17,4 +21,12 @@
     <dimen name="textSize_small">13sp</dimen>
     <dimen name="textSize_normal">15sp</dimen>
     <dimen name="textSize_large">17sp</dimen>
+
+    //otpView
+    <dimen name="otp_view_item_size">48dp</dimen>
+    <dimen name="otp_view_item_radius">5dp</dimen>
+    <dimen name="otp_view_item_spacing">5dp</dimen>
+    <dimen name="otp_view_item_line_width">2dp</dimen>
+    <dimen name="otp_view_cursor_width">2dp</dimen>
+
 </resources>

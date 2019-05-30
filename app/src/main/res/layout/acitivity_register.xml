@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="@dimen/content_padding_large"
+        android:layout_marginTop="@dimen/content_padding_normal"
+        android:layout_marginRight="@dimen/content_padding_large"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/RegisTextView"
+            android:text="@string/regis_tv_name" />
+
+        <EditText
+            android:layout_marginTop="4dp"
+            android:id="@+id/et_name"
+            style="@style/RegisEditText"
+            android:hint=" Ví dụ Nguyễn Văn A" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            style="@style/RegisTextView"
+            android:layout_marginTop="@dimen/content_padding_resend"
+            android:text="@string/regis_tv_email" />
+
+        <EditText
+            android:layout_marginTop="4dp"
+            android:id="@+id/et_regis_email"
+            style="@style/RegisEditText" />
+
+        <TextView
+            android:id="@+id/tv_password"
+            style="@style/RegisTextView"
+            android:layout_marginTop="@dimen/content_padding_resend"
+            android:text="@string/regis_tv_password" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_padding_resend"
+            android:text="@string/regis_tv_description_passowrd"
+            android:textSize="@dimen/textSize_small" />
+
+        <EditText
+            android:id="@+id/et_regis_password"
+            style="@style/RegisEditText" />
+
+        <TextView
+            style="@style/RegisTextView"
+            android:layout_marginTop="@dimen/content_padding_resend"
+            android:text="@string/regis_tv_confirm_password" />
+
+        <EditText
+            android:layout_marginTop="4dp"
+            android:id="@+id/et_password_confirm"
+            style="@style/RegisEditText" />
+
+        <TextView
+            style="@style/RegisTextView"
+            android:layout_marginTop="@dimen/content_padding_resend"
+            android:text="@string/regis_tv_phone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/content_padding_large"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_vn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textSize="@dimen/textSize_large"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="@dimen/content_padding_resend"
+                        android:text="+84"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/et_phone"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:layout_marginLeft="@dimen/content_padding_resend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/cbRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvTerm"
+                    android:text="@string/regis_tv_description_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_marginTop="@dimen/content_padding_normal"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="Tiếp tục"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

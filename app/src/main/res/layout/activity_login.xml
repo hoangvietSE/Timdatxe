@@ -56,119 +56,128 @@
 
         <!-- com.google.android.material.textfield.TextInputLayout
         dùng để hiện hint từ textfield nổi lên trên-->
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/content_padding_normal"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="@dimen/content_padding_normal">
 
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="@dimen/content_padding_normal"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginRight="@dimen/content_padding_normal"
                 android:hint="@string/login_edittext_inputEmail" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/content_padding_normal"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="@dimen/content_padding_normal">
 
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginLeft="@dimen/content_padding_normal"
+                android:layout_marginTop="@dimen/content_padding_normal"
+                android:layout_marginRight="@dimen/content_padding_normal"
                 android:hint="@string/login_edittext_password" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <TextView
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_btn"
-            android:layout_marginTop="@dimen/margin_btn_Top"
-            android:layout_marginRight="@dimen/margin_btn"
+            android:layout_marginLeft="@dimen/content_padding_large"
+            android:layout_marginTop="@dimen/content_padding_large"
+            android:layout_marginRight="@dimen/content_padding_large"
             android:background="@drawable/bg_btn_login"
             android:gravity="center"
-            android:padding="@dimen/padding_btn_login"
             android:text="@string/login_btn_name"
             android:textColor="#ffffff"
             android:textSize="22sp" />
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_padding_large"
+            android:layout_marginTop="@dimen/content_padding_normal"
+            android:layout_marginEnd="@dimen/content_padding_large">
+
+            <TextView
+                android:id="@+id/btn_forgot_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/content_padding_normal"
+                android:background="@drawable/bg_button_login_quenmatkhau"
+                android:gravity="center"
+                android:text="@string/login_btn_quenmatkhau"
+                android:textColor="@color/color_white"
+                app:layout_constraintEnd_toStartOf="@id/btn_regis"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/btn_regis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/content_padding_normal"
+                android:background="@drawable/bg_button_login_quenmatkhau"
+                android:gravity="center"
+                android:text="@string/login_btn_regis"
+                android:textColor="@color/color_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_forgot_password"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_login_linear"
-            android:layout_marginTop="@dimen/margin_login_linear_top"
-            android:layout_marginRight="@dimen/margin_login_linear"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_button_login_quenmatkhau"
-                android:gravity="center"
-                android:padding="@dimen/padding_login"
-                android:text="@string/login_btn_quenmatkhau" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_button_login_quenmatkhau"
-                android:gravity="center"
-                android:padding="@dimen/padding_login"
-                android:text="@string/login_btn_quenmatkhau" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_login_linear"
-            android:layout_marginTop="@dimen/margin_login_linear_top"
-            android:layout_marginRight="@dimen/margin_login_linear"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:layout_marginLeft="@dimen/content_padding_large"
+            android:layout_marginTop="@dimen/content_padding_normal"
+            android:layout_marginRight="@dimen/content_padding_large"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
                 android:text="@string/login_textView"
-                android:textSize="15sp" />
+                android:textSize="@dimen/textSize_large" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="25dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_fb_login" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_gmail_login" />
+                <ImageView
+                    android:id="@+id/btn_login_fb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_fb_login"
+                    app:layout_constraintEnd_toStartOf="@id/btn_login_gmail"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_login_gmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_gmail_login"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_login_fb"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>

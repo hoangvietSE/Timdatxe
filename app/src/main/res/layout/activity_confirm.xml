@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imv_confirm_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_padding_normal"
+        android:src="@drawable/bg_confirm_phone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_inputCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/content_padding_normal"
+        android:paddingTop="@dimen/content_padding_resend"
+        android:paddingBottom="@dimen/content_padding_resend"
+        android:text="@string/confirm_tv_inputCode"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imv_confirm_phone" />
+
+    <TextView
+        android:id="@+id/tv_confirm_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/content_padding_normal"
+        android:layout_marginEnd="@dimen/content_padding_extraLarge"
+        android:paddingTop="@dimen/content_padding_resend"
+        android:paddingBottom="@dimen/content_padding_resend"
+        android:text="@string/confirm_tv_description"
+        android:textSize="@dimen/textSize_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_inputCode" />
+
+    <com.example.anothertimdatxe.customview.OtpView
+        android:inputType="text"
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_padding_normal"
+        android:itemBackground="@drawable/bg_otp"
+        app:itemCount="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_confirm_description"
+        app:lineColor="@color/color_white" />
+
+    <TextView
+        android:id="@+id/btn_confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/content_padding_large"
+        android:layout_marginEnd="@dimen/content_padding_large"
+        android:layout_marginBottom="@dimen/content_padding_large"
+        android:background="@drawable/bg_btn_otp"
+        android:gravity="center"
+        android:paddingTop="@dimen/content_padding_resend"
+        android:paddingBottom="@dimen/content_padding_resend"
+        android:text="@string/confirm_btn_regis"
+        android:textColor="@color/color_white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/content_padding_large"
+        android:layout_marginEnd="@dimen/content_padding_large"
+        android:layout_marginBottom="@dimen/content_padding_normal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_padding_large"
+            android:text="@string/confirm_tv_resend" />
+
+        <TextView
+            android:layout_marginStart="@dimen/content_padding_resend"
+            android:id="@+id/btn_resend_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_resend_otp"
+            android:text="Re-send"
+            android:textColor="@color/confirm_btn_resend" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

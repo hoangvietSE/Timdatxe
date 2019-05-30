@@ -3,9 +3,10 @@
     android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="#FF8C00"/>
+    <solid android:color="@color/colorPrimaryDark"/>
     <corners android:radius="22dp"/>
-
+    <padding android:top="@dimen/content_padding_resend"
+        android:bottom="@dimen/content_padding_resend"/>
 
 
 </shape>

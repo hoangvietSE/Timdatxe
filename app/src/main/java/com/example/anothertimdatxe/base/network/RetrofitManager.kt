@@ -1,8 +1,12 @@
 package com.example.anothertimdatxe.base.network
 
 import android.text.TextUtils
+import com.example.anothertimdatxe.base.ApiConstant
+import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
+import com.example.anothertimdatxe.request.ActiveRequest
 import com.example.anothertimdatxe.request.LoginRequest
+import com.example.anothertimdatxe.request.RegisterRequest
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -35,8 +40,49 @@ object RetrofitManager {
 
     private val apiService = createRetrofit("http://api.timdatxe.com/").create(ApiService::class.java)
 
+    private fun <T> getSubcriber(callBack: ICallBack<T>): DisposableSingleObserver<Response<T>> {
+        return object : DisposableSingleObserver<Response<T>>() {
+            override fun onSuccess(response: Response<T>) {
+                /*if (t.status == 200) {
+                    callBack.onSuccess(t.data)
+                } else {
+                    if (TextUtils.isEmpty(t.msg)) {
+                        callBack.onError(ApiException(""))
+                    } else {
+                        callBack.onError(ApiException((t.msg)))
+                    }
+                }*/
+                handleResponse(callBack, response)
+            }
+
+            override fun onError(e: Throwable) {
+                callBack.onError(ApiException(e.message))
+            }
+        }
+    }
+
+    private fun <T> handleResponse(callBack: ICallBack<T>, response: Response<T>) {
+        when {
+            response.code() == ApiConstant.httpStatusCode.OK -> callBack.onSuccess(response.body()!!)
+            response.code() == ApiConstant.httpStatusCode.CREATE -> callBack.onSuccess(response.body()!!)
+            response.code() == ApiConstant.httpStatusCode.UNAUTHORIZED -> handleErrorResponse(callBack, response)
+            else -> handleErrorResponse(callBack, response)
+        }
+    }
+
+    private fun <T> handleErrorResponse(callBack: ICallBack<T>, response: Response<T>) {
+        callBack.onError(ApiException("Error"))
+    }
+
+    //POJO Object to Json
+    //convert request object to JSON and add to body of POST HTTP request
+    private fun createPostRequest(request: Any): RequestBody {
+        var requestInJson: String = Gson().toJson(request)
+        return RequestBody.create(MultipartBody.FORM, requestInJson) //data is divided to many part
+    }
+
     //Utilize RxJava2 to run this on another thread and get result in Main Thread by Obverser
-    fun loginUser(callBack: ICallBack<UserData>, request: LoginRequest): Disposable {
+    fun loginUser(callBack: ICallBack<BaseResult<UserData>>, request: LoginRequest): Disposable {
         val requestBody = createPostRequest(request)
         val subcribe = getSubcriber(callBack)
         var disposable: Disposable = apiService.loginUser(requestBody)
@@ -52,33 +98,28 @@ object RetrofitManager {
         return disposable
     }
 
-    private fun <T> getSubcriber(callBack: ICallBack<T>): DisposableSingleObserver<BaseResult<T>> {
-        return object : DisposableSingleObserver<BaseResult<T>>() {
-            override fun onSuccess(t: BaseResult<T>) {
-                if (t.status == 200) {
-                    callBack.onSuccess(t.data)
-                } else {
-                    if (TextUtils.isEmpty(t.msg)) {
-                        callBack.onError(ApiException(""))
-                    } else {
-                        callBack.onError(ApiException((t.msg)))
-                    }
-                }
-            }
-
-            override fun onError(e: Throwable) {
-                callBack.onError(ApiException(e.message))
-            }
-        }
+    fun loginDriver(callBack: ICallBack<BaseResult<UserData>>, request: LoginRequest): Disposable {
+        val subscribe = getSubcriber(callBack)
+        return apiService.loginDriver(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscribe)
     }
 
-    fun loginDriver(callBack: ICallBack<UserData>, request: LoginRequest) {
-        //convert request object to JSON and add to body of POST HTTP request
+    fun registerDriver(callBack: ICallBack<BaseResult<RegisResult>>, request: RegisterRequest): Disposable {
+        val subcriber = getSubcriber(callBack)
+        return apiService.registerDriver(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subcriber)
     }
 
-    //POJO Object to Json
-    private fun createPostRequest(request: Any): RequestBody {
-        var requestInJson: String = Gson().toJson(request)
-        return RequestBody.create(MultipartBody.FORM, requestInJson) //data is divided to many part
+    fun activeDriver(callBack: ICallBack<BaseResult<UserData>>, request: ActiveRequest): Disposable {
+        val subscriber = getSubcriber(callBack)
+        return apiService.activeDriver(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
     }
+
 }

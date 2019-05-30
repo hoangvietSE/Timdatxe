@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/element_padding_normal"
+    android:paddingEnd="@dimen/element_padding_normal">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTabNotification"
+        style="@style/BottomTabStyle"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_home_unselected"
+        android:text="Trang chủ" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTabNews"
+        style="@style/BottomTabStyle"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_news"
+        android:text="Bài đã đăng" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTabNewPost"
+        style="@style/BottomTabStyle"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_post_news"
+        android:text="Đăng bài" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTabList"
+        style="@style/BottomTabStyle"
+        android:layout_weight="1.5"
+        android:drawableTop="@drawable/ic_list"
+        android:text="Danh sách yêu cầu" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTabProfile"
+        style="@style/BottomTabStyle"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_profile"
+        android:text="Tài khoản" />
+
+</LinearLayout>

@@ -8,9 +8,34 @@
     <string name="login_edittext_password">Mật khẩu</string>
     <string name="login_btn_name">Đăng nhập</string>
     <string name="login_btn_quenmatkhau">Quên mật khẩu</string>
+    <string name="login_btn_regis">Đăng ký</string>
+    <string name="register_title">Đăng ký tài khoản</string>
     <string name="login_textView">Đăng nhập bằng</string>
 
     //dialog_loading
     <string name="tvLoading">Loading</string>
 
+    //drawer
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
+    //regis
+    <string name="regis_tv_name">Họ và tên <font color="#D80C4F">(*)</font>
+    </string>
+    <string name="regis_tv_email">Email <font color="#D80C4F">(*)</font>
+    </string>
+    <string name="regis_tv_password">Mật khẩu <font color="#D80C4F">(*)</font>
+    </string>
+    <string name="regis_tv_confirm_password">Xác nhận mật khẩu <font color="#D80C4F">(*)</font>
+    </string>
+    <string name="regis_tv_phone">Số điện thoại <font color="#D80C4F">(*)</font>
+    </string>
+    <string name="regis_tv_description_passowrd">Mật khẩu phải bao gồm ít nhất 8 ki tự, số, chữ hoa, chữ thường và kí tự đặc biệt</string>
+    <string name="regis_tv_description_checkbox">Đồng ý với các điều khoản và chính sách</string>
+
+    //confirm
+    <string name="confirm_tv_inputCode">Nhập mã xác thực</string>
+    <string name="confirm_tv_description">Hệ thống đã gửi mã xác thực về điện thoại. Nhập mã để hoàn tất đăng ký</string>
+    <string name="confirm_tv_resend">Nếu không nhận được mã xác thực</string>
+    <string name="confirm_btn_regis">Xác thực</string>
 </resources>
