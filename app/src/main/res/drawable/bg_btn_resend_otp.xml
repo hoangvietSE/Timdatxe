@@ -6,6 +6,8 @@
         android:color="#CECECE" />
     <corners android:radius="8dp" />
     <padding
+        android:bottom="4dp"
         android:left="@dimen/content_padding_resend"
-        android:right="@dimen/content_padding_resend" />
+        android:right="@dimen/content_padding_resend"
+        android:top="4dp" />
 </shape>

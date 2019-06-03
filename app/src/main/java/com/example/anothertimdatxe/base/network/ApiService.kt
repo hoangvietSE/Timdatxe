@@ -2,15 +2,13 @@ package com.example.anothertimdatxe.base.network
 
 
 import com.example.anothertimdatxe.base.ApiConstant
+import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
 import io.reactivex.Single
 import retrofit2.Response
-import retrofit2.http.HEAD
+import retrofit2.http.*
 
 interface ApiService {
     //login with user
@@ -34,5 +32,24 @@ interface ApiService {
     //active with driver
     @POST(ApiConstant.DRIVER_ACTIVATIONS)
     @Headers("Content-Type: application/json")
-    fun activeDriver(@Body requestBody: RequestBody) : Single<Response<BaseResult<UserData>>>
+    fun activeDriver(@Body requestBody: RequestBody): Single<Response<BaseResult<UserData>>>
+
+    //Request reset user password
+    @POST(ApiConstant.USER_PASSWORDS)
+    @Headers("Content-Type: application/json")
+    fun resetUserPassword(@Body requestBody: RequestBody): Single<Response<BaseResult<ForgotResult>>>
+
+    //Request reset driver password
+    @POST(ApiConstant.DRIVER_PASSWORDS)
+    @Headers("Content-Type: application/json")
+    fun resetDriverPassword(@Body requestBody: RequestBody): Single<Response<BaseResult<ForgotResult>>>
+
+    @PUT(ApiConstant.USER_PASSWORDS)
+    @Headers("Content-Type: application/json")
+    fun userUpdatePassword(@Body requestBody: RequestBody): Single<Response<BaseResult<UserData>>>
+
+    @PUT(ApiConstant.DRIVER_PASSWORDS)
+    @Headers("Content-Type: application/json")
+    fun driverUpdatePassword(@Body requestBody: RequestBody): Single<Response<BaseResult<UserData>>>
+
 }

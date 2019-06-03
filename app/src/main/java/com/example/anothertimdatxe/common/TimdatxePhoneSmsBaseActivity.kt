@@ -7,7 +7,8 @@ import com.example.anothertimdatxe.widget.TokenPhoneSms
 abstract class TimdatxePhoneSmsBaseActivity<T : BasePresenter> : TimdatxeBaseActivity<T>(), TokenPhoneSms.SendTokenSmsListener {
 
     protected var mTokenPhoneSms = TokenPhoneSms(this, this)
-    protected var mCheckSendSmsSuccess: Boolean = false
+    protected var mUserPhoneNumber: String = ""
+    protected var mCheckSendSmsSuccess: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

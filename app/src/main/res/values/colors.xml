@@ -6,5 +6,6 @@
     <color name="black">#000000</color>
     <color name="color_white">#ffffff</color>
     <color name="login_direct">#DDBEBEBE</color>
+    <color name="forgot_description">#DDE4E4E4</color>
     <color name="confirm_btn_resend">#A0DFA0</color>
 </resources>

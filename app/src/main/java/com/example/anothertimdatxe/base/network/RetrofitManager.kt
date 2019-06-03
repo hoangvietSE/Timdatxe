@@ -2,11 +2,10 @@ package com.example.anothertimdatxe.base.network
 
 import android.text.TextUtils
 import com.example.anothertimdatxe.base.ApiConstant
+import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
-import com.example.anothertimdatxe.request.ActiveRequest
-import com.example.anothertimdatxe.request.LoginRequest
-import com.example.anothertimdatxe.request.RegisterRequest
+import com.example.anothertimdatxe.request.*
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -117,6 +116,38 @@ object RetrofitManager {
     fun activeDriver(callBack: ICallBack<BaseResult<UserData>>, request: ActiveRequest): Disposable {
         val subscriber = getSubcriber(callBack)
         return apiService.activeDriver(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    fun resetUserPassword(callBack: ICallBack<BaseResult<ForgotResult>>, request: ForgotRequest): Disposable {
+        val subscriber = getSubcriber(callBack)
+        return apiService.resetUserPassword(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    fun resetDriverPassword(callBack: ICallBack<BaseResult<ForgotResult>>, request: ForgotRequest): Disposable {
+        val subscriber = getSubcriber(callBack)
+        return apiService.resetDriverPassword(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    fun userUpdatePassword(callBack: ICallBack<BaseResult<UserData>>, request: UpdatePasswordRequest): Disposable {
+        val subscriber = getSubcriber(callBack)
+        return apiService.userUpdatePassword(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    fun driverUpdatePassword(callBack: ICallBack<BaseResult<UserData>>, request: UpdatePasswordRequest): Disposable {
+        val subscriber = getSubcriber(callBack)
+        return apiService.userUpdatePassword(createPostRequest(request))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subscriber)

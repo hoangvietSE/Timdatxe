@@ -1,5 +1,7 @@
 package com.example.anothertimdatxe.extension
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import java.util.regex.Pattern
 
@@ -14,6 +16,10 @@ fun View.invisible() {
 
 fun View.gone() {
     visibility = View.GONE
+}
+
+fun Context.inflate(layoutRes: Int): View {
+    return LayoutInflater.from(this).inflate(layoutRes, null)
 }
 
 const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"
@@ -36,7 +42,7 @@ fun String.isValidPhone(): Boolean {
     return pattern.matcher(this).matches()
 }
 
-fun String.isValidStrongPassword():Boolean{
+fun String.isValidStrongPassword(): Boolean {
     val pattern = Pattern.compile(STRONG_PASSWORD_PATTERN)
     return pattern.matcher(this).matches()
 }

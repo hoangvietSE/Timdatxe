@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AnotherTimDatXe</string>
+    <string name="app_name">TimDatXe</string>
 
     <string name="login_text_welcome">Chào mừng đến với</string>
     <string name="login_text_welcomeTwo">Timdatxe</string>
@@ -38,4 +38,18 @@
     <string name="confirm_tv_description">Hệ thống đã gửi mã xác thực về điện thoại. Nhập mã để hoàn tất đăng ký</string>
     <string name="confirm_tv_resend">Nếu không nhận được mã xác thực</string>
     <string name="confirm_btn_regis">Xác thực</string>
+
+    //forgot
+    <string name="tv_forgot_description">Nhập Email hoặc số điện thoại đăng ký tài khoản Timdatxe của bạn: </string>
+    <string name="et_forgot">Số điện thoại hoặc địa chỉ Email</string>
+    <string name="tv_forgot_timdatxe">Timdatxe</string>
+    <string name="tv_forgot_timdatxe_description">Hệ thống tìm đặt xe lớn nhất Việt Nam</string>
+    <string name="tv_forgot_toolbar_title">ĐẶT LẠI MẬT KHẨU</string>
+
+    //update password
+    <string name="tv_update_password_description">Hệ thống đã gửi mã xác thực Nhập mã xác thực để đổi mật khẩu</string>
+    <string name="tv_update_password_resend">Nếu không nhận được mã xác thực</string>
+    <string name="alert_message_token_to_phone">Mã đặt lại mật khẩu đã được gửi đến điện thoại!</string>
+    <string name="alert_message_token_to_email">Mã đặt lại mật khẩu đã được gửi đến Email!</string>
+    <string name="alert_message_title">Timdatxe</string>
 </resources>

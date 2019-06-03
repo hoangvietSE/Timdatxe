@@ -1,10 +1,12 @@
 package com.example.anothertimdatxe.base.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.mvp.BasePresenter
@@ -15,8 +17,9 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
     protected abstract val layoutRes: Int
     protected var mPresenter: T? = null
-    protected var toolBar: View? = null
+    protected var toolbar: View? = null
     protected var leftbutton: ImageView? = null
+    protected var toolbarTitle: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,21 +49,26 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
     }
 
     fun initToolBar() {
-        toolBar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbar)
         leftbutton = findViewById(R.id.btn_left)
         leftbutton?.let {
             it.setOnClickListener {
                 onMenuLeftCLick()
             }
         }
+        toolbarTitle = findViewById(R.id.toolbar_title)
     }
 
     open fun onMenuLeftCLick() {
         this.finish()
     }
 
-    fun startActivityAndClearTask(mActivity: AppCompatActivity, cls: Class<*>) {
-        startActivity(Intent(mActivity, cls).apply {
+    fun startActivityAndClearTask(cls: Class<*>) {
+        startActivityAndClearTask(this, cls)
+    }
+
+    fun startActivityAndClearTask(context: Context, cls: Class<*>) {
+        startActivity(Intent(context, cls).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         })
     }

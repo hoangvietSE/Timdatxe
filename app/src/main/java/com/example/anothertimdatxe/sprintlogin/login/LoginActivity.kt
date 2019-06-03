@@ -5,12 +5,12 @@ import android.content.Intent
 import android.text.TextUtils
 import android.view.View
 import android.view.Window
-import android.view.WindowManager
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidEmail
 import com.example.anothertimdatxe.extension.isValidPhone
 import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprintlogin.forgotpassword.ForgotActivity
 import com.example.anothertimdatxe.sprintlogin.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.dialog_direct_login.*
@@ -35,6 +35,9 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView {
         })
         btn_regis.setOnClickListener {
             showDialogConfirmDirectRegister()
+        }
+        btn_forgot_password.setOnClickListener {
+            startActivity(Intent(this, ForgotActivity::class.java))
         }
     }
 
@@ -107,8 +110,8 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView {
     }
 
     private fun goToRegis(key_register: Boolean) {
-        startActivity(Intent(this,RegisterActivity::class.java).apply {
-            putExtra(RegisterActivity.KEY_REGISTER,key_register)
+        startActivity(Intent(this, RegisterActivity::class.java).apply {
+            putExtra(RegisterActivity.KEY_REGISTER, key_register)
         })
     }
 }

@@ -6,6 +6,8 @@ object ApiConstant {
     const val DRIVER_REGISTRATIONS = "/v1/driver_registrations"
     const val DRIVER_ACTIVATIONS = "/v1/driver_activations"
     const val USER_ACTIVATIONS = "/v1/user_activations"
+    const val USER_PASSWORDS = "/v1/user_passwords"
+    const val DRIVER_PASSWORDS = "/v1/driver_passwords"
 
     interface httpStatusCode {
         companion object {

@@ -69,7 +69,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     fun setUpToolBar() {
-        toolBar?.let {
+        toolbar?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 it.background = resources.getDrawable(R.color.colorPrimary, null)
             } else {

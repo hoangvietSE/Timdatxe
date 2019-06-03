@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/imv_forgot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_padding_normal"
+        android:src="@drawable/bg_confirm_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_forgot_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/content_padding_normal"
+        android:layout_marginEnd="@dimen/content_padding_normal"
+        android:padding="@dimen/content_padding_resend"
+        android:text="@string/tv_forgot_description"
+        android:textSize="@dimen/textSize_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imv_forgot" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_forgot_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/content_padding_normal"
+        android:layout_marginEnd="@dimen/content_padding_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_description">
+
+        <EditText
+            android:id="@+id/et_forgot_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_forgot" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_forgot_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/forgot_description"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/content_padding_resend"
+        android:paddingBottom="@dimen/content_padding_resend"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/tv_forgot_timdatxe"
+            android:textSize="@dimen/textSize_large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/tv_forgot_timdatxe_description" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="@dimen/content_padding_large"
+        android:layout_marginTop="@dimen/content_padding_large"
+        android:layout_marginRight="@dimen/content_padding_large"
+        android:background="@drawable/bg_btn_login"
+        android:gravity="center"
+        android:text="Xác nhận"
+        android:textColor="#ffffff"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/ln_forgot_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_forgot_email"
+        app:layout_constraintVertical_bias="0.495" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,6 @@ class ConfirmActivity : TimdatxePhoneSmsBaseActivity<ConfirmPresenter>(), Confir
     private var checkRegister: Int = -1 //1 is Driver, 0 is User
     private var tokenFromServer: String = ""
     private var emailFromServer: String = "" //PhoneNumber
-    private var mUserPhoneNumber: String = ""
 
     companion object {
         const val KEY_USER_PHONE_NUMBER = "key_user_phone_number"
