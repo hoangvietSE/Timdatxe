@@ -69,16 +69,16 @@ class LoginSocial(var mActivity: Activity, var mListener: LoginSocialListener) {
         signInGoogle()
     }
 
-    private fun signInGoogle() {
-        var signIntent = mGoogleSignInClient.signInIntent
-        mActivity.startActivityForResult(signIntent, RC_SIGN_IN)
-    }
-
     private fun configRequestGoogle(mActivity: Activity) {
         var gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(mActivity, gso)
+    }
+
+    private fun signInGoogle() {
+        var signIntent = mGoogleSignInClient!!.signInIntent
+        mActivity.startActivityForResult(signIntent, RC_SIGN_IN)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
