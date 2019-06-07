@@ -165,12 +165,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_fb_login"
-                    app:layout_constraintEnd_toStartOf="@id/btn_login_gmail"
+                    app:layout_constraintEnd_toStartOf="@id/btn_login_google"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/btn_login_gmail"
+                    android:id="@+id/btn_login_google"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_gmail_login"

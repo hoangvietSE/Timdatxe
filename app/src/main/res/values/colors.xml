@@ -8,4 +8,27 @@
     <color name="login_direct">#DDBEBEBE</color>
     <color name="forgot_description">#DDE4E4E4</color>
     <color name="confirm_btn_resend">#A0DFA0</color>
+    <color name="white">#ffffff</color>
+    <color name="color_continue">#4d4d4d</color>
+    <color name="regis_hint">#cbcbcb</color>
+    <color name="otp_line_color">#cccccc</color>
+    <color name="color_bg">#cccccc</color>
+    <color name="trans">#00000000</color>
+    <color name="divider">#999999</color>
+    <color name="color_bottom_bg">#e6e6e6</color>
+    <color name="black_80">#80000000</color>
+    <color name="text_secondary">#999999</color>
+    <color name="resend">#7fc7a1</color>
+    <color name="tab">#ffffff</color>
+    <color name="tab_pressed">#dddddd</color>
+    <color name="tab_selected">#dddddd</color>
+    <color name="color_quantity">#016936</color>
+    <color name="color_text_hint">#c5c5c5</color>
+    <color name="color_999">#999999</color>
+    <color name="color_route">#7695b0</color>
+    <color name="gray_e6e6e6">#e6e6e6</color>
+    <color name="gray_b3b3b3">#b3b3b3</color>
+    <color name="gray_666666">#666666</color>
+    <color name="gray_4d4d4d">#4d4d4d</color>
+    <color name="green_009245">#009245</color>
 </resources>

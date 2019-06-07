@@ -12,11 +12,13 @@ import com.example.anothertimdatxe.extension.isValidPhone
 import com.example.anothertimdatxe.sprinthome.HomeActivity
 import com.example.anothertimdatxe.sprintlogin.forgotpassword.ForgotActivity
 import com.example.anothertimdatxe.sprintlogin.register.RegisterActivity
+import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.dialog_direct_login.*
 import kotlinx.android.synthetic.main.dialog_direct_register.*
 
-class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView {
+class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSocial.LoginSocialListener {
+    private var mLoginSocial = LoginSocial(this, this)
 
     override fun getPresenter(): LoginPresenter {
         //do-something
@@ -39,6 +41,13 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView {
         btn_forgot_password.setOnClickListener {
             startActivity(Intent(this, ForgotActivity::class.java))
         }
+        btn_login_fb.setOnClickListener { mLoginSocial.loginFacebook() }
+        btn_login_google.setOnClickListener { mLoginSocial.loginGoogle() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LoginManager.getInstance().logOut()
     }
 
     private fun validate(): Boolean {
@@ -113,5 +122,14 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView {
         startActivity(Intent(this, RegisterActivity::class.java).apply {
             putExtra(RegisterActivity.KEY_REGISTER, key_register)
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mLoginSocial.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onVerifyLoginSocialSuccess(socialId: String, full_name: String, email: String, socialType: String) {
+        mPresenter!!.loginSocial(socialId, full_name, email, socialType)
     }
 }

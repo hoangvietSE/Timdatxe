@@ -2,11 +2,12 @@ package com.example.anothertimdatxe.base.network
 
 
 import com.example.anothertimdatxe.base.ApiConstant
+import com.example.anothertimdatxe.base.RequestParam
 import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
-import okhttp3.RequestBody
 import io.reactivex.Single
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -52,4 +53,12 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun driverUpdatePassword(@Body requestBody: RequestBody): Single<Response<BaseResult<UserData>>>
 
+    //user change password
+    @PUT(ApiConstant.USER_CHANGE_PASSWORDS)
+    @Headers("Content-Type: application/json")
+    fun userChangePassword(@Path(RequestParam.ID) id: Int, @Body createPostRequest: RequestBody): Single<Response<BaseResult<UserData>>>
+
+    @POST(ApiConstant.LOGIN_SOCIAL)
+    @Headers("Content-Type: application/json")
+    fun loginSocial(@Body requestBody: RequestBody) : Single<Response<BaseResult<UserData>>>
 }

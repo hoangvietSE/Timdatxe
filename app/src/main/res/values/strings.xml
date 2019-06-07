@@ -33,6 +33,13 @@
     <string name="regis_tv_description_passowrd">Mật khẩu phải bao gồm ít nhất 8 ki tự, số, chữ hoa, chữ thường và kí tự đặc biệt</string>
     <string name="regis_tv_description_checkbox">Đồng ý với các điều khoản và chính sách</string>
 
+    //Change Password
+    <string name="toolbar_title_change_password">ĐỔI MẬT KHẨU</string>
+    <string name="change_password_old">Mật khẩu cũ</string>
+    <string name="change_password_new">Mật khẩu mới</string>
+    <string name="change_password_retype">Xác nhận mật khẩu mới</string>
+    <string name="change_password_success">Đổi mật khẩu thành công</string>
+
     //confirm
     <string name="confirm_tv_inputCode">Nhập mã xác thực</string>
     <string name="confirm_tv_description">Hệ thống đã gửi mã xác thực về điện thoại. Nhập mã để hoàn tất đăng ký</string>
@@ -52,4 +59,9 @@
     <string name="alert_message_token_to_phone">Mã đặt lại mật khẩu đã được gửi đến điện thoại!</string>
     <string name="alert_message_token_to_email">Mã đặt lại mật khẩu đã được gửi đến Email!</string>
     <string name="alert_message_title">Timdatxe</string>
+
+    //facebook
+    <string name="facebook_app_id">366213034009507</string>
+    <string name="fb_login_protocol_scheme">fb366213034009507</string>
+
 </resources>

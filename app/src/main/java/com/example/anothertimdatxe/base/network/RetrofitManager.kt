@@ -1,11 +1,11 @@
 package com.example.anothertimdatxe.base.network
 
-import android.text.TextUtils
 import com.example.anothertimdatxe.base.ApiConstant
 import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.request.*
+import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -148,6 +148,26 @@ object RetrofitManager {
     fun driverUpdatePassword(callBack: ICallBack<BaseResult<UserData>>, request: UpdatePasswordRequest): Disposable {
         val subscriber = getSubcriber(callBack)
         return apiService.userUpdatePassword(createPostRequest(request))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    //user change password
+    fun userChangePassWord(iCallBack: ICallBack<BaseResult<UserData>>, request: ChangePasswordRequest): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.userChangePassword(
+                CarBookingSharePreference.getUserId(),
+                createPostRequest(request)
+        )//id of viethoangtien@gmail.com
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    fun loginSocial(callBack: ICallBack<BaseResult<UserData>>, request: LoginFacebookRequest): Disposable {
+        val subscriber = getSubcriber(callBack)
+        return apiService.loginSocial(createPostRequest(request))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subscriber)

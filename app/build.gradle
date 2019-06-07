@@ -11,6 +11,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -39,11 +40,13 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.android.support:appcompat-v7:28.1.0'
+    implementation 'com.android.support:design:28.1.0'
     implementation 'de.hdodenhof:circleimageview:1.2.1'
     implementation 'com.google.code.gson:gson:2.8.1'
 
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 }
