@@ -35,6 +35,7 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
             override fun onSuccess(result: BaseResult<UserData>?) {
                 Toast.makeText(mView as Context, "Login Success", LENGTH_LONG).show()
                 mView!!.hideLoading()
+                result?.data!!.isUser = true
                 CarBookingSharePreference.setUserData(result?.data!!)
                 mView!!.goToNextScreen()
             }
@@ -53,6 +54,7 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
             override fun onSuccess(result: BaseResult<UserData>?) {
                 Toast.makeText(mView as Context, "Login Success", LENGTH_LONG).show()
                 mView!!.hideLoading()
+                result?.data!!.isDriver = true
                 CarBookingSharePreference.setUserData(result?.data!!)
             }
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="@dimen/content_padding_resend"
+    android:paddingBottom="@dimen/content_padding_resend"
+    android:textColor="@color/black"
+    android:textSize="@dimen/text_size_16"
+    android:textStyle="bold"
+    tools:text="Chọn số ghế" />

@@ -2,12 +2,15 @@ package com.example.anothertimdatxe.util
 
 import android.preference.PreferenceManager
 import com.example.anothertimdatxe.application.CarBookingApplication
+import com.example.anothertimdatxe.base.RequestParam
 import com.example.anothertimdatxe.entity.UserData
 import com.google.gson.Gson
 
 object CarBookingSharePreference {
     private const val USER_DATA = "user_data"
-    private var mUserId: Int? = -1
+    private var mUserId: Int? = null
+    private var mAccessToken: String? = null
+
 
     fun setStringPreference(key: String?, data: String?) {
         var preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
@@ -34,18 +37,23 @@ object CarBookingSharePreference {
     fun getUserId(): Int {
         if (mUserId == null) {
             getUserData()?.let {
-                mUserId = it.id
+                return it.id
             }
         }
         return mUserId ?: -1
+    }
+
+    fun getAccessToken(): String {
+        if (mAccessToken == null) getUserData()?.let { mAccessToken = RequestParam.BEARER + it.session_token }
+        return mAccessToken ?: ""
     }
 
     fun clearAllPreference() {
         var preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
         var editor = preference.edit()
         mUserId = null
+        mAccessToken = null
         editor.clear()
         editor.apply()
     }
-
 }

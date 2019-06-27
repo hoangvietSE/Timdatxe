@@ -53,6 +53,9 @@
     <string name="tv_forgot_timdatxe_description">Hệ thống tìm đặt xe lớn nhất Việt Nam</string>
     <string name="tv_forgot_toolbar_title">ĐẶT LẠI MẬT KHẨU</string>
 
+    <!-- faqs-->
+    <string name="faqs_title">Các câu hỏi thường gặp (FAQ)</string>
+
     //update password
     <string name="tv_update_password_description">Hệ thống đã gửi mã xác thực Nhập mã xác thực để đổi mật khẩu</string>
     <string name="tv_update_password_resend">Nếu không nhận được mã xác thực</string>
@@ -64,4 +67,15 @@
     <string name="facebook_app_id">366213034009507</string>
     <string name="fb_login_protocol_scheme">fb366213034009507</string>
 
+    //Profile
+    <string name="user_profile_number_trip">Số chuyến đã đi:</string>
+    <string name="user_profile_detail">Thông tin chi tiết</string>
+    <string name="user_profile_full_name">Họ Tên :</string>
+    <string name="user_profile_email">Email :</string>
+    <string name="user_profile_phone_number">Số Điện Thoại :</string>
+    <string name="user_profile_date_of_birth">Ngày Sinh :</string>
+    <string name="user_profile_gender">Giới Tính :</string>
+    <string name="user_profile_address">Địa Chỉ: </string>
+    <string name="user_profile_toolbar_title">Hồ sơ người dùng</string>
+    <string name="user_profile_des">Mô tả bản thân :</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -71,7 +72,9 @@
                 android:layout_marginLeft="@dimen/content_padding_normal"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="@dimen/content_padding_normal"
-                android:hint="@string/login_edittext_inputEmail" />
+                android:hint="@string/login_edittext_inputEmail"
+                android:inputType="text"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +92,9 @@
                 android:layout_marginLeft="@dimen/content_padding_normal"
                 android:layout_marginTop="@dimen/content_padding_normal"
                 android:layout_marginRight="@dimen/content_padding_normal"
-                android:hint="@string/login_edittext_password" />
+                android:hint="@string/login_edittext_password"
+                android:inputType="text"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

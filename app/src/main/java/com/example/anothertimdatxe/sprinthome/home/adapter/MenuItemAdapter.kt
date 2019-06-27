@@ -21,6 +21,5 @@ class MenuItemAdapter(context: Context, var mListener: BaseRvListener?) : BaseAd
             itemView.tv_menu_item.text = data.title
             itemView.imv_menu_item.setImageResource(data.itemNormal)
         }
-
     }
 }

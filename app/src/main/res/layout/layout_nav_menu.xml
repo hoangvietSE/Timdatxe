@@ -25,7 +25,7 @@
                 android:src="@drawable/ic_avatar" />
 
             <ImageView
-                android:id="@+id/imv_setting"
+                android:id="@+id/btn_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

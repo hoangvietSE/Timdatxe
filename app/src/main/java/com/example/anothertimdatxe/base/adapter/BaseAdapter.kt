@@ -1,7 +1,6 @@
 package com.example.anothertimdatxe.base.adapter
 
 import android.content.Context
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter<T, VH : BaseViewHolder<T>>(var context: Context) : RecyclerView.Adapter<VH>() {
@@ -24,6 +23,10 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<T>>(var context: Context) : Re
         mListItem.clear()
         mListItem.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun getListItem(): ArrayList<T> {
+        return mListItem
     }
 
     fun addListItems(list: List<T>?) {

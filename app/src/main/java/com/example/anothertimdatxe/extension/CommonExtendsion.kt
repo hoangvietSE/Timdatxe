@@ -3,6 +3,11 @@ package com.example.anothertimdatxe.extension
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import com.example.anothertimdatxe.BuildConfig
+import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.base.util.GlideApp
 import java.util.regex.Pattern
 
 
@@ -18,8 +23,20 @@ fun View.gone() {
     visibility = View.GONE
 }
 
-fun Context.inflate(layoutRes: Int): View {
-    return LayoutInflater.from(this).inflate(layoutRes, null)
+fun Context.inflate(context: Context, layoutRes: Int): View {
+    return LayoutInflater.from(context).inflate(layoutRes, null)
+}
+
+fun Context.inflate(context: Context, root: ViewGroup, layoutRes: Int): View {
+    return LayoutInflater.from(context).inflate(layoutRes, root, true)
+}
+
+fun ImageView.setAvatar(context: Context, imv: ImageView, url: String) {
+    GlideApp.with(context)
+            .load(BuildConfig.BASE_URL + url)
+            .placeholder(R.drawable.ic_avatar)
+            .error(R.drawable.ic_avatar)
+            .into(imv)
 }
 
 const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"

@@ -34,4 +34,20 @@
     <dimen name="otp_view_item_line_width">2dp</dimen>
     <dimen name="otp_view_cursor_width">2dp</dimen>
 
+    <dimen name="margin_16_dp">16dp</dimen>
+    <dimen name="margin_20_dp">20dp</dimen>
+    <dimen name="margin_10_dp">10dp</dimen>
+    <dimen name="margin_6_dp">6dp</dimen>
+    <dimen name="margin_8_dp">8dp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="margin_4_dp">4dp</dimen>
+    <dimen name="margin_40_dp">40dp</dimen>
+    <dimen name="text_size_26">26sp</dimen>
+    <dimen name="margin_26_dp">26dp</dimen>
+    <dimen name="_dp24">24dp</dimen>
+    <dimen name="_dp12">12dp</dimen>
+    <dimen name="margin_36_dp">36dp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+
 </resources>

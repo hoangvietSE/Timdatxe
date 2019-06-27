@@ -1,9 +1,12 @@
 package com.example.anothertimdatxe.base.network
 
+import com.example.anothertimdatxe.BuildConfig
 import com.example.anothertimdatxe.base.ApiConstant
 import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
+import com.example.anothertimdatxe.entity.UserListPostEntity
+import com.example.anothertimdatxe.entity.response.FaqsResponse
 import com.example.anothertimdatxe.request.*
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.google.gson.Gson
@@ -15,6 +18,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,12 +28,16 @@ import java.util.concurrent.TimeUnit
 object RetrofitManager {
     private fun createRetrofit(baseUrl: String): Retrofit {
         //timeout for connection is 120s
-        var client: OkHttpClient = OkHttpClient.Builder()
+        var client = OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
-                .build()
+        if (BuildConfig.DEBUG) {
+            var logging = HttpLoggingInterceptor()
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            client.addInterceptor(logging)
+        }
 
         return Retrofit.Builder()
-                .client(client)
+                .client(client.build())
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 //this verifies that using RxJava2 for this API call
@@ -37,7 +45,7 @@ object RetrofitManager {
                 .build()
     }
 
-    private val apiService = createRetrofit("http://api.timdatxe.com/").create(ApiService::class.java)
+    private val apiService = createRetrofit(BuildConfig.BASE_URL).create(ApiService::class.java)
 
     private fun <T> getSubcriber(callBack: ICallBack<T>): DisposableSingleObserver<Response<T>> {
         return object : DisposableSingleObserver<Response<T>>() {
@@ -173,4 +181,27 @@ object RetrofitManager {
                 .subscribeWith(subscriber)
     }
 
+    fun onGetFaqs(iCallBack: ICallBack<BaseResult<List<FaqsResponse>>>, request: MutableMap<String, Any>): Disposable {
+        val subcriber = getSubcriber(iCallBack)
+        return apiService.onGetFaqs(request)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subcriber)
+    }
+
+    fun getUserPostCreated(iCallBack: ICallBack<BaseResult<List<UserListPostEntity>>>): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.getUserPostCreated(CarBookingSharePreference.getUserId())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    fun getUserInfo(iCallBack: ICallBack<BaseResult<UserData>>): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.getUserInfo(CarBookingSharePreference.getUserId())
+        .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscriber)
+    }
 }

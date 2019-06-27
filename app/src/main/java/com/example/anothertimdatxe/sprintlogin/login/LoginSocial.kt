@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.example.anothertimdatxe.entity.FacebookResponse
+import com.example.anothertimdatxe.entity.response.FacebookResponse
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult

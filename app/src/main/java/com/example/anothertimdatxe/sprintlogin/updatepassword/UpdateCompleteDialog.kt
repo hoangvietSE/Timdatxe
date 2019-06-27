@@ -13,7 +13,7 @@ import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 
 class UpdateCompleteDialog(mContext: Context) : Dialog(mContext, R.style.Theme_AppCompat_Light_Dialog_Alert) {
     init {
-        val view = context.inflate(R.layout.dialog_update_complete)
+        val view = context.inflate(context, R.layout.dialog_update_complete)
         view.setOnClickListener {
             dismiss()
             context.startActivity(Intent(context, LoginActivity::class.java).apply {

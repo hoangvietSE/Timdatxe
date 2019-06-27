@@ -2,8 +2,6 @@ package com.example.anothertimdatxe.sprinthome
 
 import android.content.Intent
 import android.os.Build
-import android.view.View
-import android.widget.BaseAdapter
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -14,23 +12,30 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseFragmentManager
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
+import com.example.anothertimdatxe.event_bus.GetProfileSuccess
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
+import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
+import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
+import com.example.anothertimdatxe.sprinthome.settings.faqs.FaqsActivity
+import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFragment
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.widget.BottomTabLayout
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_nav_menu.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.BottomBarListener {
 
     companion object {
         var ITEM_LOG_OUT = 5
-        var VP_HOME = 0
-        var VP_NEWS = 1
-        var VP_LISTS = 2
-        var VP_PROFILES = 3
+        var VP_ITEM_HOME = 0
+        var VP_ITEM_NEWS = 1
+        var VP_ITEM_LISTS = 2
+        var VP_ITEM_PROFILES = 3
     }
 
     private var mToggle: ActionBarDrawerToggle? = null
@@ -56,6 +61,12 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         drawer_layout.openDrawer(GravityCompat.START)
     }
 
+    override fun onSettingClick() {
+        btn_setting.setOnClickListener {
+            startActivity(Intent(this, FaqsActivity::class.java))
+        }
+    }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -66,6 +77,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         setUpToolBar()
         initDrawer()
         initViewPager()
+        onSettingClick()
     }
 
     fun setUpToolBar() {
@@ -85,9 +97,28 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         }
     }
 
+    private fun setToolbarTitle(string: String) {
+        toolbarTitle?.let {
+            it.text = string.toUpperCase()
+        }
+    }
+
     fun initViewPager() {
         var homeFragment = HomeFragment.newInstance()
+        var listPostCreatedFragment: Fragment? = null
+        var userProfileFragment: Fragment? = null
+        var listRequestFragment: Fragment? = null
+        if (CarBookingSharePreference.getUserData()!!.isUser) {
+            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
+            listRequestFragment = ListRequestFragment.getInstance()
+            userProfileFragment = UserProfileFragment.getInstance()
+        }
         mListFragment.add(homeFragment)
+        if (CarBookingSharePreference.getUserData()!!.isUser) {
+            mListFragment.add(listPostCreatedFragment!!)
+            mListFragment.add(listRequestFragment!!)
+            mListFragment.add(userProfileFragment!!)
+        }
         mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
         bottom_bar.setListener(this)
         vp_home.adapter = mFragmentAdapter
@@ -103,7 +134,17 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    //do-something
+                    VP_ITEM_PROFILES -> {
+                        when {
+                            CarBookingSharePreference.getUserData()!!.isUser -> {
+                                setUpToolBar()
+                                setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
+                            }
+                            CarBookingSharePreference.getUserData()!!.isDriver -> {
+
+                            }
+                        }
+                    }
                 }
             }
 
@@ -156,12 +197,24 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         rv_menu.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun showEditButton(getProfileSuccess: GetProfileSuccess) {
+        when (getProfileSuccess.checkSuccess) {
+            true -> {
+
+            }
+            false -> {
+
+            }
+        }
+    }
+
     override fun onHomeClick() {
-        vp_home.currentItem = VP_HOME
+        vp_home.currentItem = VP_ITEM_HOME
     }
 
     override fun onNews() {
-        vp_home.currentItem = VP_NEWS
+        vp_home.currentItem = VP_ITEM_NEWS
     }
 
     override fun onCreateNews() {
@@ -169,11 +222,11 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onRequest() {
-        vp_home.currentItem = VP_LISTS
+        vp_home.currentItem = VP_ITEM_LISTS
     }
 
     override fun onProfile() {
-        vp_home.currentItem = VP_PROFILES
+        vp_home.currentItem = VP_ITEM_PROFILES
     }
 
     fun logOut() {
