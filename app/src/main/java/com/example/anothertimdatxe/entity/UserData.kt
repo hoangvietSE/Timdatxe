@@ -35,4 +35,13 @@ class UserData {
 
     @SerializedName("session_token")
     var session_token: String = ""
+
+    @SerializedName("count_books")
+    var count_books: Int? = null
+
+    @SerializedName("description")
+    var description: String? = null
+
+    var isUser: Boolean = false
+    var isDriver: Boolean = false
 }

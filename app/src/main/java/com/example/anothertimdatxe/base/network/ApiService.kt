@@ -6,6 +6,8 @@ import com.example.anothertimdatxe.base.RequestParam
 import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
+import com.example.anothertimdatxe.entity.UserListPostEntity
+import com.example.anothertimdatxe.entity.response.FaqsResponse
 import io.reactivex.Single
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -60,5 +62,21 @@ interface ApiService {
 
     @POST(ApiConstant.LOGIN_SOCIAL)
     @Headers("Content-Type: application/json")
-    fun loginSocial(@Body requestBody: RequestBody) : Single<Response<BaseResult<UserData>>>
+    fun loginSocial(@Body requestBody: RequestBody): Single<Response<BaseResult<UserData>>>
+
+    //Faqs
+    @GET(ApiConstant.SHOW_FAQS)
+    @Headers("Content-Type: application/json")
+    fun onGetFaqs(@QueryMap data: MutableMap<String, Any>
+    ): Single<Response<BaseResult<List<FaqsResponse>>>>
+
+    //get user post created
+    @GET(ApiConstant.USER_LIST_POST_CREATED)
+    @Headers("Content-Type: application/json")
+    fun getUserPostCreated(@Path(RequestParam.USER_ID) user_id: Int): Single<Response<BaseResult<List<UserListPostEntity>>>>
+
+    //user profile
+    @GET(ApiConstant.USER_INFO)
+    @Headers("Content-Type: application/json")
+    fun getUserInfo(@Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserData>>>
 }

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_bottom_bg"
+    android:paddingBottom="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16_dp"
+            android:background="@drawable/bg_user_profile_info"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imv_avatar"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/ic_avatar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_fullname"
+                    style="@style/TextViewBold"
+                    android:textSize="@dimen/text_size_26"
+                    tools:text="Hoang Tien Viet" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextViewNormal"
+                        android:text="@string/user_profile_number_trip" />
+
+                    <TextView
+                        android:id="@+id/tv_number_trip"
+                        style="@style/TextViewBold"
+                        android:layout_marginLeft="@dimen/margin_8_dp"
+                        android:background="@drawable/bg_user_profile_number_trip"
+                        android:textColor="@color/color_quantity"
+                        tools:text="0" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextViewBold"
+            android:layout_width="match_parent"
+            android:background="@color/gray_b3b3b3"
+            android:paddingLeft="@dimen/content_padding_normal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/user_profile_detail"
+            android:textSize="@dimen/text_size_16" />
+
+        <com.example.anothertimdatxe.widget.BaseDialogRow
+            android:id="@+id/rowFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:row_title="@string/user_profile_full_name" />
+
+        <com.example.anothertimdatxe.widget.BaseDialogRow
+            android:id="@+id/rowEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:row_title="@string/user_profile_email" />
+
+        <com.example.anothertimdatxe.widget.BaseDialogRow
+            android:id="@+id/rowPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:row_title="@string/user_profile_phone_number" />
+
+        <com.example.anothertimdatxe.widget.BaseDialogRow
+            android:id="@+id/rowDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:row_title="@string/user_profile_date_of_birth" />
+
+        <com.example.anothertimdatxe.widget.BaseDialogRow
+            android:id="@+id/rowGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:row_title="@string/user_profile_gender" />
+
+        <com.example.anothertimdatxe.widget.BaseDialogRow
+            android:id="@+id/rowAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:row_title="@string/user_profile_address" />
+
+        <TextView
+            android:id="@+id/tv_des"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/margin_16_dp"
+            android:layout_marginTop="@dimen/margin_8_dp"
+            android:layout_marginRight="@dimen/margin_16_dp"
+            android:background="@drawable/bg_user_profile_des"
+            android:text="@string/user_profile_des" />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

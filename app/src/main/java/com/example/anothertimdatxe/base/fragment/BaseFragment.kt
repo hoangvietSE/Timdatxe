@@ -11,7 +11,7 @@ import com.example.anothertimdatxe.base.mvp.BaseView
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), BaseView {
     protected abstract val layoutRes: Int
-    private var mPresenter: T? = null
+    protected var mPresenter: T? = null
     protected lateinit var mContext: Context
     protected lateinit var mRootView: View
 

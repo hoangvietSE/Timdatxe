@@ -51,20 +51,20 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
     }
 
     private fun validate(): Boolean {
-        if (TextUtils.isEmpty(et_email!!.getText().toString())) {
-            et_email!!.error = "Please enter email"
+        if (TextUtils.isEmpty(et_email.text)) {
+            et_email!!.error = "Vui lòng nhập số điện thoại hoặc địa chỉ email!"
             et_email!!.requestFocus()
             return false
         } else if (!(et_email!!.getText().toString().isValidEmail() || et_email!!.getText().toString().isValidPhone())) {
-            et_email!!.error = "Email or Phone isn't valid"
+            et_email!!.error = "Vui lòng nhập số điện thoại hoặc địa chỉ email đúng định dạng!"
             et_email!!.requestFocus()
             return false
         } else if (TextUtils.isEmpty(et_password!!.getText().toString())) {
-            et_password!!.error = "Please enter password"
+            et_password!!.error = "Vui lòng nhập mật khẩu!"
             et_password!!.requestFocus()
             return false
         } else if (et_password!!.getText().toString().length <= 6) {
-            et_password!!.error = "Password must be greater than 6"
+            et_password!!.error = "Mật khẩu phải lớn hơn 6 kí tự bao gồm chữ cái, số và kí tự đặc biệt!"
             et_password!!.requestFocus()
             return false
         }

@@ -3,7 +3,6 @@ package com.example.anothertimdatxe.base.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.base.mvp.BaseView
-import kotlinx.android.synthetic.main.toolbar.view.*
+import org.greenrobot.eventbus.EventBus
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
@@ -29,6 +28,16 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         mPresenter?.let {
             it.start()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
     abstract fun getPresenter(): T

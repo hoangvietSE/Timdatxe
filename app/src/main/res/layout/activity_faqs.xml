@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar"/>
+
+    <ExpandableListView
+            android:childDivider="@color/trans"
+            android:dividerHeight="@dimen/content_padding_resend"
+            android:divider="@color/trans"
+            android:layout_marginTop="@dimen/content_padding_large"
+            android:id="@+id/elv_faqs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</LinearLayout>
