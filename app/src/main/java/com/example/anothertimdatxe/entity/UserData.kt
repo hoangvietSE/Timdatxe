@@ -1,8 +1,9 @@
 package com.example.anothertimdatxe.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class UserData {
+class UserData : Serializable {
     @SerializedName("id")
     var id: Int = 0
 
@@ -13,7 +14,7 @@ class UserData {
     var full_name: String = ""
 
     @SerializedName("birthday")
-    var birthday: String? = null
+    var birthday: String ?= null
 
     @SerializedName("gender")
     var gender: String? = null

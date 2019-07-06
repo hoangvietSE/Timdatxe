@@ -1,6 +1,7 @@
 package com.example.anothertimdatxe.extension
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,14 @@ fun Context.inflate(context: Context, root: ViewGroup, layoutRes: Int): View {
 fun ImageView.setAvatar(context: Context, imv: ImageView, url: String) {
     GlideApp.with(context)
             .load(BuildConfig.BASE_URL + url)
+            .placeholder(R.drawable.ic_avatar)
+            .error(R.drawable.ic_avatar)
+            .into(imv)
+}
+
+fun ImageView.setAvatar(context: Context, imv: ImageView, contentURI: Uri) {
+    GlideApp.with(context)
+            .load(contentURI)
             .placeholder(R.drawable.ic_avatar)
             .error(R.drawable.ic_avatar)
             .into(imv)

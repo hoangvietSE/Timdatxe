@@ -13,18 +13,23 @@ import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseFragmentManager
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
 import com.example.anothertimdatxe.event_bus.GetProfileSuccess
+import com.example.anothertimdatxe.extension.gone
+import com.example.anothertimdatxe.extension.setAvatar
+import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
 import com.example.anothertimdatxe.sprinthome.settings.faqs.FaqsActivity
+import com.example.anothertimdatxe.sprinthome.updateprofile.UpdateProfileActivity
 import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFragment
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.widget.BottomTabLayout
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_nav_menu.*
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -42,6 +47,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     private lateinit var mAdapter: MenuItemAdapter
     private var mListFragment: ArrayList<Fragment> = arrayListOf()
     private var mFragmentAdapter: BaseFragmentManager? = null
+    private var isLoadingProfileSuccess: Boolean = false
     private var mListener: BaseRvListener = object : BaseRvListener {
         override fun onItemClick(position: Int) {
             when (position) {
@@ -71,6 +77,16 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
     }
 
     override fun initView() {
@@ -135,13 +151,34 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             override fun onPageSelected(position: Int) {
                 when (position) {
                     VP_ITEM_PROFILES -> {
-                        when {
-                            CarBookingSharePreference.getUserData()!!.isUser -> {
-                                setUpToolBar()
-                                setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
+                        rightButton?.let {
+                            if (isLoadingProfileSuccess) {
+                                it.visible()
+                            } else {
+                                it.gone()
                             }
-                            CarBookingSharePreference.getUserData()!!.isDriver -> {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit, null))
+                            } else {
+                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit))
+                            }
+                            it.setOnClickListener {
+                                var mfragment: Fragment = mListFragment[position]
+                                if (mfragment is UserProfileFragment) {
+                                    var data = mfragment.getUserProfile()
+                                    startActivity(Intent(this@HomeActivity, UpdateProfileActivity::class.java).apply {
+                                        putExtra(UpdateProfileActivity.USER_PROFILE, data)
+                                    })
+                                }
+                            }
+                            when {
+                                CarBookingSharePreference.getUserData()!!.isUser -> {
+                                    setUpToolBar()
+                                    setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
+                                }
+                                CarBookingSharePreference.getUserData()!!.isDriver -> {
 
+                                }
                             }
                         }
                     }
@@ -195,16 +232,26 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         mAdapter.add(itemLogout)
         rv_menu.adapter = mAdapter
         rv_menu.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        updateHeaderMenu(CarBookingSharePreference.getUserData()!!.full_name, CarBookingSharePreference.getUserData()!!.avatar!!)
+    }
+
+    fun updateHeaderMenu(full_name: String, avatar: String) {
+        imv_avatar.let {
+            it.setAvatar(this, it, avatar)
+        }
+        tv_user_name.text = full_name
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun showEditButton(getProfileSuccess: GetProfileSuccess) {
         when (getProfileSuccess.checkSuccess) {
             true -> {
-
+                isLoadingProfileSuccess = true
+                rightButton!!.visible()
             }
             false -> {
-
+                isLoadingProfileSuccess = false
+                rightButton!!.gone()
             }
         }
     }

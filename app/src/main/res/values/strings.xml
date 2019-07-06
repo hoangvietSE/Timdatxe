@@ -11,6 +11,7 @@
     <string name="login_btn_regis">Đăng ký</string>
     <string name="register_title">Đăng ký tài khoản</string>
     <string name="login_textView">Đăng nhập bằng</string>
+    <string name="login_success">Đăng nhập thành công</string>
 
     //dialog_loading
     <string name="tvLoading">Loading</string>
@@ -78,4 +79,22 @@
     <string name="user_profile_address">Địa Chỉ: </string>
     <string name="user_profile_toolbar_title">Hồ sơ người dùng</string>
     <string name="user_profile_des">Mô tả bản thân :</string>
+
+    //User Update Profile
+    <string name="user_update_profile_toolbar">Chỉnh sửa hồ sơ</string>
+    <string name="user_update_profile_choose_avatar">Chọn ảnh</string>
+    <string name="user_update_profile_title">Thông tin chi tiết</string>
+    <string name="user_update_profile_name">Họ tên:</string>
+    <string name="user_update_profile_email">Email:</string>
+    <string name="user_update_profile_phone">Số điện thoại:</string>
+    <string name="user_update_profile_dob">Ngày sinh:</string>
+    <string name="user_update_profile_gender">Giới tính:</string>
+    <string name="user_update_profile_address">Địa chỉ:</string>
+    <string name="user_update_profile_des">Mô tả bản thân:</string>
+    <string-array name="array_gender">
+        <item>Giới tính</item>
+        <item>Nam</item>
+        <item>Nữ</item>
+    </string-array>
+    <string name="request_read_external_storeage">Chưa cấp quyền truy cập bộ nhớ</string>
 </resources>

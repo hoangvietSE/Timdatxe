@@ -30,4 +30,23 @@
         <attr name="row_title" format="string" />
         <attr name="row_detail" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="ClearableEditText">
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:hint"/>
+        <attr name="android:lines"/>
+        <attr name="android:inputType"/>
+        <attr name="android:textColorHint"/>
+        <attr name="edtMaxLength"/>
+        <attr name="edtGravityCentered"/>
+        <attr name="edtPadding"/>
+        <attr name="edtUnderlineColor" />
+        <attr name="edtBackground"/>
+        <attr name="edtIcon" />
+        <attr name="edtEditable"/>
+        <attr name="clearButtonDrawable"/>
+        <attr name="clearButtonSize"/>
+    </declare-styleable>
 </resources>

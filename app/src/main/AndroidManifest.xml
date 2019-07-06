@@ -47,6 +47,8 @@
         <activity
             android:name=".sprintlogin.updatepassword.UpdatePasswordActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".sprinthome.updateprofile.UpdateProfileActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

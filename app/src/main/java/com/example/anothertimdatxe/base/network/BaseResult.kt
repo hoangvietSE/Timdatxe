@@ -9,4 +9,6 @@ class BaseResult<R> {
     var msg: String? = null
     @SerializedName("data")
     var data: R? = null
+    @SerializedName("count_books")
+    var count_books: Int? = null
 }

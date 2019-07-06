@@ -62,9 +62,10 @@
         </LinearLayout>
 
         <TextView
+            android:gravity="center_vertical"
             style="@style/TextViewBold"
             android:layout_width="match_parent"
-            android:background="@color/gray_b3b3b3"
+            android:background="@drawable/bg_type_trip"
             android:paddingLeft="@dimen/content_padding_normal"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"

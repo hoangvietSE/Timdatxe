@@ -25,7 +25,10 @@
         style="@style/BottomTabStyle"
         android:layout_weight="1"
         android:drawableTop="@drawable/ic_post_news"
-        android:text="Đăng bài" />
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:text="Đăng bài"
+        android:textSize="10sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTabList"

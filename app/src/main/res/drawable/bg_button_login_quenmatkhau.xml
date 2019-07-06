@@ -2,9 +2,9 @@
 <shape
     android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/common_google_signin_btn_text_dark_disabled"/>
+    <solid android:color="@color/color_text_hint"/>
     <corners android:radius="@dimen/radius_login_quenmatkhau"/>
-    <padding android:top="@dimen/content_padding_resend"
-        android:bottom="@dimen/content_padding_resend"/>
+    <padding android:top="6dp"
+        android:bottom="6dp"/>
 
 </shape>
