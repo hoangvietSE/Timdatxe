@@ -13,12 +13,16 @@ class UserProfilePresenterImpl(mView: UserProfileView) : BasePresenterImpl<UserP
     override fun getUserData() {
         val disposable = RetrofitManager.getUserInfo(object : ICallBack<BaseResult<UserData>> {
             override fun onSuccess(result: BaseResult<UserData>?) {
-                mView!!.showData(result?.data!!)
-                EventBus.getDefault().post(GetProfileSuccess(true))
+                val userData = result?.data!!
+                userData.count_books = result?.count_books
+                mView!!.showData(userData)
+                val getProfileSuccess = GetProfileSuccess(true)
+                EventBus.getDefault().post(getProfileSuccess)
             }
 
             override fun onError(e: ApiException) {
-                EventBus.getDefault().post(GetProfileSuccess(false))
+                val getProfileSuccess = GetProfileSuccess(false)
+                EventBus.getDefault().post(getProfileSuccess)
             }
 
         })

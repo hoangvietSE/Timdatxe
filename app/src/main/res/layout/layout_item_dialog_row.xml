@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/content_padding_normal"
         android:paddingTop="@dimen/content_padding_resend"
-        android:paddingEnd="@dimen/content_padding_large"
+        android:paddingEnd="@dimen/margin_16_dp"
         android:paddingBottom="@dimen/content_padding_resend">
 
         <TextView
@@ -25,12 +25,12 @@
             android:id="@+id/detail"
             style="@style/TextViewBold"
             android:layout_alignParentEnd="true"
-            tools:text="Hoang Tien Viet" />
+            tools:text="Chưa cập nhật" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/row"
-        android:background="@color/gray_b3b3b3"/>
+        android:background="@color/gray_b3b3b3" />
 </RelativeLayout>

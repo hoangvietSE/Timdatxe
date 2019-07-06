@@ -2,6 +2,7 @@ package com.example.anothertimdatxe.sprintlogin.login
 
 import android.content.Context
 import android.widget.Toast
+import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 import com.example.anothertimdatxe.base.network.ApiException
 import com.example.anothertimdatxe.base.network.BaseResult
@@ -33,7 +34,7 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
             }
 
             override fun onSuccess(result: BaseResult<UserData>?) {
-                Toast.makeText(mView as Context, "Login Success", LENGTH_LONG).show()
+                Toast.makeText(mView as Context, R.string.login_success, LENGTH_LONG).show()
                 mView!!.hideLoading()
                 result?.data!!.isUser = true
                 CarBookingSharePreference.setUserData(result?.data!!)
@@ -52,10 +53,11 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
         request.remember = 1
         var disposable = RetrofitManager.loginDriver(object : ICallBack<BaseResult<UserData>> {
             override fun onSuccess(result: BaseResult<UserData>?) {
-                Toast.makeText(mView as Context, "Login Success", LENGTH_LONG).show()
+                Toast.makeText(mView as Context, R.string.login_success, LENGTH_LONG).show()
                 mView!!.hideLoading()
                 result?.data!!.isDriver = true
                 CarBookingSharePreference.setUserData(result?.data!!)
+                mView!!.goToNextScreen()
             }
 
             override fun onError(e: ApiException) {

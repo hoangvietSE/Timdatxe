@@ -5,8 +5,8 @@
 
     <solid android:color="@color/colorPrimaryDark"/>
     <corners android:radius="22dp"/>
-    <padding android:top="@dimen/content_padding_resend"
-        android:bottom="@dimen/content_padding_resend"/>
+    <padding android:top="8dp"
+    android:bottom="8dp"/>
 
 
 </shape>

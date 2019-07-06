@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.base.mvp.BaseView
-import org.greenrobot.eventbus.EventBus
+import com.example.anothertimdatxe.customview.CarBookingLoading
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
@@ -18,8 +18,9 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
     protected var mPresenter: T? = null
     protected var toolbar: View? = null
     protected var leftbutton: ImageView? = null
+    protected var rightButton: ImageView? = null
     protected var toolbarTitle: TextView? = null
-
+    private var dialog: CarBookingLoading? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
@@ -28,16 +29,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         mPresenter?.let {
             it.start()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
+        dialog = CarBookingLoading.getInstance(this)
     }
 
     abstract fun getPresenter(): T
@@ -49,17 +41,18 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         }
     }
 
-    override fun hideLoading() {
-
+    override fun showLoading() {
+        dialog!!.show()
     }
 
-    override fun showLoading() {
-
+    override fun hideLoading() {
+        dialog!!.hide()
     }
 
     fun initToolBar() {
         toolbar = findViewById(R.id.toolbar)
         leftbutton = findViewById(R.id.btn_left)
+        rightButton = findViewById(R.id.btn_right)
         leftbutton?.let {
             it.setOnClickListener {
                 onMenuLeftCLick()

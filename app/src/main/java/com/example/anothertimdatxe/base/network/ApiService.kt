@@ -9,6 +9,7 @@ import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.entity.response.FaqsResponse
 import io.reactivex.Single
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -79,4 +80,13 @@ interface ApiService {
     @GET(ApiConstant.USER_INFO)
     @Headers("Content-Type: application/json")
     fun getUserInfo(@Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserData>>>
+
+    //update profile
+    @JvmSuppressWildcards
+    @POST(ApiConstant.USER_UPDATE_INFO)
+    @Multipart
+    fun userUpdateProfile(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String,
+                          @Path(RequestParam.ID) id: Int,
+                          @Part part: MultipartBody.Part?,
+                          @PartMap request: Map<String, RequestBody>): Single<BaseResult<UserData>>
 }

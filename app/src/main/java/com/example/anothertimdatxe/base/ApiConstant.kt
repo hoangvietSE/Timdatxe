@@ -8,6 +8,7 @@ object ApiConstant {
     const val USER_ACTIVATIONS = "/v1/user_activations"
     const val USER_PASSWORDS = "/v1/user_passwords"
     const val USER_INFO = "/v1/users/{${RequestParam.ID}}"
+    const val USER_UPDATE_INFO = "/v1/users/{${RequestParam.ID}}"
 
     //[DRIVER]
     const val DRIVER_SESSIONS = "/v1/driver_sessions"

@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_padding_normal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/content_padding_resend"
             android:layout_marginEnd="@dimen/content_padding_normal">
 
             <EditText
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_padding_normal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/content_padding_normal">
 
             <EditText
@@ -93,7 +93,7 @@
                 android:layout_marginTop="@dimen/content_padding_normal"
                 android:layout_marginRight="@dimen/content_padding_normal"
                 android:hint="@string/login_edittext_password"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +109,7 @@
             android:gravity="center"
             android:text="@string/login_btn_name"
             android:textColor="#ffffff"
-            android:textSize="22sp" />
+            android:textSize="@dimen/text_size_20" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -128,6 +128,7 @@
                 android:gravity="center"
                 android:text="@string/login_btn_quenmatkhau"
                 android:textColor="@color/color_white"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintEnd_toStartOf="@id/btn_regis"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -141,6 +142,7 @@
                 android:gravity="center"
                 android:text="@string/login_btn_regis"
                 android:textColor="@color/color_white"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_forgot_password"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -159,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/login_textView"
-                android:textSize="@dimen/textSize_large" />
+                android:textSize="@dimen/text_size_14" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

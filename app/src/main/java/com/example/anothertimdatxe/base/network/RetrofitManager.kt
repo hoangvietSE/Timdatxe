@@ -11,6 +11,7 @@ import com.example.anothertimdatxe.request.*
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -200,8 +201,15 @@ object RetrofitManager {
     fun getUserInfo(iCallBack: ICallBack<BaseResult<UserData>>): Disposable {
         val subscriber = getSubcriber(iCallBack)
         return apiService.getUserInfo(CarBookingSharePreference.getUserId())
-        .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscriber)
+    }
+
+    fun userUpdateProfile(part: MultipartBody.Part?, request: Map<String, RequestBody>): Single<BaseResult<UserData>> {
+        return apiService.userUpdateProfile(CarBookingSharePreference.getAccessToken(), CarBookingSharePreference.getUserId(),
+                part, request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 }
