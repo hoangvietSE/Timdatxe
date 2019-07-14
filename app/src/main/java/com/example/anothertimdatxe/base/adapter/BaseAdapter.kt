@@ -20,7 +20,7 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<T>>(var context: Context) : Re
     }
 
     fun setListItems(list: List<T>) {
-        mListItem.clear()
+        clear()
         mListItem.addAll(list)
         notifyDataSetChanged()
     }

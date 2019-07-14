@@ -31,4 +31,9 @@
     <color name="gray_666666">#666666</color>
     <color name="gray_4d4d4d">#4d4d4d</color>
     <color name="green_009245">#009245</color>
+    <color name="green_title">#e3e4d6</color>
+    <color name="green_text">#017408</color>
+    <color name="blue_text">#0067BB</color>
+    <color name="purple_text">#673AB7</color>
+    <color name="red_text">#ff00</color>
 </resources>

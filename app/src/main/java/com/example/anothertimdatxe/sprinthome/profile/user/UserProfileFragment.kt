@@ -42,7 +42,7 @@ class UserProfileFragment : BaseFragment<UserProfilePresenter>(), UserProfileVie
     override fun showData(userData: UserData) {
         mUserProfile = userData
         imv_avatar.let {
-            it.setAvatar(context!!, it, userData.avatar!!)
+            it.setAvatar(context!!, userData.avatar)
         }
         tv_fullname.text = userData.full_name
         userData.count_books.let {
@@ -53,7 +53,7 @@ class UserProfileFragment : BaseFragment<UserProfilePresenter>(), UserProfileVie
         rowFullName.setContent(userData.full_name)
         rowEmail.setContent(userData.email)
         rowPhoneNumber.setContent(userData.phone)
-        rowDateOfBirth.setContent(userData.birthday!!)
+        rowDateOfBirth.setContent(userData.birthday)
         when (userData.gender) {
             "0" -> {
                 rowGender.setContent("Nam")

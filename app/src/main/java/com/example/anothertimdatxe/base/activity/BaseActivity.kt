@@ -25,11 +25,11 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
         mPresenter = getPresenter()
+        dialog = CarBookingLoading.getInstance(this)
         initToolBar()
         mPresenter?.let {
             it.start()
         }
-        dialog = CarBookingLoading.getInstance(this)
     }
 
     abstract fun getPresenter(): T

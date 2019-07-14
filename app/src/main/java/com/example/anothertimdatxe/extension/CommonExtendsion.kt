@@ -32,12 +32,16 @@ fun Context.inflate(context: Context, root: ViewGroup, layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, root, true)
 }
 
-fun ImageView.setAvatar(context: Context, imv: ImageView, url: String) {
+fun Context.inflate(layoutRes: Int, viewGroup: ViewGroup, attachToRoot: Boolean): View {
+    return LayoutInflater.from(this).inflate(layoutRes, viewGroup, attachToRoot)
+}
+
+fun ImageView.setAvatar(context: Context, url: String?) {
     GlideApp.with(context)
             .load(BuildConfig.BASE_URL + url)
             .placeholder(R.drawable.ic_avatar)
             .error(R.drawable.ic_avatar)
-            .into(imv)
+            .into(this)
 }
 
 fun ImageView.setAvatar(context: Context, imv: ImageView, contentURI: Uri) {

@@ -97,4 +97,26 @@
         <item>Nữ</item>
     </string-array>
     <string name="request_read_external_storeage">Chưa cấp quyền truy cập bộ nhớ</string>
+
+
+    //Post Created More Find Car
+    <string name="seat_book">Số ghế đặt:</string>
+    <string name="recruitment">Ứng tuyển</string>
+
+    //Post Created More Find User
+    <string name="empty_seat">Số ghế trống:</string>
+    <string name="departure_time">Giờ khởi hành:</string>
+    <string name="departure_date">Ngày khởi hành:</string>
+    <string name="money">Giá tiền:</string>
+    <string name="edittext_hint_starting_point"><font size="14">Nhập điểm đến</font></string>
+    <string name="edittext_hint_ending_point"><font size="14">Nhập điểm đi</font></string>
+    <string name="find_user">Bài đăng tìm khách</string>
+    <string name="find_car">Bài đăng tìm xe</string>
+    <string name="book_car">Đặt xe</string>
+
+    //History Travel
+    <string name="history_travel_title">Lịch sử chuyến đi</string>
+    <string name="number_trip">Số chuyến đã di chuyển</string>
+    <string name="history_number_seat">Số ghế:</string>
+    <string name="history_money">Giá tiền:</string>
 </resources>
