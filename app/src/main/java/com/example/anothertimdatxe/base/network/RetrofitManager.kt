@@ -6,7 +6,7 @@ import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.entity.UserListPostEntity
-import com.example.anothertimdatxe.entity.response.FaqsResponse
+import com.example.anothertimdatxe.entity.response.*
 import com.example.anothertimdatxe.request.*
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.google.gson.Gson
@@ -27,10 +27,13 @@ import java.util.concurrent.TimeUnit
 
 //singleton
 object RetrofitManager {
+    const val TIME: Long = 60
     private fun createRetrofit(baseUrl: String): Retrofit {
         //timeout for connection is 120s
         var client = OkHttpClient.Builder()
-                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(RetrofitManager.TIME, TimeUnit.SECONDS)
+                .readTimeout(RetrofitManager.TIME, TimeUnit.SECONDS)
+                .connectTimeout(RetrofitManager.TIME, TimeUnit.SECONDS)
         if (BuildConfig.DEBUG) {
             var logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BODY
@@ -211,5 +214,33 @@ object RetrofitManager {
                 part, request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getListPostFindUser(request: MutableMap<String, Any>): Single<BaseResult<List<DriverPostResponse>>> {
+        return apiService.getListPostFindUser(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getListPostFindCar(request: MutableMap<String, Any>): Single<BaseResult<List<UserPostResponse>>> {
+        return apiService.getListPostFindCar(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getUserHistory(iCallBack: ICallBack<BaseResponse<List<UserHistoryResponse>>>, id: Int): Disposable {
+        var subscribe = getSubcriber(iCallBack)
+        return apiService.getUserHistory(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun getDriverHistory(iCallBack: ICallBack<BaseResponse<List<DriverHistoryResponse>>>, id: Int): Disposable {
+        var subscribe = getSubcriber(iCallBack)
+        return apiService.getDriverHistory(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
     }
 }

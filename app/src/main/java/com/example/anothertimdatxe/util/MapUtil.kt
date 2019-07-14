@@ -16,11 +16,19 @@ object MapUtil {
     }
 
     fun getLocationCity(context: Context, lat: Double, lng: Double): String {
-        return getListAddress(context, lat, lng).get(0).locality
+        try {
+            return getListAddress(context, lat, lng).get(0).locality
+        }catch (e: Exception){
+            return ""
+        }
     }
 
     fun getLocationState(context: Context, lat: Double, lng: Double): String {
-        return getListAddress(context, lat, lng).get(0).adminArea
+        try {
+            return getListAddress(context, lat, lng).get(0).adminArea
+        }catch (e: Exception){
+            return ""
+        }
     }
 
     fun getLocationCountry(context: Context, lat: Double, lng: Double): String {

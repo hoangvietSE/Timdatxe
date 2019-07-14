@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.anothertimdatxe.R
 
-class SpinnerSeatAdapter(var context: Context, var mResource: Int, var data: List<String>) : BaseAdapter() {
+class SpinnerSeatAdapter(var context: Context, var data: List<String>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: TextView = convertView as TextView?
                 ?: LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false) as TextView

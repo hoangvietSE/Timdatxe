@@ -7,7 +7,7 @@ import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.entity.UserListPostEntity
-import com.example.anothertimdatxe.entity.response.FaqsResponse
+import com.example.anothertimdatxe.entity.response.*
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -89,4 +89,26 @@ interface ApiService {
                           @Path(RequestParam.ID) id: Int,
                           @Part part: MultipartBody.Part?,
                           @PartMap request: Map<String, RequestBody>): Single<BaseResult<UserData>>
+
+    //post more find user
+    @GET(ApiConstant.DRIVER_POST_CREATED)
+    @JvmSuppressWildcards
+    @Headers("Content-Type: application/json")
+    fun getListPostFindUser(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverPostResponse>>>
+
+    //post more find car
+    @GET(ApiConstant.USER_POST_CREATED)
+    @JvmSuppressWildcards
+    @Headers("Content-Type: application/json")
+    fun getListPostFindCar(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<UserPostResponse>>>
+
+    //User History
+    @GET(ApiConstant.USER_HISTORY)
+    @Headers("Content-Type: application/json")
+    fun getUserHistory(@Path(RequestParam.ID) id: Int): Single<Response<BaseResponse<List<UserHistoryResponse>>>>
+
+    //Driver History
+    @GET(ApiConstant.DRIVER_HISTORY)
+    @Headers("Content-Type: application/json")
+    fun getDriverHistory(@Path(RequestParam.ID) id: Int): Single<Response<BaseResponse<List<DriverHistoryResponse>>>>
 }

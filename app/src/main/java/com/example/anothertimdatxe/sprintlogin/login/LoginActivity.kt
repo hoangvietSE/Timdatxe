@@ -12,6 +12,7 @@ import com.example.anothertimdatxe.extension.isValidPhone
 import com.example.anothertimdatxe.sprinthome.HomeActivity
 import com.example.anothertimdatxe.sprintlogin.forgotpassword.ForgotActivity
 import com.example.anothertimdatxe.sprintlogin.register.RegisterActivity
+import com.example.anothertimdatxe.widget.TextWatcherPassword
 import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.dialog_direct_login.*
@@ -43,6 +44,7 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
         }
         btn_login_fb.setOnClickListener { mLoginSocial.loginFacebook() }
         btn_login_google.setOnClickListener { mLoginSocial.loginGoogle() }
+        et_password.addTextChangedListener(TextWatcherPassword(input_password))
     }
 
     override fun onDestroy() {
@@ -60,12 +62,10 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
             et_email!!.requestFocus()
             return false
         } else if (TextUtils.isEmpty(et_password!!.getText().toString())) {
-            et_password!!.error = "Vui lòng nhập mật khẩu!"
-            et_password!!.requestFocus()
+            input_password!!.error = "Vui lòng nhập mật khẩu!"
             return false
         } else if (et_password!!.getText().toString().length <= 6) {
-            et_password!!.error = "Mật khẩu phải lớn hơn 6 kí tự bao gồm chữ cái, số và kí tự đặc biệt!"
-            et_password!!.requestFocus()
+            input_password!!.error = "Mật khẩu phải lớn hơn 6 kí tự bao gồm chữ cái, số và kí tự đặc biệt!"
             return false
         }
         return true

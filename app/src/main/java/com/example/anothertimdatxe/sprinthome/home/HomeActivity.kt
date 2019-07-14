@@ -16,6 +16,7 @@ import com.example.anothertimdatxe.event_bus.GetProfileSuccess
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
@@ -36,11 +37,12 @@ import org.greenrobot.eventbus.ThreadMode
 class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.BottomBarListener {
 
     companion object {
-        var ITEM_LOG_OUT = 5
-        var VP_ITEM_HOME = 0
-        var VP_ITEM_NEWS = 1
-        var VP_ITEM_LISTS = 2
-        var VP_ITEM_PROFILES = 3
+        const val ITEM_MENU_HISTORY = 1
+        const val ITEM_MENU_LOG_OUT = 5
+        const val VP_ITEM_HOME = 0
+        const val VP_ITEM_NEWS = 1
+        const val VP_ITEM_LISTS = 2
+        const val VP_ITEM_PROFILES = 3
     }
 
     private var mToggle: ActionBarDrawerToggle? = null
@@ -51,7 +53,12 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     private var mListener: BaseRvListener = object : BaseRvListener {
         override fun onItemClick(position: Int) {
             when (position) {
-                ITEM_LOG_OUT -> logOut()
+                ITEM_MENU_HISTORY -> {
+                    goToHistoryTravelActivity()
+                }
+                ITEM_MENU_LOG_OUT -> {
+                    logOut()
+                }
             }
         }
     }
@@ -201,7 +208,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         val itemTrip = MenuItemData(
                 R.drawable.ic_trip_selected,
                 R.drawable.ic_trip_normal,
-                "Các chuyến đi"
+                "Lịch sử chuyến đi"
         )
         val itemMessage = MenuItemData(
                 R.drawable.ic_message_selected,
@@ -232,12 +239,12 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         mAdapter.add(itemLogout)
         rv_menu.adapter = mAdapter
         rv_menu.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        updateHeaderMenu(CarBookingSharePreference.getUserData()!!.full_name, CarBookingSharePreference.getUserData()!!.avatar!!)
+        updateHeaderMenu(CarBookingSharePreference.getUserData()!!.full_name, CarBookingSharePreference.getUserData()!!.avatar)
     }
 
-    fun updateHeaderMenu(full_name: String, avatar: String) {
+    fun updateHeaderMenu(full_name: String, avatar: String?) {
         imv_avatar.let {
-            it.setAvatar(this, it, avatar)
+            it.setAvatar(this, avatar)
         }
         tv_user_name.text = full_name
     }
@@ -280,6 +287,12 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         CarBookingSharePreference.clearAllPreference()
         startActivity(Intent(this, LoginActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
+    }
+
+    private fun goToHistoryTravelActivity() {
+        startActivity(Intent(this@HomeActivity, HistoryTravelActivity::class.java).apply {
+            putExtra(HistoryTravelActivity.HISTORY_TRAVEL, if (CarBookingSharePreference.getUserData()!!.isUser) true else false)
         })
     }
 

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_8_dp"
+    android:background="@drawable/bg_item_post_created_find_car"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/formTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_title_item_post_created"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:minLines="1"
+        android:paddingStart="@dimen/content_padding_resend"
+        android:textColor="@color/black"
+        android:textSize="@dimen/margin_14_dp"
+        android:textStyle="bold"
+        tools:text="Hoang Tien Viet" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_4_dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/formAvatar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/margin_4_dp"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/ic_avatar" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/margin_4_dp"
+            android:layout_marginTop="@dimen/margin_4_dp"
+            android:layout_toRightOf="@id/formAvatar"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/formStartingPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_place"
+                    android:drawablePadding="@dimen/margin_4_dp"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:textColor="@color/green_text"
+                    android:textStyle="bold"
+                    tools:text="Hà Nội" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:drawableStart="@drawable/ic_arrow" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/formEndingPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:textColor="@color/green_text"
+                    android:textStyle="bold"
+                    tools:text="Hải Phòng" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_seat" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/empty_seat" />
+
+                <TextView
+                    android:id="@+id/formSeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    tools:text="5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_time_start" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/departure_time" />
+
+                <TextView
+                    android:id="@+id/formTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:textColor="@color/blue_text"
+                    android:textStyle="bold"
+                    tools:text="13:56" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_calendar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/departure_date" />
+
+                <TextView
+                    android:id="@+id/formDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:textColor="@color/purple_text"
+                    android:textStyle="bold"
+                    tools:text="19/7/2019" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_money" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/money" />
+
+                <TextView
+                    android:id="@+id/formMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:textColor="@color/red_text"
+                    android:textStyle="bold"
+                    tools:text="19/7/2019" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_btn_book_car"
+            android:text="@string/book_car"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</LinearLayout>

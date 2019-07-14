@@ -49,4 +49,12 @@
         <attr name="clearButtonDrawable"/>
         <attr name="clearButtonSize"/>
     </declare-styleable>
+
+    <declare-styleable name="DashView">
+        <attr format="dimension" name="dashWidth"/>
+        <attr format="dimension" name="dashLineWidth"/>
+        <attr format="dimension" name="lineHeight"/>
+        <attr format="color" name="dashLineColor"/>
+        <attr format="integer" name="dashOrientation"/>
+    </declare-styleable>
 </resources>

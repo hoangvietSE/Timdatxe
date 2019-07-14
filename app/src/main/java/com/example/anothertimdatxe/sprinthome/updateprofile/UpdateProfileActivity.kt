@@ -150,12 +150,12 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
     private fun setData() {
         mUserProfile = intent.getSerializableExtra(USER_PROFILE) as UserData
         imv_avatar.let {
-            it.setAvatar(this, it, mUserProfile?.avatar!!)
+            it.setAvatar(this, mUserProfile?.avatar)
         }
         edt_name.text = mUserProfile?.full_name
         edt_email.text = mUserProfile?.email
         edt_phone.text = mUserProfile?.phone
-        edt_dob.text = mUserProfile?.birthday!!
+        edt_dob.text = mUserProfile?.birthday
         when (mUserProfile?.gender) {
             "0" -> {
                 sp_gender.setSelection(1)//Male
