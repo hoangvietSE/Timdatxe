@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/content_padding_large">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.anothertimdatxe.widget.RowRevenue
+            android:id="@+id/row_sum_revenue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_padding_normal"
+            app:mTitle="@string/title_one" />
+
+        <com.example.anothertimdatxe.widget.RowRevenue
+            android:id="@+id/row_sum_trip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_padding_resend"
+            app:mTitle="@string/title_two" />
+    </LinearLayout>
+
+    <com.example.anothertimdatxe.widget.BaseRecyclerView
+        android:id="@+id/recyclerViewDetailMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/forgot_description"
+        android:clipToPadding="false" />
+</LinearLayout>

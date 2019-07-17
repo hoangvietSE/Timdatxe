@@ -7,4 +7,5 @@ import com.example.anothertimdatxe.entity.response.UserHistoryResponse
 interface HistoryTravelView : BaseView {
     fun showUserHistory(data: List<UserHistoryResponse>)
     fun showDriverHistory(data: List<DriverHistoryResponse>)
+    fun setNumberTrip(count: Int)
 }

@@ -37,6 +37,8 @@ class DriverHistoryAdapter(context: Context, enableSelectedMode: Boolean) : Endl
         viewHolder.time.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_7)
         viewHolder.date.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
         viewHolder.imv_avatar.setAvatar(context!!, data?.avatar)
+        viewHolder.title.text = data?.title
+        viewHolder.number_seat.text = data?.seat.toString()
     }
 
     class DriverHistoryViewHolder(itemView: View) : NormalViewHolder(itemView) {
@@ -46,5 +48,6 @@ class DriverHistoryAdapter(context: Context, enableSelectedMode: Boolean) : Endl
         val time: TextView = itemView.findViewById(R.id.formTime)
         val date: TextView = itemView.findViewById(R.id.formDate)
         val imv_avatar: ImageView = itemView.findViewById(R.id.formAvatar)
+        val title: TextView = itemView.findViewById(R.id.formTitle)
     }
 }

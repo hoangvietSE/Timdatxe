@@ -22,6 +22,7 @@ import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
+import com.example.anothertimdatxe.sprinthome.revenue.RevenueDriverActivity
 import com.example.anothertimdatxe.sprinthome.settings.faqs.FaqsActivity
 import com.example.anothertimdatxe.sprinthome.updateprofile.UpdateProfileActivity
 import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFragment
@@ -37,6 +38,7 @@ import org.greenrobot.eventbus.ThreadMode
 class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.BottomBarListener {
 
     companion object {
+        const val ITEM_MENU_REVENUE = 0
         const val ITEM_MENU_HISTORY = 1
         const val ITEM_MENU_LOG_OUT = 5
         const val VP_ITEM_HOME = 0
@@ -53,9 +55,14 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     private var mListener: BaseRvListener = object : BaseRvListener {
         override fun onItemClick(position: Int) {
             when (position) {
+                ITEM_MENU_REVENUE -> {
+                    goToRevenueDriver()
+                }
+
                 ITEM_MENU_HISTORY -> {
                     goToHistoryTravelActivity()
                 }
+
                 ITEM_MENU_LOG_OUT -> {
                     logOut()
                 }
@@ -200,10 +207,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         drawer_layout.addDrawerListener(mToggle!!)
         mAdapter = MenuItemAdapter(this, mListener)
 
-        val itemPayment = MenuItemData(
+        val itemRevenue = MenuItemData(
                 R.drawable.ic_payment_selected,
                 R.drawable.ic_payment_normal,
-                "Thông tin tài khoản"
+                "Thống kê doanh thu"
         )
         val itemTrip = MenuItemData(
                 R.drawable.ic_trip_selected,
@@ -231,7 +238,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 "Đăng xuất"
         )
 
-        mAdapter.add(itemPayment)
+        if (CarBookingSharePreference.getUserData()!!.isDriver) mAdapter.add(itemRevenue)
         mAdapter.add(itemTrip)
         mAdapter.add(itemMessage)
         mAdapter.add(itemPromotion)
@@ -294,6 +301,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         startActivity(Intent(this@HomeActivity, HistoryTravelActivity::class.java).apply {
             putExtra(HistoryTravelActivity.HISTORY_TRAVEL, if (CarBookingSharePreference.getUserData()!!.isUser) true else false)
         })
+    }
+
+    private fun goToRevenueDriver() {
+        startActivity(Intent(this@HomeActivity, RevenueDriverActivity::class.java))
     }
 
 }

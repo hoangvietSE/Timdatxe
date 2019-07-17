@@ -243,4 +243,12 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
+
+    fun getDriverRevenue(iCallBack: ICallBack<BaseRevenueResponse<List<DriverRevenueResponse>>>, month: Int): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.getDriverRevenue(CarBookingSharePreference.getAccessToken(), CarBookingSharePreference.getUserId(), month)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
 }
