@@ -19,6 +19,7 @@ object ApiConstant {
     const val DRIVER_PASSWORDS = "/v1/driver_passwords"
     const val DRIVER_POST_CREATED = "/v1/driver_posts"
     const val DRIVER_HISTORY = "/v1/driver_history/{${RequestParam.ID}}"
+    const val DRIVER_REVENUE = "/v1/driver/{${RequestParam.ID}}/statistics"
 
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"

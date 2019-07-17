@@ -32,29 +32,34 @@
     </declare-styleable>
 
     <declare-styleable name="ClearableEditText">
-        <attr name="android:text"/>
-        <attr name="android:textColor"/>
-        <attr name="android:textSize"/>
-        <attr name="android:hint"/>
-        <attr name="android:lines"/>
-        <attr name="android:inputType"/>
-        <attr name="android:textColorHint"/>
-        <attr name="edtMaxLength"/>
-        <attr name="edtGravityCentered"/>
-        <attr name="edtPadding"/>
+        <attr name="android:text" />
+        <attr name="android:textColor" />
+        <attr name="android:textSize" />
+        <attr name="android:hint" />
+        <attr name="android:lines" />
+        <attr name="android:inputType" />
+        <attr name="android:textColorHint" />
+        <attr name="edtMaxLength" />
+        <attr name="edtGravityCentered" />
+        <attr name="edtPadding" />
         <attr name="edtUnderlineColor" />
-        <attr name="edtBackground"/>
+        <attr name="edtBackground" />
         <attr name="edtIcon" />
-        <attr name="edtEditable"/>
-        <attr name="clearButtonDrawable"/>
-        <attr name="clearButtonSize"/>
+        <attr name="edtEditable" />
+        <attr name="clearButtonDrawable" />
+        <attr name="clearButtonSize" />
     </declare-styleable>
 
     <declare-styleable name="DashView">
-        <attr format="dimension" name="dashWidth"/>
-        <attr format="dimension" name="dashLineWidth"/>
-        <attr format="dimension" name="lineHeight"/>
-        <attr format="color" name="dashLineColor"/>
-        <attr format="integer" name="dashOrientation"/>
+        <attr name="dashWidth" format="dimension" />
+        <attr name="dashLineWidth" format="dimension" />
+        <attr name="lineHeight" format="dimension" />
+        <attr name="dashLineColor" format="color" />
+        <attr name="dashOrientation" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseRevenue">
+        <attr name="mTitle" format="string" />
+        <attr name="mDetail" format="string" />
     </declare-styleable>
 </resources>

@@ -35,6 +35,8 @@ class UserHistoryAdapter(context: Context, enableSelectedMode: Boolean) : Endles
         viewHolder.time.text = DateUtil.formatDate(data?.book_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_7)
         viewHolder.date.text = DateUtil.formatDate(data?.book_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
         viewHolder.imv_avatar.setAvatar(context!!, data?.avatar)
+        viewHolder.title.text = data?.title
+        viewHolder.number_seat.text = data?.number_seat!!.toString()
     }
 
     class UserHistoryViewHolder(itemView: View) : NormalViewHolder(itemView) {
@@ -45,5 +47,7 @@ class UserHistoryAdapter(context: Context, enableSelectedMode: Boolean) : Endles
         val date: TextView = itemView.findViewById(R.id.formDate)
         val money: TextView = itemView.findViewById(R.id.formMoney)
         val imv_avatar: ImageView = itemView.findViewById(R.id.formAvatar)
+        val title: TextView = itemView.findViewById(R.id.formTitle)
+
     }
 }

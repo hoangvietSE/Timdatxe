@@ -111,4 +111,9 @@ interface ApiService {
     @GET(ApiConstant.DRIVER_HISTORY)
     @Headers("Content-Type: application/json")
     fun getDriverHistory(@Path(RequestParam.ID) id: Int): Single<Response<BaseResponse<List<DriverHistoryResponse>>>>
+
+    //Driver Revenue
+    @GET(ApiConstant.DRIVER_REVENUE)
+    @Headers("Content-Type: application/json")
+    fun getDriverRevenue(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int, @Query("month") month: Int): Single<Response<BaseRevenueResponse<List<DriverRevenueResponse>>>>
 }

@@ -79,4 +79,8 @@ class HistoryTravelActivity : BaseActivity<HistoryTravelPresenter>(), HistoryTra
 
     override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
     }
+
+    override fun setNumberTrip(count: Int) {
+        tv_number_trip.text = count.toString()
+    }
 }
