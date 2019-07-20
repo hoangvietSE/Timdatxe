@@ -16,6 +16,7 @@ import com.example.anothertimdatxe.event_bus.GetProfileSuccess
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.sprinthome.help.SupportActivity
 import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
@@ -40,6 +41,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     companion object {
         const val ITEM_MENU_REVENUE = 0
         const val ITEM_MENU_HISTORY = 1
+        const val ITEM_MENU_SUPPRT = 4
         const val ITEM_MENU_LOG_OUT = 5
         const val VP_ITEM_HOME = 0
         const val VP_ITEM_NEWS = 1
@@ -61,6 +63,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
                 ITEM_MENU_HISTORY -> {
                     goToHistoryTravelActivity()
+                }
+
+                ITEM_MENU_SUPPRT -> {
+                    goToSupportActivity()
                 }
 
                 ITEM_MENU_LOG_OUT -> {
@@ -305,6 +311,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
     private fun goToRevenueDriver() {
         startActivity(Intent(this@HomeActivity, RevenueDriverActivity::class.java))
+    }
+
+    private fun goToSupportActivity() {
+        startActivity(Intent(this@HomeActivity, SupportActivity::class.java))
     }
 
 }

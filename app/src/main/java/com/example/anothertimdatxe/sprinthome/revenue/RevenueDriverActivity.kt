@@ -21,6 +21,7 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
     private var mListRevenueDetail: MutableList<DriverRevenueResponse> = mutableListOf()
     private var mRevenueMonthAdapter: RevenueMonthAdapter? = null
     private var mRevenueDetailAdapter: RevenueDetailAdapter? = null
+    private var mCurrentMonth: Int = 0
     override val layoutRes: Int
         get() = R.layout.activity_revenue_driver
 
@@ -28,12 +29,19 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
         return RevenueDriverPresenterImpl(this)
     }
 
+    private val mMonthListener = object : BaseRvListener {
+        override fun onItemClick(position: Int) {
+            setItemPosition(position)
+            mPresenter!!.fetchData(position + 1, false)
+        }
+    }
+
     override fun onItemClick(position: Int) {
-        setItemPosition(position)
-        mPresenter!!.fetchData((position + 1))
+        //Detail Revenue OnClick
     }
 
     fun setItemPosition(position: Int) {
+        mCurrentMonth = position + 1
         mListMonth[position].isSelected = true
         mListMonth.forEach {
             if (it != mListMonth[position]) {
@@ -53,9 +61,10 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
 
     private fun fetchDateCurrentTime() {
         val month = Calendar.getInstance().get(Calendar.MONTH)
+        mCurrentMonth = month
         setItemPosition(month)
         recyclerViewMonth.smoothScrollToPosition(month)
-        mPresenter!!.fetchData(month + 1)
+        mPresenter!!.fetchData(month + 1, false)
     }
 
     private fun setLayoutToolbar() {
@@ -83,7 +92,7 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
     }
 
     private fun setMonthAdapter() {
-        mRevenueMonthAdapter = RevenueMonthAdapter(this, this)
+        mRevenueMonthAdapter = RevenueMonthAdapter(this, mMonthListener)
         mRevenueMonthAdapter?.setListItems(mListMonth)
         val spacingDecoration = resources.getDimensionPixelSize(R.dimen.spacing)
         recyclerViewMonth.addItemDecoration(ItemSpacingDecoration(spacingDecoration))
@@ -95,13 +104,16 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
         mRevenueDetailAdapter = RevenueDetailAdapter(this, this)
     }
 
-    override fun showDataByMonth(data: List<DriverRevenueResponse>) {
+    override fun showDataByMonth(data: List<DriverRevenueResponse>, isRefreshing: Boolean) {
         mListRevenueDetail.clear()
         mListRevenueDetail.addAll(data)
         mRevenueDetailAdapter?.setListItems(mListRevenueDetail)
         recyclerViewDetailMonth.setAdapter(mRevenueDetailAdapter!!)
         recyclerViewDetailMonth.setOnRefreshAndLoadMore(this)
         recyclerViewDetailMonth.setListLayoutManager()
+        if (isRefreshing) {
+            recyclerViewDetailMonth.hideLoading()
+        }
     }
 
     override fun showDetail(sum_trip: Int, sum_revenue: Int) {
@@ -110,7 +122,7 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
     }
 
     override fun onRefresh() {
-
+        mPresenter!!.fetchData(mCurrentMonth, true)
     }
 
     override fun onLoadMore() {

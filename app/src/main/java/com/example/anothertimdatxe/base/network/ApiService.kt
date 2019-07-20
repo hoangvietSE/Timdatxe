@@ -116,4 +116,9 @@ interface ApiService {
     @GET(ApiConstant.DRIVER_REVENUE)
     @Headers("Content-Type: application/json")
     fun getDriverRevenue(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int, @Query("month") month: Int): Single<Response<BaseRevenueResponse<List<DriverRevenueResponse>>>>
+
+    //Contact System
+    @POST(ApiConstant.CONTACT_SYSTEM)
+    @Headers("Content-Type: application/json")
+    fun sendContactSystem(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody): Single<Response<BaseResult<ContactSystemResponse>>>
 }

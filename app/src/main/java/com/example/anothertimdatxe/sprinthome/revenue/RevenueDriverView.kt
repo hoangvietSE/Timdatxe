@@ -5,5 +5,5 @@ import com.example.anothertimdatxe.entity.response.DriverRevenueResponse
 
 interface RevenueDriverView : BaseView {
     fun showDetail(sum_trip: Int, sum_revenue: Int)
-    fun showDataByMonth(data: List<DriverRevenueResponse>)
+    fun showDataByMonth(data: List<DriverRevenueResponse>, isRefreshing: Boolean)
 }
