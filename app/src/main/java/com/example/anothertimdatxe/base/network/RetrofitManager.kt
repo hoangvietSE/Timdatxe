@@ -251,4 +251,13 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
+
+    fun sendContactSystem(iCallBack: ICallBack<BaseResult<ContactSystemResponse>>, request: ContactRequest): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        val request = createPostRequest(request)
+        return apiService.sendContactSystem(CarBookingSharePreference.getAccessToken(), request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
 }

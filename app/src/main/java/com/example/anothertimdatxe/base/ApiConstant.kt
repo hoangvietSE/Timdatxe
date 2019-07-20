@@ -27,6 +27,9 @@ object ApiConstant {
     //FAQS
     const val SHOW_FAQS = "/v1/faqs"
 
+    //Contact
+    const val CONTACT_SYSTEM = "/v1/contact_system"
+
     interface httpStatusCode {
         companion object {
             const val OK = 200

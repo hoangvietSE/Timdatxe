@@ -2,23 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/color_white">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/content_padding_normal"
-        android:paddingTop="@dimen/content_padding_resend"
+        android:paddingTop="@dimen/margin_10_dp"
         android:paddingEnd="@dimen/margin_16_dp"
-        android:paddingBottom="@dimen/content_padding_resend">
+        android:paddingBottom="@dimen/margin_10_dp">
 
         <TextView
             android:id="@+id/title"
             style="@style/TextViewNormal"
             android:layout_alignParentStart="true"
-            android:textSize="@dimen/text_size_14"
+            android:textSize="@dimen/text_size_16"
             tools:text="Ho ten" />
 
         <TextView

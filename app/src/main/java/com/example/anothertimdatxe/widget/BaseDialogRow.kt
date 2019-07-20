@@ -2,6 +2,7 @@ package com.example.anothertimdatxe.widget
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.os.Build
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -41,6 +42,18 @@ class BaseDialogRow : RelativeLayout {
     private fun initDataFromStyleable(ta: TypedArray) {
         var mTitle = ta.getString(R.styleable.BaseDialogRow_row_title)
         setTitle(mTitle)
+        var mDetail = ta.getString(R.styleable.BaseDialogRow_row_detail)
+        setContent(mDetail)
+//        var mBackground = ta.getColor(R.styleable.BaseDialogRow_row_background, resources.getColor(R.color.white))
+//        setRowBackground(mBackground)
+    }
+
+    private fun setRowBackground(mBackground: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            row.background = resources.getDrawable(mBackground, null)
+        } else {
+            row.background = resources.getDrawable(mBackground)
+        }
     }
 
     fun setTitle(mTitle: String?) {

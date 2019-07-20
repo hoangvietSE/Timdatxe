@@ -27,6 +27,7 @@
     </declare-styleable>
 
     <declare-styleable name="BaseDialogRow">
+        <attr name="row_background" format="color" />
         <attr name="row_title" format="string" />
         <attr name="row_detail" format="string" />
     </declare-styleable>
