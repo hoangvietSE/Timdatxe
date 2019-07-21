@@ -121,4 +121,13 @@ interface ApiService {
     @POST(ApiConstant.CONTACT_SYSTEM)
     @Headers("Content-Type: application/json")
     fun sendContactSystem(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody): Single<Response<BaseResult<ContactSystemResponse>>>
+
+    @GET(ApiConstant.VERSION_APP)
+    @Headers("Content-Type: application/json")
+    fun getVersionApp(): Single<Response<BaseResult<List<VersionAppResponse>>>>
+
+    @GET(ApiConstant.TERM_AND_CONDITION)
+    @Headers("Content-Type: application/json")
+    fun getTermAndCondition(@Path(RequestParam.SLUG) slug: String): Single<Response<BaseResult<TermAndConditionResponse>>>
+
 }

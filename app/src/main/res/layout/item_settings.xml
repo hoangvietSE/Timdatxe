@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+        <TextView
+                android:layout_marginLeft="@dimen/text_normal"
+                android:layout_marginTop="@dimen/content_padding_normal"
+                android:textSize="@dimen/text_big"
+                android:text="Dieu khoan dieu kien"
+                android:id="@+id/tv_item_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <ImageView
+                android:src="@drawable/ic_chevron_right_black_24dp"
+                android:layout_marginEnd="@dimen/content_padding_normal"
+                android:layout_marginTop="@dimen/content_padding_normal"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <View
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+    </RelativeLayout>
+</LinearLayout>
