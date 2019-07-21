@@ -65,12 +65,18 @@
         <activity
             android:name=".sprinthome.settings.SettingActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".sprinthome.condition.ConditionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".sprinthome.version.VersionUpdateActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".sprintlogin.changepassword.ChangePasswordActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".sprinthome.condition.ConditionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprinthome.version.VersionUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprintlogin.changepassword.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprintsearch.driver.driversearch.DriverSearchActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
