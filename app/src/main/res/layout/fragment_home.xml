@@ -5,6 +5,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_home_search"
+            android:hint="@string/home_search_title"
+            android:paddingStart="@dimen/content_padding_normal"
+            android:paddingTop="@dimen/margin_12_dp"
+            android:paddingBottom="@dimen/margin_12_dp"
+            android:textSize="@dimen/text_size_16" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_16_dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/ic_search" />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/btn_find_user"
         android:layout_width="wrap_content"

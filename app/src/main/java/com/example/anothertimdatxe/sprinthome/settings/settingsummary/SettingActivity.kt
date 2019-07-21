@@ -9,13 +9,13 @@ import beetech.com.carbooking.sprinthome.settings.SettingPresenter
 import beetech.com.carbooking.sprinthome.settings.SettingPresenterImpl
 import beetech.com.carbooking.sprinthome.settings.SettingView
 import beetech.com.carbooking.sprinthome.settings.adapter.SettingAdapter
-import beetech.com.carbooking.sprintlogin.changepassword.ChangePasswordActivity
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
 import com.example.anothertimdatxe.sprinthome.condition.ConditionActivity
 import com.example.anothertimdatxe.sprinthome.settings.faqs.FaqsActivity
 import com.example.anothertimdatxe.sprinthome.version.VersionUpdateActivity
+import com.example.anothertimdatxe.sprintlogin.changepassword.ChangePasswordActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingActivity : BaseActivity<SettingPresenter>(), SettingView {

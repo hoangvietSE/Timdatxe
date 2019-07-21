@@ -10,6 +10,7 @@ import com.example.anothertimdatxe.base.adapter.BaseViewHolder
 import com.example.anothertimdatxe.entity.response.DriverRevenueResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.util.DateUtil
+import com.example.anothertimdatxe.util.NumberUtil
 import kotlinx.android.synthetic.main.item_revenue_detail.view.*
 
 class RevenueDetailAdapter(context: Context, var mListener: BaseRvListener) : BaseAdapter<DriverRevenueResponse, RevenueDetailAdapter.RevenueDetailViewHolder>(context) {
@@ -22,7 +23,7 @@ class RevenueDetailAdapter(context: Context, var mListener: BaseRvListener) : Ba
             itemView.tv_time.text = DateUtil.formatDate(data.start_date!!, DateUtil.DATE_FORMAT_21, DateUtil.DATE_FORMAT_23)
             itemView.tv_starting_point.text = data.start_point
             itemView.tv_ending_point.text = data.end_point
-            itemView.tv_money.text = "${data.total_money_trip} VNĐ"
+            itemView.tv_money.text = NumberUtil.formatNumber(data.total_money_trip.toString())
         }
 
     }

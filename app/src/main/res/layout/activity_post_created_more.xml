@@ -20,6 +20,7 @@
             android:background="@drawable/bg_list_driver_post_created">
 
             <RelativeLayout
+                android:alpha="0.8"
                 android:id="@+id/form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,6 +38,18 @@
                     android:layout_marginStart="@dimen/margin_32_dp"
                     android:layout_marginTop="@dimen/margin_16_dp"
                     android:src="@drawable/ic_start" />
+
+                <com.example.anothertimdatxe.widget.DashView
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    android:layout_width="5dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/imv_starting_point"
+                    android:layout_marginStart="45dp"
+                    app:dashLineColor="@color/color_999"
+                    app:lineHeight="2dp"
+                    app:dashLineWidth="2dp"
+                    app:dashOrientation="1"
+                    app:dashWidth="5dp" />
 
                 <ImageView
                     android:id="@+id/imv_ending_point"
