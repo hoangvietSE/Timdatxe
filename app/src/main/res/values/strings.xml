@@ -40,6 +40,13 @@
     <string name="change_password_new">Mật khẩu mới</string>
     <string name="change_password_retype">Xác nhận mật khẩu mới</string>
     <string name="change_password_success">Đổi mật khẩu thành công</string>
+    <string name="change_password_old_no_type">Vui lòng nhập mật khẩu cũ!</string>
+    <string name="change_password_new_no_type">Vui lòng nhập mật khẩu mới!</string>
+    <string name="change_password_retype_no_type">Vui lòng nhập xác nhận mật khẩu mới!</string>
+    <string name="change_password_old_error_type">Mật khẩu cũ không đúng định dạng!</string>
+    <string name="change_password_new_error_type">Mật khẩu mới không đúng định dạng!</string>
+    <string name="change_password_retype_error_type">Mật khẩu nhập lại không đúng định dạng!</string>
+    <string name="change_password_not_exactly">Xác nhận mật khẩu không khớp!</string>
 
     //confirm
     <string name="confirm_tv_inputCode">Nhập mã xác thực</string>

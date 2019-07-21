@@ -1,11 +1,14 @@
-package beetech.com.carbooking.sprintlogin.changepassword
+package com.example.anothertimdatxe.sprintlogin.changepassword
 
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
+import beetech.com.carbooking.sprintlogin.changepassword.ChangePasswordActivityImpl
+import beetech.com.carbooking.sprintlogin.changepassword.ChangePasswordPresenter
+import beetech.com.carbooking.sprintlogin.changepassword.ChangePasswordView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
+import com.example.anothertimdatxe.extension.isValidStrongPassword
+import com.example.anothertimdatxe.widget.TextWatcherPassword
 import kotlinx.android.synthetic.main.activity_change_password.*
 
 class ChangePasswordActivity : TimdatxeBaseActivity<ChangePasswordPresenter>(), ChangePasswordView {
@@ -28,23 +31,33 @@ class ChangePasswordActivity : TimdatxeBaseActivity<ChangePasswordPresenter>(), 
         toolbarTitle?.let {
             it.text = getString(R.string.toolbar_title_change_password)
         }
+        addingTextWatcher()
+    }
+
+    private fun addingTextWatcher() {
+        et_change_password_old.addTextChangedListener(TextWatcherPassword(til_old_password))
+        et_change_password_new.addTextChangedListener(TextWatcherPassword(til_new_password))
+        et_change_password_retype.addTextChangedListener(TextWatcherPassword(til_confirm_password))
     }
 
     private fun isValidate(): Boolean {
-        if (TextUtils.isEmpty(et_change_password_old.text)
-            || TextUtils.isEmpty(et_change_password_new.text)
-            || TextUtils.isEmpty(et_change_password_retype.text)
-        ) {
-            Toast.makeText(this, "Vui lòng nhập mật khẩu", LENGTH_LONG).show()
+        if (TextUtils.isEmpty(et_change_password_old.text)) {
+            til_old_password.error = getString(R.string.change_password_old_no_type)
             return false
-        } else if (et_change_password_old.getText().toString().length < 6
-            || et_change_password_new.getText().toString().length < 6
-            || et_change_password_new.getText().toString().length < 6
-        ) {
-            Toast.makeText(this, "Hãy nhập mật khẩu hợp lệ", LENGTH_LONG).show()
+        } else if (!et_change_password_old.text.toString().isValidStrongPassword()) {
+            til_old_password.error = getString(R.string.change_password_old_error_type)
+            return false
+        } else if (TextUtils.isEmpty(et_change_password_new.text)) {
+            til_new_password.error = getString(R.string.change_password_new_no_type)
+            return false
+        } else if (!et_change_password_new.text.toString().isValidStrongPassword()) {
+            til_new_password.error = getString(R.string.change_password_new_error_type)
+            return false
+        } else if (TextUtils.isEmpty(et_change_password_retype.text)) {
+            til_confirm_password.error = getString(R.string.change_password_retype_no_type)
             return false
         } else if (!(et_change_password_new.text.toString().equals(et_change_password_retype.text.toString()))) {
-            Toast.makeText(this, "Mật khẩu nhập lại không chính xác", LENGTH_LONG).show()
+            til_confirm_password.error = getString(R.string.change_password_not_exactly)
             return false
         }
         return true

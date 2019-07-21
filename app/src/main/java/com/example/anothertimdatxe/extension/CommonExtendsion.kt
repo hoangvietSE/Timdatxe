@@ -55,7 +55,7 @@ fun ImageView.setAvatar(context: Context, imv: ImageView, contentURI: Uri) {
 const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"
 const val EMAIL_TWO_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+.[a-z]+"
 const val PHONE_PATTERN = "[0-9]{9,10}"
-const val STRONG_PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[~`!@#$%^&*()_=+.,;':\"])(?=\\S+$).{8,}$"
+const val STRONG_PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{7,}$"
 
 fun String.isValidEmail(): Boolean {
     val parttern = Pattern.compile(EMAIL_PATTERN)
