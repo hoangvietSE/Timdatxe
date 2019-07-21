@@ -138,4 +138,24 @@
     <string name="toolbar">Hỗ trợ</string>
     <string name="support_success">Gửi hỗ trợ thành công</string>
     <string name="support_fail">Gửi hỗ trợ thất bại</string>
+
+    <!--settings-->
+    <string name="setting_title">CÀI ĐẶT</string>
+    <string name="setting_developing">Chức năng đang phát triển</string>
+    <string name="travel_feedback">Ý kiến phản hồi</string>
+    <string name="enter_feedback_content">Nhập nội dung đánh giá</string>
+    <string name="enter_support_content">Nhập nội dung cần hỗ trợ</string>
+    <string name="support">Hỗ trợ</string>
+    <string name="stars">Số sao:</string>
+
+    <!--update_version-->
+    <string name="update_version_title">Cập nhật Version APP</string>
+    <string name="update_version_website_name">TIMDATXE.COM</string>
+    <string name="update_version_website_description">Hệ thống đặt xe tiện chuyến lớn nhất Việt Nam</string>
+    <string name="update_version_current">Phiên bản hiện tại:\u0020</string>
+    <string name="update_version_day">Ngày cập nhật:\u0020</string>
+    <string name="update_version_description_current">Mô tả phiên bản hiện tại</string>
+    <string name="description_one">- Tính năng Theo dõi nhận thông tin tài xế yêu thích</string>
+    <string name="description_two">- Tính năng thanh toán bằng tiền mặt</string>
+    <string name="btn_update_version">Cập nhật phiên bản mới nhất</string>
 </resources>

@@ -24,7 +24,7 @@ import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
 import com.example.anothertimdatxe.sprinthome.revenue.RevenueDriverActivity
-import com.example.anothertimdatxe.sprinthome.settings.faqs.FaqsActivity
+import com.example.anothertimdatxe.sprinthome.settings.SettingActivity
 import com.example.anothertimdatxe.sprinthome.updateprofile.UpdateProfileActivity
 import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFragment
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
@@ -89,7 +89,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
     override fun onSettingClick() {
         btn_setting.setOnClickListener {
-            startActivity(Intent(this, FaqsActivity::class.java))
+            startActivity(Intent(this, SettingActivity::class.java))
         }
     }
 
@@ -113,7 +113,6 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         setUpToolBar()
         initDrawer()
         initViewPager()
-        onSettingClick()
     }
 
     fun setUpToolBar() {
@@ -253,6 +252,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         rv_menu.adapter = mAdapter
         rv_menu.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         updateHeaderMenu(CarBookingSharePreference.getUserData()!!.full_name, CarBookingSharePreference.getUserData()!!.avatar)
+        onSettingClick()
     }
 
     fun updateHeaderMenu(full_name: String, avatar: String?) {

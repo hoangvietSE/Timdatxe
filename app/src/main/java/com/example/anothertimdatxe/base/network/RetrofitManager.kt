@@ -260,4 +260,20 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
+
+    fun getVersionApp(iCallBack: ICallBack<BaseResult<List<VersionAppResponse>>>): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.getVersionApp()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
+
+    fun getTermAndCondition(iCallBack: ICallBack<BaseResult<TermAndConditionResponse>>, slug: String): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.getTermAndCondition(slug)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(subscriber)
+    }
 }

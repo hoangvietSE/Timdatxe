@@ -24,6 +24,12 @@ object ApiConstant {
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"
 
+    //Term and Condition
+    const val TERM_AND_CONDITION = "/v1/page/{${RequestParam.SLUG}}"
+
+    //Version App
+    const val VERSION_APP = "/v1/versions"
+
     //FAQS
     const val SHOW_FAQS = "/v1/faqs"
 

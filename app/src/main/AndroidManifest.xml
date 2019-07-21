@@ -59,9 +59,16 @@
             android:name=".sprinthome.revenue.RevenueDriverActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:windowSoftInputMode="stateVisible|adjustResize"
             android:name=".sprinthome.help.SupportActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".sprinthome.settings.SettingActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".sprinthome.condition.ConditionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sprinthome.version.VersionUpdateActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
