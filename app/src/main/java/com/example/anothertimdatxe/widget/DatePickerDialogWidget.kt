@@ -8,7 +8,7 @@ import java.util.*
 
 class DatePickerDialogWidget(var context: Context, var mListener: onSetDateSuccessListener) : DatePickerDialog.OnDateSetListener {
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        mListener.onSetDateSuccess(year, month, dayOfMonth)
+        mListener.onSetDateSuccess(year, month + 1, dayOfMonth)
     }
 
     val calendar = Calendar.getInstance(TimeZone.getDefault())

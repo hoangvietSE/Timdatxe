@@ -276,4 +276,12 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subscriber)
     }
+
+    fun getListHotCities(iCallBack: ICallBack<BaseResult<List<HotCitiesResponse>>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.getHotCities(CarBookingSharePreference.getAccessToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
 }

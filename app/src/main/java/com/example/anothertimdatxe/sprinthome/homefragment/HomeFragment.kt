@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.fragment.BaseFragment
+import com.example.anothertimdatxe.entity.response.HotCitiesResponse
 import com.example.anothertimdatxe.sprinthome.postmore.PostCreatedMoreActivity
 import com.example.anothertimdatxe.sprintsearch.driver.driversearch.DriverSearchActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : BaseFragment<HomePresenter>(), HomeView {
+class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
+    private var mListHotCities: List<HotCitiesResponse>? = null
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -39,9 +41,14 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeView {
                 startActivity(Intent(context, DriverSearchActivity::class.java))
             }
         }
+        mPresenter!!.getData()
     }
 
-    override fun getPresenter(): HomePresenter {
-        return HomePresenterImpl(this)
+    override fun getPresenter(): HomeFragmentPresenter {
+        return HomeFragmentPresenterImpl(this)
+    }
+
+    override fun showListHotCities(data: List<HotCitiesResponse>) {
+        mListHotCities = data
     }
 }

@@ -36,6 +36,9 @@ object ApiConstant {
     //Contact
     const val CONTACT_SYSTEM = "/v1/contact_system"
 
+    //Hot Cities
+    const val HOT_CITIES = "/v1/cities"
+
     interface httpStatusCode {
         companion object {
             const val OK = 200

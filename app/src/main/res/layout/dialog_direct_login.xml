@@ -109,7 +109,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hệ thống tìm đặt xe tiện chuyến lớn nhất Việt Nam"
+            android:text="Hệ thống tìm xe tiện chuyến lớn nhất Việt Nam"
             android:textColor="@color/black" />
     </LinearLayout>
 

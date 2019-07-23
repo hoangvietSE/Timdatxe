@@ -130,4 +130,7 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun getTermAndCondition(@Path(RequestParam.SLUG) slug: String): Single<Response<BaseResult<TermAndConditionResponse>>>
 
+    @GET(ApiConstant.HOT_CITIES)
+    @Headers("Content-Type: application/json")
+    fun getHotCities(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<Response<BaseResult<List<HotCitiesResponse>>>>
 }

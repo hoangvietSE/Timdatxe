@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -24,18 +24,23 @@
             android:paddingStart="@dimen/content_padding_normal"
             android:paddingTop="@dimen/margin_12_dp"
             android:paddingBottom="@dimen/margin_12_dp"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/margin_8_dp"
-            android:layout_marginEnd="@dimen/margin_16_dp"
+            android:layout_marginEnd="@dimen/content_padding_normal"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:src="@drawable/ic_search" />
-    </RelativeLayout>
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/tv_search"
+            app:layout_constraintEnd_toEndOf="@id/tv_search"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/btn_find_user"
