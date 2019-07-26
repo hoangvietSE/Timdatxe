@@ -94,7 +94,7 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
     private fun setMonthAdapter() {
         mRevenueMonthAdapter = RevenueMonthAdapter(this, mMonthListener)
         mRevenueMonthAdapter?.setListItems(mListMonth)
-        val spacingDecoration = resources.getDimensionPixelSize(R.dimen.spacing)
+        val spacingDecoration = resources.getDimensionPixelSize(R.dimen.spacing_16_dp)
         recyclerViewMonth.addItemDecoration(ItemSpacingDecoration(spacingDecoration))
         recyclerViewMonth.adapter = mRevenueMonthAdapter
         recyclerViewMonth.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)

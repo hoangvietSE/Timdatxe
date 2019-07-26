@@ -13,4 +13,6 @@ class BaseResult<R> {
     var count_books: Int? = null
     @SerializedName("total_page")
     var total_page: Int? = null
+    @SerializedName("total")
+    var total: Int? = 0
 }

@@ -6,29 +6,46 @@ import com.google.gson.annotations.SerializedName
 
 class HotCitiesResponse() : Parcelable {
     @SerializedName("id")
-    val id: Int? = null
+    var id: Int? = null
     @SerializedName("name")
-    val name: Int? = null
+    var name: String? = null
     @SerializedName("slug")
-    val slug: Int? = null
+    var slug: String? = null
     @SerializedName("code")
-    val code: Int? = null
+    var code: String? = null
     @SerializedName("image")
-    val image: Int? = null
+    var image: String? = null
     @SerializedName("sort")
-    val sort: Int? = null
+    var sort: Int? = null
     @SerializedName("created_at")
-    val created_at: Int? = null
+    var created_at: String? = null
     @SerializedName("updated_at")
-    val updated_at: Int? = null
+    var updated_at: String? = null
     @SerializedName("app_image")
-    val app_image: Int? = null
+    var app_image: String? = null
 
     constructor(parcel: Parcel) : this() {
+        id = parcel.readInt()
+        name = parcel.readString()
+        slug = parcel.readString()
+        code = parcel.readString()
+        image = parcel.readString()
+        sort = parcel.readInt()
+//        created_at = parcel.readString()
+//        updated_at = parcel.readString()
+        app_image = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-
+        parcel.writeInt(id!!)
+        parcel.writeString(name!!)
+        parcel.writeString(slug!!)
+        parcel.writeString(code!!)
+        parcel.writeString(image!!)
+        parcel.writeInt(sort!!)
+//        parcel.writeString(created_at!!)
+//        parcel.writeString(updated_at!!)
+        parcel.writeString(app_image!!)
     }
 
     override fun describeContents(): Int {

@@ -2,9 +2,6 @@ package com.example.anothertimdatxe.sprintlogin.changepassword
 
 import android.text.TextUtils
 import android.view.View
-import beetech.com.carbooking.sprintlogin.changepassword.ChangePasswordActivityImpl
-import beetech.com.carbooking.sprintlogin.changepassword.ChangePasswordPresenter
-import beetech.com.carbooking.sprintlogin.changepassword.ChangePasswordView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidStrongPassword

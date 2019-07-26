@@ -10,7 +10,8 @@
     <dimen name="text_normal">15sp</dimen>
     <dimen name="text_big">17sp</dimen>
     <dimen name="text_small">13sp</dimen>
-    <dimen name="spacing">16dp</dimen>
+    <dimen name="spacing_16_dp">16dp</dimen>
+    <dimen name="spacing_8_dp">8dp</dimen>
 
     <dimen name="margin_edittext">40dp</dimen>
     <dimen name="margin_edittext_Top">20dp</dimen>

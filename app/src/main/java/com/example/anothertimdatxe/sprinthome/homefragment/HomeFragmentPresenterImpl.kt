@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome.homefragment
 
+import android.util.Log
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 import com.example.anothertimdatxe.base.network.ApiException
 import com.example.anothertimdatxe.base.network.BaseResult
@@ -13,16 +14,18 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
     }
 
     private fun getHotCities() {
-        val disposable = RetrofitManager.getListHotCities(object : ICallBack<BaseResult<List<HotCitiesResponse>>> {
-            override fun onSuccess(result: BaseResult<List<HotCitiesResponse>>?) {
+        val disposable = RetrofitManager.getListHotCities(object : ICallBack<BaseResult<ArrayList<HotCitiesResponse>>> {
+            override fun onSuccess(result: BaseResult<ArrayList<HotCitiesResponse>>?) {
                 mView!!.showListHotCities(result?.data!!)
             }
 
             override fun onError(e: ApiException) {
                 //do-something
+                Log.d("myLOG","Error")
             }
 
         })
+        addDispose(disposable)
     }
 
 }

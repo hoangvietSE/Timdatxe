@@ -14,14 +14,16 @@ import kotlinx.android.synthetic.main.item_hot_cities.view.*
 
 class HotCitiesAdapter(context: Context, var mListener: BaseRvListener) : BaseAdapter<HotCitiesResponse, HotCitiesAdapter.HotCitiesViewHolder>(context) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotCitiesViewHolder {
-        return HotCitiesViewHolder(context!!.inflate(R.layout.item_hot_cities, parent, false), mListener)
+        return HotCitiesViewHolder(context, context!!.inflate(R.layout.item_hot_cities, parent, false), mListener)
     }
 
-    class HotCitiesViewHolder(itemView: View, mListener: BaseRvListener) : BaseViewHolder<HotCitiesResponse>(itemView, mListener) {
+    class HotCitiesViewHolder(var context: Context, itemView: View, mListener: BaseRvListener) : BaseViewHolder<HotCitiesResponse>(itemView, mListener) {
         override fun bindData(data: HotCitiesResponse) {
-            GlideApp.with(itemView)
+            GlideApp.with(context)
                     .load(data.app_image)
-                    .override(80, 120)
+                    .placeholder(R.drawable.img_default)
+                    .error(R.drawable.img_default)
+                    .override(1200, 800)
                     .into(itemView.imv_hot_cities)
         }
 

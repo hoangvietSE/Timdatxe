@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">TimDatXe</string>
 
+    //home
+    <string name="home_title_hot_cities">Tỉnh thành nổi bật</string>
+
     <string name="login_text_welcome">Chào mừng đến với</string>
     <string name="login_text_welcomeTwo">Timdatxe</string>
     <string name="login_text_welcomeThree">Hệ thống tìm xe tiện chuyến lớn nhất Việt Nam</string>
@@ -12,6 +15,7 @@
     <string name="register_title">Đăng ký tài khoản</string>
     <string name="login_textView">Đăng nhập bằng</string>
     <string name="login_success">Đăng nhập thành công</string>
+    <string name="layout_no_result">Chưa có chuyến đi phù hợp</string>
 
     //dialog_loading
     <string name="tvLoading">Loading</string>
@@ -108,6 +112,7 @@
 
     //Post Created More Find Car
     <string name="seat_book">Số ghế đặt:</string>
+    <string name="post_more_status">Trạng thái:</string>
     <string name="recruitment">Ứng tuyển</string>
 
     //Post Created More Find User
@@ -174,4 +179,13 @@
 
     //home_search
     <string name="home_search_title">Bạn muốn đi đâu?</string>
+
+    //Hot Cities
+    <string name="hot_cities_title">Các tỉnh thành nổi bật</string>
+
+    //City Post
+    <string name="city_post_title">Danh sách chuyến đi</string>
+    <string name="city_post_tab_one">CHUYẾN ĐI CỦA KHÁCH</string>
+    <string name="city_post_tab_two">CHUYẾN ĐI CỦA LÁI XE</string>
+
 </resources>
