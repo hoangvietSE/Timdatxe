@@ -130,4 +130,19 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun getTermAndCondition(@Path(RequestParam.SLUG) slug: String): Single<Response<BaseResult<TermAndConditionResponse>>>
 
+    @GET(ApiConstant.HOT_CITIES)
+    @Headers("Content-Type: application/json")
+    fun getHotCities(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<Response<BaseResult<ArrayList<HotCitiesResponse>>>>
+
+    //User Hot Cities
+    @GET(ApiConstant.USER_SEARCH_CITY_POST)
+    @JvmSuppressWildcards
+    @Headers("Content-Type: application/json")
+    fun getUserSearchCityPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<UserSearchCityPostResponse>>>
+
+    //Driver Hot Cities
+    @GET(ApiConstant.DRIVER_SEARCH_CITY_POST)
+    @JvmSuppressWildcards
+    @Headers("Content-Type: application/json")
+    fun getDriverSearchCityPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverSearchCityPostResponse>>>
 }

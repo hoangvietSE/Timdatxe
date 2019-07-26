@@ -37,4 +37,12 @@
     <color name="purple_text">#673AB7</color>
     <color name="red_text">#ff00</color>
     <color name="search_home">#FFEDDA</color>
+    <color name="color_title_item">#e3e4d6</color>
+
+    <!--status-->
+    <color name="color_pending">#006837</color>
+    <color name="color_reject">#662d91</color>
+    <color name="color_finish">#c1272d</color>
+    <color name="color_cancel">#000</color>
+    <color name="color_revenue">#026838</color>
 </resources>

@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingBottom="@dimen/content_padding_resend"
         android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,20 +23,25 @@
             android:background="@drawable/bg_home_search"
             android:hint="@string/home_search_title"
             android:paddingStart="@dimen/content_padding_normal"
-            android:paddingTop="@dimen/margin_12_dp"
-            android:paddingBottom="@dimen/margin_12_dp"
-            android:textSize="@dimen/text_size_16" />
+            android:paddingTop="@dimen/content_padding_resend"
+            android:paddingBottom="@dimen/content_padding_resend"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/margin_8_dp"
-            android:layout_marginEnd="@dimen/margin_16_dp"
+            android:layout_marginEnd="@dimen/content_padding_normal"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:src="@drawable/ic_search" />
-    </RelativeLayout>
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/tv_search"
+            app:layout_constraintEnd_toEndOf="@id/tv_search"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/btn_find_user"
@@ -62,4 +68,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_find_user"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_hot_cities"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_type_trip"
+        android:drawableEnd="@drawable/ic_arrow"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/content_padding_normal"
+        android:paddingEnd="@dimen/content_padding_normal"
+        android:text="@string/home_title_hot_cities"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintTop_toBottomOf="@id/btn_find_user" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -276,4 +276,24 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subscriber)
     }
+
+    fun getListHotCities(iCallBack: ICallBack<BaseResult<ArrayList<HotCitiesResponse>>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.getHotCities(CarBookingSharePreference.getAccessToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun getUserSearchCityPost(data: MutableMap<String, Any>): Single<BaseResult<List<UserSearchCityPostResponse>>> {
+        return apiService.getUserSearchCityPost(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getDriverSearchCityPost(data: MutableMap<String, Any>) : Single<BaseResult<List<DriverSearchCityPostResponse>>>{
+        return apiService.getDriverSearchCityPost(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

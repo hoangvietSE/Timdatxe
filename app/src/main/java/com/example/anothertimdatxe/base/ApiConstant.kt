@@ -11,6 +11,7 @@ object ApiConstant {
     const val USER_UPDATE_INFO = "/v1/users/{${RequestParam.ID}}"
     const val USER_POST_CREATED = "/v1/user_posts"
     const val USER_HISTORY = "/v1/user_history/{${RequestParam.ID}}"
+    const val USER_SEARCH_CITY_POST = "/v1/searches/city_user_post"
 
     //[DRIVER]
     const val DRIVER_SESSIONS = "/v1/driver_sessions"
@@ -20,6 +21,7 @@ object ApiConstant {
     const val DRIVER_POST_CREATED = "/v1/driver_posts"
     const val DRIVER_HISTORY = "/v1/driver_history/{${RequestParam.ID}}"
     const val DRIVER_REVENUE = "/v1/driver/{${RequestParam.ID}}/statistics"
+    const val DRIVER_SEARCH_CITY_POST = "/v1/searches/city_driver_post"
 
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"
@@ -35,6 +37,9 @@ object ApiConstant {
 
     //Contact
     const val CONTACT_SYSTEM = "/v1/contact_system"
+
+    //Hot Cities
+    const val HOT_CITIES = "/v1/cities"
 
     interface httpStatusCode {
         companion object {
