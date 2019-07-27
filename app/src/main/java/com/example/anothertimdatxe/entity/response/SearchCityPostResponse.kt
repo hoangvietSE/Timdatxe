@@ -2,7 +2,7 @@ package com.example.anothertimdatxe.entity.response
 
 import com.google.gson.annotations.SerializedName
 
-data class DriverSearchCityPostResponse(
+data class SearchCityPostResponse(
 
 	@field:SerializedName("driver_id")
 	val driverId: Int? = null,
@@ -110,5 +110,11 @@ data class DriverSearchCityPostResponse(
 	var avatar: String? = null,
 
 	@field:SerializedName("str_status")
-	val str_status: String? = null
+	val str_status: String? = null,
+
+    @field:SerializedName("number_seat")
+    val numberSeat: Int? = null,
+
+    @field:SerializedName("user_id")
+    val userId: Int? = null
 )

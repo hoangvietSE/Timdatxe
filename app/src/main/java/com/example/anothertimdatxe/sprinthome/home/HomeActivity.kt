@@ -29,6 +29,7 @@ import com.example.anothertimdatxe.sprinthome.updateprofile.UpdateProfileActivit
 import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFragment
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
+import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.BottomTabLayout
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_nav_menu.*
@@ -47,6 +48,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         const val VP_ITEM_NEWS = 1
         const val VP_ITEM_LISTS = 2
         const val VP_ITEM_PROFILES = 3
+        const val TIME_BACK_LIMIT = 2000L
     }
 
     private var mToggle: ActionBarDrawerToggle? = null
@@ -54,6 +56,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     private var mListFragment: ArrayList<Fragment> = arrayListOf()
     private var mFragmentAdapter: BaseFragmentManager? = null
     private var isLoadingProfileSuccess: Boolean = false
+    private var backPressTime: Long = 0L
     private var mListener: BaseRvListener = object : BaseRvListener {
         override fun onItemClick(position: Int) {
             when (position) {
@@ -97,6 +100,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         }
+        if (backPressTime + TIME_BACK_LIMIT > System.currentTimeMillis()) {
+            super.onBackPressed()
+            return
+        } else {
+            ToastUtil.show(resources.getString(R.string.home_back_press))
+        }
+        backPressTime = System.currentTimeMillis()
     }
 
     override fun onStart() {

@@ -3,6 +3,7 @@
 
     //home
     <string name="home_title_hot_cities">Tỉnh thành nổi bật</string>
+    <string name="home_back_press">Nhấn back thêm một lần nữa để thoát</string>
 
     <string name="login_text_welcome">Chào mừng đến với</string>
     <string name="login_text_welcomeTwo">Timdatxe</string>

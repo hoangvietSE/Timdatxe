@@ -285,13 +285,13 @@ object RetrofitManager {
                 .subscribeWith(subscribe)
     }
 
-    fun getUserSearchCityPost(data: MutableMap<String, Any>): Single<BaseResult<List<UserSearchCityPostResponse>>> {
+    fun getUserSearchCityPost(data: MutableMap<String, Any>): Single<BaseResult<List<SearchCityPostResponse>>> {
         return apiService.getUserSearchCityPost(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getDriverSearchCityPost(data: MutableMap<String, Any>) : Single<BaseResult<List<DriverSearchCityPostResponse>>>{
+    fun getDriverSearchCityPost(data: MutableMap<String, Any>) : Single<BaseResult<List<SearchCityPostResponse>>>{
         return apiService.getDriverSearchCityPost(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

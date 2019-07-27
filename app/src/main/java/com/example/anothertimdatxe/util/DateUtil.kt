@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 object DateUtil {
     val DATE_FORMAT_1 = "yyyy-MM-dd"
     val DATE_FORMAT_2 = "HH:mm:ss"
-    val DATE_FORMAT_3 = "hh:mm a"
+    val DATE_FORMAT_3 = "h:mm a"
     val DATE_FORMAT_4 = "dd/MM/yyyy"
     val DATE_FORMAT_5 = "hh:mmaa dd/MM/yyyy"
     val DATE_FORMAT_6 = "MM/dd/yyyy"
