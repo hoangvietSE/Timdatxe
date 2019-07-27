@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.anothertimdatxe.BuildConfig
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.util.GlideApp
@@ -22,6 +23,14 @@ fun View.invisible() {
 
 fun View.gone() {
     visibility = View.GONE
+}
+
+fun SwipeRefreshLayout.showRefreshing(){
+    isRefreshing = true
+}
+
+fun SwipeRefreshLayout.hideRefreshing(){
+    isRefreshing = false
 }
 
 fun Context.inflate(context: Context, layoutRes: Int): View {

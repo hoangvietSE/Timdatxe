@@ -138,11 +138,11 @@ interface ApiService {
     @GET(ApiConstant.USER_SEARCH_CITY_POST)
     @JvmSuppressWildcards
     @Headers("Content-Type: application/json")
-    fun getUserSearchCityPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<UserSearchCityPostResponse>>>
+    fun getUserSearchCityPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<SearchCityPostResponse>>>
 
     //Driver Hot Cities
     @GET(ApiConstant.DRIVER_SEARCH_CITY_POST)
     @JvmSuppressWildcards
     @Headers("Content-Type: application/json")
-    fun getDriverSearchCityPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverSearchCityPostResponse>>>
+    fun getDriverSearchCityPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<SearchCityPostResponse>>>
 }

@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome.city_post.city_post_fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.SearchCityPostAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
-import com.example.anothertimdatxe.entity.response.DriverSearchCityPostResponse
-import com.example.anothertimdatxe.entity.response.UserSearchCityPostResponse
+import com.example.anothertimdatxe.entity.response.SearchCityPostResponse
 import com.example.anothertimdatxe.extension.gone
+import com.example.anothertimdatxe.extension.hideRefreshing
+import com.example.anothertimdatxe.extension.showRefreshing
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.MyApp
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
@@ -22,6 +24,7 @@ class CityPostFragment : BaseFragment<CityPostPresenter>(), CityPostView,
     private var city: String? = null
     private var mSearchCityPostAdapter: SearchCityPostAdapter? = null
     private var mLinearLayoutManager: LinearLayoutManager? = null
+    private var mList: MutableList<SearchCityPostResponse> = mutableListOf()
 
     companion object {
         fun getInstance(key: String, city: String): CityPostFragment {
@@ -41,15 +44,47 @@ class CityPostFragment : BaseFragment<CityPostPresenter>(), CityPostView,
         getDataArgument()
         setAdapter()
         setLinearLayoutManager()
+        fetchData(false)
+        setRefreshing()
+    }
+
+    private fun setRefreshing() {
+        setColorSchema()
+        swipeRefresh.setOnRefreshListener {
+            showRefreshing()
+            fetchData(true)
+            hideRefreshing()
+        }
+    }
+
+    private fun setColorSchema() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary,null))
+        }else{
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
+
+        }
+    }
+
+    fun showRefreshing() {
+        swipeRefresh.showRefreshing()
+    }
+
+    fun hideRefreshing() {
+        swipeRefresh.hideRefreshing()
+    }
+
+    private fun fetchData(isRefreshing: Boolean) {
         if (key == "driver") {
-            fetchUserData(city)
+            fetchUserData(city, isRefreshing)
         } else {
-            fetchDriverData(city)
+            fetchDriverData(city, isRefreshing)
         }
     }
 
     private fun setLinearLayoutManager() {
         mLinearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recyclerView.adapter = mSearchCityPostAdapter
         recyclerView.layoutManager = mLinearLayoutManager
     }
 
@@ -58,12 +93,12 @@ class CityPostFragment : BaseFragment<CityPostPresenter>(), CityPostView,
         mSearchCityPostAdapter?.setLoadingMoreListener(this)
     }
 
-    private fun fetchUserData(city: String?) {
-        mPresenter!!.getUserCityPost(city!!)
+    private fun fetchUserData(city: String?, isRefreshing: Boolean) {
+        mPresenter!!.getUserCityPost(city!!, isRefreshing)
     }
 
-    private fun fetchDriverData(city: String?) {
-        mPresenter!!.getDriverCityPost(city!!)
+    private fun fetchDriverData(city: String?, isRefreshing: Boolean) {
+        mPresenter!!.getDriverCityPost(city!!, isRefreshing)
     }
 
     private fun getDataArgument() {
@@ -84,25 +119,53 @@ class CityPostFragment : BaseFragment<CityPostPresenter>(), CityPostView,
         progress_bar.visibility = View.GONE
     }
 
-    override fun showUserCityPost(data: List<UserSearchCityPostResponse>) {
+    override fun showUserCityPost(data: List<SearchCityPostResponse>, isRefreshing: Boolean) {
+        if (isRefreshing){
+            mSearchCityPostAdapter?.clear()
+            mList.clear()
+        }
+        mList.addAll(data)
+        hideLoadingMoreProgress()
         mSearchCityPostAdapter?.addModels(data, false)
     }
 
-    override fun showDriverCityPost(data: List<DriverSearchCityPostResponse>) {
+    override fun showDriverCityPost(data: List<SearchCityPostResponse>, isRefreshing: Boolean) {
+        if (isRefreshing){
+            mSearchCityPostAdapter?.clear()
+            mList.clear()
+        }
+        mList.addAll(data)
+        hideLoadingMoreProgress()
         mSearchCityPostAdapter?.addModels(data, false)
     }
 
     override fun showEmptyContent(check: Boolean) {
         if (check) {
             layout_no_result.visible()
-        }else{
+        } else {
             layout_no_result.gone()
         }
     }
 
     override fun onLoadMore() {
-
+        showLoadingMoreProgress()
+        fetchData(false)
     }
 
+    override fun enableLoadingMore() {
+        mSearchCityPostAdapter!!.enableLoadingMore(true)
+    }
+
+    override fun disableLoadingMore() {
+        mSearchCityPostAdapter!!.enableLoadingMore(false)
+    }
+
+    override fun showLoadingMoreProgress() {
+        mSearchCityPostAdapter!!.showLoadingItem(true)
+    }
+
+    override fun hideLoadingMoreProgress() {
+        mSearchCityPostAdapter!!.hideLoadingItem()
+    }
 
 }
