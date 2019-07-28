@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    android:paddingBottom="@dimen/content_padding_normal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/formImgLogo"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/content_padding_normal"
-            android:src="@drawable/register_bg"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
-        android:orientation="vertical">
+            android:layout_height="wrap_content">
+            <ImageView
+                app:layout_constraintDimensionRatio="16:9"
+                android:id="@+id/formImgLogo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/content_padding_normal"
+                android:src="@drawable/register_bg"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tvWelcome"
@@ -190,6 +186,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
