@@ -29,11 +29,58 @@ object DialogUtil {
         return alertDialog
     }
 
+    fun customBaseAlertDialog(context: Context, title: String, msg: String, cancelable: Boolean, positiveButton: String, negativeButton: String, mListener: BaseAlertDialogListener) {
+        var builder = AlertDialog.Builder(context)
+        builder.setTitle(title)
+        builder.setMessage(msg)
+        builder.setCancelable(cancelable)
+        builder.setPositiveButton(
+                positiveButton,
+                { dialog, which -> mListener.onPositiveClick(dialog) }
+        )
+        builder.setNegativeButton(
+                negativeButton,
+                { dialog, which -> mListener.onNegativeClick(dialog) }
+        )
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    fun customBaseAlertDialogNoTitle(context: Context, msg: String, cancelable: Boolean, positiveButton: String, negativeButton: String, mListener: BaseAlertDialogListener) {
+        var builder = AlertDialog.Builder(context)
+        builder.setMessage(msg)
+        builder.setCancelable(cancelable)
+        builder.setPositiveButton(
+                positiveButton,
+                { dialog, which -> mListener.onPositiveClick(dialog) }
+        )
+        builder.setNegativeButton(
+                negativeButton,
+                { dialog, which -> mListener.onNegativeClick(dialog) }
+        )
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
     fun showConfirmDiaglogNotCancel(context: Context, layout: Int, resBackground: Int): Dialog {
         return showConfirmDiaglog(context, layout, false, resBackground)
     }
 
     fun showMessageDialog(context: Context, msg: Int): AlertDialog {
         return showMessageDialog(context, msg, R.string.alert_message_title, null)
+    }
+
+    fun showAlertDialogTitle(context: Context, title: String, msg: String, cancelable: Boolean, positiveButton: String, negativeButton: String, mListener: BaseAlertDialogListener) {
+        customBaseAlertDialog(context, title, msg, cancelable, positiveButton, negativeButton, mListener)
+    }
+
+    fun showAlertDialogNoTitle(context: Context, msg: String, cancelable: Boolean, positiveButton: String, negativeButton: String, mListener: BaseAlertDialogListener) {
+        customBaseAlertDialogNoTitle(context, msg, cancelable, positiveButton, negativeButton, mListener)
+    }
+
+
+    interface BaseAlertDialogListener {
+        fun onPositiveClick(dialogInterface: DialogInterface)
+        fun onNegativeClick(dialogInterface: DialogInterface)
     }
 }

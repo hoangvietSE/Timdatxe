@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome.settings
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
@@ -16,6 +17,9 @@ import com.example.anothertimdatxe.sprinthome.condition.ConditionActivity
 import com.example.anothertimdatxe.sprinthome.settings.faqs.FaqsActivity
 import com.example.anothertimdatxe.sprinthome.version.VersionUpdateActivity
 import com.example.anothertimdatxe.sprintlogin.changepassword.ChangePasswordActivity
+import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
+import com.example.anothertimdatxe.util.CarBookingSharePreference
+import com.example.anothertimdatxe.util.DialogUtil
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingActivity : BaseActivity<SettingPresenter>(), SettingView {
@@ -70,5 +74,27 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingView {
         toolbarTitle?.let {
             it.text = getString(R.string.setting_title)
         }
+        tv_logout.setOnClickListener {
+            DialogUtil.showAlertDialogNoTitle(this, resources.getString(R.string.setting_logout_msg), false,
+                    resources.getString(R.string.setting_logout_positive),resources.getString(R.string.setting_logout_negative),
+                    object : DialogUtil.BaseAlertDialogListener{
+                        override fun onPositiveClick(dialogInterface: DialogInterface) {
+                            dialogInterface.dismiss()
+                            logOut()
+                        }
+
+                        override fun onNegativeClick(dialogInterface: DialogInterface) {
+                            dialogInterface.dismiss()
+                        }
+
+                    })
+        }
+    }
+
+    private fun logOut() {
+        CarBookingSharePreference.clearAllPreference()
+        startActivity(Intent(this, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
     }
 }
