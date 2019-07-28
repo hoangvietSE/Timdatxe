@@ -40,10 +40,10 @@ import org.greenrobot.eventbus.ThreadMode
 class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.BottomBarListener {
 
     companion object {
-        const val ITEM_MENU_REVENUE = 0
-        const val ITEM_MENU_HISTORY = 1
-        const val ITEM_MENU_SUPPRT = 4
-        const val ITEM_MENU_LOG_OUT = 5
+        const val ITEM_MENU_REVENUE = "revenue"
+        const val ITEM_MENU_HISTORY = "history"
+        const val ITEM_MENU_SUPPORT = "support"
+//        const val ITEM_MENU_LOG_OUT = "logout"
         const val VP_ITEM_HOME = 0
         const val VP_ITEM_NEWS = 1
         const val VP_ITEM_LISTS = 2
@@ -59,7 +59,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     private var backPressTime: Long = 0L
     private var mListener: BaseRvListener = object : BaseRvListener {
         override fun onItemClick(position: Int) {
-            when (position) {
+            when (mAdapter.getListItem().get(position).name) {
                 ITEM_MENU_REVENUE -> {
                     goToRevenueDriver()
                 }
@@ -68,13 +68,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                     goToHistoryTravelActivity()
                 }
 
-                ITEM_MENU_SUPPRT -> {
+                ITEM_MENU_SUPPORT -> {
                     goToSupportActivity()
                 }
 
-                ITEM_MENU_LOG_OUT -> {
-                    logOut()
-                }
+//                ITEM_MENU_LOG_OUT -> {
+//                    logOut()
+//                }
             }
         }
     }
@@ -223,42 +223,45 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         mAdapter = MenuItemAdapter(this, mListener)
 
         val itemRevenue = MenuItemData(
+                resources.getString(R.string.home_menu_revenue),
                 R.drawable.ic_payment_selected,
                 R.drawable.ic_payment_normal,
                 "Thống kê doanh thu"
         )
         val itemTrip = MenuItemData(
+                resources.getString(R.string.home_menu_history),
                 R.drawable.ic_trip_selected,
                 R.drawable.ic_trip_normal,
                 "Lịch sử chuyến đi"
         )
-        val itemMessage = MenuItemData(
-                R.drawable.ic_message_selected,
-                R.drawable.ic_message_normal,
-                "Tin nhắn"
-        )
-        val itemPromotion = MenuItemData(
-                R.drawable.ic_promotion_selected,
-                R.drawable.ic_promotion_normal,
-                "Ưu dãi"
-        )
+//        val itemMessage = MenuItemData(
+//                R.drawable.ic_message_selected,
+//                R.drawable.ic_message_normal,
+//                "Tin nhắn"
+//        )
+//        val itemPromotion = MenuItemData(
+//                R.drawable.ic_promotion_selected,
+//                R.drawable.ic_promotion_normal,
+//                "Ưu dãi"
+//        )
         val itemHelp = MenuItemData(
+                resources.getString(R.string.home_menu_support),
                 R.drawable.ic_help_selected,
                 R.drawable.ic_help_normal,
                 "Trợ giúp"
         )
-        val itemLogout = MenuItemData(
-                R.drawable.ic_logout_selected,
-                R.drawable.ic_logout_normal,
-                "Đăng xuất"
-        )
+//        val itemLogout = MenuItemData(
+//                R.drawable.ic_logout_selected,
+//                R.drawable.ic_logout_normal,
+//                "Đăng xuất"
+//        )
 
         if (CarBookingSharePreference.getUserData()!!.isDriver) mAdapter.add(itemRevenue)
         mAdapter.add(itemTrip)
-        mAdapter.add(itemMessage)
-        mAdapter.add(itemPromotion)
+//        mAdapter.add(itemMessage)
+//        mAdapter.add(itemPromotion)
         mAdapter.add(itemHelp)
-        mAdapter.add(itemLogout)
+//        mAdapter.add(itemLogout)
         rv_menu.adapter = mAdapter
         rv_menu.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         updateHeaderMenu(CarBookingSharePreference.getUserData()!!.full_name, CarBookingSharePreference.getUserData()!!.avatar)

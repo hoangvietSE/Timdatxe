@@ -13,12 +13,15 @@ import com.example.anothertimdatxe.sprinthome.revenue.item.ItemMonth
 import com.example.anothertimdatxe.sprinthome.revenue.item.ItemSpacingDecoration
 import com.example.anothertimdatxe.util.NumberUtil
 import com.example.anothertimdatxe.widget.BaseRecyclerView
+import com.example.anothertimdatxe.widget.CustomLinearSnapHelper
 import kotlinx.android.synthetic.main.activity_revenue_driver.*
 import java.util.*
 
 class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDriverView, BaseRvListener, BaseRecyclerView.onRefreshLoadMoreListener {
     private var mListMonth: MutableList<ItemMonth> = mutableListOf()
     private var mListRevenueDetail: MutableList<DriverRevenueResponse> = mutableListOf()
+    private var mLinearLayoutManager: LinearLayoutManager? = null
+    private var mCustomLinearLayoutManager: CustomLinearSnapHelper? = null
     private var mRevenueMonthAdapter: RevenueMonthAdapter? = null
     private var mRevenueDetailAdapter: RevenueDetailAdapter? = null
     private var mCurrentMonth: Int = 0
@@ -49,21 +52,49 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
             }
         }
         mRevenueMonthAdapter!!.notifyDataSetChanged()
+        scroolToPosition(position)
+    }
+
+    private fun scroolToPosition(position: Int) {
+        var firstVisibleItemPosition = mLinearLayoutManager!!.findFirstVisibleItemPosition()
+        var lastVisibleItemPosition = mLinearLayoutManager!!.findLastVisibleItemPosition()
+        var centerPosition = (firstVisibleItemPosition + lastVisibleItemPosition) / 2
+        if (position == 0 || position == mRevenueMonthAdapter!!.getListItem().size - 1){
+            recyclerViewMonth.smoothScrollToPosition(position)
+        }else{
+            if (position > centerPosition) {
+                recyclerViewMonth.smoothScrollToPosition(position + 1)
+            } else {
+                recyclerViewMonth.smoothScrollToPosition(position - 1)
+            }
+        }
     }
 
     override fun initView() {
         setLayoutToolbar()
         initRevenueDetailAdapter()
         initListMonth()
+        setLinearSnapHelper()
+        setLayoutManager()
         setMonthAdapter()
         fetchDateCurrentTime()
+    }
+
+    private fun setLayoutManager() {
+        mLinearLayoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        recyclerViewMonth.layoutManager = mLinearLayoutManager
+    }
+
+    private fun setLinearSnapHelper() {
+        mCustomLinearLayoutManager = CustomLinearSnapHelper()
+        mCustomLinearLayoutManager!!.attachToRecyclerView(recyclerViewMonth)
     }
 
     private fun fetchDateCurrentTime() {
         val month = Calendar.getInstance().get(Calendar.MONTH)
         mCurrentMonth = month
         setItemPosition(month)
-        recyclerViewMonth.smoothScrollToPosition(month)
+        scroolToPosition(month)
         mPresenter!!.fetchData(month + 1, false)
     }
 
@@ -97,7 +128,7 @@ class RevenueDriverActivity : BaseActivity<RevenueDriverPresenter>(), RevenueDri
         val spacingDecoration = resources.getDimensionPixelSize(R.dimen.spacing_16_dp)
         recyclerViewMonth.addItemDecoration(ItemSpacingDecoration(spacingDecoration))
         recyclerViewMonth.adapter = mRevenueMonthAdapter
-        recyclerViewMonth.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+//        recyclerViewMonth.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
 
     private fun initRevenueDetailAdapter() {

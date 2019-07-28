@@ -4,6 +4,9 @@
     //home
     <string name="home_title_hot_cities">Tỉnh thành nổi bật</string>
     <string name="home_back_press">Nhấn back thêm một lần nữa để thoát</string>
+    <string name="home_menu_revenue">revenue</string>
+    <string name="home_menu_history">history</string>
+    <string name="home_menu_support">support</string>
 
     <string name="login_text_welcome">Chào mừng đến với</string>
     <string name="login_text_welcomeTwo">Timdatxe</string>
@@ -160,6 +163,10 @@
     <string name="enter_support_content">Nhập nội dung cần hỗ trợ</string>
     <string name="support">Hỗ trợ</string>
     <string name="stars">Số sao:</string>
+    <string name="setting_logout">Đăng xuất</string>
+    <string name="setting_logout_msg">Bạn chắc chắn muốn đăng xuất?</string>
+    <string name="setting_logout_negative">Không</string>
+    <string name="setting_logout_positive">Đồng ý</string>
 
     <!--update_version-->
     <string name="update_version_title">Cập nhật Version APP</string>
