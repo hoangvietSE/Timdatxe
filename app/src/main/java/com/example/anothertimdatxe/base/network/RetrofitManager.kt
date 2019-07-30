@@ -291,8 +291,22 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getDriverSearchCityPost(data: MutableMap<String, Any>) : Single<BaseResult<List<SearchCityPostResponse>>>{
+    fun getDriverSearchCityPost(data: MutableMap<String, Any>): Single<BaseResult<List<SearchCityPostResponse>>> {
         return apiService.getDriverSearchCityPost(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    //user refresh token
+    fun userRefreshToken(session_token: String): Single<BaseResult<RefreshTokenResponse>> {
+        return apiService.userRefreshToken(session_token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    //driver refresh token
+    fun driverRefreshToken(session_token: String): Single<BaseResult<RefreshTokenResponse>> {
+        return apiService.driverRefreshToken(session_token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

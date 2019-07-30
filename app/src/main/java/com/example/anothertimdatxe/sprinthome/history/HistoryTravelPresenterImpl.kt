@@ -10,19 +10,19 @@ import com.example.anothertimdatxe.entity.response.UserHistoryResponse
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 
 class HistoryTravelPresenterImpl(mView: HistoryTravelView) : BasePresenterImpl<HistoryTravelView>(mView), HistoryTravelPresenter {
-    override fun getData(isHistoryUser: Boolean) {
+    override fun getData(isHistoryUser: Boolean, isFreshing: Boolean) {
         if (isHistoryUser) {
-            getUserHistory()
+            getUserHistory(isFreshing)
         } else {
-            getDriverHistory()
+            getDriverHistory(isFreshing)
         }
     }
 
-    private fun getUserHistory() {
-        mView!!.showLoading()
+    private fun getUserHistory(isFreshing: Boolean) {
+        if (!isFreshing) mView!!.showLoading()
         val disposable = RetrofitManager.getUserHistory(object : ICallBack<BaseResponse<List<UserHistoryResponse>>> {
             override fun onSuccess(result: BaseResponse<List<UserHistoryResponse>>?) {
-                mView!!.showUserHistory(result?.data!!)
+                mView!!.showUserHistory(result?.data!!,isFreshing)
                 mView!!.setNumberTrip(result?.count_books!!)
                 mView!!.hideLoading()
             }
@@ -33,11 +33,11 @@ class HistoryTravelPresenterImpl(mView: HistoryTravelView) : BasePresenterImpl<H
         }, CarBookingSharePreference.getUserId())
     }
 
-    private fun getDriverHistory() {
-        mView!!.showLoading()
+    private fun getDriverHistory(isFreshing: Boolean) {
+        if (!isFreshing) mView!!.showLoading()
         val disposable = RetrofitManager.getDriverHistory(object : ICallBack<BaseResponse<List<DriverHistoryResponse>>> {
             override fun onSuccess(result: BaseResponse<List<DriverHistoryResponse>>?) {
-                mView!!.showDriverHistory(result?.data!!)
+                mView!!.showDriverHistory(result?.data!!,isFreshing)
                 mView!!.setNumberTrip(result?.count_books!!)
                 mView!!.hideLoading()
             }

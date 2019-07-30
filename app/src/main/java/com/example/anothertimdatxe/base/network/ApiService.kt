@@ -145,4 +145,14 @@ interface ApiService {
     @JvmSuppressWildcards
     @Headers("Content-Type: application/json")
     fun getDriverSearchCityPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<SearchCityPostResponse>>>
+
+    //User Refresh Token
+    @GET(ApiConstant.USER_REFRESH_TOKEN)
+    @Headers("Content-Type: application/json")
+    fun userRefreshToken(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<BaseResult<RefreshTokenResponse>>
+    //Driver Refresh Token
+    @GET(ApiConstant.DRIVER_REFRESH_TOEKN)
+    @Headers("Content-Type: application/json")
+    fun driverRefreshToken(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<BaseResult<RefreshTokenResponse>>
+
 }
