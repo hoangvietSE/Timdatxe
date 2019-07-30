@@ -16,6 +16,7 @@ import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MyApp
+import com.example.anothertimdatxe.util.NumberUtil
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_search_city_post.view.*
 
@@ -64,13 +65,13 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
             cityPostHolder.formMoney.visible()
             when (dataDriver!!.type) {
                 MyApp.KEY_CONVENIENT_CAR -> {
-                    cityPostHolder.tvMoney.text = "${dataDriver!!.regularPrice}/Người"
+                    cityPostHolder.tvMoney.text = "${NumberUtil.formatNumber(dataDriver!!.regularPrice!!)}/Người"
                 }
                 MyApp.KEY_PRIVATE_CAR -> {
-                    cityPostHolder.tvMoney.text = dataDriver!!.priceLevel2
+                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.priceLevel2!!)
                 }
                 MyApp.KEY_BOTH_CAR -> {
-                    cityPostHolder.tvMoney.text = dataDriver!!.priceLevel2
+                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.priceLevel2!!)
                 }
             }
             when (dataDriver!!.status) {
@@ -110,6 +111,7 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
                 MyApp.KEY_PENDING -> {
                     setColorStatus(cityPostHolder.tvStatus, R.color.color_pending)
                     setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status)
+
                 }
                 MyApp.KEY_PUBLISHED -> {
                     setColorStatus(cityPostHolder.tvStatus, R.color.colorPrimary)

@@ -12,6 +12,7 @@ object ApiConstant {
     const val USER_POST_CREATED = "/v1/user_posts"
     const val USER_HISTORY = "/v1/user_history/{${RequestParam.ID}}"
     const val USER_SEARCH_CITY_POST = "/v1/searches/city_user_post"
+    const val USER_REFRESH_TOKEN = "/v1/user_refresh"
 
     //[DRIVER]
     const val DRIVER_SESSIONS = "/v1/driver_sessions"
@@ -22,6 +23,7 @@ object ApiConstant {
     const val DRIVER_HISTORY = "/v1/driver_history/{${RequestParam.ID}}"
     const val DRIVER_REVENUE = "/v1/driver/{${RequestParam.ID}}/statistics"
     const val DRIVER_SEARCH_CITY_POST = "/v1/searches/city_driver_post"
+    const val DRIVER_REFRESH_TOEKN = "/v1/driver_refresh"
 
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"
@@ -46,6 +48,7 @@ object ApiConstant {
             const val OK = 200
             const val CREATE = 201
             const val UNAUTHORIZED = 401
+            const val INTERNAL_ERROR_SERVER = 500
         }
     }
 }

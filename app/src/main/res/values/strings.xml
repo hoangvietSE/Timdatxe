@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">TimDatXe</string>
 
+    //splash
+    <string name="dialog_no_connectivity_title">Thông báo</string>
+    <string name="dialog_no_connectivity_positive">Tiếp tục</string>
+    <string name="dialog_no_connectivity_msg">Không có kết nối Internet</string>
+    <string name="dialog_expired_session_title">Thông báo</string>
+    <string name="dialog_expired_session_msg">Phiên đăng nhập hết hạn. Đăng nhập lại</string>
+    <string name="dialog_expired_session_positive">Tiếp tục</string>
+    <string name="dialog_expired_session_negative">Hủy</string>
+    <string name="dialog_refresh_token_error_positive">OK</string>
+    <string name="no_connectivity_exception">Không có kết nối Internet!</string>
+    <string name="server_error">Server quá tải hoặc có lỗi xảy ra. Vui lòng quay lại sau!</string>
+
     //home
     <string name="home_title_hot_cities">Tỉnh thành nổi bật</string>
     <string name="home_back_press">Nhấn back thêm một lần nữa để thoát</string>
@@ -140,8 +152,8 @@
     <string name="title_one">Doanh số của tài xế trong tháng:</string>
     <string name="title_two">Tổng số chuyến đi:</string>
     <string name="revenue_time">Thời gian</string>
-    <string name="revenue_starting_point">Điểm đón</string>
-    <string name="revenue_ending_point">Điểm trả</string>
+    <string name="revenue_starting_point">Điểm xuất phát</string>
+    <string name="revenue_ending_point">Điểm kết thúc</string>
     <string name="revenue_toolbar_title">Doanh số driver</string>
 
     //support

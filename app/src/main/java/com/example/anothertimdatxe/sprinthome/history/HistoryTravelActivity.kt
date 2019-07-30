@@ -33,7 +33,33 @@ class HistoryTravelActivity : BaseActivity<HistoryTravelPresenter>(), HistoryTra
         setToolbar()
         getDataIntent()
         setAdapter()
-        getHistoryTravel()
+        getHistoryTravel(false)
+        setRefreshing()
+    }
+
+    private fun setRefreshing() {
+        setColorSchema()
+        swipeRefresh.setOnRefreshListener {
+            showRefreshing()
+            getHistoryTravel(true)
+            hideRefreshing()
+        }
+    }
+
+    private fun hideRefreshing() {
+        swipeRefresh.isRefreshing = false
+    }
+
+    private fun showRefreshing() {
+        swipeRefresh.isRefreshing = true
+    }
+
+    private fun setColorSchema() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary, null))
+        } else {
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
+        }
     }
 
     private fun setAdapter() {
@@ -50,8 +76,8 @@ class HistoryTravelActivity : BaseActivity<HistoryTravelPresenter>(), HistoryTra
         }
     }
 
-    private fun getHistoryTravel() {
-        mPresenter!!.getData(isUserHistory)
+    private fun getHistoryTravel(isFreshing: Boolean) {
+        mPresenter!!.getData(isUserHistory, isFreshing)
     }
 
     private fun getDataIntent() {
@@ -69,11 +95,13 @@ class HistoryTravelActivity : BaseActivity<HistoryTravelPresenter>(), HistoryTra
         }
     }
 
-    override fun showUserHistory(data: List<UserHistoryResponse>) {
+    override fun showUserHistory(data: List<UserHistoryResponse>, isFreshing: Boolean) {
+        if (isFreshing) mUserHistoryAdapter!!.clear()
         mUserHistoryAdapter!!.addModels(data, false)
     }
 
-    override fun showDriverHistory(data: List<DriverHistoryResponse>) {
+    override fun showDriverHistory(data: List<DriverHistoryResponse>, isFreshing: Boolean) {
+        if (isFreshing) mDriverHistoryAdapter!!.clear()
         mDriverHistoryAdapter!!.addModels(data, false)
     }
 

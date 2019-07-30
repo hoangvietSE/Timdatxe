@@ -44,17 +44,16 @@
 
                         <ImageView
                             android:id="@+id/imv_car"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:scaleX="0.7"
-                            android:scaleY="0.7"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="@dimen/margin_8_dp"
                             android:src="@drawable/ic_car" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/margin_4_dp"
+                            android:layout_marginStart="@dimen/margin_8_dp"
                             android:text="@string/number_trip"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_16" />
@@ -87,11 +86,11 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:clipToPadding="false"
-                    android:padding="@dimen/content_padding_normal"
                     android:id="@+id/recyclerView"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:padding="@dimen/content_padding_normal" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </RelativeLayout>
 

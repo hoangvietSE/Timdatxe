@@ -47,6 +47,7 @@
     <dimen name="margin_6_dp">6dp</dimen>
     <dimen name="margin_8_dp">8dp</dimen>
     <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="margin_40_dp">40dp</dimen>
     <dimen name="text_size_26">26sp</dimen>

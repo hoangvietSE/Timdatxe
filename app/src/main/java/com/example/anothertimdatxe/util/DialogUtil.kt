@@ -62,6 +62,19 @@ object DialogUtil {
         alertDialog.show()
     }
 
+    fun customBaseAlertDialogNoNegative(context: Context, title: String, msg: String, cancelable: Boolean, positiveButton: String, mListener: BaseAlertDialogListener) {
+        var builder = AlertDialog.Builder(context)
+        builder.setMessage(msg)
+        builder.setTitle(title)
+        builder.setCancelable(cancelable)
+        builder.setPositiveButton(
+                positiveButton,
+                { dialog, which -> mListener.onPositiveClick(dialog) }
+        )
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
     fun showConfirmDiaglogNotCancel(context: Context, layout: Int, resBackground: Int): Dialog {
         return showConfirmDiaglog(context, layout, false, resBackground)
     }
@@ -76,6 +89,10 @@ object DialogUtil {
 
     fun showAlertDialogNoTitle(context: Context, msg: String, cancelable: Boolean, positiveButton: String, negativeButton: String, mListener: BaseAlertDialogListener) {
         customBaseAlertDialogNoTitle(context, msg, cancelable, positiveButton, negativeButton, mListener)
+    }
+
+    fun showAlertDialogNoNegative(context: Context, title: String, msg: String, cancelable: Boolean, positiveButton: String, mListener: BaseAlertDialogListener) {
+        customBaseAlertDialogNoNegative(context, title, msg, cancelable, positiveButton, mListener)
     }
 
 

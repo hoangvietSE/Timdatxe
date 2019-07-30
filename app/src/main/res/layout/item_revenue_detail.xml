@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_marginBottom="@dimen/margin_8_dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_item_revenue"
+    android:paddingBottom="@dimen/content_padding_resend">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -17,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8_dp"
         android:layout_marginTop="@dimen/margin_8_dp"
-        android:background="@drawable/bg_item_revenue"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,47 +33,19 @@
             android:orientation="horizontal"
             android:paddingStart="@dimen/content_padding_resend">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.6"
-                android:paddingTop="@dimen/margin_4_dp"
-                android:paddingBottom="@dimen/margin_4_dp"
-                android:text="@string/revenue_time" />
-
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                tools:text="14/06/2019" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="@dimen/margin_8_dp"
-            android:layout_marginEnd="@dimen/margin_8_dp"
-            android:background="@color/color_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/content_padding_resend">
-
             <ImageView
+                android:layout_marginTop="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
-                android:src="@drawable/ic_start" />
+                android:src="@drawable/ic_starting_point_two" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:paddingTop="@dimen/margin_4_dp"
                 android:paddingBottom="@dimen/margin_4_dp"
                 android:text="@string/revenue_starting_point" />
@@ -79,8 +54,10 @@
                 android:id="@+id/tv_starting_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
+                android:layout_weight="0.4"
                 android:maxLines="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 tools:text="Ha Noi, Viet Nam" />
         </LinearLayout>
 
@@ -108,7 +85,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:paddingTop="@dimen/margin_4_dp"
                 android:paddingBottom="@dimen/margin_4_dp"
                 android:text="@string/revenue_starting_point" />
@@ -117,9 +94,50 @@
                 android:id="@+id/tv_ending_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
+                android:layout_weight="0.4"
                 android:maxLines="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 tools:text="Ha Noi, Viet Nam" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@color/color_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/content_padding_resend">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_16_dp"
+                android:layout_marginTop="@dimen/margin_6_dp"
+                android:layout_weight="0.1"
+                android:src="@drawable/ic_calendar" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_4_dp"
+                android:layout_weight="0.5"
+                android:paddingTop="@dimen/margin_4_dp"
+                android:paddingBottom="@dimen/margin_4_dp"
+                android:text="@string/revenue_time" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="14/06/2019" />
         </LinearLayout>
     </LinearLayout>
 
@@ -130,13 +148,15 @@
         android:layout_marginStart="@dimen/margin_8_dp"
         android:layout_marginTop="@dimen/margin_8_dp"
         android:layout_marginEnd="@dimen/margin_8_dp"
-        android:background="@drawable/bg_item_revenue"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:padding="@dimen/content_padding_resend"
+        android:textColor="@color/color_quantity"
+        android:textSize="@dimen/text_size_18"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="300VND" />
+        tools:text="3,000,000 VND" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
