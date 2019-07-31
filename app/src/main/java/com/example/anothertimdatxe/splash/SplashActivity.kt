@@ -9,6 +9,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.customview.CarBookingLoading
 import com.example.anothertimdatxe.sprinthome.HomeActivity
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
+import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.DialogUtil
 
 class SplashActivity : AppCompatActivity(), SplashView {
@@ -67,6 +68,7 @@ class SplashActivity : AppCompatActivity(), SplashView {
     }
 
     override fun showDialogExpiredSessionLogin() {
+        CarBookingSharePreference.clearAllPreference()
         DialogUtil.showAlertDialogTitle(
                 this,
                 resources.getString(R.string.dialog_expired_session_title),
