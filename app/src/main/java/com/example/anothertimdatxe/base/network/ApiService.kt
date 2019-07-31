@@ -28,6 +28,16 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun loginDriver(@Body requestBody: RequestBody): Single<Response<BaseResult<UserData>>>
 
+    //user update info
+    @PUT(ApiConstant.USER_INFO)
+    @Headers("Content-Type: application/json")
+    fun userUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<UserUpdateInfoResponse>>>
+
+    //driver update info
+    @PUT(ApiConstant.DRIVER_INFO)
+    @Headers("Content-Type: application/json")
+    fun driverUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<DriverUpdateInfoResponse>>>
+
     //regis with driver
     @POST(ApiConstant.DRIVER_REGISTRATIONS)
     @Headers("Content-Type: application/json")
@@ -150,6 +160,7 @@ interface ApiService {
     @GET(ApiConstant.USER_REFRESH_TOKEN)
     @Headers("Content-Type: application/json")
     fun userRefreshToken(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<BaseResult<RefreshTokenResponse>>
+
     //Driver Refresh Token
     @GET(ApiConstant.DRIVER_REFRESH_TOEKN)
     @Headers("Content-Type: application/json")

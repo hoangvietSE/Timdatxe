@@ -38,6 +38,8 @@
         <activity
             android:name=".sprinthome.HomeActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".sprintlogin.updateinfo.UpdateInfoActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".sprintlogin.register.RegisterActivity"
             android:screenOrientation="portrait" />

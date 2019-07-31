@@ -48,6 +48,7 @@
         <item>Nam</item>
         <item>Nữ</item>
     </string-array>
+    <string name="update_info_toolbar_title">Cập nhật thông tin</string>
 
     //dialog_loading
     <string name="tvLoading">Loading</string>

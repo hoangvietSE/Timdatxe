@@ -21,14 +21,10 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
             mView!!.goToLoginScreen()
         } else {
             if (DeviceUtil.isConnectedToNetword(mView as Context)) {
-                if (mUserData?.full_name!!.isNullOrEmpty()) {
-                    mView!!.goToUpdateInfoScreen()
+                if (CarBookingSharePreference.getUserData()!!.isUser) {
+                    userRefreshToken(mUserData!!)
                 } else {
-                    if (CarBookingSharePreference.getUserData()!!.isUser) {
-                        userRefreshToken(mUserData!!)
-                    } else {
-                        driverRefreshToken(mUserData!!)
-                    }
+                    driverRefreshToken(mUserData!!)
                 }
             } else {
                 mView!!.showNoConnectedToNetword()
@@ -102,10 +98,9 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
     }
 
     fun handlerError(mThrowable: Throwable) {
-        if(mThrowable is NetworkConnectionInterceptor.NoConnectivityException){
+        if (mThrowable is NetworkConnectionInterceptor.NoConnectivityException) {
             mView!!.refreshTokenError((mView as Context).resources.getString(R.string.no_connectivity_exception))
-        }
-        else if (mThrowable is ConnectException || mThrowable is UnknownHostException || mThrowable is SocketTimeoutException) {
+        } else if (mThrowable is ConnectException || mThrowable is UnknownHostException || mThrowable is SocketTimeoutException) {
             mView!!.refreshTokenError((mView as Context).resources.getString(R.string.server_error))
         } else {
             mView!!.showDialogExpiredSessionLogin()
