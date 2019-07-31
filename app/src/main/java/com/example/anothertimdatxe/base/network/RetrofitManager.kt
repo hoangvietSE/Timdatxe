@@ -67,7 +67,7 @@ object RetrofitManager {
             }
 
             override fun onError(e: Throwable) {
-                callBack.onError(ApiException(e.message))
+                callBack.onError(ApiException(e.message, e))
             }
         }
     }
@@ -82,7 +82,7 @@ object RetrofitManager {
     }
 
     private fun <T> handleErrorResponse(callBack: ICallBack<T>, response: Response<T>) {
-        callBack.onError(ApiException("Error"))
+//        callBack.onError(ApiException("Error"))
     }
 
     //POJO Object to Json
@@ -122,6 +122,22 @@ object RetrofitManager {
         return apiService.registerDriver(createPostRequest(request))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
+                .subscribeWith(subcriber)
+    }
+
+    fun userUpdateInfo(callBack: ICallBack<BaseResult<UserUpdateInfoResponse>>, userData: UserData): Disposable {
+        val subcriber = getSubcriber(callBack)
+        return apiService.userUpdateInfo(CarBookingSharePreference.getAccessToken(), createPostRequest(userData), userData.id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subcriber)
+    }
+
+    fun driverUpdateInfo(callBack: ICallBack<BaseResult<DriverUpdateInfoResponse>>, userData: UserData): Disposable {
+        val subcriber = getSubcriber(callBack)
+        return apiService.driverUpdateInfo(CarBookingSharePreference.getAccessToken(), createPostRequest(userData), userData.id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subcriber)
     }
 

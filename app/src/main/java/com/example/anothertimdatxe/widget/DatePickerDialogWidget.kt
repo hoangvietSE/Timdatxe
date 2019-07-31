@@ -13,7 +13,7 @@ class DatePickerDialogWidget(var context: Context, var mListener: onSetDateSucce
 
     val calendar = Calendar.getInstance(TimeZone.getDefault())
     fun showDatePickerDialog() {
-        var dialog: DatePickerDialog = DatePickerDialog(
+        var dialog = DatePickerDialog(
                 context,
                 R.style.DialogTheme,
                 this,

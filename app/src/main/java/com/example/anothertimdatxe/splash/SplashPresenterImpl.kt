@@ -3,12 +3,14 @@ package com.example.anothertimdatxe.splash
 import android.content.Context
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.ApiConstant
+import com.example.anothertimdatxe.base.network.NetworkConnectionInterceptor
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.DeviceUtil
 import io.reactivex.disposables.CompositeDisposable
 import java.net.ConnectException
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
@@ -19,14 +21,10 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
             mView!!.goToLoginScreen()
         } else {
             if (DeviceUtil.isConnectedToNetword(mView as Context)) {
-                if (mUserData?.full_name!!.isNullOrEmpty()) {
-                    mView!!.goToUpdateInfoScreen()
+                if (CarBookingSharePreference.getUserData()!!.isUser) {
+                    userRefreshToken(mUserData!!)
                 } else {
-                    if (CarBookingSharePreference.getUserData()!!.isUser) {
-                        userRefreshToken(mUserData!!)
-                    } else {
-                        driverRefreshToken(mUserData!!)
-                    }
+                    driverRefreshToken(mUserData!!)
                 }
             } else {
                 mView!!.showNoConnectedToNetword()
@@ -100,9 +98,11 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
     }
 
     fun handlerError(mThrowable: Throwable) {
-        if (mThrowable is ConnectException || mThrowable is UnknownHostException) {
+        if (mThrowable is NetworkConnectionInterceptor.NoConnectivityException) {
+            mView!!.refreshTokenError((mView as Context).resources.getString(R.string.no_connectivity_exception))
+        } else if (mThrowable is ConnectException || mThrowable is UnknownHostException || mThrowable is SocketTimeoutException) {
             mView!!.refreshTokenError((mView as Context).resources.getString(R.string.server_error))
-        }else{
+        } else {
             mView!!.showDialogExpiredSessionLogin()
         }
     }
