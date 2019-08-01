@@ -20,8 +20,15 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     }
 
     override fun initView() {
+        setToolbar()
         initSearSearch()
         setDateSearch()
+    }
+
+    private fun setToolbar() {
+        toolbarTitle?.let {
+            it.text = resources.getString(R.string.driver_search_btn).toUpperCase()
+        }
     }
 
     private fun setDateSearch() {

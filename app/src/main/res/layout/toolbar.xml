@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
@@ -23,6 +24,7 @@
         android:textSize="@dimen/textSize_large" />
 
     <ImageView
+        tools:src="@drawable/ic_notification"
         android:id="@+id/btn_right"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -30,7 +32,12 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/content_padding_normal"
         android:layout_marginRight="@dimen/content_padding_normal"
-        android:src="@drawable/ic_edit"
-        android:visibility="invisible" />
+        android:visibility="visible" />
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:id="@+id/imv_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

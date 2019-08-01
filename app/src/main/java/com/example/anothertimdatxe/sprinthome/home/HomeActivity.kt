@@ -140,6 +140,20 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 it.setImageResource(R.drawable.ic_menu)
             }
         }
+        imvCenter?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.background = resources.getDrawable(R.drawable.app_title,null)
+            } else {
+                it.background = resources.getDrawable(R.drawable.app_title)
+            }
+        }
+        rightButton?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.setImageResource(R.drawable.ic_notification)
+            } else {
+                it.setImageResource(R.drawable.ic_notification)
+            }
+        }
     }
 
     private fun setToolbarTitle(string: String) {

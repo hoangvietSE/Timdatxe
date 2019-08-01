@@ -20,6 +20,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
     protected var leftbutton: ImageView? = null
     protected var rightButton: ImageView? = null
     protected var toolbarTitle: TextView? = null
+    protected var imvCenter: ImageView? = null
     private var dialog: CarBookingLoading? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +54,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         toolbar = findViewById(R.id.toolbar)
         leftbutton = findViewById(R.id.btn_left)
         rightButton = findViewById(R.id.btn_right)
+        imvCenter = findViewById(R.id.imv_center)
         leftbutton?.let {
             it.setOnClickListener {
                 onMenuLeftCLick()

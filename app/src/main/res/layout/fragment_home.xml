@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:paddingBottom="@dimen/content_padding_resend"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:paddingBottom="@dimen/content_padding_resend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,10 +22,10 @@
             android:layout_marginEnd="@dimen/margin_8_dp"
             android:background="@drawable/bg_home_search"
             android:hint="@string/home_search_title"
-            android:paddingStart="@dimen/content_padding_normal"
+            android:paddingStart="@dimen/margin_16_dp"
             android:paddingTop="@dimen/content_padding_resend"
             android:paddingBottom="@dimen/content_padding_resend"
-            android:textSize="@dimen/text_size_16"
+            android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,9 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/content_padding_normal"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:src="@drawable/ic_search"
+            android:src="@drawable/ic_search_"
             app:layout_constraintBottom_toBottomOf="@id/tv_search"
             app:layout_constraintEnd_toEndOf="@id/tv_search"
             app:layout_constraintTop_toTopOf="parent" />

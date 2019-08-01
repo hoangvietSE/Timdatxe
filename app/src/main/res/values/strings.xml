@@ -209,8 +209,8 @@
     <string name="btn_update_version">Cập nhật phiên bản mới nhất</string>
 
     //driver search
-    <string name="driver_search_start_hint">Nhập điểm đến</string>
-    <string name="driver_search_end_hint">Nhập điểm đi</string>
+    <string name="driver_search_start_hint">Điểm xuất phát</string>
+    <string name="driver_search_end_hint">Điểm kết thúc</string>
     <string name="driver_search_btn">Tìm kiếm</string>
     <string name="driver_search_hint_date">Ngày/tháng/năm</string>
 
