@@ -148,6 +148,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             }
         }
         rightButton?.let {
+            it.visible()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 it.setImageResource(R.drawable.ic_notification)
             } else {

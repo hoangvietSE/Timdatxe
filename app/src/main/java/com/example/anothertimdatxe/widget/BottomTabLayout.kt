@@ -1,10 +1,11 @@
 package com.example.anothertimdatxe.widget
 
 import android.content.Context
-import androidx.appcompat.widget.AppCompatTextView
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatTextView
 import com.example.anothertimdatxe.R
 import kotlinx.android.synthetic.main.layout_bottom_bar.view.*
 
@@ -77,9 +78,19 @@ class BottomTabLayout : LinearLayout {
         for (i in 0 until mTabs.size) {
             if (position == i) {
                 mTabs[i].setCompoundDrawablesWithIntrinsicBounds(0, listIconSelected[i], 0, 0)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mTabs[i].setTextColor(resources.getColor(R.color.colorPrimary, null))
+                }else{
+                    mTabs[i].setTextColor(resources.getColor(R.color.colorPrimary))
+                }
                 mTabs[i].isSelected = true
             } else {
                 mTabs[i].setCompoundDrawablesWithIntrinsicBounds(0, listIconNormal[i], 0, 0)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mTabs[i].setTextColor(resources.getColor(R.color.text_secondary, null))
+                }else{
+                    mTabs[i].setTextColor(resources.getColor(R.color.text_secondary))
+                }
                 mTabs[i].isSelected = false
             }
         }

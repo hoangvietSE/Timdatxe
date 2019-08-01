@@ -26,13 +26,13 @@
     <ImageView
         tools:src="@drawable/ic_notification"
         android:id="@+id/btn_right"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/content_padding_normal"
         android:layout_marginRight="@dimen/content_padding_normal"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <ImageView
         android:layout_centerInParent="true"
