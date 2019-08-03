@@ -10,6 +10,8 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.DriverSearchResponse
 import com.example.anothertimdatxe.extension.inflate
+import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
@@ -39,6 +41,9 @@ class DriverSearchUserPostAdapter(context: Context) : EndlessLoadingRecyclerView
         driverSearchHolder.tvNumberSeat.text = data.numberSeat!!.toString()
         driverSearchHolder.tvTime.text = DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
         driverSearchHolder.tvDate.text = DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+        if (data.status == Constant.USER_POST_PUBLISHED) {
+            holder.btnBook.visible()
+        }
     }
 
     class DriverSearchViewHolder(itemView: View) : NormalViewHolder(itemView) {
@@ -49,5 +54,6 @@ class DriverSearchUserPostAdapter(context: Context) : EndlessLoadingRecyclerView
         val tvNumberSeat: TextView = itemView.findViewById(R.id.tv_number_seat)
         val tvTime: TextView = itemView.findViewById(R.id.tv_time)
         val tvDate: TextView = itemView.findViewById(R.id.tv_date)
+        val btnBook : TextView = itemView.findViewById(R.id.btn_recruitment)
     }
 }
