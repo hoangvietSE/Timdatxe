@@ -31,6 +31,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         mPresenter?.let {
             it.start()
         }
+        setListener()
     }
 
     abstract fun getPresenter(): T
@@ -65,6 +66,9 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
     open fun onMenuLeftCLick() {
         this.finish()
+    }
+
+    protected open fun setListener() {
     }
 
     fun startActivityAndClearTask(cls: Class<*>) {

@@ -166,4 +166,8 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun driverRefreshToken(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<BaseResult<RefreshTokenResponse>>
 
+    //Driver Search User Post
+    @GET(ApiConstant.USER_POST_CREATED)
+    @Headers("Content-Type: application/json")
+    fun driverSearchUserPost(@QueryMap data: MutableMap<String, Any>) : Single<BaseResult<List<DriverSearchResponse>>>
 }

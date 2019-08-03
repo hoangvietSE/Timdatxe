@@ -326,4 +326,11 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    //driver search user post
+    fun driverSearchUserPost(data: MutableMap<String, Any>): Single<BaseResult<List<DriverSearchResponse>>> {
+        return apiService.driverSearchUserPost(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

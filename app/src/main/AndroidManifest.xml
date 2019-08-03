@@ -82,6 +82,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".sprintsearch.driver.driversearch.DriverSearchActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".sprinthome.hotcities.HotCitiesActivity"

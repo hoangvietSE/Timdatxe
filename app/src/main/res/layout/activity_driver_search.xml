@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
@@ -12,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -196,6 +198,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
+                        android:id="@+id/btn_search"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_btn_search"
@@ -217,14 +220,22 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/formSearch" />
-        </RelativeLayout>
+                android:layout_height="wrap_content">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    tools:listitem = "@layout/item_driver_search"
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" />
+
+                <include
+                    android:id="@+id/layout_no_result"
+                    layout="@layout/layout_no_result_search"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 </RelativeLayout>
