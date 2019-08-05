@@ -1,23 +1,31 @@
 package com.example.anothertimdatxe.sprinthome.listrequest.driver.detail
 
+import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
+import android.view.View
+import android.widget.AdapterView
 import com.example.anothertimdatxe.BuildConfig
 import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.adapter.SpinnerCarAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.util.GlideApp
+import com.example.anothertimdatxe.entity.response.DriverCar
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.*
 import kotlinx.android.synthetic.main.activity_detail_request.*
+import kotlinx.android.synthetic.main.dialog_driver_book_request.*
 
 class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>(), DriverRequestDetailView {
     private var id: Int? = null
     private var response: UserPostDetailResponse? = null
+    private var mSpinnerAdapter: SpinnerCarAdapter? = null
 
     companion object {
         const val USER_POST_ID = "id"
@@ -172,7 +180,9 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         if (data.driver_can_request != null && data.driver_can_request) {
             tv_request.setOnClickListener {
                 if (!avoidDoubleClick()) {
-
+                    if (data.driverCarPending == 1) {
+                        showConfirmRequestDialog(data.driverCars)
+                    }
                 }
             }
             tv_request.visible()
@@ -250,6 +260,39 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         if (data.canBook == 0) {
             tv_request.gone()
         }
+    }
+
+    private fun showConfirmRequestDialog(driverCars: ArrayList<DriverCar>?) {
+        if (driverCars?.size == 0) {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_no_regis_car))
+            return
+        }
+        DialogUtil.showConfirmDialogDriverBookRequest(
+                this,
+                R.layout.dialog_driver_book_request,
+                true,
+                R.drawable.bg_white_10dp,
+                object : DialogUtil.BaseDialogListener {
+                    override fun onAddDataToDialog(context: Context, dialog: Dialog) {
+                        mSpinnerAdapter = SpinnerCarAdapter(context, driverCars!!)
+                        dialog.spinner.adapter = mSpinnerAdapter
+                        dialog.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                            }
+
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                            }
+
+                        }
+                    }
+
+                    override fun onClickDialog(dialog: Dialog) {
+                    }
+                }
+        )
+
     }
 
     override fun finishScreen() {
