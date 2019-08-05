@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-
-import java.util.ArrayList
+import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 
 
@@ -291,6 +290,7 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
                     if (onItemTouchChangeListener != null) {
                         onItemTouchChangeListener!!.onItemPress(viewHolder, viewType)
                     }
+                    true
                 }
 
                 MotionEvent.ACTION_CANCEL -> {

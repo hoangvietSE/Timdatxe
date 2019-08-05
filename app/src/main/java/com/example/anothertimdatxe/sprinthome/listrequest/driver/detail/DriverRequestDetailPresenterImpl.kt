@@ -6,6 +6,7 @@ import com.example.anothertimdatxe.base.network.BaseResult
 import com.example.anothertimdatxe.base.network.ICallBack
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
+import com.example.anothertimdatxe.util.NetworkUtil
 
 class DriverRequestDetailPresenterImpl(mView: DriverRequestDetailView) : BasePresenterImpl<DriverRequestDetailView>(mView), DriverRequestDetailPresenter {
     override fun getDataUserPost(id: Int) {
@@ -24,4 +25,66 @@ class DriverRequestDetailPresenterImpl(mView: DriverRequestDetailView) : BasePre
 
         }, id)
     }
+
+    override fun cancelRequest(driverBookOptionId: Int) {
+        addDispose(RetrofitManager.driverCancelRequest(driverBookOptionId)
+                .doOnSubscribe {
+                    mView!!.showLoading()
+                }
+                .doFinally {
+                    mView!!.hideLoading()
+                }
+                .subscribe(
+                        {
+                            mView!!.finishScreen()
+                            mView!!.cancelRequestSuccess(true)
+                        },
+                        {
+                            mView!!.cancelRequestSuccess(false)
+                            NetworkUtil.handleError(it)
+                        }
+                ))
+    }
+
+    override fun cancelBooking(driverBookId: Int) {
+        addDispose(RetrofitManager.driverCancelBooking(driverBookId)
+                .doOnSubscribe {
+                    mView!!.showLoading()
+                }
+                .doFinally {
+                    mView!!.hideLoading()
+                }
+                .subscribe(
+                        {
+                            mView!!.finishScreen()
+                            mView!!.cancelBookingSuccess(true)
+                        },
+                        {
+                            NetworkUtil.handleError(it)
+                            mView!!.cancelBookingSuccess(false)
+                        }
+                ))
+    }
+
+    override fun finishTripDriverBook(userPostId: Int) {
+        addDispose(RetrofitManager.driverFinishTrip(userPostId)
+                .doOnSubscribe {
+                    mView!!.showLoading()
+                }
+                .doFinally {
+                    mView!!.hideLoading()
+                }
+                .subscribe(
+                        {
+                            mView!!.finishScreen()
+                            mView!!.finishTripSucceess(true)
+                        },
+                        {
+                            NetworkUtil.handleError(it)
+                            mView!!.finishTripSucceess(false)
+                        }
+                ))
+    }
+
+
 }

@@ -103,7 +103,7 @@ class UserPostDetailResponse : Serializable {
         @SerializedName("str_driver_status")
         val str_driver_status: String? = ""
         @SerializedName("code")
-        val code: String? = ""
+        val code: String? = null
         @SerializedName("duration_time")
         val duration_time : String? = ""
         @SerializedName("driver_book")

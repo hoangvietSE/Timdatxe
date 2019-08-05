@@ -10,4 +10,8 @@ object NumberUtil {
     fun formatNumber(value: String): String {
         return formatter.format(value.toInt()) + " VNĐ"
     }
+
+    fun showDistance(value: String): String {
+        return value + " km"
+    }
 }

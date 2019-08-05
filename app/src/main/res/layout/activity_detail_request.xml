@@ -59,6 +59,7 @@
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/tv_title_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Họ tên:"
@@ -70,7 +71,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
-                                tools:text="Hoàng Tiến Việt" />
+                                android:layout_toRightOf="@id/tv_title_name"
+                                android:gravity="right"
+                                android:maxLines="2"
+                                android:paddingStart="@dimen/margin_8_dp"
+                                tools:text="Hoàng Tiến Viet" />
                         </RelativeLayout>
 
                         <View
@@ -83,6 +88,7 @@
                             android:layout_marginTop="@dimen/margin_8_dp">
 
                             <TextView
+                                android:id="@+id/tv_title_address"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Địa chỉ:"
@@ -94,6 +100,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:layout_toRightOf="@id/tv_title_address"
+                                android:gravity="right"
+                                android:maxLines="2"
+                                android:paddingStart="@dimen/margin_8_dp"
                                 tools:text="Xá đàn" />
                         </RelativeLayout>
                     </LinearLayout>
@@ -115,9 +125,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/content_padding_resend"
-                    android:paddingBottom="@dimen/content_padding_resend">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/imv_starting_point"
@@ -146,12 +154,15 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="Hà Nội, Hoàn Kiếm" />
-                </RelativeLayout>
 
-                <View style="@style/LineView" />
+                    <View
+                        style="@style/LineView"
+                        android:layout_below="@id/tv_starting_point"
+                        android:layout_marginTop="@dimen/margin_16_dp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -186,7 +197,7 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="Hà Nội, Hoàn Kiếm" />
                 </RelativeLayout>
@@ -196,9 +207,7 @@
                 <RelativeLayout
                     android:id="@+id/formCode"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/content_padding_resend"
-                    android:paddingBottom="@dimen/content_padding_resend">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/imv_code"
@@ -228,12 +237,15 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="" />
-                </RelativeLayout>
 
-                <View style="@style/LineView" />
+                    <View
+                        style="@style/LineView"
+                        android:layout_below="@id/tv_code"
+                        android:layout_marginTop="@dimen/margin_16_dp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -269,7 +281,7 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="" />
                 </RelativeLayout>
@@ -310,7 +322,7 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="" />
                 </RelativeLayout>
@@ -351,7 +363,7 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="" />
                 </RelativeLayout>
@@ -361,9 +373,7 @@
                 <RelativeLayout
                     android:id="@+id/formCar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/content_padding_resend"
-                    android:paddingBottom="@dimen/content_padding_resend">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/imv_car"
@@ -382,23 +392,48 @@
                         android:text="@string/driver_request_detail_car_name"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_car_name"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/csl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/imv_info"
+                        android:layout_toRightOf="@id/tv_title_car">
+
+                        <TextView
+                            android:id="@+id/tv_car_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="end"
+                            android:gravity="right"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:paddingStart="@dimen/margin_8_dp"
+                            android:paddingEnd="@dimen/margin_8_dp"
+                            android:textColor="@color/blue_text"
+                            android:textSize="@dimen/text_size_14"
+                            android:textStyle="bold|italic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="TOYOTA INNOVA 2015" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ImageView
+                        android:id="@+id/imv_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/tv_title_car"
-                        android:gravity="right"
-                        android:maxLines="2"
-                        android:paddingStart="@dimen/content_padding_normal"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
-                        android:textStyle="bold"
-                        tools:text="" />
-                </RelativeLayout>
+                        android:src="@drawable/ic_info" />
 
-                <View style="@style/LineView" />
+                    <View
+                        style="@style/LineView"
+                        android:layout_below="@+id/csl"
+                        android:layout_marginTop="@dimen/margin_16_dp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -434,7 +469,7 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="" />
                 </RelativeLayout>
@@ -444,9 +479,7 @@
                 <RelativeLayout
                     android:id="@+id/formReason"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/content_padding_resend"
-                    android:paddingBottom="@dimen/content_padding_resend">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/imv_reason"
@@ -476,19 +509,20 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="" />
-                </RelativeLayout>
 
-                <View style="@style/LineView" />
+                    <View
+                        style="@style/LineView"
+                        android:layout_below="@id/tv_reason"
+                        android:layout_marginTop="@dimen/margin_16_dp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/formMoney"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/content_padding_resend"
-                    android:paddingBottom="@dimen/content_padding_resend">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/imv_money"
@@ -518,19 +552,20 @@
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
+                        android:textSize="@dimen/text_size_14"
                         android:textStyle="bold"
                         tools:text="" />
-                </RelativeLayout>
 
-                <View style="@style/LineView" />
+                    <View
+                        style="@style/LineView"
+                        android:layout_below="@id/tv_money"
+                        android:layout_marginTop="@dimen/margin_16_dp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/formPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/content_padding_resend"
-                    android:paddingBottom="@dimen/content_padding_resend">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/imv_phone"
@@ -559,13 +594,16 @@
                         android:gravity="right"
                         android:maxLines="2"
                         android:paddingStart="@dimen/content_padding_normal"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16"
-                        android:textStyle="bold"
-                        tools:text="" />
-                </RelativeLayout>
+                        android:textColor="@color/blue_text"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold|italic"
+                        tools:text="0968582598" />
 
-                <View style="@style/LineView" />
+                    <View
+                        style="@style/LineView"
+                        android:layout_below="@id/tv_phone"
+                        android:layout_marginTop="@dimen/margin_16_dp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/formRequest"
@@ -632,7 +670,7 @@
                     android:text="Kết thúc chuyến đi"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/margin_16_dp"
+                    android:textSize="@dimen/text_size_14"
                     android:textStyle="bold"
                     android:visibility="gone" />
 
@@ -646,7 +684,7 @@
                     android:text="Gửi yêu cầu cho chuyến đi này"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/margin_16_dp"
+                    android:textSize="@dimen/text_size_14"
                     android:textStyle="bold"
                     android:visibility="gone" />
 
@@ -660,7 +698,7 @@
                     android:text="Hủy yêu cầu cho chuyến đi này"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/margin_16_dp"
+                    android:textSize="@dimen/text_size_14"
                     android:textStyle="bold"
                     android:visibility="gone" />
 
@@ -674,7 +712,7 @@
                     android:text="Hủy booking cho chuyến đi này"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/margin_16_dp"
+                    android:textSize="@dimen/text_size_14"
                     android:textStyle="bold"
                     android:visibility="gone" />
             </LinearLayout>

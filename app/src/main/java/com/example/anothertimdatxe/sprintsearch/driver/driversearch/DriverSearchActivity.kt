@@ -157,8 +157,10 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     }
 
     override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
-        startActivity(Intent(this, DriverRequestDetailActivity::class.java).apply {
-            putExtra(DriverRequestDetailActivity.USER_POST_ID, mList!![position].id)
-        })
+        if(!avoidDoubleClick()){
+            startActivity(Intent(this, DriverRequestDetailActivity::class.java).apply {
+                putExtra(DriverRequestDetailActivity.USER_POST_ID, mList!![position].id)
+            })
+        }
     }
 }

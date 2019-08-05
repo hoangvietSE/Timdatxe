@@ -1,6 +1,9 @@
 package com.example.anothertimdatxe.sprinthome.listrequest.driver.detail
 
 import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Build
 import com.example.anothertimdatxe.BuildConfig
 import com.example.anothertimdatxe.R
@@ -14,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_detail_request.*
 
 class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>(), DriverRequestDetailView {
     private var id: Int? = null
+    private var response: UserPostDetailResponse? = null
 
     companion object {
         const val USER_POST_ID = "id"
@@ -34,6 +38,11 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         } else {
             layout_action.gone()
         }
+        fetchData()
+    }
+
+    private fun fetchData() {
+        mPresenter!!.getDataUserPost(id!!)
     }
 
     private fun setToolbar() {
@@ -56,6 +65,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
     }
 
     override fun showDetailUserPost(data: UserPostDetailResponse) {
+        response = data
         tv_starting_point.text = data.start_point
         tv_ending_point.text = data.end_point
         data.code?.let {
@@ -67,10 +77,16 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         tv_user_request.text = data.description
         tv_time_start.text = DateUtil.formatDate(data.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_24)
         tv_seat.text = data.number_seat!!.toString()
-        tv_distance.text = data.distance!!.toString()
+        tv_distance.text = NumberUtil.showDistance(data.distance!!.toString())
         if (data.driver_book != null) {
             formCar.visible()
             tv_car_name.text = data.driver_book?.full_name
+            tv_car_name.paintFlags = (tv_car_name.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
+            tv_car_name.setOnClickListener {
+                if (!avoidDoubleClick()) {
+
+                }
+            }
             tv_status.text = data.driver_book?.str_status
             when (data.driver_book?.status) {
                 Constant.DRIVER_BOOK_PENDING -> {
@@ -110,13 +126,21 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                 .load(BuildConfig.BASE_URL + "/" + data.user!!.avatar)
                 .placeholder(if (data.user!!.gender.equals("0")) R.drawable.ic_avatar else R.drawable.ic_avatar_female)
                 .error(if (data.user!!.gender.equals("0")) R.drawable.ic_avatar else R.drawable.ic_avatar_female)
-                .centerCrop()
+                .circleCrop()
                 .into(imv_avatar)
         if (data.driver_book?.status == Constant.DRIVER_BOOK_ACCEPTED) {
             formMoney.visible()
             formPhone.visible()
             tv_money.text = NumberUtil.formatNumber(data.driverBookTotalPrice!!)
             tv_phone.text = data.user!!.phone
+            tv_phone.paintFlags = (tv_phone.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
+            tv_phone.setOnClickListener {
+                if (!avoidDoubleClick()) {
+                    var callIntent = Intent(Intent.ACTION_DIAL)
+                    callIntent.setData(Uri.parse("tel:${tv_phone.text}"))
+                    startActivity(callIntent)
+                }
+            }
         } else if (data.driver_book?.status == Constant.DRIVER_BOOK_PENDING) {
             formPhone.gone()
             formMoney.visible()
@@ -129,7 +153,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
             tv_finish_trip.visible()
             tv_finish_trip.setOnClickListener {
                 if (!avoidDoubleClick()) {
-
+                    mPresenter!!.finishTripDriverBook(response?.id!!)
                 }
             }
         } else {
@@ -142,6 +166,8 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
             } else {
                 tv_reason.text = data.str_reason
             }
+        } else {
+            formReason.gone()
         }
         if (data.driver_can_request != null && data.driver_can_request) {
             tv_request.setOnClickListener {
@@ -171,6 +197,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                             object : DialogUtil.BaseAlertDialogListener {
                                 override fun onPositiveClick(dialogInterface: DialogInterface) {
                                     dialogInterface.dismiss()
+                                    mPresenter!!.cancelRequest(response?.driver_book!!.driver_book_option_id!!)
                                 }
 
                                 override fun onNegativeClick(dialogInterface: DialogInterface) {
@@ -199,6 +226,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                                     object : DialogUtil.BaseAlertDialogListener {
                                         override fun onPositiveClick(dialogInterface: DialogInterface) {
                                             dialogInterface.dismiss()
+                                            mPresenter!!.cancelBooking(response?.driverBookId!!)
                                         }
 
                                         override fun onNegativeClick(dialogInterface: DialogInterface) {
@@ -221,6 +249,34 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         }
         if (data.canBook == 0) {
             tv_request.gone()
+        }
+    }
+
+    override fun finishScreen() {
+        finish()
+    }
+
+    override fun cancelRequestSuccess(check: Boolean) {
+        if (check) {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_request_success))
+        } else {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_request_fail))
+        }
+    }
+
+    override fun cancelBookingSuccess(check: Boolean) {
+        if (check) {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_booking_success))
+        } else {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_booking_fail))
+        }
+    }
+
+    override fun finishTripSucceess(check: Boolean) {
+        if (check) {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_success))
+        } else {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_fail))
         }
     }
 }

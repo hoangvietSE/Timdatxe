@@ -174,5 +174,20 @@ interface ApiService {
     //User Post Detail
     @GET(ApiConstant.USER_POST_DETAIL)
     @Headers("Content-Type: application/json")
-    fun userPostDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<UserPostDetailResponse>>>
+    fun userPostDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserPostDetailResponse>>>
+
+    //Driver Cancel Request
+    @DELETE(ApiConstant.DRIVER_CANCEL_REQUEST)
+    @Headers("Content-Type: application/json")
+    fun driverCancelRequest(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<BaseResult<CancelRequestResponse>>
+
+    //Driver Cancel Booking
+    @Multipart
+    @POST(ApiConstant.DRIVER_CANCEL_DRIVER_BOOKING)
+    fun driverCancelBooing(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part(RequestParam.ID) id: Int): Single<BaseResult<CancelRequestResponse>>
+
+    //Driver Finish Trip
+    @Multipart
+    @DELETE(ApiConstant.DRIVER_FINISH_TRIP)
+    fun driverFinishTrip(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part("user_post_id") id: Int): Single<BaseResult<CancelRequestResponse>>
 }
