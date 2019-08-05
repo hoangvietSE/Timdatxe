@@ -6,6 +6,7 @@ import com.example.anothertimdatxe.base.network.BaseResult
 import com.example.anothertimdatxe.base.network.ICallBack
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
+import com.example.anothertimdatxe.request.DriverFinishTripRequest
 import com.example.anothertimdatxe.util.NetworkUtil
 
 class DriverRequestDetailPresenterImpl(mView: DriverRequestDetailView) : BasePresenterImpl<DriverRequestDetailView>(mView), DriverRequestDetailPresenter {
@@ -67,7 +68,9 @@ class DriverRequestDetailPresenterImpl(mView: DriverRequestDetailView) : BasePre
     }
 
     override fun finishTripDriverBook(userPostId: Int) {
-        addDispose(RetrofitManager.driverFinishTrip(userPostId)
+        val request = DriverFinishTripRequest()
+        request.user_post_id = userPostId
+        addDispose(RetrofitManager.driverFinishTrip(request)
                 .doOnSubscribe {
                     mView!!.showLoading()
                 }
