@@ -3,208 +3,239 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/banner_post"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/form"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:alpha="0.8"
-                android:background="@drawable/bg_search_form"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.85" />
+                android:id="@+id/formSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:paddingStart="@dimen/content_padding_resend"
-                android:paddingTop="@dimen/content_padding_resend"
-                android:paddingEnd="@dimen/content_padding_normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.85">
-
-                <ImageView
-                    android:id="@+id/imv_starting_point"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_8_dp"
-                    android:layout_marginTop="@dimen/margin_8_dp"
-                    android:src="@drawable/ic_starting_point_two"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.example.anothertimdatxe.widget.DashView
-                    android:id="@+id/dash_view"
-                    android:layout_width="2dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="2dp"
-                    app:dashLineColor="@color/color_bg"
-                    app:dashLineWidth="2dp"
-                    app:dashOrientation="1"
-                    app:dashWidth="5dp"
-                    app:layout_constraintBottom_toTopOf="@id/imv_ending_point"
-                    app:layout_constraintEnd_toEndOf="@id/imv_starting_point"
-                    app:layout_constraintStart_toStartOf="@id/imv_starting_point"
-                    app:layout_constraintTop_toBottomOf="@id/imv_starting_point"
-                    app:lineHeight="2dp" />
-
-                <ImageView
-                    android:id="@+id/imv_ending_point"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_8_dp"
-                    android:layout_marginTop="@dimen/margin_20_dp"
-                    android:src="@drawable/ic_end"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imv_starting_point" />
-
-                <EditText
-                    android:id="@+id/edt_starting_point"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_16_dp"
-                    android:layout_marginTop="@dimen/margin_10_dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/driver_search_start_hint"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_14"
-                    app:layout_constraintBottom_toTopOf="@id/divider"
+                    android:background="@drawable/banner_post"
+                    app:layout_constraintDimensionRatio="16:9"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imv_starting_point"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="@dimen/margin_26_dp"
-                    android:layout_marginTop="@dimen/margin_12_dp"
-                    android:background="@color/color_bg"
-                    app:layout_constraintBottom_toTopOf="@id/edt_ending_point"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/dash_view"
-                    app:layout_constraintTop_toBottomOf="@id/edt_starting_point" />
-
-                <EditText
-                    android:id="@+id/edt_ending_point"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_16_dp"
-                    android:layout_marginTop="@dimen/margin_16_dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/driver_search_end_hint"
-                    android:textSize="@dimen/text_size_14"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imv_ending_point"
-                    app:layout_constraintTop_toBottomOf="@id/divider" />
-
-                <RelativeLayout
-                    android:id="@+id/rl_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_ending_point"
-                    app:layout_constraintWidth_percent="0.45">
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <Spinner
-                        android:id="@+id/spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/bg_search_spinner" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/form"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:alpha="0.8"
+                        android:background="@drawable/bg_search_form"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_percent="0.7"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.85" />
 
-                    <ImageView
-                        android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_drop_down" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:paddingStart="@dimen/content_padding_resend"
+                        android:paddingTop="@dimen/content_padding_resend"
+                        android:paddingEnd="@dimen/content_padding_normal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_percent="0.7"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.85">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/imv_starting_point"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_8_dp"
+                            android:layout_marginTop="@dimen/margin_8_dp"
+                            android:src="@drawable/ic_starting_point_two"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <RelativeLayout
-                    android:layout_marginTop="@dimen/margin_4_dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_8_dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rl_spinner"
-                    app:layout_constraintWidth_percent="0.45">
+                        <com.example.anothertimdatxe.widget.DashView
+                            android:id="@+id/dash_view"
+                            android:layout_width="2dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="2dp"
+                            app:dashLineColor="@color/color_bg"
+                            app:dashLineWidth="2dp"
+                            app:dashOrientation="1"
+                            app:dashWidth="5dp"
+                            app:layout_constraintBottom_toTopOf="@id/imv_ending_point"
+                            app:layout_constraintEnd_toEndOf="@id/imv_starting_point"
+                            app:layout_constraintStart_toStartOf="@id/imv_starting_point"
+                            app:layout_constraintTop_toBottomOf="@id/imv_starting_point"
+                            app:lineHeight="2dp" />
+
+                        <ImageView
+                            android:id="@+id/imv_ending_point"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_8_dp"
+                            android:layout_marginTop="@dimen/margin_20_dp"
+                            android:src="@drawable/ic_end"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imv_starting_point" />
+
+                        <EditText
+                            android:id="@+id/edt_starting_point"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_16_dp"
+                            android:layout_marginTop="@dimen/margin_10_dp"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/driver_search_start_hint"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_14"
+                            app:layout_constraintBottom_toTopOf="@id/divider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imv_starting_point"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="@dimen/margin_26_dp"
+                            android:layout_marginTop="@dimen/margin_12_dp"
+                            android:background="@color/color_bg"
+                            app:layout_constraintBottom_toTopOf="@id/edt_ending_point"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/dash_view"
+                            app:layout_constraintTop_toBottomOf="@id/edt_starting_point" />
+
+                        <EditText
+                            android:id="@+id/edt_ending_point"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_16_dp"
+                            android:layout_marginTop="@dimen/margin_16_dp"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/driver_search_end_hint"
+                            android:textColorHint="@color/color_quantity"
+                            android:textSize="@dimen/text_size_14"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imv_ending_point"
+                            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edt_ending_point"
+                            app:layout_constraintWidth_percent="0.45">
+
+                            <Spinner
+                                android:id="@+id/spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/bg_search_spinner" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_drop_down" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_4_dp"
+                            android:layout_marginBottom="@dimen/margin_8_dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rl_spinner"
+                            app:layout_constraintWidth_percent="0.45">
+
+                            <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_search_spinner"
+                                android:gravity="center_vertical"
+                                android:hint="@string/driver_search_hint_date"
+                                android:paddingStart="@dimen/margin_8_dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/margin_12_dp" />
+
+                            <ImageView
+                                android:id="@+id/imv_close"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:paddingEnd="@dimen/margin_4_dp"
+                                android:scaleX="0.8"
+                                android:scaleY="0.8"
+                                android:src="@drawable/ic_close"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
-                        android:id="@+id/tv_date"
-                        android:layout_width="match_parent"
+                        android:id="@+id/btn_search"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_search_spinner"
-                        android:gravity="center_vertical"
-                        android:hint="@string/driver_search_hint_date"
-                        android:paddingStart="@dimen/margin_8_dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/margin_12_dp" />
+                        android:background="@drawable/bg_btn_search"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/margin_4_dp"
+                        android:paddingBottom="@dimen/margin_4_dp"
+                        android:text="@string/driver_search_btn"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/form"
+                        app:layout_constraintWidth_percent="0.5" />
 
-                    <ImageView
-                        android:id="@+id/imv_close"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:paddingEnd="@dimen/margin_4_dp"
-                        android:scaleX="0.8"
-                        android:scaleY="0.8"
-                        android:src="@drawable/ic_close"
-                        android:visibility="gone" />
-                </RelativeLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_btn_search"
-                android:gravity="center"
-                android:paddingTop="@dimen/margin_4_dp"
-                android:paddingBottom="@dimen/margin_4_dp"
-                android:text="@string/driver_search_btn"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/form"
-                app:layout_constraintWidth_percent="0.5" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    tools:listitem = "@layout/item_driver_search"
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+                <include
+                    android:id="@+id/layout_no_result"
+                    layout="@layout/layout_no_result_search"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

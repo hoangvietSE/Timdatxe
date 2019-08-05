@@ -3,7 +3,6 @@ package com.example.anothertimdatxe.sprintlogin.login
 import android.app.Dialog
 import android.content.Intent
 import android.text.TextUtils
-import android.view.View
 import android.view.Window
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
@@ -12,6 +11,7 @@ import com.example.anothertimdatxe.extension.isValidPhone
 import com.example.anothertimdatxe.sprinthome.HomeActivity
 import com.example.anothertimdatxe.sprintlogin.forgotpassword.ForgotActivity
 import com.example.anothertimdatxe.sprintlogin.register.RegisterActivity
+import com.example.anothertimdatxe.sprintlogin.updateinfo.UpdateInfoActivity
 import com.example.anothertimdatxe.widget.TextWatcherPassword
 import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activity_login.*
@@ -31,11 +31,11 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
 
 
     override public fun initView() {
-        btn_login.setOnClickListener(View.OnClickListener {
+        btn_login.setOnClickListener {
             if (validate()) {
                 showDialogConfirmDirectLogin()
             }
-        })
+        }
         btn_regis.setOnClickListener {
             showDialogConfirmDirectRegister()
         }
@@ -98,17 +98,17 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
         dialog.setCancelable(false)
         dialog.window.setBackgroundDrawableResource(R.drawable.bg_direct_register)
         //dialog.window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
-        dialog.tvCancel.setOnClickListener(View.OnClickListener {
+        dialog.tvCancel.setOnClickListener {
             dialog.dismiss()
-        })
-        dialog.tv_user_login_direct.setOnClickListener(View.OnClickListener {
+        }
+        dialog.tv_user_login_direct.setOnClickListener {
             dialog.dismiss()
             mPresenter!!.loginUser(et_email.getText().toString(), et_password.getText().toString())
-        })
-        dialog.tv_driver_login_direct.setOnClickListener(View.OnClickListener {
+        }
+        dialog.tv_driver_login_direct.setOnClickListener {
             dialog.dismiss()
             mPresenter!!.loginDriver(et_email.getText().toString(), et_password.getText().toString())
-        })
+        }
         dialog.show()
     }
 
@@ -131,5 +131,9 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
 
     override fun onVerifyLoginSocialSuccess(socialId: String, full_name: String, email: String, socialType: String) {
         mPresenter!!.loginSocial(socialId, full_name, email, socialType)
+    }
+
+    override fun goToUpdateInfo() {
+        startActivityAndClearTask(UpdateInfoActivity::class.java)
     }
 }

@@ -38,6 +38,9 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
                 mView!!.hideLoading()
                 result?.data!!.isUser = true
                 CarBookingSharePreference.setUserData(result?.data!!)
+                if(result?.data!!.full_name.isNullOrEmpty()){
+                    mView!!.goToUpdateInfo()
+                }
                 mView!!.goToNextScreen()
             }
         }, request)
@@ -57,6 +60,9 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
                 mView!!.hideLoading()
                 result?.data!!.isDriver = true
                 CarBookingSharePreference.setUserData(result?.data!!)
+                if(result?.data!!.full_name.isNullOrEmpty()){
+                    mView!!.goToUpdateInfo()
+                }
                 mView!!.goToNextScreen()
             }
 

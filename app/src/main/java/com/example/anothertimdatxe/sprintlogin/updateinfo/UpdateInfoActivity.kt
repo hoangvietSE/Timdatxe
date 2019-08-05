@@ -108,4 +108,13 @@ class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, 
         startActivityAndClearTask(HomeActivity::class.java)
     }
 
+    override fun onMenuLeftCLick() {
+        startActivityAndClearTask(HomeActivity::class.java)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivityAndClearTask(HomeActivity::class.java)
+    }
+
 }

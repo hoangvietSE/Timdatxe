@@ -3,6 +3,7 @@ package com.example.anothertimdatxe.base.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,13 +15,19 @@ import com.example.anothertimdatxe.customview.CarBookingLoading
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
+    companion object {
+        const val MIN_CLICK_INTERVAL = 1000L
+    }
+
     protected abstract val layoutRes: Int
     protected var mPresenter: T? = null
     protected var toolbar: View? = null
     protected var leftbutton: ImageView? = null
     protected var rightButton: ImageView? = null
     protected var toolbarTitle: TextView? = null
+    protected var imvCenter: ImageView? = null
     private var dialog: CarBookingLoading? = null
+    private var mLastClickTime: Long = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
@@ -30,6 +37,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         mPresenter?.let {
             it.start()
         }
+        setListener()
     }
 
     abstract fun getPresenter(): T
@@ -53,6 +61,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         toolbar = findViewById(R.id.toolbar)
         leftbutton = findViewById(R.id.btn_left)
         rightButton = findViewById(R.id.btn_right)
+        imvCenter = findViewById(R.id.imv_center)
         leftbutton?.let {
             it.setOnClickListener {
                 onMenuLeftCLick()
@@ -63,6 +72,18 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
     open fun onMenuLeftCLick() {
         this.finish()
+    }
+
+    protected open fun setListener() {
+    }
+
+    protected fun avoidDoubleClick(): Boolean {
+        val currentTime = SystemClock.elapsedRealtime()
+        if (currentTime - mLastClickTime < MIN_CLICK_INTERVAL) {
+            return true
+        }
+        mLastClickTime = currentTime
+        return false
     }
 
     fun startActivityAndClearTask(cls: Class<*>) {

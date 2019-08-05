@@ -10,6 +10,7 @@ object ApiConstant {
     const val USER_INFO = "/v1/users/{${RequestParam.ID}}"
     const val USER_UPDATE_INFO = "/v1/users/{${RequestParam.ID}}"
     const val USER_POST_CREATED = "/v1/user_posts"
+    const val USER_POST_DETAIL = "/v1/user_posts/{${RequestParam.ID}}"
     const val USER_HISTORY = "/v1/user_history/{${RequestParam.ID}}"
     const val USER_SEARCH_CITY_POST = "/v1/searches/city_user_post"
     const val USER_REFRESH_TOKEN = "/v1/user_refresh"
@@ -21,10 +22,14 @@ object ApiConstant {
     const val DRIVER_INFO = "/v1/drivers/{${RequestParam.ID}}"
     const val DRIVER_PASSWORDS = "/v1/driver_passwords"
     const val DRIVER_POST_CREATED = "/v1/driver_posts"
+    const val DRIVER_POST_DETAIL = "/v1/driver_posts/{${RequestParam.ID}}"
     const val DRIVER_HISTORY = "/v1/driver_history/{${RequestParam.ID}}"
     const val DRIVER_REVENUE = "/v1/driver/{${RequestParam.ID}}/statistics"
     const val DRIVER_SEARCH_CITY_POST = "/v1/searches/city_driver_post"
     const val DRIVER_REFRESH_TOEKN = "/v1/driver_refresh"
+    const val DRIVER_CANCEL_REQUEST = "/v1/driver_book_options/{${RequestParam.ID}}"
+    const val DRIVER_CANCEL_DRIVER_BOOKING = "/v1/driver_cancel_driver_book"
+    const val DRIVER_FINISH_TRIP = "/v1/finish_driver_book"
 
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"

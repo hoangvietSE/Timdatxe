@@ -7,8 +7,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".application.CarBookingApplication"
@@ -38,8 +39,9 @@
         <activity
             android:name=".sprinthome.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".sprintlogin.updateinfo.UpdateInfoActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".sprintlogin.updateinfo.UpdateInfoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".sprintlogin.register.RegisterActivity"
             android:screenOrientation="portrait" />
@@ -82,12 +84,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".sprintsearch.driver.driversearch.DriverSearchActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".sprinthome.hotcities.HotCitiesActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".sprinthome.city_post.CityPostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprinthome.listrequest.driver.detail.DriverRequestDetailActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

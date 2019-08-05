@@ -209,8 +209,8 @@
     <string name="btn_update_version">Cập nhật phiên bản mới nhất</string>
 
     //driver search
-    <string name="driver_search_start_hint">Nhập điểm đến</string>
-    <string name="driver_search_end_hint">Nhập điểm đi</string>
+    <string name="driver_search_start_hint">Điểm xuất phát</string>
+    <string name="driver_search_end_hint">Điểm kết thúc</string>
     <string name="driver_search_btn">Tìm kiếm</string>
     <string name="driver_search_hint_date">Ngày/tháng/năm</string>
 
@@ -225,4 +225,28 @@
     <string name="city_post_tab_one">CHUYẾN ĐI CỦA KHÁCH</string>
     <string name="city_post_tab_two">CHUYẾN ĐI CỦA LÁI XE</string>
 
+    //Driver Request Detail
+    <string name="driver_request_detail_toolbar_title">Thông tin chi tiết chuyến đi</string>
+    <string name="driver_request_detail_starting">Điểm xuất phát:</string>
+    <string name="driver_request_detail_ending">Điểm kết thúc:</string>
+    <string name="driver_request_detail_code">Mã chuyến đi:</string>
+    <string name="driver_request_detail_distance">Khoảng cách:</string>
+    <string name="driver_request_detail_seat">Số khách:</string>
+    <string name="driver_request_detail_start_time">Ngày xuất phát:</string>
+    <string name="driver_request_detail_car_name">Tên xe:</string>
+    <string name="driver_request_detail_status">Trạng thái:</string>
+    <string name="driver_request_detail_money">Giá tiền một ghế:</string>
+    <string name="driver_request_detail_phone">Số điện thoại khách:</string>
+    <string name="driver_request_detail_request">Yêu cầu của khách:</string>
+    <string name="driver_request_detail_condition">(*)Bạn không thể hủy chuyến đi trước một ngày</string>
+    <string name="driver_request_detail_dialog_message_cancel_request">Bạn có chắc chắn hủy yêu cầu này không ?</string>
+    <string name="driver_request_detail_dialog_message_cancel_booking">Bạn có chắc chắn hủy chuyến đi này không ?</string>
+    <string name="driver_request_detail_dialog_positive">Đồng ý</string>
+    <string name="driver_request_detail_dialog_negative">Hủy bỏ</string>
+    <string name="driver_request_detail_cancel_request_success">Hủy yêu cầu thành công</string>
+    <string name="driver_request_detail_cancel_request_fail">Hủy yêu cầu thất bại</string>
+    <string name="driver_request_detail_cancel_booking_success">Hủy yêu cầu thành công</string>
+    <string name="driver_request_detail_cancel_booking_fail">Hủy yêu cầu thất bại</string>
+    <string name="driver_request_detail_finish_trip_success">Kết thúc chuyến đi thành công</string>
+    <string name="driver_request_detail_finish_trip_fail">Kết thúc chuyến đi thất bị</string>
 </resources>

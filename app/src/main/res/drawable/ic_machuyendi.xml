@@ -1,0 +1,13 @@
+<vector android:height="22dp" android:viewportHeight="21.57"
+    android:viewportWidth="21.57" android:width="22dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#4d4d4d" android:pathData="M1.22,8.64L6.89,8.64A1.22,1.22 0,0 0,8.1 7.42L8.1,1.24A1.22,1.22 0,0 0,6.89 0L1.22,0A1.22,1.22 0,0 0,0 1.24L0,7.42A1.22,1.22 0,0 0,1.22 8.64ZM1.68,6.22L1.68,2.43a0.72,0.72 0,0 1,0.72 -0.72L5.69,1.71a0.72,0.72 0,0 1,0.72 0.72L6.41,6.22a0.72,0.72 0,0 1,-0.72 0.72L2.4,6.94A0.72,0.72 0,0 1,1.68 6.22Z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M14.68,8.64h5.65a1.22,1.22 0,0 0,1.22 -1.22L21.55,1.22A1.22,1.22 0,0 0,20.33 0L14.68,0a1.22,1.22 0,0 0,-1.22 1.22L13.46,7.42A1.22,1.22 0,0 0,14.68 8.64ZM15.15,6.24L15.15,2.43a0.72,0.72 0,0 1,0.72 -0.72h3.27a0.72,0.72 0,0 1,0.72 0.72L19.86,6.24a0.72,0.72 0,0 1,-0.72 0.72L15.87,6.96A0.72,0.72 0,0 1,15.16 6.24Z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M6.87,12.93H1.22A1.22,1.22 0,0 0,0 14.15v6.21a1.22,1.22 0,0 0,1.22 1.22H6.87a1.22,1.22 0,0 0,1.22 -1.22V14.15A1.22,1.22 0,0 0,6.87 12.93ZM6.4,15.36v3.82a0.72,0.72 0,0 1,-0.72 0.72H2.42a0.72,0.72 0,0 1,-0.72 -0.72V15.36a0.72,0.72 0,0 1,0.72 -0.72H5.69A0.72,0.72 0,0 1,6.4 15.36Z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M19.88,19.21a0.72,0.72 0,0 1,-0.72 0.72H13.45v1.64h6.87a1.22,1.22 0,0 0,1.22 -1.22V13H19.88Z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M11.52,14.57V6.47H10V9.32a0.72,0.72 0,0 1,-0.72 0.72H7v1.54H9.3a0.72,0.72 0,0 1,0.72 0.72v2.28Z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M15.13,15.31a0.72,0.72 0,0 1,0.72 -0.72H18V12.94H14.67a1.22,1.22 0,0 0,-1.22 1.22v3.3h1.67Z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M0,10.05h4.52v1.63h-4.52z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M17.04,10.04h4.53v1.63h-4.53z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M10.03,0h1.63v4h-1.63z"/>
+    <path android:fillColor="#4d4d4d" android:pathData="M10.02,17.58h1.64v3.99h-1.64z"/>
+</vector>

@@ -31,12 +31,12 @@ interface ApiService {
     //user update info
     @PUT(ApiConstant.USER_INFO)
     @Headers("Content-Type: application/json")
-    fun userUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<UserUpdateInfoResponse>>>
+    fun userUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserUpdateInfoResponse>>>
 
     //driver update info
     @PUT(ApiConstant.DRIVER_INFO)
     @Headers("Content-Type: application/json")
-    fun driverUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<DriverUpdateInfoResponse>>>
+    fun driverUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<DriverUpdateInfoResponse>>>
 
     //regis with driver
     @POST(ApiConstant.DRIVER_REGISTRATIONS)
@@ -166,4 +166,28 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun driverRefreshToken(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<BaseResult<RefreshTokenResponse>>
 
+    //Driver Search User Post
+    @GET(ApiConstant.USER_POST_CREATED)
+    @Headers("Content-Type: application/json")
+    fun driverSearchUserPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverSearchResponse>>>
+
+    //User Post Detail
+    @GET(ApiConstant.USER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun userPostDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserPostDetailResponse>>>
+
+    //Driver Cancel Request
+    @DELETE(ApiConstant.DRIVER_CANCEL_REQUEST)
+    @Headers("Content-Type: application/json")
+    fun driverCancelRequest(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<BaseResult<CancelRequestResponse>>
+
+    //Driver Cancel Booking
+    @Multipart
+    @POST(ApiConstant.DRIVER_CANCEL_DRIVER_BOOKING)
+    fun driverCancelBooing(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part(RequestParam.ID) id: Int): Single<BaseResult<CancelRequestResponse>>
+
+    //Driver Finish Trip
+    @Multipart
+    @DELETE(ApiConstant.DRIVER_FINISH_TRIP)
+    fun driverFinishTrip(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part("user_post_id") id: Int): Single<BaseResult<CancelRequestResponse>>
 }

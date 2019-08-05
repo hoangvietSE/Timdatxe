@@ -326,4 +326,37 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    //driver search user post
+    fun driverSearchUserPost(data: MutableMap<String, Any>): Single<BaseResult<List<DriverSearchResponse>>> {
+        return apiService.driverSearchUserPost(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun userPostDetail(iCallBack: ICallBack<BaseResult<UserPostDetailResponse>>, id: Int): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.userPostDetail(CarBookingSharePreference.getAccessToken(), id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun driverCancelRequest(driverBookOptionId: Int): Single<BaseResult<CancelRequestResponse>> {
+        return apiService.driverCancelRequest(CarBookingSharePreference.getAccessToken(), driverBookOptionId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun driverCancelBooking(driverBookId: Int): Single<BaseResult<CancelRequestResponse>> {
+        return apiService.driverCancelBooing(CarBookingSharePreference.getAccessToken(), driverBookId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun driverFinishTrip(userPostId: Int): Single<BaseResult<CancelRequestResponse>> {
+        return apiService.driverFinishTrip(CarBookingSharePreference.getAccessToken(), userPostId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }
