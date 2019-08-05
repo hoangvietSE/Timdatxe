@@ -226,6 +226,7 @@
     <string name="city_post_tab_two">CHUYẾN ĐI CỦA LÁI XE</string>
 
     //Driver Request Detail
+    <string name="driver_request_detail_toolbar_title">Thông tin chi tiết chuyến đi</string>
     <string name="driver_request_detail_starting">Điểm xuất phát:</string>
     <string name="driver_request_detail_ending">Điểm kết thúc:</string>
     <string name="driver_request_detail_code">Mã chuyến đi:</string>
@@ -238,4 +239,8 @@
     <string name="driver_request_detail_phone">Số điện thoại khách:</string>
     <string name="driver_request_detail_request">Yêu cầu của khách:</string>
     <string name="driver_request_detail_condition">(*)Bạn không thể hủy chuyến đi trước một ngày</string>
+    <string name="driver_request_detail_dialog_message_cancel_request">Bạn có chắc chắn hủy yêu cầu này không ?</string>
+    <string name="driver_request_detail_dialog_message_cancel_booking">Bạn có chắc chắn hủy chuyến đi này không ?</string>
+    <string name="driver_request_detail_dialog_positive">Đồng ý</string>
+    <string name="driver_request_detail_dialog_negative">Hủy bỏ</string>
 </resources>

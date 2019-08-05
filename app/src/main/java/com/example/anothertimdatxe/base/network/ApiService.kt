@@ -31,12 +31,12 @@ interface ApiService {
     //user update info
     @PUT(ApiConstant.USER_INFO)
     @Headers("Content-Type: application/json")
-    fun userUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<UserUpdateInfoResponse>>>
+    fun userUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserUpdateInfoResponse>>>
 
     //driver update info
     @PUT(ApiConstant.DRIVER_INFO)
     @Headers("Content-Type: application/json")
-    fun driverUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<DriverUpdateInfoResponse>>>
+    fun driverUpdateInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<DriverUpdateInfoResponse>>>
 
     //regis with driver
     @POST(ApiConstant.DRIVER_REGISTRATIONS)
@@ -169,5 +169,10 @@ interface ApiService {
     //Driver Search User Post
     @GET(ApiConstant.USER_POST_CREATED)
     @Headers("Content-Type: application/json")
-    fun driverSearchUserPost(@QueryMap data: MutableMap<String, Any>) : Single<BaseResult<List<DriverSearchResponse>>>
+    fun driverSearchUserPost(@QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverSearchResponse>>>
+
+    //User Post Detail
+    @GET(ApiConstant.USER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun userPostDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int) : Single<Response<BaseResult<UserPostDetailResponse>>>
 }

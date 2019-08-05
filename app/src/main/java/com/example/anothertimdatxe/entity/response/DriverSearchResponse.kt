@@ -20,7 +20,7 @@ data class DriverSearchResponse(
 	val strStatus: String? = null,
 
 	@field:SerializedName("distance")
-	val distance: Int? = null,
+	val distance: Double? = null,
 
 	@field:SerializedName("app_start_province")
 	val appStartProvince: String? = null,

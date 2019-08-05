@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprintsearch.driver.driversearch
 
+import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,14 +14,18 @@ import com.example.anothertimdatxe.entity.response.DriverSearchResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.request.DriverSearchRequest
+import com.example.anothertimdatxe.sprinthome.listrequest.driver.detail.DriverRequestDetailActivity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
+import com.example.kotlinapplication.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_driver_search.*
 
 class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearchView,
         DatePickerDialogWidget.onSetDateSuccessListener,
-        EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener {
+        EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener,
+        RecyclerViewAdapter.OnItemClickListener {
+    private var mList: MutableList<DriverSearchResponse>? = mutableListOf()
     private var mDriverSearchUserPostAdapter: DriverSearchUserPostAdapter? = null
     private var mSpinnerSeatSearchAdapter: SpinnerSeatSearchAdapter? = null
     private var mDatePickerDialogWidget: DatePickerDialogWidget? = null
@@ -90,10 +95,11 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
 
     private fun initAdapter() {
         mDriverSearchUserPostAdapter = DriverSearchUserPostAdapter(this)
-        mDriverSearchUserPostAdapter!!.setLoadingMoreListener(this)
+        mDriverSearchUserPostAdapter?.setLoadingMoreListener(this)
+        mDriverSearchUserPostAdapter?.addOnItemClickListener(this)
+        recyclerView.addItemDecoration(ItemRecyclerViewDecoration(this, R.dimen.spacing_16_dp))
         recyclerView.adapter = mDriverSearchUserPostAdapter
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView.addItemDecoration(ItemRecyclerViewDecoration(this, R.dimen.spacing_16_dp))
     }
 
     override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
@@ -127,6 +133,7 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     override fun showListDriverSearch(data: List<DriverSearchResponse>) {
         hideLoadingMore()
         mDriverSearchUserPostAdapter!!.addModels(data, false)
+        mList!!.addAll(data)
     }
 
     override fun onLoadMore() {
@@ -143,7 +150,15 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     }
 
     override fun showListDriverSearchOnClick(data: List<DriverSearchResponse>) {
+        mList!!.clear()
         mDriverSearchUserPostAdapter!!.clear()
+        mList!!.addAll(data)
         mDriverSearchUserPostAdapter!!.addModels(data, false)
+    }
+
+    override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
+        startActivity(Intent(this, DriverRequestDetailActivity::class.java).apply {
+            putExtra(DriverRequestDetailActivity.USER_POST_ID, mList!![position].id)
+        })
     }
 }

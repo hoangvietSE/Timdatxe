@@ -26,6 +26,7 @@ object DateUtil {
     val DATE_FORMAT_22 = "yyyy-MM-dd HH:mm"
     val DATE_FORMAT_21 = "dd-MM-yyyy"
     val DATE_FORMAT_23 = "dd/MM/yyyy"
+    val DATE_FORMAT_24 = "h:mm a - dd/MM/yyyy"
 
     val TIME_0H = "00:00:00"
     val TIME_7H = "07:00:00"
