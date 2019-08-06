@@ -316,7 +316,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                                     mCarId,
                                     response?.id!!,
                                     mount,
-                                    edt_des.text.toString()
+                                    dialog.edt_des.text.toString()
                             )
                             dialog.dismiss()
                         }

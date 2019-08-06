@@ -8,6 +8,7 @@ import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
 import com.example.anothertimdatxe.request.DriverBookUserPostRequest
 import com.example.anothertimdatxe.request.DriverFinishTripRequest
+import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.NetworkUtil
 import com.example.anothertimdatxe.util.ToastUtil
 
@@ -97,6 +98,7 @@ class DriverRequestDetailPresenterImpl(mView: DriverRequestDetailView) : BasePre
         request.userId = userId
         request.driverCarId = driverCarId
         request.userPostId = userPostId
+        request.driverId = CarBookingSharePreference.getUserId()
         request.price = price
         request.note = note
         request.canBook = canBook
