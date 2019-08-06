@@ -57,10 +57,10 @@
             android:background="@drawable/bg_update_profile_edittext" />
 
         <ImageView
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/ic_drop_down" />
     </RelativeLayout>
 
@@ -106,10 +106,10 @@
         android:layout_marginStart="@dimen/text_size_16"
         android:layout_marginTop="@dimen/margin_8_dp"
         android:layout_marginEnd="@dimen/text_size_16"
-        android:inputType="number"
         android:textSize="@dimen/text_size_16"
         app:clearButtonDrawable="@drawable/ic_close"
         app:edtBackground="@drawable/bg_update_profile_edittext"
+        app:edtMaxLength="1000"
         app:edtPadding="@dimen/margin_8_dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -8,6 +8,7 @@ import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.entity.response.*
+import com.example.anothertimdatxe.request.DriverBookUserPostRequest
 import com.example.anothertimdatxe.request.DriverFinishTripRequest
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -191,4 +192,9 @@ interface ApiService {
     @HTTP(method = "DELETE", path = ApiConstant.DRIVER_FINISH_TRIP, hasBody = true)
     @Headers("Content-Type: application/json")
     fun driverFinishTrip(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body body: DriverFinishTripRequest): Single<BaseResult<CancelRequestResponse>>
+
+    //Driver Apply User Post
+    @POST(ApiConstant.DRIVER_REQUEST_USER_POST)
+    @Headers("Content-Type: application/json")
+    fun driverBookUserPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body body: DriverBookUserPostRequest): Single<BaseResult<DriverBookUserPostResponse>>
 }

@@ -359,4 +359,10 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun driverBookUserPost(request: DriverBookUserPostRequest) : Single<BaseResult<DriverBookUserPostResponse>>{
+        return apiService.driverBookUserPost(CarBookingSharePreference.getAccessToken(),request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

@@ -19,6 +19,7 @@ import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.*
+import com.example.anothertimdatxe.widget.NumberTextWatcher
 import kotlinx.android.synthetic.main.activity_detail_request.*
 import kotlinx.android.synthetic.main.dialog_driver_book_request.*
 
@@ -263,6 +264,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
     }
 
     private fun showConfirmRequestDialog(driverCars: ArrayList<DriverCar>?) {
+        var mCarId = -1
         if (driverCars?.size == 0) {
             ToastUtil.show(resources.getString(R.string.driver_request_detail_no_regis_car))
             return
@@ -278,17 +280,46 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                         dialog.spinner.adapter = mSpinnerAdapter
                         dialog.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                             override fun onNothingSelected(parent: AdapterView<*>?) {
-
                             }
 
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+                                mCarId = driverCars!![position].id!!
                             }
 
                         }
+                        dialog.edt_money.addTextChangeListener(NumberTextWatcher(dialog.edt_money))
                     }
 
                     override fun onClickDialog(dialog: Dialog) {
+                        if (mCarId == -1) {
+                            ToastUtil.show(resources.getString(R.string.dialog_driver_book_request_no_car))
+                        } else if (dialog.edt_money.text.toString().isNullOrEmpty() || dialog.edt_money.text.toString().isNullOrBlank()) {
+                            dialog.edt_money.setError(resources.getString(R.string.dialog_driver_book_request_no_money))
+                            dialog.edt_money.requestFocus()
+                        } else if (NumberUtil.replaceNumber(dialog.edt_money.text.toString(), ",", "").toInt() < 1000) {
+                            dialog.edt_money.setError(resources.getString(R.string.dialog_driver_book_request_min_value))
+                            dialog.edt_money.requestFocus()
+                        } else if (NumberUtil.isNumberString(dialog.edt_des.text.toString())) {
+                            dialog.edt_des.setError(resources.getString(R.string.dialog_driver_book_request_no_number))
+                            dialog.edt_des.requestFocus()
+                        } else {
+                            var mount: String = ""
+                            dialog.edt_money.text.toString()?.let {
+                                if (it.contains(",", false)) {
+                                    mount = NumberUtil.replaceNumber(it, ",", "")
+                                } else {
+                                    mount = it
+                                }
+                            }
+                            mPresenter?.bookUserPost(
+                                    response?.user_id!!,
+                                    mCarId,
+                                    response?.id!!,
+                                    mount,
+                                    edt_des.text.toString()
+                            )
+                            dialog.dismiss()
+                        }
                     }
                 }
         )
@@ -320,6 +351,14 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
             ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_success))
         } else {
             ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_fail))
+        }
+    }
+
+    override fun finishBookSuccess(check: Boolean) {
+        if (check) {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_apply_success))
+        } else {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_apply_fail))
         }
     }
 }

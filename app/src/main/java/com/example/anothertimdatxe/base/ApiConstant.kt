@@ -30,6 +30,7 @@ object ApiConstant {
     const val DRIVER_CANCEL_REQUEST = "/v1/driver_book_options/{${RequestParam.ID}}"
     const val DRIVER_CANCEL_DRIVER_BOOKING = "/v1/driver_cancel_driver_book"
     const val DRIVER_FINISH_TRIP = "/v1/finish_driver_book"
+    const val DRIVER_REQUEST_USER_POST = "/v1/driver_book_options"
 
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"

@@ -83,7 +83,6 @@ object DialogUtil {
         dialog.setCancelable(cancelable)
         dialog.window.setBackgroundDrawableResource(resBackground)
         dialog.btn_regis.setOnClickListener {
-            dialog.dismiss()
             mListener.onClickDialog(dialog)
         }
         dialog.imv_close.setOnClickListener {

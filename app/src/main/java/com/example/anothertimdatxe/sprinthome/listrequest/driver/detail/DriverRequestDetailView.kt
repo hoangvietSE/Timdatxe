@@ -9,4 +9,5 @@ interface DriverRequestDetailView : BaseView {
     fun cancelRequestSuccess(check: Boolean)
     fun cancelBookingSuccess(check: Boolean)
     fun finishTripSucceess(check: Boolean)
+    fun finishBookSuccess(check: Boolean)
 }
