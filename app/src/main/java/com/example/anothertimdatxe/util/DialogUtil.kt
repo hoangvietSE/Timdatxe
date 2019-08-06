@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.view.Window
 import com.example.anothertimdatxe.R
+import kotlinx.android.synthetic.main.dialog_driver_book_request.*
 
 object DialogUtil {
     fun showConfirmDiaglog(context: Context, layout: Int, setCancel: Boolean, resBackground: Int): Dialog {
@@ -75,8 +76,28 @@ object DialogUtil {
         alertDialog.show()
     }
 
+    fun showConfirmDialogDriverBookRequest(context: Context, layout: Int, cancelable: Boolean, resBackground: Int, mListener: BaseDialogListener) {
+        var dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(layout)
+        dialog.setCancelable(cancelable)
+        dialog.window.setBackgroundDrawableResource(resBackground)
+        dialog.btn_regis.setOnClickListener {
+            mListener.onClickDialog(dialog)
+        }
+        dialog.imv_close.setOnClickListener {
+            dialog.dismiss()
+        }
+        mListener.onAddDataToDialog(context, dialog)
+        dialog.show()
+    }
+
     fun showConfirmDiaglogNotCancel(context: Context, layout: Int, resBackground: Int): Dialog {
         return showConfirmDiaglog(context, layout, false, resBackground)
+    }
+
+    fun showConfirmDialogCancel(context: Context, layout: Int, resBackground: Int): Dialog {
+        return showConfirmDiaglog(context, layout, true, resBackground)
     }
 
     fun showMessageDialog(context: Context, msg: Int): AlertDialog {
@@ -99,5 +120,10 @@ object DialogUtil {
     interface BaseAlertDialogListener {
         fun onPositiveClick(dialogInterface: DialogInterface)
         fun onNegativeClick(dialogInterface: DialogInterface)
+    }
+
+    interface BaseDialogListener {
+        fun onAddDataToDialog(context: Context, dialog: Dialog)
+        fun onClickDialog(dialog: Dialog)
     }
 }

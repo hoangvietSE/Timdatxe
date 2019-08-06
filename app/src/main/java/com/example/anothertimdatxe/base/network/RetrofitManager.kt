@@ -354,8 +354,14 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun driverFinishTrip(userPostId: Int): Single<BaseResult<CancelRequestResponse>> {
-        return apiService.driverFinishTrip(CarBookingSharePreference.getAccessToken(), userPostId)
+    fun driverFinishTrip(request: DriverFinishTripRequest): Single<BaseResult<CancelRequestResponse>> {
+        return apiService.driverFinishTrip(CarBookingSharePreference.getAccessToken(), request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun driverBookUserPost(request: DriverBookUserPostRequest) : Single<BaseResult<DriverBookUserPostResponse>>{
+        return apiService.driverBookUserPost(CarBookingSharePreference.getAccessToken(),request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

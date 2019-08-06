@@ -249,4 +249,17 @@
     <string name="driver_request_detail_cancel_booking_fail">Hủy yêu cầu thất bại</string>
     <string name="driver_request_detail_finish_trip_success">Kết thúc chuyến đi thành công</string>
     <string name="driver_request_detail_finish_trip_fail">Kết thúc chuyến đi thất bị</string>
+    <string name="driver_request_detail_no_regis_car">Bạn chưa đăng ký xe trong hệ thống. Vui lòng đăng ký xe!</string>
+    <string name="driver_request_detail_apply_success">Đăng ký chuyến đi thành công</string>
+    <string name="driver_request_detail_apply_fail">Đăng ký chuyến đi thất bại</string>
+
+    //dialog driver book request
+    <string name="dialog_driver_book_request_title">Đăng ký ứng tuyển chuyến đi</string>
+    <string name="dialog_driver_book_request_title_car">Xe muốn đăng ký</string>
+    <string name="dialog_driver_book_request_money">Mức giá đề xuất (VND) (Giá tiền / 1 khách)</string>
+    <string name="dialog_driver_book_request_des">Mô tả thêm</string>
+    <string name="dialog_driver_book_request_no_car">Bạn chưa chọn xe ứng tuyển!</string>
+    <string name="dialog_driver_book_request_no_money">Giá không được để trống!</string>
+    <string name="dialog_driver_book_request_min_value">Số tiền ít nhất là 1000 VNĐ</string>
+    <string name="dialog_driver_book_request_no_number">Mô tả vui lòng không nhập số!</string>
 </resources>

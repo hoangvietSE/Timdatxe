@@ -8,6 +8,8 @@ import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.entity.response.*
+import com.example.anothertimdatxe.request.DriverBookUserPostRequest
+import com.example.anothertimdatxe.request.DriverFinishTripRequest
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -187,7 +189,12 @@ interface ApiService {
     fun driverCancelBooing(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part(RequestParam.ID) id: Int): Single<BaseResult<CancelRequestResponse>>
 
     //Driver Finish Trip
-    @Multipart
-    @DELETE(ApiConstant.DRIVER_FINISH_TRIP)
-    fun driverFinishTrip(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part("user_post_id") id: Int): Single<BaseResult<CancelRequestResponse>>
+    @HTTP(method = "DELETE", path = ApiConstant.DRIVER_FINISH_TRIP, hasBody = true)
+    @Headers("Content-Type: application/json")
+    fun driverFinishTrip(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body body: DriverFinishTripRequest): Single<BaseResult<CancelRequestResponse>>
+
+    //Driver Apply User Post
+    @POST(ApiConstant.DRIVER_REQUEST_USER_POST)
+    @Headers("Content-Type: application/json")
+    fun driverBookUserPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body body: DriverBookUserPostRequest): Single<BaseResult<DriverBookUserPostResponse>>
 }

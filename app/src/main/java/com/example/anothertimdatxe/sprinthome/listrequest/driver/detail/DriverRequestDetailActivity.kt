@@ -1,23 +1,32 @@
 package com.example.anothertimdatxe.sprinthome.listrequest.driver.detail
 
+import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
+import android.view.View
+import android.widget.AdapterView
 import com.example.anothertimdatxe.BuildConfig
 import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.adapter.SpinnerCarAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.util.GlideApp
+import com.example.anothertimdatxe.entity.response.DriverCar
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.*
+import com.example.anothertimdatxe.widget.NumberTextWatcher
 import kotlinx.android.synthetic.main.activity_detail_request.*
+import kotlinx.android.synthetic.main.dialog_driver_book_request.*
 
 class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>(), DriverRequestDetailView {
     private var id: Int? = null
     private var response: UserPostDetailResponse? = null
+    private var mSpinnerAdapter: SpinnerCarAdapter? = null
 
     companion object {
         const val USER_POST_ID = "id"
@@ -172,7 +181,9 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         if (data.driver_can_request != null && data.driver_can_request) {
             tv_request.setOnClickListener {
                 if (!avoidDoubleClick()) {
-
+                    if (data.driverCarPending == 1) {
+                        showConfirmRequestDialog(data.driverCars)
+                    }
                 }
             }
             tv_request.visible()
@@ -252,6 +263,69 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         }
     }
 
+    private fun showConfirmRequestDialog(driverCars: ArrayList<DriverCar>?) {
+        var mCarId = -1
+        if (driverCars?.size == 0) {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_no_regis_car))
+            return
+        }
+        DialogUtil.showConfirmDialogDriverBookRequest(
+                this,
+                R.layout.dialog_driver_book_request,
+                true,
+                R.drawable.bg_white_10dp,
+                object : DialogUtil.BaseDialogListener {
+                    override fun onAddDataToDialog(context: Context, dialog: Dialog) {
+                        mSpinnerAdapter = SpinnerCarAdapter(context, driverCars!!)
+                        dialog.spinner.adapter = mSpinnerAdapter
+                        dialog.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                            }
+
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                mCarId = driverCars!![position].id!!
+                            }
+
+                        }
+                        dialog.edt_money.addTextChangeListener(NumberTextWatcher(dialog.edt_money))
+                    }
+
+                    override fun onClickDialog(dialog: Dialog) {
+                        if (mCarId == -1) {
+                            ToastUtil.show(resources.getString(R.string.dialog_driver_book_request_no_car))
+                        } else if (dialog.edt_money.text.toString().isNullOrEmpty() || dialog.edt_money.text.toString().isNullOrBlank()) {
+                            dialog.edt_money.setError(resources.getString(R.string.dialog_driver_book_request_no_money))
+                            dialog.edt_money.requestFocus()
+                        } else if (NumberUtil.replaceNumber(dialog.edt_money.text.toString(), ",", "").toInt() < 1000) {
+                            dialog.edt_money.setError(resources.getString(R.string.dialog_driver_book_request_min_value))
+                            dialog.edt_money.requestFocus()
+                        } else if (NumberUtil.isNumberString(dialog.edt_des.text.toString())) {
+                            dialog.edt_des.setError(resources.getString(R.string.dialog_driver_book_request_no_number))
+                            dialog.edt_des.requestFocus()
+                        } else {
+                            var mount: String = ""
+                            dialog.edt_money.text.toString()?.let {
+                                if (it.contains(",", false)) {
+                                    mount = NumberUtil.replaceNumber(it, ",", "")
+                                } else {
+                                    mount = it
+                                }
+                            }
+                            mPresenter?.bookUserPost(
+                                    response?.user_id!!,
+                                    mCarId,
+                                    response?.id!!,
+                                    mount,
+                                    dialog.edt_des.text.toString()
+                            )
+                            dialog.dismiss()
+                        }
+                    }
+                }
+        )
+
+    }
+
     override fun finishScreen() {
         finish()
     }
@@ -277,6 +351,14 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
             ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_success))
         } else {
             ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_fail))
+        }
+    }
+
+    override fun finishBookSuccess(check: Boolean) {
+        if (check) {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_apply_success))
+        } else {
+            ToastUtil.show(resources.getString(R.string.driver_request_detail_apply_fail))
         }
     }
 }

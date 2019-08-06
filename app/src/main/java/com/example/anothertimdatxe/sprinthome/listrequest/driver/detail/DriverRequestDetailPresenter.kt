@@ -7,4 +7,5 @@ interface DriverRequestDetailPresenter : BasePresenter {
     fun cancelRequest(driverBookOptionId: Int)
     fun cancelBooking(driverBookId: Int)
     fun finishTripDriverBook(userPostId: Int)
+    fun bookUserPost(userId: Int, driverCarId: Int, userPostId: Int, price: String, note: String)
 }

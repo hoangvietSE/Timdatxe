@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/margin_8_dp"
+        android:src="@drawable/ic_close" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/icon_logo_direct" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_40_dp"
+        android:text="@string/dialog_driver_book_request_title"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_title_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_40_dp"
+        android:text="@string/dialog_driver_book_request_title_car"
+        android:textSize="@dimen/text_size_14" />
+
+    <RelativeLayout
+        android:id="@+id/rl_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_car"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_8_dp"
+        android:layout_marginEnd="@dimen/margin_16_dp">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_update_profile_edittext" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_drop_down" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_car"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_8_dp"
+        android:text="@string/dialog_driver_book_request_money"
+        android:textSize="@dimen/text_size_14" />
+
+    <com.example.anothertimdatxe.customview.ClearableEditText
+        android:id="@+id/edt_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_money"
+        android:layout_marginStart="@dimen/text_size_16"
+        android:layout_marginTop="@dimen/margin_8_dp"
+        android:layout_marginEnd="@dimen/text_size_16"
+        android:inputType="number"
+        android:textSize="@dimen/text_size_16"
+        app:clearButtonDrawable="@drawable/ic_close"
+        app:edtBackground="@drawable/bg_update_profile_edittext"
+        app:edtPadding="@dimen/margin_8_dp" />
+
+    <TextView
+        android:id="@+id/tv_title_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_money"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_8_dp"
+        android:text="@string/dialog_driver_book_request_des"
+        android:textSize="@dimen/text_size_14" />
+
+    <com.example.anothertimdatxe.customview.ClearableEditText
+        android:id="@+id/edt_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_des"
+        android:layout_marginStart="@dimen/text_size_16"
+        android:layout_marginTop="@dimen/margin_8_dp"
+        android:layout_marginEnd="@dimen/text_size_16"
+        android:textSize="@dimen/text_size_16"
+        app:clearButtonDrawable="@drawable/ic_close"
+        app:edtBackground="@drawable/bg_update_profile_edittext"
+        app:edtMaxLength="1000"
+        app:edtPadding="@dimen/margin_8_dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/csl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_des"
+        android:layout_marginTop="@dimen/margin_32_dp">
+
+        <TextView
+            android:id="@+id/btn_regis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_login"
+            android:gravity="center"
+            android:text="Đăng ký"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.7" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/csl"
+        android:layout_marginTop="@dimen/content_padding_normal"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:padding="@dimen/content_padding_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Timdatxe.com"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Hệ thống tìm xe tiện chuyến lớn nhất Việt Nam"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</RelativeLayout>
