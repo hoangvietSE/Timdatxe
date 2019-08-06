@@ -3,9 +3,7 @@ package com.example.anothertimdatxe.widget
 import android.text.Editable
 import android.text.TextWatcher
 import com.example.anothertimdatxe.customview.ClearableEditText
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.*
+import com.example.anothertimdatxe.util.NumberUtil
 
 class NumberTextWatcher(var editText: ClearableEditText) : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
@@ -19,9 +17,9 @@ class NumberTextWatcher(var editText: ClearableEditText) : TextWatcher {
             }
             longval = java.lang.Long.parseLong(originalString)
 
-            val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
-            formatter.applyPattern("#,###,###,###")
-            val formattedString = formatter.format(longval)
+//            val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+//            formatter.applyPattern("#,###,###,###")
+            val formattedString = NumberUtil.formatMoneyInput(longval)
 
             //setting text after format to EditText
             editText.setText(formattedString)
