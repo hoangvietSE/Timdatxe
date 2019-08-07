@@ -63,9 +63,9 @@ class DriverCarActivity : BaseActivity<DriverCarPresenter>(), DriverCarView {
         }
         toolbarTitle?.let {
             if (mKeyView) {
-                it.text = resources.getString(R.string.driver_car_title_toolbar_driver)
+                it.text = resources.getString(R.string.driver_car_title_toolbar_driver).toUpperCase()
             } else {
-                it.text = resources.getString(R.string.driver_car_title_toolbar_mycar)
+                it.text = resources.getString(R.string.driver_car_title_toolbar_mycar).toUpperCase()
             }
         }
     }
@@ -79,6 +79,14 @@ class DriverCarActivity : BaseActivity<DriverCarPresenter>(), DriverCarView {
         tabIndicator.setupWithViewPager(viewPager)
         mDriverCarPagerAdapter = DriverCarPagerAdapter(this, mListImage)
         viewPager.offscreenPageLimit = 4
+        viewPager.pageMargin = resources.getDimensionPixelSize(R.dimen.margin_12_dp)
+        viewPager.clipToPadding = false
+        viewPager.setPadding(
+                resources.getDimensionPixelSize(R.dimen.margin_20_dp),
+                0,
+                resources.getDimensionPixelSize(R.dimen.margin_20_dp),
+                0
+        )
         viewPager.adapter = mDriverCarPagerAdapter
     }
 

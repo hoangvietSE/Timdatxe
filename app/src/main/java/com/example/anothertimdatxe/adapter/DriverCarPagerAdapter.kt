@@ -27,6 +27,7 @@ class DriverCarPagerAdapter(var context: Context, var mListImage: ArrayList<Stri
         view.tv_number.text = "${position + 1}/${mListImage.size}"
         GlideApp.with(context)
                 .load(mListImage[position])
+                .centerCrop()
                 .placeholder(R.drawable.img_default)
                 .error(R.drawable.img_default)
                 .into(view.imv_car)

@@ -80,7 +80,7 @@ data class DriverSearchResponse(
 	val startPoint: String? = null,
 
 	@field:SerializedName("duration_time")
-	val durationTime: Int? = null,
+	val durationTime: Float? = null,
 
 	@field:SerializedName("city_id")
 	val cityId: Int? = null,
