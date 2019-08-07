@@ -25,11 +25,11 @@ fun View.gone() {
     visibility = View.GONE
 }
 
-fun SwipeRefreshLayout.showRefreshing(){
+fun SwipeRefreshLayout.showRefreshing() {
     isRefreshing = true
 }
 
-fun SwipeRefreshLayout.hideRefreshing(){
+fun SwipeRefreshLayout.hideRefreshing() {
     isRefreshing = false
 }
 
@@ -59,6 +59,15 @@ fun ImageView.setAvatar(context: Context, imv: ImageView, contentURI: Uri) {
             .placeholder(R.drawable.ic_avatar)
             .error(R.drawable.ic_avatar)
             .into(imv)
+}
+
+fun ImageView.setImageUrl(context: Context, url: String) {
+    GlideApp.with(context)
+            .load(url)
+            .centerCrop()
+            .placeholder(R.drawable.bg_white)
+            .error(R.drawable.bg_white)
+            .into(this)
 }
 
 const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"

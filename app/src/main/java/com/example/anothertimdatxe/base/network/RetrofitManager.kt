@@ -109,6 +109,14 @@ object RetrofitManager {
         return disposable
     }
 
+    fun getBanners(iCallBack: ICallBack<BaseResult<List<BannerHomeResponse>>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.getBanners()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
     fun loginDriver(callBack: ICallBack<BaseResult<UserData>>, request: LoginRequest): Disposable {
         val subscribe = getSubcriber(callBack)
         return apiService.loginDriver(createPostRequest(request))

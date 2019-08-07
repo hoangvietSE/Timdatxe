@@ -17,6 +17,11 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
+
+    @GET(ApiConstant.HOT_BANNERS)
+    @Headers("Content-Type: application/json")
+    fun getBanners() : Single<Response<BaseResult<List<BannerHomeResponse>>>>
+
     //login with user
     //Observable
     //Single Observable: only an item or an error
