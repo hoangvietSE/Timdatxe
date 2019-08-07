@@ -262,4 +262,16 @@
     <string name="dialog_driver_book_request_no_money">Giá không được để trống!</string>
     <string name="dialog_driver_book_request_min_value">Số tiền ít nhất là 1000 VNĐ</string>
     <string name="dialog_driver_book_request_no_number">Mô tả vui lòng không nhập số!</string>
+    
+    //driver car
+    <string name="driver_car_title_toolbar_mycar">Xe của tôi</string>
+    <string name="driver_car_title_toolbar_driver">Xe của tài xế</string>
+    <string name="driver_car_title">Thông tin chi tiết</string>
+    <string name="driver_car_title_car">Tên xe:</string>
+    <string name="driver_car_title_bienso">Biển số:</string>
+    <string name="driver_car_title_status">Tình trạng:</string>
+    <string name="driver_car_title_color">Màu sắc:</string>
+    <string name="driver_car_title_handangkiem">Hạn đăng kiểm:</string>
+    <string name="driver_car_title_date_regis">Ngày đăng ký:</string>
+    <string name="driver_car_btn_update">Cập nhật thông tin</string>
 </resources>

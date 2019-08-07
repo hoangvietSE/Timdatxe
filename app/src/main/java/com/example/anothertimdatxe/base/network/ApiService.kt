@@ -197,4 +197,9 @@ interface ApiService {
     @POST(ApiConstant.DRIVER_REQUEST_USER_POST)
     @Headers("Content-Type: application/json")
     fun driverBookUserPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body body: DriverBookUserPostRequest): Single<BaseResult<DriverBookUserPostResponse>>
+
+    //Driver Car Detail
+    @GET(ApiConstant.DRIVER_CAR_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun driverCarDetail(@Path(RequestParam.ID) id: Int): Single<BaseResult<DriverCarDetailResponse>>
 }
