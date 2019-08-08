@@ -18,6 +18,7 @@ import com.example.anothertimdatxe.entity.response.DriverCar
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.sprinthome.profile.driver.driver_car.DriverCarActivity
 import com.example.anothertimdatxe.util.*
 import com.example.anothertimdatxe.widget.NumberTextWatcher
 import kotlinx.android.synthetic.main.activity_detail_request.*
@@ -93,7 +94,10 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
             tv_car_name.paintFlags = (tv_car_name.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
             tv_car_name.setOnClickListener {
                 if (!avoidDoubleClick()) {
-
+                    startActivity(Intent(this, DriverCarActivity::class.java).apply {
+                        putExtra("id", response?.driver_book!!.driver_car_id)
+                        putExtra(DriverCarActivity.KEY_VIEW_ONLY, true)
+                    })
                 }
             }
             tv_status.text = data.driver_book?.str_status

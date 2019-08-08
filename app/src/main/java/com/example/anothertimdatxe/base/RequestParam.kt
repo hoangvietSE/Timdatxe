@@ -7,4 +7,5 @@ object RequestParam {
     const val AUTHORIZATION_HEADER = "Authorization"
     const val BEARER = "Bearer "
     const val SLUG = "slug"
+    const val TYPE = "type"
 }

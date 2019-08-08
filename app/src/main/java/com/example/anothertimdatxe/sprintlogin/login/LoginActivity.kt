@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.text.TextUtils
 import android.view.Window
+import android.view.WindowManager
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidEmail
@@ -97,7 +98,8 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
         dialog.setContentView(R.layout.dialog_direct_login)
         dialog.setCancelable(false)
         dialog.window.setBackgroundDrawableResource(R.drawable.bg_direct_register)
-        //dialog.window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
+        val width = (resources.displayMetrics.widthPixels * 0.9).toInt()
+        dialog.window!!.setLayout(width, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.tvCancel.setOnClickListener {
             dialog.dismiss()
         }

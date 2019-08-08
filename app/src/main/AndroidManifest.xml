@@ -95,6 +95,9 @@
         <activity
             android:name=".sprinthome.listrequest.driver.detail.DriverRequestDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprinthome.profile.driver.driver_car.DriverCarActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -34,6 +34,7 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPresenter?.start()
+        initListener()
     }
 
     override fun onDestroyView() {
@@ -42,6 +43,8 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), BaseView {
     }
 
     abstract override fun initView()
+    protected open fun initListener() {
+    }
 
     override fun hideLoading() {
 

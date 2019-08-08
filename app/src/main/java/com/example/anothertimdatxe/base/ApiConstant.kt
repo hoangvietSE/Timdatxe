@@ -31,6 +31,7 @@ object ApiConstant {
     const val DRIVER_CANCEL_DRIVER_BOOKING = "/v1/driver_cancel_driver_book"
     const val DRIVER_FINISH_TRIP = "/v1/finish_driver_book"
     const val DRIVER_REQUEST_USER_POST = "/v1/driver_book_options"
+    const val DRIVER_CAR_DETAIL = "/v1/driver_cars/{${RequestParam.ID}}"
 
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"
@@ -49,6 +50,7 @@ object ApiConstant {
 
     //Hot Cities
     const val HOT_CITIES = "/v1/cities"
+    const val HOT_BANNERS = "/v1/banners"
 
     interface httpStatusCode {
         companion object {

@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/margin_8_dp"
-        android:paddingEnd="@dimen/content_padding_resend"
         android:paddingTop="@dimen/margin_4_dp"
+        android:paddingEnd="@dimen/content_padding_resend"
         android:src="@drawable/ic_close" />
 
     <ImageView
@@ -88,6 +88,7 @@
         android:textSize="@dimen/text_size_16"
         app:clearButtonDrawable="@drawable/ic_close"
         app:edtBackground="@drawable/bg_update_profile_edittext"
+        app:edtMaxLength="10"
         app:edtPadding="@dimen/margin_8_dp" />
 
     <TextView

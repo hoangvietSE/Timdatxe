@@ -17,6 +17,11 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
+
+    @GET(ApiConstant.HOT_BANNERS)
+    @Headers("Content-Type: application/json")
+    fun getBanners(): Single<Response<BaseResult<List<BannerHomeResponse>>>>
+
     //login with user
     //Observable
     //Single Observable: only an item or an error
@@ -197,4 +202,19 @@ interface ApiService {
     @POST(ApiConstant.DRIVER_REQUEST_USER_POST)
     @Headers("Content-Type: application/json")
     fun driverBookUserPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body body: DriverBookUserPostRequest): Single<BaseResult<DriverBookUserPostResponse>>
+
+    //Driver Car Detail
+    @GET(ApiConstant.DRIVER_CAR_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun driverCarDetail(@Path(RequestParam.ID) id: Int): Single<BaseResult<DriverCarDetailResponse>>
+
+    //User Post Home
+    @GET(ApiConstant.USER_POST_CREATED)
+    @Headers("Content-Type: application/json")
+    fun userPostHome(@Query(RequestParam.TYPE) type: Int): Single<Response<BaseResult<List<UserPostResponse>>>>
+
+    //Driver Post Home
+    @GET(ApiConstant.DRIVER_POST_CREATED)
+    @Headers("Content-Type: application/json")
+    fun driverPostHome(@Query(RequestParam.TYPE) type: Int): Single<Response<BaseResult<List<DriverPostResponse>>>>
 }
