@@ -11,4 +11,6 @@ interface HomeFragmentView : BaseView {
     fun showListBanners(list: List<BannerHomeResponse>)
     fun showListUserPost(list: List<UserPostResponse>)
     fun showListDriverPost(list: List<DriverPostResponse>)
+    fun showLoadingData()
+    fun hideLoadingData()
 }

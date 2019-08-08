@@ -39,6 +39,8 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     private var mCarFindUserFragment: CarFindUserFragment? = null
     private var mPostCreatedMoreFindUserAdapter: PostCreatedMoreFindUserAdapter? = null
     private var mHomeAdapter: HomeAdapter? = null
+    private var mCurrentSelectedScreen = 0
+    private var mNextSelectedScreen = 0
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -94,8 +96,53 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
             mUserFindCarFragment = UserFindCarFragment.getInstance()
             mList!!.add(mCarFindUserFragment!!)
             mList!!.add(mUserFindCarFragment!!)
-            mHomeAdapter = HomeAdapter((context!! as AppCompatActivity).supportFragmentManager, mList!!, arrayListOf("",""))
+            mHomeAdapter = HomeAdapter((context!! as AppCompatActivity).supportFragmentManager, mList!!, arrayListOf("", ""))
             vp_home_list_post.adapter = mHomeAdapter!!
+            vp_home_list_post.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                    if (position == mCurrentSelectedScreen) {
+                        // We are moving to next screen on right side
+                        if (positionOffset > 0.5) {
+                            // Closer to next screen than to current
+                            if (position + 1 != mNextSelectedScreen) {
+                                mNextSelectedScreen = position + 1;
+                                updateState(mNextSelectedScreen);
+                            }
+                        } else {
+                            // Closer to current screen than to next
+                            if (position != mNextSelectedScreen) {
+                                mNextSelectedScreen = position;
+                                updateState(mNextSelectedScreen);
+                            }
+                        }
+                    } else {
+                        // We are moving to next screen left side
+                        if (positionOffset > 0.5) {
+                            // Closer to current screen than to next
+                            if (position + 1 != mNextSelectedScreen) {
+                                mNextSelectedScreen = position + 1;
+                                updateState(mNextSelectedScreen);
+                            }
+                        } else {
+                            // Closer to next screen than to current
+                            if (position != mNextSelectedScreen) {
+                                mNextSelectedScreen = position;
+                                updateState(mNextSelectedScreen);
+                            }
+                        }
+                    }
+                }
+
+                override fun onPageSelected(position: Int) {
+                    mCurrentSelectedScreen = position
+                    mNextSelectedScreen = position
+                    setSelectedItem(mCurrentSelectedScreen)
+                }
+
+            })
             setSelectedItem(VP_ITEM_USER_FIND_CAR)
 
         } else {
@@ -119,6 +166,29 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
             }
             VP_ITEM_USER_FIND_CAR -> {
                 vp_home_list_post.currentItem = VP_ITEM_USER_FIND_CAR
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    btn_user_find_car.background = resources.getDrawable(R.drawable.bg_button_selected, null)
+                    btn_car_find_user.background = resources.getDrawable(R.drawable.bg_button_nomarl, null)
+                } else {
+                    btn_user_find_car.background = resources.getDrawable(R.drawable.bg_button_selected)
+                    btn_car_find_user.background = resources.getDrawable(R.drawable.bg_button_nomarl)
+                }
+            }
+        }
+    }
+
+    fun updateState(item: Int) {
+        when (item) {
+            VP_ITEM_CAR_FIND_USER -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    btn_car_find_user.background = resources.getDrawable(R.drawable.bg_button_selected, null)
+                    btn_user_find_car.background = resources.getDrawable(R.drawable.bg_button_nomarl, null)
+                } else {
+                    btn_car_find_user.background = resources.getDrawable(R.drawable.bg_button_selected)
+                    btn_user_find_car.background = resources.getDrawable(R.drawable.bg_button_nomarl)
+                }
+            }
+            VP_ITEM_USER_FIND_CAR -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     btn_user_find_car.background = resources.getDrawable(R.drawable.bg_button_selected, null)
                     btn_car_find_user.background = resources.getDrawable(R.drawable.bg_button_nomarl, null)
@@ -176,17 +246,24 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     override fun showListUserPost(list: List<UserPostResponse>) {
         if (CarBookingSharePreference.getUserData()!!.isDriver) {
             mUserFindCarFragment!!.showListUserFindCar(list)
+            mUserFindCarFragment!!.showNoResult(list.size == 0)
         }
     }
 
     override fun showListDriverPost(list: List<DriverPostResponse>) {
         if (CarBookingSharePreference.getUserData()!!.isDriver) {
             mCarFindUserFragment!!.showListCarFindUser(list)
+            mCarFindUserFragment!!.showNoResult(list.size == 0)
         } else {
             mPostCreatedMoreFindUserAdapter = PostCreatedMoreFindUserAdapter(context!!)
             mPostCreatedMoreFindUserAdapter!!.addModels(list, false)
             recycler_view_home.adapter = mPostCreatedMoreFindUserAdapter!!
             recycler_view_home.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+            if (list.size == 0) {
+                no_result_home.visible()
+            }else{
+                no_result_home.gone()
+            }
         }
     }
 
@@ -194,5 +271,13 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
         super.onDestroyView()
         mTimer!!.cancel()
         mTimer = null
+    }
+
+    override fun showLoadingData() {
+        progress_bar_home.visible()
+    }
+
+    override fun hideLoadingData() {
+        progress_bar_home.gone()
     }
 }

@@ -7,6 +7,8 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.PostCreatedMoreFindUserAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.response.DriverPostResponse
+import com.example.anothertimdatxe.extension.gone
+import com.example.anothertimdatxe.extension.visible
 import kotlinx.android.synthetic.main.fragment_car_find_user.*
 
 class CarFindUserFragment : BaseFragment<CarFindUserPresenter>(), CarFindUserView {
@@ -39,5 +41,13 @@ class CarFindUserFragment : BaseFragment<CarFindUserPresenter>(), CarFindUserVie
 
     fun showListCarFindUser(list: List<DriverPostResponse>) {
         mPostCreatedMoreFindUserAdapter!!.addModels(list, false)
+    }
+
+    fun showNoResult(check: Boolean) {
+        if (check) {
+            no_result_car_find_user.visible()
+        } else {
+            no_result_car_find_user.gone()
+        }
     }
 }

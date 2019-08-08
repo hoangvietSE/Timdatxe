@@ -20,8 +20,10 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
     }
 
     private fun getUserPost() {
+        mView!!.showLoadingData()
         val disposable = RetrofitManager.userPostHome(object : ICallBack<BaseResult<List<UserPostResponse>>> {
             override fun onSuccess(result: BaseResult<List<UserPostResponse>>?) {
+                mView!!.hideLoadingData()
                 mView!!.showListUserPost(result?.data!!)
             }
 
@@ -33,8 +35,10 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
     }
 
     private fun getDriverPost() {
+        mView!!.showLoadingData()
         val disposable = RetrofitManager.driverPostHome(object : ICallBack<BaseResult<List<DriverPostResponse>>> {
             override fun onSuccess(result: BaseResult<List<DriverPostResponse>>?) {
+                mView!!.hideLoadingData()
                 mView!!.showListDriverPost(result?.data!!)
             }
 

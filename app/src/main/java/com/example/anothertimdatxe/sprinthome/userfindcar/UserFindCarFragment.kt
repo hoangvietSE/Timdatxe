@@ -7,6 +7,8 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.PostCreatedMoreFindCarAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.response.UserPostResponse
+import com.example.anothertimdatxe.extension.gone
+import com.example.anothertimdatxe.extension.visible
 import kotlinx.android.synthetic.main.fragment_user_find_car.*
 
 class UserFindCarFragment : BaseFragment<UserFindCarPresenter>(), UserFindCarView {
@@ -35,10 +37,18 @@ class UserFindCarFragment : BaseFragment<UserFindCarPresenter>(), UserFindCarVie
     private fun initAdapter() {
         mPostCreatedMoreFindCarAdapter = PostCreatedMoreFindCarAdapter(context!!)
         recycler_view_user_find_car.adapter = mPostCreatedMoreFindCarAdapter
-        recycler_view_user_find_car.layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL,false)
+        recycler_view_user_find_car.layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
     }
 
     fun showListUserFindCar(list: List<UserPostResponse>) {
         mPostCreatedMoreFindCarAdapter!!.addModels(list, false)
+    }
+
+    fun showNoResult(check: Boolean) {
+        if(check){
+            no_result_user_find_car.visible()
+        }else{
+            no_result_user_find_car.gone()
+        }
     }
 }
