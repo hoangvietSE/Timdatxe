@@ -30,7 +30,7 @@ class BannerHomeAdapter(var context: Context, var mListBanner: List<BannerHomeRe
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(context).inflate(R.layout.item_home_banner, container, false)
-        val width = (container.resources.displayMetrics.widthPixels * 0.33333).toInt()
+        val width = (container.resources.displayMetrics.widthPixels * 0.333333).toInt()
         val param = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, width)
         view.imv_home_banner.layoutParams = param
         view.imv_home_banner.setImageUrl(context, mListBanner[position].image!!)

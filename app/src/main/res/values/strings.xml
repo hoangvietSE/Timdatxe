@@ -14,6 +14,8 @@
     <string name="server_error">Server quá tải hoặc có lỗi xảy ra. Vui lòng quay lại sau!</string>
 
     //home
+    <string name="home_car_find_user">Xe tìm khách</string>
+    <string name="home_user_find_car">Khách tìm xe</string>
     <string name="home_title_hot_cities">Tỉnh thành nổi bật</string>
     <string name="home_back_press">Nhấn back thêm một lần nữa để thoát</string>
     <string name="home_menu_revenue">revenue</string>
@@ -262,7 +264,7 @@
     <string name="dialog_driver_book_request_no_money">Giá không được để trống!</string>
     <string name="dialog_driver_book_request_min_value">Số tiền ít nhất là 1000 VNĐ</string>
     <string name="dialog_driver_book_request_no_number">Mô tả vui lòng không nhập số!</string>
-    
+
     //driver car
     <string name="driver_car_title_toolbar_mycar">Xe của tôi</string>
     <string name="driver_car_title_toolbar_driver">Xe của tài xế</string>

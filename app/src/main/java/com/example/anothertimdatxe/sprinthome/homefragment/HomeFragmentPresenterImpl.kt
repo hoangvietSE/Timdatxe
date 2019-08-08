@@ -7,12 +7,42 @@ import com.example.anothertimdatxe.base.network.BaseResult
 import com.example.anothertimdatxe.base.network.ICallBack
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.response.BannerHomeResponse
+import com.example.anothertimdatxe.entity.response.DriverPostResponse
 import com.example.anothertimdatxe.entity.response.HotCitiesResponse
+import com.example.anothertimdatxe.entity.response.UserPostResponse
 
 class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<HomeFragmentView>(mView), HomeFragmentPresenter {
     override fun getData() {
         getHotCities()
         getHotBanners()
+        getUserPost()
+        getDriverPost()
+    }
+
+    private fun getUserPost() {
+        val disposable = RetrofitManager.userPostHome(object : ICallBack<BaseResult<List<UserPostResponse>>> {
+            override fun onSuccess(result: BaseResult<List<UserPostResponse>>?) {
+                mView!!.showListUserPost(result?.data!!)
+            }
+
+            override fun onError(e: ApiException) {
+            }
+
+        })
+        addDispose(disposable)
+    }
+
+    private fun getDriverPost() {
+        val disposable = RetrofitManager.driverPostHome(object : ICallBack<BaseResult<List<DriverPostResponse>>> {
+            override fun onSuccess(result: BaseResult<List<DriverPostResponse>>?) {
+                mView!!.showListDriverPost(result?.data!!)
+            }
+
+            override fun onError(e: ApiException) {
+            }
+
+        })
+        addDispose(disposable)
     }
 
     private fun getHotBanners() {

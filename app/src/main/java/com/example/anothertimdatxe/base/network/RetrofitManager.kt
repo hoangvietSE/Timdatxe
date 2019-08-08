@@ -379,4 +379,20 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun userPostHome(iCallBack: ICallBack<BaseResult<List<UserPostResponse>>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.userPostHome(0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun driverPostHome(iCallBack: ICallBack<BaseResult<List<DriverPostResponse>>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.driverPostHome(0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
 }
