@@ -6,7 +6,7 @@ import com.example.anothertimdatxe.base.network.BaseResult
 import com.example.anothertimdatxe.base.network.ICallBack
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.UserData
-import com.example.anothertimdatxe.event_bus.GetProfileSuccess
+import com.example.anothertimdatxe.eventbus.GetProfileSuccess
 import org.greenrobot.eventbus.EventBus
 
 class UserProfilePresenterImpl(mView: UserProfileView) : BasePresenterImpl<UserProfileView>(mView), UserProfilePresenter {

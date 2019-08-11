@@ -47,10 +47,10 @@
                 android:textSize="@dimen/text_size_18" />
 
             <EditText
-                android:editable="false"
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 android:hint="@string/update_info_hint_email" />
 
             <TextView
@@ -91,12 +91,12 @@
                 </LinearLayout>
 
                 <EditText
-                    android:editable="false"
-                    tools:text="0968582598"
-                    android:inputType="none"
                     android:id="@+id/edt_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:inputType="none"
+                    tools:text="0968582598" />
             </LinearLayout>
 
             <RelativeLayout
@@ -210,15 +210,15 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:layout_gravity="center"
                 android:id="@+id/cb_condition"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
 
             <TextView
-                android:layout_marginStart="@dimen/margin_8_dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8_dp"
                 android:text="@string/update_info_condition" />
         </LinearLayout>
     </RelativeLayout>

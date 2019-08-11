@@ -24,24 +24,28 @@
             android:paddingBottom="@dimen/content_padding_normal">
 
             <com.example.anothertimdatxe.widget.BaseDialogRow
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_detail="(+84)942054566"
                 app:row_title="Tổng đài"></com.example.anothertimdatxe.widget.BaseDialogRow>
 
             <com.example.anothertimdatxe.widget.BaseDialogRow
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_detail="info@beetechsoft.com"
                 app:row_title="Email"></com.example.anothertimdatxe.widget.BaseDialogRow>
 
             <com.example.anothertimdatxe.widget.BaseDialogRow
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_detail="58 Tố Hữu, Thanh Xuân, Hà Nội"
                 app:row_title="Địa chỉ công ty"></com.example.anothertimdatxe.widget.BaseDialogRow>
 
             <com.example.anothertimdatxe.widget.BaseDialogRow
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_detail="Timdatxe.com"

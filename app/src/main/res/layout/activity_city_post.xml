@@ -30,7 +30,7 @@
                         android:id="@+id/imv_banner_city_post"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="fitXY"
                         android:src="@drawable/img_default"
                         app:layout_constraintDimensionRatio="16:7"
                         app:layout_constraintEnd_toEndOf="parent"

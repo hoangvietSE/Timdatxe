@@ -38,4 +38,8 @@ object Constant {
     const val DRIVER_BOOK_REJECTED = 2
     const val DRIVER_BOOK_FINISH = 3
     const val DRIVER_BOOK_CANCEL = 4
+
+    const val CONVENIENT_TRIP = 0
+    const val PRIVATE_TRIP = 1
+    const val BOTH_CONVENIENT_AND_PRIVATE = 2
 }

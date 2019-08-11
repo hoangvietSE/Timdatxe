@@ -187,6 +187,10 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                 if (!avoidDoubleClick()) {
                     if (data.driverCarPending == 1) {
                         showConfirmRequestDialog(data.driverCars)
+                    } else if (data.driverCarPending == 0) {
+                        ToastUtil.show(data.driverCarMsg!!)
+                    }else{
+                        ToastUtil.show(data.driverCarMsg!!)
                     }
                 }
             }

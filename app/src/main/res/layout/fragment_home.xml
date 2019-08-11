@@ -149,6 +149,7 @@
                     android:layout_marginTop="@dimen/margin_8_dp" />
 
                 <RelativeLayout
+                    android:layout_marginTop="@dimen/margin_8_dp"
                     android:id="@+id/rl_home_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

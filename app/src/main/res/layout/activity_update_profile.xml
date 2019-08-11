@@ -96,14 +96,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
-                <com.example.anothertimdatxe.customview.ClearableEditText
+                <TextView
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_8_dp"
+                    android:background="@drawable/bg_not_edit"
+                    android:paddingStart="@dimen/margin_10_dp"
+                    android:paddingTop="@dimen/margin_10_dp"
+                    android:paddingBottom="@dimen/margin_10_dp"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16"
-                    app:edtBackground="@drawable/bg_update_profile_edittext"
-                    app:edtEditable="false"
                     tools:text="viethoangtien@gmail.com" />
             </LinearLayout>
 
@@ -122,14 +125,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
-                <com.example.anothertimdatxe.customview.ClearableEditText
+                <TextView
                     android:id="@+id/edt_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_8_dp"
+                    android:background="@drawable/bg_not_edit"
+                    android:paddingStart="@dimen/margin_10_dp"
+                    android:paddingTop="@dimen/margin_10_dp"
+                    android:paddingBottom="@dimen/margin_10_dp"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16"
-                    app:edtBackground="@drawable/bg_update_profile_edittext"
-                    app:edtEditable="false"
                     tools:text="0968582598" />
             </LinearLayout>
 
@@ -183,9 +189,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_8_dp"
                     android:background="@drawable/bg_update_profile_edittext"
-                    android:entries="@array/array_gender"
-                    android:paddingTop="@dimen/content_padding_resend"
-                    android:paddingBottom="@dimen/content_padding_resend"
                     android:textSize="@dimen/text_size_16" />
             </LinearLayout>
 
@@ -215,6 +218,15 @@
                     tools:text="58 Tố Hữu" />
             </LinearLayout>
 
+            <TextView
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16_dp"
+                android:text="@string/user_update_profile_address"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
             <EditText
                 android:id="@+id/edt_des"
                 android:layout_width="match_parent"
@@ -222,10 +234,10 @@
                 android:layout_marginStart="@dimen/margin_16_dp"
                 android:layout_marginTop="@dimen/margin_8_dp"
                 android:layout_marginEnd="@dimen/margin_16_dp"
-                android:background="@drawable/bg_update_profile_des"
+                android:background="@drawable/bg_update_profile_edittext"
                 android:gravity="top"
                 android:lines="6"
-                android:paddingStart="@dimen/content_padding_normal"
+                android:paddingStart="@dimen/content_padding_resend"
                 android:paddingTop="@dimen/content_padding_resend"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"

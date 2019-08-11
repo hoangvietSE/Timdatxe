@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.adapter.SpinnerGenderAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.extension.setAvatar
@@ -18,7 +19,9 @@ import kotlinx.android.synthetic.main.activity_update_profile.*
 import java.util.*
 
 class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProfileView {
-    var mUserProfile: UserData? = null
+    private var mUserProfile: UserData? = null
+    private var mSpinnerGenderAdapter: SpinnerGenderAdapter? = null
+    private var mListItem: ArrayList<String>? = null
 
     companion object {
         const val REQUEST_CODE_PERMISSION: Int = 1000
@@ -34,6 +37,7 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
     }
 
     override fun initView() {
+        initGenderSpinner()
         setData()
         setToolbar()
         edt_dob.setOnClickListener {
@@ -77,6 +81,12 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
             mPresenter!!.updateUserProfile(mUserProfile!!)
         }
 
+    }
+
+    private fun initGenderSpinner() {
+        mListItem = arrayListOf("Giới tính","Nam","Nữ")
+        mSpinnerGenderAdapter = SpinnerGenderAdapter(this,mListItem!!)
+        sp_gender.adapter = mSpinnerGenderAdapter
     }
 
     private fun handlePermission() {

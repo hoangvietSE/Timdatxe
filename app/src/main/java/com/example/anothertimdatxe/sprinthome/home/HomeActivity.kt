@@ -12,7 +12,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseFragmentManager
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
-import com.example.anothertimdatxe.event_bus.GetProfileSuccess
+import com.example.anothertimdatxe.eventbus.GetProfileSuccess
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.visible
@@ -43,7 +43,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         const val ITEM_MENU_REVENUE = "revenue"
         const val ITEM_MENU_HISTORY = "history"
         const val ITEM_MENU_SUPPORT = "support"
-//        const val ITEM_MENU_LOG_OUT = "logout"
+        //        const val ITEM_MENU_LOG_OUT = "logout"
         const val VP_ITEM_HOME = 0
         const val VP_ITEM_NEWS = 1
         const val VP_ITEM_LISTS = 2
@@ -120,41 +120,8 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun initView() {
-        setUpToolBar()
         initDrawer()
         initViewPager()
-    }
-
-    fun setUpToolBar() {
-        toolbar?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.background = resources.getDrawable(R.color.colorPrimary, null)
-            } else {
-                it.background = resources.getDrawable(R.color.colorPrimary)
-            }
-        }
-        leftbutton?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.setImageResource(R.drawable.ic_menu)
-            } else {
-                it.setImageResource(R.drawable.ic_menu)
-            }
-        }
-        imvCenter?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.background = resources.getDrawable(R.drawable.app_title,null)
-            } else {
-                it.background = resources.getDrawable(R.drawable.app_title)
-            }
-        }
-        rightButton?.let {
-            it.visible()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.setImageResource(R.drawable.ic_notification)
-            } else {
-                it.setImageResource(R.drawable.ic_notification)
-            }
-        }
     }
 
     private fun setToolbarTitle(string: String) {
@@ -183,6 +150,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         bottom_bar.setListener(this)
         vp_home.adapter = mFragmentAdapter
         vp_home.offscreenPageLimit = 3
+        vp_home.currentItem = VP_ITEM_HOME
         vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
@@ -194,13 +162,18 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
             override fun onPageSelected(position: Int) {
                 when (position) {
+                    VP_ITEM_HOME -> {
+                        setToolbarHome()
+                    }
                     VP_ITEM_PROFILES -> {
+                        setToolbarProfile()
                         rightButton?.let {
                             if (isLoadingProfileSuccess) {
                                 it.visible()
                             } else {
                                 it.gone()
                             }
+                            it.visible()
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                 it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit, null))
                             } else {
@@ -217,7 +190,6 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                             }
                             when {
                                 CarBookingSharePreference.getUserData()!!.isUser -> {
-                                    setUpToolBar()
                                     setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
                                 }
                                 CarBookingSharePreference.getUserData()!!.isDriver -> {
@@ -230,6 +202,57 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             }
 
         })
+    }
+
+    private fun setToolbarHome() {
+        toolbarTitle?.gone()
+        toolbar?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.background = resources.getDrawable(R.color.colorPrimary, null)
+            } else {
+                it.background = resources.getDrawable(R.color.colorPrimary)
+            }
+        }
+        leftbutton?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.setImageResource(R.drawable.ic_menu)
+            } else {
+                it.setImageResource(R.drawable.ic_menu)
+            }
+        }
+        imvCenter?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.background = resources.getDrawable(R.drawable.app_title, null)
+            } else {
+                it.background = resources.getDrawable(R.drawable.app_title)
+            }
+        }
+        rightButton?.let {
+            it.visible()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.setImageDrawable(resources.getDrawable((R.drawable.ic_notification), null))
+            } else {
+                it.setImageDrawable(resources.getDrawable((R.drawable.ic_notification)))
+            }
+        }
+    }
+
+    private fun setToolbarProfile() {
+        toolbar?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.background = resources.getDrawable(R.color.colorPrimary, null)
+            } else {
+                it.background = resources.getDrawable(R.color.colorPrimary)
+            }
+        }
+        leftbutton?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.setImageResource(R.drawable.ic_menu)
+            } else {
+                it.setImageResource(R.drawable.ic_menu)
+            }
+        }
+        imvCenter?.gone()
     }
 
     fun initDrawer() {
