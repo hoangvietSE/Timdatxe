@@ -120,6 +120,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun initView() {
+        setToolbarHome()
         initDrawer()
         initViewPager()
     }
@@ -206,6 +207,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
     private fun setToolbarHome() {
         toolbarTitle?.gone()
+        imvCenter?.visible()
         toolbar?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 it.background = resources.getDrawable(R.color.colorPrimary, null)
@@ -238,6 +240,8 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     private fun setToolbarProfile() {
+        toolbarTitle?.visible()
+        imvCenter?.gone()
         toolbar?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 it.background = resources.getDrawable(R.color.colorPrimary, null)
@@ -252,7 +256,6 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 it.setImageResource(R.drawable.ic_menu)
             }
         }
-        imvCenter?.gone()
     }
 
     fun initDrawer() {
