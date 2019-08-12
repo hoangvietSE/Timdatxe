@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.CityPostAdapter
 import com.example.anothertimdatxe.base.util.GlideApp
+import com.example.anothertimdatxe.extension.gone
+import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.util.CarBookingSharePreference
 import kotlinx.android.synthetic.main.activity_city_post.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -55,5 +58,10 @@ class CityPostActivity : AppCompatActivity() {
             tabLayout.setupWithViewPager(viewPager)
         }
         viewPager.adapter = mCityPostAdapter
+        if(CarBookingSharePreference.getUserData()!!.isDriver){
+            tabLayout.visible()
+        }else{
+            tabLayout.gone()
+        }
     }
 }
