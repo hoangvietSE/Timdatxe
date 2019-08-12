@@ -233,6 +233,20 @@ object RetrofitManager {
                 .subscribeWith(subscriber)
     }
 
+    fun getDriverInfo(iCallBack: ICallBack<BaseResult<DriverProfileResponse>>): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.getDriverInfo(CarBookingSharePreference.getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscriber)
+    }
+
+    fun getUserReviewDriver(pageIndex: Int): Single<BaseResult<List<UserReviewDriverResponse>>> {
+        return apiService.getUserReviewDriver(CarBookingSharePreference.getAccessToken(), CarBookingSharePreference.getUserId(), null, pageIndex)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun userUpdateProfile(part: MultipartBody.Part?, request: Map<String, RequestBody>): Single<BaseResult<UserData>> {
         return apiService.userUpdateProfile(CarBookingSharePreference.getAccessToken(), CarBookingSharePreference.getUserId(),
                 part, request)

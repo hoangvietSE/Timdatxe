@@ -69,10 +69,41 @@
                             <TextView
                                 android:id="@+id/tv_number_trip"
                                 style="@style/TextViewBold"
+                                android:layout_marginStart="@dimen/margin_16_dp"
                                 android:layout_marginLeft="@dimen/margin_8_dp"
                                 android:background="@drawable/bg_user_profile_number_trip"
                                 android:textColor="@color/color_quantity"
                                 tools:text="0" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_8_dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextViewNormal"
+                                android:text="@string/driver_profile_number_star" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                                    android:id="@+id/mrb"
+                                    style="@style/SmallRatingBar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:isIndicator="false"
+                                    android:numStars="5"
+                                    android:progressTint="@color/colorPrimary"
+                                    android:rating="0"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.45"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -150,6 +181,101 @@
                 android:paddingTop="@dimen/content_padding_resend"
                 android:textSize="@dimen/text_size_16"
                 tools:text="Handsome" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:background="@drawable/bg_type_trip"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/margin_16_dp"
+                android:text="@string/driver_profile_license"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp">
+
+                <ImageView
+                    android:id="@+id/imv_before"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="@dimen/margin_8_dp"
+                    android:layout_marginEnd="@dimen/margin_8_dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toStartOf="@id/imv_after"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/img_default" />
+
+                <ImageView
+                    android:id="@+id/imv_after"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="@dimen/margin_8_dp"
+                    android:layout_marginEnd="@dimen/margin_8_dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imv_before"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/img_default" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_size_16"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/text_size_16"
+                android:background="@drawable/bg_btn_login"
+                android:gravity="center"
+                android:text="@string/driver_profile_manage_car"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:background="@drawable/bg_type_trip"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/margin_16_dp"
+                android:text="@string/driver_profile_suggest"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white"
+                    android:paddingTop="@dimen/content_padding_normal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_review_driver" />
+
+                <TextView
+                    android:id="@+id/tv_no_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    android:text="Chưa có ý kiến đánh giá"
+                    android:textSize="@dimen/text_size_16"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

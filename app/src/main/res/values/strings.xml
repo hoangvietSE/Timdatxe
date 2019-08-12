@@ -115,7 +115,7 @@
     <string name="facebook_app_id">366213034009507</string>
     <string name="fb_login_protocol_scheme">fb366213034009507</string>
 
-    //Profile
+    //User Profile
     <string name="user_profile_number_trip">Số chuyến đã đi:</string>
     <string name="user_profile_detail">Thông tin chi tiết</string>
     <string name="user_profile_full_name">Họ Tên:</string>
@@ -144,6 +144,16 @@
         <item>Nữ</item>
     </string-array>
     <string name="request_read_external_storeage">Chưa cấp quyền truy cập bộ nhớ</string>
+
+    //Driver Profile
+    <string name="driver_profile_toolbar_title">Hồ sơ tài xế</string>
+    <string name="driver_profile_number_star">Số sao:</string>
+    <string name="driver_profile_license">Bằng lái xe</string>
+    <string name="driver_profile_manage_car">Quản lý xe</string>
+    <string name="driver_profile_suggest">Ý kiến khách hàng</string>
+    <string name="driver_profile_review_customer">Khách hàng:</string>
+    <string name="driver_profile_review_rating">Đánh giá:</string>
+    <string name="driver_profile_review_rating_date">Ngày đánh giá:</string>
 
 
     //Post Created More Find Car

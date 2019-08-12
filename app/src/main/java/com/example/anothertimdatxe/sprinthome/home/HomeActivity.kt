@@ -22,6 +22,7 @@ import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
+import com.example.anothertimdatxe.sprinthome.profile.driver.profile.DriverProfileFragment
 import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
 import com.example.anothertimdatxe.sprinthome.revenue.RevenueDriverActivity
 import com.example.anothertimdatxe.sprinthome.settings.SettingActivity
@@ -135,17 +136,26 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         var homeFragment = HomeFragment.newInstance()
         var listPostCreatedFragment: Fragment? = null
         var userProfileFragment: Fragment? = null
+        var driverProfileFragment: Fragment? = null
         var listRequestFragment: Fragment? = null
         if (CarBookingSharePreference.getUserData()!!.isUser) {
             listPostCreatedFragment = UserPostCreatedFragment.getInstance()
             listRequestFragment = ListRequestFragment.getInstance()
             userProfileFragment = UserProfileFragment.getInstance()
+        } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
+            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
+            listRequestFragment = ListRequestFragment.getInstance()
+            driverProfileFragment = DriverProfileFragment.getInstance()
         }
         mListFragment.add(homeFragment)
         if (CarBookingSharePreference.getUserData()!!.isUser) {
             mListFragment.add(listPostCreatedFragment!!)
             mListFragment.add(listRequestFragment!!)
             mListFragment.add(userProfileFragment!!)
+        } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
+            mListFragment.add(listPostCreatedFragment!!)
+            mListFragment.add(listRequestFragment!!)
+            mListFragment.add(driverProfileFragment!!)
         }
         mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
         bottom_bar.setListener(this)
@@ -187,6 +197,8 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                                     startActivity(Intent(this@HomeActivity, UpdateProfileActivity::class.java).apply {
                                         putExtra(UpdateProfileActivity.USER_PROFILE, data)
                                     })
+                                } else if (mfragment is DriverProfileFragment) {
+
                                 }
                             }
                             when {
@@ -194,7 +206,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                                     setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
                                 }
                                 CarBookingSharePreference.getUserData()!!.isDriver -> {
-
+                                    setToolbarTitle(resources.getString(R.string.driver_profile_toolbar_title))
                                 }
                             }
                         }
