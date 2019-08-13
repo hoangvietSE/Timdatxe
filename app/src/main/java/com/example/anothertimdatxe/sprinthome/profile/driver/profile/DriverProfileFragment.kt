@@ -1,6 +1,8 @@
 package com.example.anothertimdatxe.sprinthome.profile.driver.profile
 
 import android.os.Bundle
+import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.UserReviewDriverAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
@@ -16,6 +18,9 @@ import kotlinx.android.synthetic.main.fragment_driver_profile.*
 class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProfileView,
         EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener {
     private var mUserReviewDriverAdapter: UserReviewDriverAdapter? = null
+    private var mResponse: DriverProfileResponse? = null
+    private var isLoading = false
+    private var enableLoadMore = false
     override val layoutRes: Int
         get() = R.layout.fragment_driver_profile
 
@@ -30,8 +35,31 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
 
     override fun initView() {
         mPresenter?.getDriverInfo()
+        initListenerNestedScrollView()
         initAdapter()
         mPresenter?.getUserReviewDriver()
+    }
+
+    private fun initListenerNestedScrollView() {
+        nestedScroolView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (v.getChildAt(v.getChildCount() - 1) != null) {
+                if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
+                        scrollY > oldScrollY) {
+                    if (isLoading || !enableLoadMore) {
+                        return@OnScrollChangeListener
+                    }
+                    val visibleItemCount = recycler_view_profile.layoutManager!!.itemCount
+                    val totalItemCount = recycler_view_profile.layoutManager!!.childCount
+                    val pastVisiblesItems = (recycler_view_profile.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    if (!isLoading) {
+                        isLoading = true
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                            onLoadMore()
+                        }
+                    }
+                }
+            }
+        })
     }
 
     private fun initAdapter() {
@@ -45,6 +73,7 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
     }
 
     override fun showDriverInfo(data: DriverProfileResponse) {
+        mResponse = data
         imv_avatar.setAvatar(context!!, data.avatar)
         tv_fullname.text = data.fullName
         tv_number_trip.text = data.countBooks.toString()
@@ -67,11 +96,14 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
     }
 
     override fun onLoadMore() {
-
+        showLoadMoreProgress()
+        mUserReviewDriverAdapter!!.setIsLoading(true)
+        mPresenter?.getUserReviewDriver()
     }
 
     override fun enableLoadMore(enable: Boolean) {
         mUserReviewDriverAdapter!!.enableLoadingMore(enable)
+        this.enableLoadMore = enable
     }
 
     override fun showLoadMoreProgress() {
@@ -83,14 +115,21 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
     }
 
     override fun showListReview(list: List<UserReviewDriverResponse>) {
+        isLoading = false
+        hideLoadMoreProgress()
         mUserReviewDriverAdapter!!.addModels(list, false)
     }
 
     override fun showNoResult(check: Boolean) {
-        if(check){
+        if (check) {
             tv_no_result.visible()
-        }else{
+        } else {
             tv_no_result.gone()
         }
     }
+
+    fun getDriverProfile(): DriverProfileResponse {
+        return mResponse!!
+    }
+
 }

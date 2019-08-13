@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/margin_20_dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imv_avatar"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:src="@drawable/ic_avatar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/btn_choose_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_profile_btn_choose_avatar"
+                    android:text="Chọn ảnh"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imv_avatar"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_type_trip"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/content_padding_normal"
+                android:text="@string/user_update_profile_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/content_padding_normal"
+                android:paddingEnd="@dimen/content_padding_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_update_profile_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <com.example.anothertimdatxe.customview.ClearableEditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    android:textSize="@dimen/text_size_16"
+                    app:clearButtonDrawable="@drawable/ic_close"
+                    app:edtBackground="@drawable/bg_update_profile_edittext"
+                    tools:text="Hoàng Tiến Việt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/content_padding_normal"
+                android:paddingEnd="@dimen/content_padding_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_update_profile_email"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    android:background="@drawable/bg_not_edit"
+                    android:paddingStart="@dimen/margin_10_dp"
+                    android:paddingTop="@dimen/margin_10_dp"
+                    android:paddingBottom="@dimen/margin_10_dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16"
+                    tools:text="viethoangtien@gmail.com" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/content_padding_normal"
+                android:paddingEnd="@dimen/content_padding_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_update_profile_phone"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/edt_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    android:background="@drawable/bg_not_edit"
+                    android:paddingStart="@dimen/margin_10_dp"
+                    android:paddingTop="@dimen/margin_10_dp"
+                    android:paddingBottom="@dimen/margin_10_dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16"
+                    tools:text="0968582598" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/content_padding_normal"
+                android:paddingEnd="@dimen/content_padding_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_update_profile_dob"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/edt_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    android:background="@drawable/bg_update_profile_edittext"
+                    android:paddingStart="@dimen/content_padding_resend"
+                    android:paddingTop="@dimen/content_padding_resend"
+                    android:paddingBottom="@dimen/content_padding_resend"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16"
+                    tools:text="29/06/2019" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/content_padding_normal"
+                android:paddingEnd="@dimen/content_padding_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_update_profile_gender"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <Spinner
+                    android:id="@+id/sp_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    android:background="@drawable/bg_update_profile_edittext"
+                    android:textSize="@dimen/text_size_16" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/content_padding_normal"
+                android:paddingEnd="@dimen/content_padding_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_update_profile_address"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <com.example.anothertimdatxe.customview.ClearableEditText
+                    android:id="@+id/edt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    android:textSize="@dimen/text_size_16"
+                    app:clearButtonDrawable="@drawable/ic_close"
+                    app:edtBackground="@drawable/bg_update_profile_edittext"
+                    tools:text="58 Tố Hữu" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16_dp"
+                android:text="@string/user_update_profile_address"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <EditText
+                android:id="@+id/edt_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16_dp"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:layout_marginEnd="@dimen/margin_16_dp"
+                android:background="@drawable/bg_update_profile_edittext"
+                android:gravity="top"
+                android:lines="6"
+                android:paddingStart="@dimen/content_padding_resend"
+                android:paddingTop="@dimen/content_padding_resend"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16"
+                tools:text="Mình là gì của nhau" />
+
+            <TextView
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16_dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_16_dp"
+                android:background="@drawable/bg_btn_update_profile"
+                android:gravity="center_horizontal"
+                android:text="Lưu"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_26" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -193,11 +193,12 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                             it.setOnClickListener {
                                 var mfragment: Fragment = mListFragment[position]
                                 if (mfragment is UserProfileFragment) {
-                                    var data = mfragment.getUserProfile()
+                                    val data = mfragment.getUserProfile()
                                     startActivity(Intent(this@HomeActivity, UpdateProfileActivity::class.java).apply {
                                         putExtra(UpdateProfileActivity.USER_PROFILE, data)
                                     })
                                 } else if (mfragment is DriverProfileFragment) {
+                                    val data = mfragment.getDriverProfile()
 
                                 }
                             }

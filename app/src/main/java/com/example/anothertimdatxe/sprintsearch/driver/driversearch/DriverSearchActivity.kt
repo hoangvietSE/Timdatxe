@@ -97,22 +97,22 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
         }
         nestedScroolView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (v.getChildAt(v.childCount - 1) != null) {
-                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-                    if (isLoading || !enableLoadmore) {
-                        return@OnScrollChangeListener
-                    }
-                    val visibleItemCount = recyclerView.layoutManager?.childCount!!
-                    val totalItemCount = recyclerView.layoutManager?.itemCount!!
-                    val pastVisiblesItems =
-                            (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                    if (!isLoading) {
-                        isLoading = true
-                        if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
-                            onLoadMore()
-                        }
+            if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
+                if (isLoading || !enableLoadmore) {
+                    return@OnScrollChangeListener
+                }
+                val visibleItemCount = recyclerView.layoutManager?.childCount!!
+                val totalItemCount = recyclerView.layoutManager?.itemCount!!
+                val pastVisiblesItems =
+                        (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                if (!isLoading) {
+                    isLoading = true
+                    if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
+                        onLoadMore()
                     }
                 }
             }
+        }
         })
     }
 

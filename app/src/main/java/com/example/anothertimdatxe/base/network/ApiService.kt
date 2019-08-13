@@ -105,7 +105,8 @@ interface ApiService {
     //driver profile user review
     @GET(ApiConstant.DRIVER_USER_REVIEW)
     @Headers("Content-Type: application/json")
-    fun getUserReviewDriver(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int, type: String?, @Query("page") page: Int): Single<BaseResult<List<UserReviewDriverResponse>>>
+    fun getUserReviewDriver(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.DRIVER_ID) id: Int, @Query(RequestParam.TYPE) type: String?,
+                            @Query("page") page: Int): Single<BaseResult<List<UserReviewDriverResponse>>>
 
     //update profile
     @JvmSuppressWildcards
