@@ -1,14 +1,11 @@
 package com.example.anothertimdatxe.widget
 
 import android.util.Log
-import android.text.TextUtils;
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthProvider
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
@@ -31,7 +28,7 @@ class TokenPhoneSms(var mActivity: AppCompatActivity, var mListener: TokenPhoneS
         FirebaseApp.initializeApp(mActivity)
         //getInstance
         mAuth = FirebaseAuth.getInstance()
-        //Create mCallBacks object to get update abour state of the verification process
+        //Create mCallBacks object to get update about state of the verification process
         mCallbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             //this method is called when verification is done without user interactions
             override fun onVerificationCompleted(p0: PhoneAuthCredential?) {

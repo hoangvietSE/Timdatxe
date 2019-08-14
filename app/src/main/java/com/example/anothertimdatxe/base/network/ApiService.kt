@@ -1,6 +1,5 @@
 package com.example.anothertimdatxe.base.network
 
-
 import com.example.anothertimdatxe.base.ApiConstant
 import com.example.anothertimdatxe.base.RequestParam
 import com.example.anothertimdatxe.entity.ForgotResult
@@ -98,6 +97,17 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun getUserInfo(@Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserData>>>
 
+    //driver profile
+    @GET(ApiConstant.DRIVER_INFO)
+    @Headers("Content-Type: application/json")
+    fun getDriverInfo(@Path(RequestParam.ID) id: Int): Single<Response<BaseResult<DriverProfileResponse>>>
+
+    //driver profile user review
+    @GET(ApiConstant.DRIVER_USER_REVIEW)
+    @Headers("Content-Type: application/json")
+    fun getUserReviewDriver(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.DRIVER_ID) id: Int, @Query(RequestParam.TYPE) type: String?,
+                            @Query("page") page: Int): Single<BaseResult<List<UserReviewDriverResponse>>>
+
     //update profile
     @JvmSuppressWildcards
     @POST(ApiConstant.USER_UPDATE_INFO)
@@ -106,6 +116,15 @@ interface ApiService {
                           @Path(RequestParam.ID) id: Int,
                           @Part part: MultipartBody.Part?,
                           @PartMap request: Map<String, RequestBody>): Single<BaseResult<UserData>>
+
+    //driver update profile
+    @JvmSuppressWildcards
+    @POST(ApiConstant.DRIVER_INFO)
+    @Multipart
+    fun driverUpdateProfile(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String,
+                            @Path(RequestParam.ID) id: Int,
+                            @PartMap request: Map<String, RequestBody>,
+                            @Part avatar: Array<MultipartBody.Part?>): Single<BaseResult<DriverDataResponse>>
 
     //post more find user
     @GET(ApiConstant.DRIVER_POST_CREATED)

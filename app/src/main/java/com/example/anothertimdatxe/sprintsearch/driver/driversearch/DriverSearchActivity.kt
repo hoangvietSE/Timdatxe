@@ -3,6 +3,8 @@ package com.example.anothertimdatxe.sprintsearch.driver.driversearch
 import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ScrollView
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
@@ -30,6 +32,8 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     private var mSpinnerSeatSearchAdapter: SpinnerSeatSearchAdapter? = null
     private var mDatePickerDialogWidget: DatePickerDialogWidget? = null
     private val mSeatSearch: ArrayList<String> = arrayListOf("Chọn số ghế", "Từ 1 đến 10 ghế", "Từ 10 đến 20 ghế", "Lớn hơn 20 ghế")
+    private var isLoading = false
+    private var enableLoadmore = false
     private var seatNumber: String = ""
     override val layoutRes: Int
         get() = R.layout.activity_driver_search
@@ -91,6 +95,25 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
             }
 
         }
+        nestedScroolView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (v.getChildAt(v.childCount - 1) != null) {
+            if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
+                if (isLoading || !enableLoadmore) {
+                    return@OnScrollChangeListener
+                }
+                val visibleItemCount = recyclerView.layoutManager?.childCount!!
+                val totalItemCount = recyclerView.layoutManager?.itemCount!!
+                val pastVisiblesItems =
+                        (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                if (!isLoading) {
+                    isLoading = true
+                    if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
+                        onLoadMore()
+                    }
+                }
+            }
+        }
+        })
     }
 
     private fun initAdapter() {
@@ -120,6 +143,7 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
 
     override fun enableLoadingMore(enable: Boolean) {
         mDriverSearchUserPostAdapter!!.enableLoadingMore(enable)
+        this.enableLoadmore = enable
     }
 
     override fun showNoResult(check: Boolean) {
@@ -131,12 +155,16 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     }
 
     override fun showListDriverSearch(data: List<DriverSearchResponse>) {
+        mDriverSearchUserPostAdapter!!.setIsLoading(true)
         hideLoadingMore()
         mDriverSearchUserPostAdapter!!.addModels(data, false)
         mList!!.addAll(data)
+        isLoading = false
     }
 
     override fun onLoadMore() {
+        nestedScroolView.smoothScrollTo(0, nestedScroolView.bottom)
+        nestedScroolView.post { nestedScroolView.fullScroll(ScrollView.FOCUS_DOWN) }
         showLoadingMore()
         mPresenter!!.fetchDataLoadMore()
     }
@@ -157,7 +185,7 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     }
 
     override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
-        if(!avoidDoubleClick()){
+        if (!avoidDoubleClick()) {
             startActivity(Intent(this, DriverRequestDetailActivity::class.java).apply {
                 putExtra(DriverRequestDetailActivity.USER_POST_ID, mList!![position].id)
             })

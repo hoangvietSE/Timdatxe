@@ -2,6 +2,7 @@ package com.example.anothertimdatxe.sprinthome
 
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -12,7 +13,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseFragmentManager
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
-import com.example.anothertimdatxe.event_bus.GetProfileSuccess
+import com.example.anothertimdatxe.eventbus.GetProfileSuccess
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.visible
@@ -22,6 +23,8 @@ import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
+import com.example.anothertimdatxe.sprinthome.profile.driver.profile.DriverProfileFragment
+import com.example.anothertimdatxe.sprinthome.profile.driver.updateprofile.DriverUpdateProfileActivity
 import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
 import com.example.anothertimdatxe.sprinthome.revenue.RevenueDriverActivity
 import com.example.anothertimdatxe.sprinthome.settings.SettingActivity
@@ -36,6 +39,7 @@ import kotlinx.android.synthetic.main.layout_nav_menu.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.io.Serializable
 
 class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.BottomBarListener {
 
@@ -43,7 +47,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         const val ITEM_MENU_REVENUE = "revenue"
         const val ITEM_MENU_HISTORY = "history"
         const val ITEM_MENU_SUPPORT = "support"
-//        const val ITEM_MENU_LOG_OUT = "logout"
+        //        const val ITEM_MENU_LOG_OUT = "logout"
         const val VP_ITEM_HOME = 0
         const val VP_ITEM_NEWS = 1
         const val VP_ITEM_LISTS = 2
@@ -120,12 +124,111 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun initView() {
-        setUpToolBar()
+        setToolbarHome()
         initDrawer()
         initViewPager()
     }
 
-    fun setUpToolBar() {
+    private fun setToolbarTitle(string: String) {
+        toolbarTitle?.let {
+            it.text = string.toUpperCase()
+        }
+    }
+
+    fun initViewPager() {
+        var homeFragment = HomeFragment.newInstance()
+        var listPostCreatedFragment: Fragment? = null
+        var userProfileFragment: Fragment? = null
+        var driverProfileFragment: Fragment? = null
+        var listRequestFragment: Fragment? = null
+        if (CarBookingSharePreference.getUserData()!!.isUser) {
+            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
+            listRequestFragment = ListRequestFragment.getInstance()
+            userProfileFragment = UserProfileFragment.getInstance()
+        } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
+            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
+            listRequestFragment = ListRequestFragment.getInstance()
+            driverProfileFragment = DriverProfileFragment.getInstance()
+        }
+        mListFragment.add(homeFragment)
+        if (CarBookingSharePreference.getUserData()!!.isUser) {
+            mListFragment.add(listPostCreatedFragment!!)
+            mListFragment.add(listRequestFragment!!)
+            mListFragment.add(userProfileFragment!!)
+        } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
+            mListFragment.add(listPostCreatedFragment!!)
+            mListFragment.add(listRequestFragment!!)
+            mListFragment.add(driverProfileFragment!!)
+        }
+        mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
+        bottom_bar.setListener(this)
+        vp_home.adapter = mFragmentAdapter
+        vp_home.offscreenPageLimit = 3
+        vp_home.currentItem = VP_ITEM_HOME
+        vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                when (position) {
+                    VP_ITEM_HOME -> {
+                        setToolbarHome()
+                    }
+                    VP_ITEM_PROFILES -> {
+                        setToolbarProfile()
+                        rightButton?.let {
+                            if (isLoadingProfileSuccess) {
+                                it.visible()
+                            } else {
+                                it.gone()
+                            }
+                            it.visible()
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit, null))
+                            } else {
+                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit))
+                            }
+                            it.setOnClickListener {
+                                var mfragment: Fragment = mListFragment[position]
+                                if (mfragment is UserProfileFragment) {
+                                    val data = mfragment.getUserProfile()
+                                    startActivity(Intent(this@HomeActivity, UpdateProfileActivity::class.java).apply {
+                                        putExtra(UpdateProfileActivity.USER_PROFILE, data)
+                                    })
+                                } else if (mfragment is DriverProfileFragment) {
+                                    val data = mfragment.getDriverProfile()
+                                    startActivity(Intent(this@HomeActivity, DriverUpdateProfileActivity::class.java).apply {
+                                        val bundle = Bundle()
+                                        bundle.putSerializable(DriverUpdateProfileActivity.DRIVER_PROFILE, data as Serializable)
+                                        putExtras(bundle)
+                                    })
+
+                                }
+                            }
+                            when {
+                                CarBookingSharePreference.getUserData()!!.isUser -> {
+                                    setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
+                                }
+                                CarBookingSharePreference.getUserData()!!.isDriver -> {
+                                    setToolbarTitle(resources.getString(R.string.driver_profile_toolbar_title))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        })
+    }
+
+    private fun setToolbarHome() {
+        toolbarTitle?.gone()
+        imvCenter?.visible()
         toolbar?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 it.background = resources.getDrawable(R.color.colorPrimary, null)
@@ -142,7 +245,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         }
         imvCenter?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.background = resources.getDrawable(R.drawable.app_title,null)
+                it.background = resources.getDrawable(R.drawable.app_title, null)
             } else {
                 it.background = resources.getDrawable(R.drawable.app_title)
             }
@@ -150,86 +253,30 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         rightButton?.let {
             it.visible()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.setImageResource(R.drawable.ic_notification)
+                it.setImageDrawable(resources.getDrawable((R.drawable.ic_notification), null))
             } else {
-                it.setImageResource(R.drawable.ic_notification)
+                it.setImageDrawable(resources.getDrawable((R.drawable.ic_notification)))
             }
         }
     }
 
-    private fun setToolbarTitle(string: String) {
-        toolbarTitle?.let {
-            it.text = string.toUpperCase()
-        }
-    }
-
-    fun initViewPager() {
-        var homeFragment = HomeFragment.newInstance()
-        var listPostCreatedFragment: Fragment? = null
-        var userProfileFragment: Fragment? = null
-        var listRequestFragment: Fragment? = null
-        if (CarBookingSharePreference.getUserData()!!.isUser) {
-            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
-            listRequestFragment = ListRequestFragment.getInstance()
-            userProfileFragment = UserProfileFragment.getInstance()
-        }
-        mListFragment.add(homeFragment)
-        if (CarBookingSharePreference.getUserData()!!.isUser) {
-            mListFragment.add(listPostCreatedFragment!!)
-            mListFragment.add(listRequestFragment!!)
-            mListFragment.add(userProfileFragment!!)
-        }
-        mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
-        bottom_bar.setListener(this)
-        vp_home.adapter = mFragmentAdapter
-        vp_home.offscreenPageLimit = 3
-        vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-
+    private fun setToolbarProfile() {
+        toolbarTitle?.visible()
+        imvCenter?.gone()
+        toolbar?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.background = resources.getDrawable(R.color.colorPrimary, null)
+            } else {
+                it.background = resources.getDrawable(R.color.colorPrimary)
             }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
+        }
+        leftbutton?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.setImageResource(R.drawable.ic_menu)
+            } else {
+                it.setImageResource(R.drawable.ic_menu)
             }
-
-            override fun onPageSelected(position: Int) {
-                when (position) {
-                    VP_ITEM_PROFILES -> {
-                        rightButton?.let {
-                            if (isLoadingProfileSuccess) {
-                                it.visible()
-                            } else {
-                                it.gone()
-                            }
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit, null))
-                            } else {
-                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit))
-                            }
-                            it.setOnClickListener {
-                                var mfragment: Fragment = mListFragment[position]
-                                if (mfragment is UserProfileFragment) {
-                                    var data = mfragment.getUserProfile()
-                                    startActivity(Intent(this@HomeActivity, UpdateProfileActivity::class.java).apply {
-                                        putExtra(UpdateProfileActivity.USER_PROFILE, data)
-                                    })
-                                }
-                            }
-                            when {
-                                CarBookingSharePreference.getUserData()!!.isUser -> {
-                                    setUpToolBar()
-                                    setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
-                                }
-                                CarBookingSharePreference.getUserData()!!.isDriver -> {
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-        })
+        }
     }
 
     fun initDrawer() {

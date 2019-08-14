@@ -39,4 +39,11 @@ object DateUtil {
         val resultFormater = SimpleDateFormat(resultFormat)
         return resultFormater.format(initFormater.parse(day))
     }
+
+    fun formatValue(value: String): String {
+        if (value.length == 1) {
+            return "0${value}"
+        }
+        return value
+    }
 }

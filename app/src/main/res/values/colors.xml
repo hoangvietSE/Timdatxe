@@ -38,6 +38,7 @@
     <color name="red_text">#ff00</color>
     <color name="search_home">#f6e8c3</color>
     <color name="color_title_item">#e3e4d6</color>
+    <color name="transparent_black">#3F000000</color>
 
     <!--status-->
     <color name="color_pending">#006837</color>

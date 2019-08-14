@@ -72,6 +72,7 @@ class UserProfileFragment : BaseFragment<UserProfilePresenter>(), UserProfileVie
     fun updateUserProfile(userData: UserData) {
         showData(userData)
         (activity as HomeActivity).updateHeaderMenu(userData.full_name, userData.avatar!!)
+        EventBus.getDefault().removeStickyEvent(userData)
     }
 
     fun getUserProfile(): UserData {

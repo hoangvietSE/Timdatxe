@@ -43,7 +43,7 @@ class HotCitiesActivity : BaseActivity<HotCitiesPresenter>(), HotCitiesView, Bas
 
     private fun setToolbar() {
         toolbarTitle?.let {
-            it.text = resources.getString(R.string.hot_cities_title)
+            it.text = resources.getString(R.string.hot_cities_title).toUpperCase()
         }
     }
 

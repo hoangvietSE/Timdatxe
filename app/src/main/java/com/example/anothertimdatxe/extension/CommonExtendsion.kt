@@ -47,7 +47,7 @@ fun Context.inflate(layoutRes: Int, viewGroup: ViewGroup, attachToRoot: Boolean)
 
 fun ImageView.setAvatar(context: Context, url: String?) {
     GlideApp.with(context)
-            .load(BuildConfig.BASE_URL + url)
+            .load(BuildConfig.BASE_URL + "/" + url)
             .placeholder(R.drawable.ic_avatar)
             .error(R.drawable.ic_avatar)
             .into(this)
@@ -59,6 +59,22 @@ fun ImageView.setAvatar(context: Context, imv: ImageView, contentURI: Uri) {
             .placeholder(R.drawable.ic_avatar)
             .error(R.drawable.ic_avatar)
             .into(imv)
+}
+
+fun ImageView.setlicenseImage(context: Context, url: String?) {
+    GlideApp.with(context)
+            .load(BuildConfig.BASE_URL + "/" + url)
+            .placeholder(R.drawable.img_default)
+            .error(R.drawable.img_default)
+            .into(this)
+}
+
+fun ImageView.setlicenseImage(context: Context, contentURI: Uri?) {
+    GlideApp.with(context)
+            .load(contentURI)
+            .placeholder(R.drawable.img_default)
+            .error(R.drawable.img_default)
+            .into(this)
 }
 
 fun ImageView.setImageUrl(context: Context, url: String) {

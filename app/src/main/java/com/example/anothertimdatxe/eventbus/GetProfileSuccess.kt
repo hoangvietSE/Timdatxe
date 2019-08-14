@@ -1,3 +1,3 @@
-package com.example.anothertimdatxe.event_bus
+package com.example.anothertimdatxe.eventbus
 
 class GetProfileSuccess(var checkSuccess: Boolean)

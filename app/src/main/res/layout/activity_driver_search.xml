@@ -9,8 +9,9 @@
     <include layout="@layout/toolbar" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScroolView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar">
 
         <LinearLayout

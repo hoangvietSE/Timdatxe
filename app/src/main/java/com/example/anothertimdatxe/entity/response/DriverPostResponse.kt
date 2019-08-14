@@ -48,4 +48,10 @@ class DriverPostResponse {
     @SerializedName("private_price_2")
     @Expose
     var private_price_2: String? = null
+    @SerializedName("high_way")
+    @Expose
+    var high_way: Int? = null
+    @SerializedName("type")
+    @Expose
+    var type: Int? = null
 }
