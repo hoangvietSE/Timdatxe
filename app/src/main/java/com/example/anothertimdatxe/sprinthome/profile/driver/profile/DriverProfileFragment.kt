@@ -12,8 +12,11 @@ import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.setlicenseImage
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.sprinthome.HomeActivity
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_driver_profile.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProfileView,
         EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener {
@@ -38,6 +41,12 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
         initListenerNestedScrollView()
         initAdapter()
         mPresenter?.getUserReviewDriver()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        EventBus.getDefault().unregister(this)
     }
 
     private fun initListenerNestedScrollView() {
@@ -130,6 +139,13 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
 
     fun getDriverProfile(): DriverProfileResponse {
         return mResponse!!
+    }
+
+    @Subscribe(sticky = true)
+    fun updateDriverProfile(data: DriverProfileResponse?) {
+        showDriverInfo(data!!)
+        (context as HomeActivity).updateHeaderMenu(data!!.fullName!!,data!!.avatar)
+        EventBus.getDefault().removeStickyEvent(data)
     }
 
 }

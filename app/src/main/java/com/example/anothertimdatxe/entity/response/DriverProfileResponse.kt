@@ -1,132 +1,132 @@
 package com.example.anothertimdatxe.entity.response
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class DriverProfileResponse(
+class DriverProfileResponse : Serializable {
 
-        @field:SerializedName("birthday")
-        val birthday: String? = null,
+    @SerializedName("birthday")
+    var birthday: String? = null
 
-        @field:SerializedName("google_id")
-        val googleId: Any? = null,
+    @SerializedName("google_id")
+    var googleId: Int? = null
 
-        @field:SerializedName("gender")
-        val gender: Int? = null,
+    @SerializedName("gender")
+    var gender: Int? = null
 
-        @field:SerializedName("avatar_new")
-        val avatarNew: Any? = null,
+    @SerializedName("avatar_new")
+    var avatarNew: String? = null
 
-        @field:SerializedName("description")
-        val description: Any? = null,
+    @SerializedName("description")
+    var description: String? = null
 
-        @field:SerializedName("created_at")
-        val createdAt: Any? = null,
+    @SerializedName("created_at")
+    var createdAt: String? = null
 
-        @field:SerializedName("before_license_image")
-        val beforeLicenseImage: String? = null,
+    @SerializedName("before_license_image")
+    var beforeLicenseImage: String? = null
 
-        @field:SerializedName("session_token")
-        val sessionToken: String? = null,
+    @SerializedName("session_token")
+    var sessionToken: String? = null
 
-        @field:SerializedName("flag_edit")
-        val flagEdit: Int? = null,
+    @SerializedName("flag_edit")
+    var flagEdit: Int? = null
 
-        @field:SerializedName("updated_at")
-        val updatedAt: String? = null,
+    @SerializedName("updated_at")
+    var updatedAt: String? = null
 
-        @field:SerializedName("provider")
-        val provider: Any? = null,
+    @SerializedName("provider")
+    var provider: String? = null
 
-        @field:SerializedName("flag_current_driver")
-        val flagCurrentDriver: Int? = null,
+    @SerializedName("flag_current_driver")
+    var flagCurrentDriver: Int? = null
 
-        @field:SerializedName("id")
-        val id: Int? = null,
+    @SerializedName("id")
+    var id: Int? = null
 
-        @field:SerializedName("twitter_id")
-        val twitterId: Any? = null,
+    @SerializedName("twitter_id")
+    var twitterId: String? = null
 
-        @field:SerializedName("driver_license")
-        val driverLicense: String? = null,
+    @SerializedName("driver_license")
+    var driverLicense: String? = null
 
-        @field:SerializedName("remember_token")
-        val rememberToken: String? = null,
+    @SerializedName("remember_token")
+    var rememberToken: String? = null
 
-        @field:SerializedName("app_id")
-        val appId: String? = null,
+    @SerializedName("app_id")
+    var appId: String? = null
 
-        @field:SerializedName("vote")
-        val vote: String? = null,
+    @SerializedName("vote")
+    var vote: String? = null
 
-        @field:SerializedName("email")
-        val email: String? = null,
+    @SerializedName("email")
+    var email: String? = null
 
-        @field:SerializedName("address")
-        val address: String? = null,
+    @SerializedName("address")
+    var address: String? = null
 
-        @field:SerializedName("count_driver_post")
-        val countDriverPost: Int? = null,
+    @SerializedName("count_driver_post")
+    var countDriverPost: Int? = null
 
-        @field:SerializedName("avatar")
-        val avatar: String? = null,
+    @SerializedName("avatar")
+    var avatar: String? = null
 
-        @field:SerializedName("card_id")
-        val cardId: String? = null,
+    @SerializedName("card_id")
+    var cardId: Int? = null
 
-        @field:SerializedName("facebook_id")
-        val facebookId: Any? = null,
+    @SerializedName("facebook_id")
+    var facebookId: Int? = null
 
-        @field:SerializedName("instagram_id")
-        val instagramId: Any? = null,
+    @SerializedName("instagram_id")
+    var instagramId: Int? = null
 
-        @field:SerializedName("full_name")
-        val fullName: String? = null,
+    @SerializedName("full_name")
+    var fullName: String? = null
 
-        @field:SerializedName("str_gender")
-        val strGender: String? = null,
+    @SerializedName("str_gender")
+    var strGender: String? = null
 
-        @field:SerializedName("zalo_id")
-        val zaloId: Any? = null,
+    @SerializedName("zalo_id")
+    var zaloId: Int? = null
 
-        @field:SerializedName("phone")
-        val phone: String? = null,
+    @SerializedName("phone")
+    var phone: String? = null
 
-        @field:SerializedName("drivercars")
-        val drivercars: List<DrivercarsItem?>? = null,
+    @SerializedName("drivercars")
+    var drivercars: List<DrivercarsItem?>? = listOf()
 
-        @field:SerializedName("provider_id")
-        val providerId: Any? = null,
+    @SerializedName("provider_id")
+    var providerId: Int? = null
 
-        @field:SerializedName("after_license_image")
-        val afterLicenseImage: String? = null,
+    @SerializedName("after_license_image")
+    var afterLicenseImage: String? = null
 
-        @field:SerializedName("age")
-        val age: Int? = null,
+    @SerializedName("age")
+    var age: Int? = null
 
-        @field:SerializedName("status")
-        val status: Int? = null,
+    @SerializedName("status")
+    var status: Int? = null
 
-        @field:SerializedName("count_books")
-        val countBooks: Int? = null
-)
+    @SerializedName("count_books")
+    var countBooks: Int? = null
+}
 
-data class DrivercarsItem(
+class DrivercarsItem : Serializable {
+    @SerializedName("car_name")
+    var carName: String? = null
 
-        @field:SerializedName("car_name")
-        val carName: String? = null,
+    @SerializedName("license_plate")
+    var licensePlate: String? = null
 
-        @field:SerializedName("license_plate")
-        val licensePlate: String? = null,
+    @SerializedName("str_status")
+    var strStatus: String? = null
 
-        @field:SerializedName("str_status")
-        val strStatus: String? = null,
+    @SerializedName("id")
+    var id: Int? = null
 
-        @field:SerializedName("id")
-        val id: Int? = null,
+    @SerializedName("car_id")
+    var carId: Int? = null
 
-        @field:SerializedName("car_id")
-        val carId: Int? = null,
-
-        @field:SerializedName("status")
-        val status: Int? = null
-)
+    @SerializedName("status")
+    var status: Int? = null
+}

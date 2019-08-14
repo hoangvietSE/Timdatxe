@@ -117,6 +117,15 @@ interface ApiService {
                           @Part part: MultipartBody.Part?,
                           @PartMap request: Map<String, RequestBody>): Single<BaseResult<UserData>>
 
+    //driver update profile
+    @JvmSuppressWildcards
+    @POST(ApiConstant.DRIVER_INFO)
+    @Multipart
+    fun driverUpdateProfile(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String,
+                            @Path(RequestParam.ID) id: Int,
+                            @PartMap request: Map<String, RequestBody>,
+                            @Part avatar: Array<MultipartBody.Part?>): Single<BaseResult<DriverDataResponse>>
+
     //post more find user
     @GET(ApiConstant.DRIVER_POST_CREATED)
     @JvmSuppressWildcards

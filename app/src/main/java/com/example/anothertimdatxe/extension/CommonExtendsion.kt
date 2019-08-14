@@ -69,6 +69,14 @@ fun ImageView.setlicenseImage(context: Context, url: String?) {
             .into(this)
 }
 
+fun ImageView.setlicenseImage(context: Context, contentURI: Uri?) {
+    GlideApp.with(context)
+            .load(contentURI)
+            .placeholder(R.drawable.img_default)
+            .error(R.drawable.img_default)
+            .into(this)
+}
+
 fun ImageView.setImageUrl(context: Context, url: String) {
     GlideApp.with(context)
             .load(url)

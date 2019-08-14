@@ -155,6 +155,15 @@
     <string name="driver_profile_review_rating">Đánh giá:</string>
     <string name="driver_profile_review_rating_date">Ngày đánh giá:</string>
 
+    //Driver Update Profile
+    <string name="driver_update_profile_name_error">Vui lòng nhập họ tên!</string>
+    <string name="driver_update_profile_date_error">Không được chọn ngày trong tương lai!</string>
+    <string name="driver_update_profile_address_error">Vui lòng nhập địa chỉ!</string>
+    <string name="driver_update_profile_description_error">Vui lòng nhập mô tả!</string>
+    <string name="driver_update_profile_toolbar_title">Chỉnh sửa hồ sơ</string>
+    <string name="driver_update_profile_license_title">Bằng lái xe</string>
+    <string name="driver_update_profile_success">Cập nhật thông tin thành công</string>
+
 
     //Post Created More Find Car
     <string name="seat_book">Số ghế đặt:</string>

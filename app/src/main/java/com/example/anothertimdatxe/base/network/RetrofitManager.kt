@@ -254,6 +254,15 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun driverUpdateProfile(request: Map<String, RequestBody>, partArray: Array<MultipartBody.Part?>): Single<BaseResult<DriverDataResponse>> {
+        return apiService.driverUpdateProfile(CarBookingSharePreference.getAccessToken(),
+                CarBookingSharePreference.getUserId(),
+                request,
+                partArray)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun getListPostFindUser(request: MutableMap<String, Any>): Single<BaseResult<List<DriverPostResponse>>> {
         return apiService.getListPostFindUser(request)
                 .subscribeOn(Schedulers.io())

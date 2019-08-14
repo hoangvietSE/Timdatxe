@@ -2,6 +2,7 @@ package com.example.anothertimdatxe.sprinthome
 
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.driver.profile.DriverProfileFragment
+import com.example.anothertimdatxe.sprinthome.profile.driver.updateprofile.DriverUpdateProfileActivity
 import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
 import com.example.anothertimdatxe.sprinthome.revenue.RevenueDriverActivity
 import com.example.anothertimdatxe.sprinthome.settings.SettingActivity
@@ -37,6 +39,7 @@ import kotlinx.android.synthetic.main.layout_nav_menu.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.io.Serializable
 
 class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.BottomBarListener {
 
@@ -199,6 +202,11 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                                     })
                                 } else if (mfragment is DriverProfileFragment) {
                                     val data = mfragment.getDriverProfile()
+                                    startActivity(Intent(this@HomeActivity, DriverUpdateProfileActivity::class.java).apply {
+                                        val bundle = Bundle()
+                                        bundle.putSerializable(DriverUpdateProfileActivity.DRIVER_PROFILE, data as Serializable)
+                                        putExtras(bundle)
+                                    })
 
                                 }
                             }
