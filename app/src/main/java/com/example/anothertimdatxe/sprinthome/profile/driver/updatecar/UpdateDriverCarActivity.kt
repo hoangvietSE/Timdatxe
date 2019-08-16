@@ -21,7 +21,9 @@ import com.example.anothertimdatxe.entity.response.DriverCarBrandResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.ToastUtil
+import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import kotlinx.android.synthetic.main.activity_update_driver_car.*
 import kotlinx.android.synthetic.main.item_add.view.*
 
@@ -70,10 +72,22 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
             }
         }
         edt_date_regis.setOnClickListener {
-
+            var mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.onSetDateSuccessListener {
+                override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
+                    edt_date_regis.setText("${DateUtil.formatValue(dayOfMonth.toString())}/${DateUtil.formatValue(month.toString())}" +
+                            "/${DateUtil.formatValue(year.toString())}")
+                }
+            })
+            mDatePickerDialogWidget.showDatePickerDialog()
         }
         edt_handangkiem.setOnClickListener {
-
+            var mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.onSetDateSuccessListener {
+                override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
+                    edt_handangkiem.setText("${DateUtil.formatValue(dayOfMonth.toString())}/${DateUtil.formatValue(month.toString())}" +
+                            "/${DateUtil.formatValue(year.toString())}")
+                }
+            })
+            mDatePickerDialogWidget.showDatePickerDialog()
         }
     }
 
@@ -285,5 +299,37 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     override fun showListDriverCarName(list: List<DriverCarBrandDetailResponse>) {
         mListCarName.addAll(list)
         mSpinnerCarNameAdapter?.notifyDataSetChanged()
+    }
+
+    override fun onCarBrandError() {
+        ToastUtil.show(resources.getString(R.string.update_driver_car_error_car_brand))
+    }
+
+    override fun onCarNameSpinnerError() {
+        ToastUtil.show(resources.getString(R.string.update_driver_car_error_car_name_spinner))
+    }
+
+    override fun onCarNameEdittextError() {
+        edt_car_name.setError(resources.getString(R.string.update_driver_car_error_car_name_edittext))
+        edt_car_name.requestFocus()
+    }
+
+    override fun onDoixeError() {
+        ToastUtil.show(resources.getString(R.string.update_driver_car_error_doixe))
+    }
+
+    override fun onNumberSeatError() {
+        edt_number_seat.setError(resources.getString(R.string.update_driver_car_error_number_seat))
+        edt_number_seat.requestFocus()
+    }
+
+    override fun onLicensePlateError() {
+        edt_license_plate.setError(resources.getString(R.string.update_driver_car_error_license_plate))
+        edt_license_plate.requestFocus()
+    }
+
+    override fun onColorError() {
+        edt_color.setError(resources.getString(R.string.update_driver_car_error_color))
+        edt_color.requestFocus()
     }
 }

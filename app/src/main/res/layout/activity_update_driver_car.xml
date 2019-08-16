@@ -241,6 +241,7 @@
                             android:text="@string/update_driver_car_number_seat" />
 
                         <EditText
+                            android:id="@+id/edt_number_seat"
                             style="@style/EditTextUpdateCar"
                             android:hint="@string/update_driver_car_hint_number_seat" />
                     </LinearLayout>
@@ -263,6 +264,7 @@
                         android:text="@string/update_driver_car_license_plate" />
 
                     <EditText
+                        android:id="@+id/edt_license_plate"
                         style="@style/EditTextUpdateCar"
                         android:hint="@string/update_driver_car_hint_license_plate"
                         android:visibility="visible" />
@@ -285,6 +287,7 @@
                         android:text="@string/update_driver_car_color" />
 
                     <EditText
+                        android:id="@+id/edt_color"
                         style="@style/EditTextUpdateCar"
                         android:hint="@string/update_driver_car_hint_color"
                         android:visibility="visible" />

@@ -14,4 +14,11 @@ interface UpdateDriverCarView : BaseView {
     fun removeItem(pos: Int)
     fun showListDriverCarBrand(list: List<DriverCarBrandResponse>)
     fun showListDriverCarName(list: List<DriverCarBrandDetailResponse>)
+    fun onCarBrandError()
+    fun onCarNameSpinnerError()
+    fun onCarNameEdittextError()
+    fun onDoixeError()
+    fun onNumberSeatError()
+    fun onLicensePlateError()
+    fun onColorError()
 }

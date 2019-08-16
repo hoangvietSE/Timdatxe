@@ -320,4 +320,11 @@
     <string name="update_driver_car_hint_color"><font size="12"><i>VD: Trắng</i></font></string>
     <string name="update_driver_car_hint_date_regis"><font size="12"><i>VD: 01/01/2000</i></font></string>
     <string name="update_driver_car_hint_number_seat"><font size="12"><i>VD: 4</i></font></string>
+    <string name="update_driver_car_error_car_brand">Vui lòng chọn hãng xe</string>
+    <string name="update_driver_car_error_car_name_spinner">Vui lòng chọn tên xe</string>
+    <string name="update_driver_car_error_car_name_edittext">Vui lòng nhập tên xe</string>
+    <string name="update_driver_car_error_doixe">Vui lòng chọn đời xe</string>
+    <string name="update_driver_car_error_number_seat">Vui lòng chọn số ghế</string>
+    <string name="update_driver_car_error_license_plate">Vui lòng chọn biển số</string>
+    <string name="update_driver_car_error_color">Vui lòng chọn màu sắc</string>
 </resources>
