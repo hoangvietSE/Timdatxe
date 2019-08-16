@@ -45,6 +45,10 @@ fun Context.inflate(layoutRes: Int, viewGroup: ViewGroup, attachToRoot: Boolean)
     return LayoutInflater.from(this).inflate(layoutRes, viewGroup, attachToRoot)
 }
 
+fun Context.inflate(layoutRes: Int): View {
+    return LayoutInflater.from(this).inflate(layoutRes, null,false)
+}
+
 fun ImageView.setAvatar(context: Context, url: String?) {
     GlideApp.with(context)
             .load(BuildConfig.BASE_URL + "/" + url)

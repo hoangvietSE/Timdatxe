@@ -296,4 +296,28 @@
     <string name="driver_car_title_handangkiem">Hạn đăng kiểm:</string>
     <string name="driver_car_title_date_regis">Ngày đăng ký:</string>
     <string name="driver_car_btn_update">Cập nhật thông tin</string>
+
+    //list driver car
+    <string name="list_driver_car_name">Tên xe:</string>
+    <string name="list_driver_car_status">Tình trạng:</string>
+    <string name="list_driver_car_license_plate">Biển số:</string>
+
+    //update driver car
+    <string name="update_driver_car_title">Thêm mới xe</string>
+    <string name="update_driver_car_condition_image">(Chọn 5 hình ảnh xe của bạn(không quá 5MB/1 ảnh))</string>
+    <string name="update_driver_car_title_car">Hãng xe</string>
+    <string name="update_driver_car_name_car">Tên xe</string>
+    <string name="update_driver_car_enter_name_car">Nhập tên xe</string>
+    <string name="update_driver_car_doixe">Đời xe</string>
+    <string name="update_driver_car_number_seat">Số ghế</string>
+    <string name="update_driver_car_license_plate">Biển số</string>
+    <string name="update_driver_car_color">Màu sắc</string>
+    <string name="update_driver_car_date_regis">Ngày đăng ký</string>
+    <string name="update_driver_car_handangkiem">Hạn đăng kiểm</string>
+    <string name="update_driver_car_add_car">Thêm xe</string>
+    <string name="update_driver_car_hint_car_name"><font size="12"><i>VD: Toyota Vios</i></font></string>
+    <string name="update_driver_car_hint_license_plate"><font size="12"><i>VD: 30A 203.88</i></font></string>
+    <string name="update_driver_car_hint_color"><font size="12"><i>VD: Trắng</i></font></string>
+    <string name="update_driver_car_hint_date_regis"><font size="12"><i>VD: 01/01/2000</i></font></string>
+    <string name="update_driver_car_hint_number_seat"><font size="12"><i>VD: 4</i></font></string>
 </resources>

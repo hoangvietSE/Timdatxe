@@ -418,4 +418,16 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
+
+    fun driverCarBrand(): Single<BaseResult<List<DriverCarBrandResponse>>> {
+        return apiService.getDriverCarBrand()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun driverCarName(id: Int): Single<BaseResult<List<DriverCarBrandDetailResponse>>> {
+        return apiService.getDriverCarName(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

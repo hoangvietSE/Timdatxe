@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome.profile.driver.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.setlicenseImage
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.profile.driver.updatecar.UpdateDriverCarActivity
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_driver_profile.*
 import org.greenrobot.eventbus.EventBus
@@ -42,6 +44,12 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
         initAdapter()
         mPresenter?.getUserReviewDriver()
         EventBus.getDefault().register(this)
+    }
+
+    override fun initListener() {
+        btn_list_car.setOnClickListener {
+            startActivity(Intent(context!!, UpdateDriverCarActivity::class.java))
+        }
     }
 
     override fun onDetach() {
@@ -144,7 +152,7 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
     @Subscribe(sticky = true)
     fun updateDriverProfile(data: DriverProfileResponse?) {
         showDriverInfo(data!!)
-        (context as HomeActivity).updateHeaderMenu(data!!.fullName!!,data!!.avatar)
+        (context as HomeActivity).updateHeaderMenu(data!!.fullName!!, data!!.avatar)
         EventBus.getDefault().removeStickyEvent(data)
     }
 
