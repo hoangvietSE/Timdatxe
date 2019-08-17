@@ -240,10 +240,10 @@ interface ApiService {
     //User Post Home
     @GET(ApiConstant.USER_POST_CREATED)
     @Headers("Content-Type: application/json")
-    fun userPostHome(@Query(RequestParam.TYPE) type: Int): Single<Response<BaseResult<List<UserPostResponse>>>>
+    fun userPostHome(@Query(RequestParam.TYPE) type: Int): Single<BaseResult<List<UserPostResponse>>>
 
     //Driver Post Home
     @GET(ApiConstant.DRIVER_POST_CREATED)
     @Headers("Content-Type: application/json")
-    fun driverPostHome(@Query(RequestParam.TYPE) type: Int): Single<Response<BaseResult<List<DriverPostResponse>>>>
+    fun driverPostHome(@Query(RequestParam.TYPE) type: Int): Single<BaseResult<List<DriverPostResponse>>>
 }

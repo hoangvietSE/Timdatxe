@@ -55,7 +55,7 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
                         .into(imageHolder.imvCar)
                 if (imageHolder.btnCancel != null) {
                     imageHolder.btnCancel?.setOnClickListener {
-                        mListener.onCancelClick(position)
+                        mListener.onCancelClick(imageHolder.adapterPosition)
                     }
                 }
             }
@@ -66,6 +66,7 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val btnCancel: ImageView = itemView.btn_cancel
         val imvCar: ImageView = itemView.iv_car
+
     }
 
     class AddButtonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -92,8 +93,13 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
     fun removeImageAt(position: Int): Boolean {
         mList.removeAt(position)
         notifyItemRemoved(position)
+        notifyItemRangeChanged(position, mList.size)
         if (position == 4) return true
         return false
+    }
+
+    fun getListSize(): Int {
+        return mList.size
     }
 
 

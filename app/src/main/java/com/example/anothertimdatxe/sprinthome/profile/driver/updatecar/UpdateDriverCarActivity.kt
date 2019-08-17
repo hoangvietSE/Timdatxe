@@ -32,11 +32,12 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     private var mSpinnerCarBrandAdapter: SpinnerCarBrandAdapter? = null
     private var mSpinnerCarNameAdapter: SpinnerCarNameAdapter? = null
     private var mSpinnerDoiXe: SpinnerSeatAdapter? = null
-    private var titleCarName: DriverCarBrandDetailResponse? = null
     private var isFull: Boolean = false
-    private var mListCarBrand: MutableList<DriverCarBrandResponse> = mutableListOf()
-    private var mListCarName: MutableList<DriverCarBrandDetailResponse> = mutableListOf()
     private var mListDoiXe: MutableList<String> = mutableListOf()
+    private var mCarBrandId: Int? = null
+    private var mCarVersion: String? = null
+    private var mCarID: Int? = null
+    private var isSpinnerCarName: Boolean = true
     override val layoutRes: Int
         get() = R.layout.activity_update_driver_car
 
@@ -57,16 +58,18 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
         addButtonNoImage()
         mPresenter?.setImage(mutableListOf())
         mPresenter?.fetchDriverCarBrand()
-        initCarNameAdapter()
+        mPresenter?.initCarName()
         initDoiXeAdapter()
     }
 
     override fun setListener() {
         cb_car_name.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+                isSpinnerCarName = false
                 formCarName.gone()
                 edt_car_name.visible()
             } else {
+                isSpinnerCarName = true
                 formCarName.visible()
                 edt_car_name.gone()
             }
@@ -89,6 +92,18 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
             })
             mDatePickerDialogWidget.showDatePickerDialog()
         }
+        btn_add_car.setOnClickListener {
+            mPresenter?.createDriverCar(
+                    mCarBrandId!!,
+                    isSpinnerCarName, mCarID!!,
+                    edt_car_name.text.toString(),
+                    mCarVersion!!,
+                    edt_number_seat.text.toString(),
+                    edt_color.text.toString(),
+                    edt_license_plate.text.toString(),
+                    edt_handangkiem.text.toString(),
+                    edt_date_regis.text.toString())
+        }
     }
 
     private fun initDoiXeAdapter() {
@@ -103,7 +118,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+                mCarVersion = mListDoiXe[position]
             }
 
         }
@@ -208,7 +223,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
         val view = this.inflate(R.layout.item_add)
         val btnAdd: ImageView = view.iv_add
         val params: LinearLayout.LayoutParams = btnAdd.layoutParams as LinearLayout.LayoutParams
-        params.marginEnd = resources.getDimension(R.dimen.margin_10_dp).toInt()
+        params.marginEnd = resources.getDimensionPixelSize(R.dimen.margin_8_dp)
         btnAdd.layoutParams = params
         btnAdd.setImageResource(R.drawable.bg_add_button_not_active)
         if (btnAdd.parent != null) {
@@ -224,11 +239,12 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     override fun addImageIndex(pos: Int, image: DriverCarImage) {
         mImageAdapter?.addImageIndex(pos, image)
         removeButtonNotSelected()
+
     }
 
-    override fun addLastImage(image: DriverCarImage) {
-        isFull = mImageAdapter?.removeImageAt(4)!!
-        mImageAdapter?.addImageIndex(4, image)
+    override fun addLastImage(pos: Int, image: DriverCarImage) {
+        isFull = mImageAdapter?.removeImageAt(pos)!!
+        mImageAdapter?.addImageIndex(pos, image)
         removeButtonNotSelected()
     }
 
@@ -245,6 +261,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     }
 
     override fun removeItemAndAddButton(pos: Int) {
+        isFull = false
         mImageAdapter?.removeImageAt(pos)!!
         mImageAdapter?.addImageIndex(pos, DriverCarImage("", null, ImageAdapter.VIEW_TYPE_BTN_ADD, false))
 
@@ -252,15 +269,16 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
 
     override fun removeItem(pos: Int) {
         mImageAdapter?.removeImageAt(pos)!!
-        addButtonNotSelected()
+        if (isFull) {
+            isFull = false
+            mImageAdapter?.addImageIndex(mImageAdapter?.getListSize()!!, DriverCarImage("", null, ImageAdapter.VIEW_TYPE_BTN_ADD, false))
+        } else {
+            addButtonNotSelected()
+        }
     }
 
-    override fun showListDriverCarBrand(list: List<DriverCarBrandResponse>) {
-        val title = DriverCarBrandResponse()
-        title.brand = "Chọn hãng xe"
-        mListCarBrand.add(title)
-        mListCarBrand.addAll(list)
-        mSpinnerCarBrandAdapter = SpinnerCarBrandAdapter(this, mListCarBrand)
+    override fun showListDriverCarBrand(list: MutableList<DriverCarBrandResponse>) {
+        mSpinnerCarBrandAdapter = SpinnerCarBrandAdapter(this, list)
         sp_brand_car.adapter = mSpinnerCarBrandAdapter
         sp_brand_car.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -268,37 +286,29 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (position == 0) {
-                    mListCarName.clear()
-                    mListCarName.add(titleCarName!!)
-                    mSpinnerCarNameAdapter?.notifyDataSetChanged()
+                    mSpinnerCarNameAdapter?.clear()
+                    mSpinnerCarNameAdapter?.addItem(DriverCarBrandDetailResponse(-1, "Chọn tên xe", -1))
                 } else {
-                    mPresenter?.fetchDriverCarName(mListCarBrand[position].id)
+                    mPresenter?.fetchDriverCarName(list[position].id)
                 }
+                mCarBrandId = list[position].id
             }
 
         }
     }
 
-    private fun initCarNameAdapter() {
-        titleCarName = DriverCarBrandDetailResponse()
-        titleCarName?.name = "Chọn tên xe"
-        mListCarName.add(titleCarName!!)
-        mSpinnerCarNameAdapter = SpinnerCarNameAdapter(this, mListCarName)
+    override fun showListDriverCarName(list: MutableList<DriverCarBrandDetailResponse>) {
+        mSpinnerCarNameAdapter = SpinnerCarNameAdapter(this, list)
         sp_car_name.adapter = mSpinnerCarNameAdapter
         sp_car_name.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+                mCarID = list[position].id
             }
 
         }
-    }
-
-    override fun showListDriverCarName(list: List<DriverCarBrandDetailResponse>) {
-        mListCarName.addAll(list)
-        mSpinnerCarNameAdapter?.notifyDataSetChanged()
     }
 
     override fun onCarBrandError() {
@@ -331,5 +341,25 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     override fun onColorError() {
         edt_color.setError(resources.getString(R.string.update_driver_car_error_color))
         edt_color.requestFocus()
+    }
+
+    override fun onRegistrationNotLessThanRegiterDate() {
+        edt_handangkiem.setError(resources.getString(R.string.update_driver_car_error_registration_not_less_than_regiter_date))
+        edt_handangkiem.requestFocus()
+    }
+
+    override fun onDateRegisEmptyError() {
+        edt_date_regis.setError(resources.getString(R.string.update_driver_car_error_date_regis_empty))
+        edt_date_regis.requestFocus()
+    }
+
+    override fun onDateRegisInFutureError() {
+        edt_date_regis.setError(resources.getString(R.string.update_driver_car_error_date_regis_future))
+        edt_date_regis.requestFocus()
+    }
+
+    override fun onDateRegistrationEmptyError() {
+        edt_handangkiem.setError(resources.getString(R.string.update_driver_car_error_registration_not_less_than_regiter_date))
+        edt_handangkiem.requestFocus()
     }
 }

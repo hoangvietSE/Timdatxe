@@ -68,6 +68,18 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     override fun initView() {
         setUpHomePosted()
         mPresenter!!.getData()
+        initRefreshListener()
+    }
+
+    private fun initRefreshListener() {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary, null))
+        }else{
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
+        }
+        swipeRefresh.setOnRefreshListener {
+            mPresenter?.getData()
+        }
     }
 
     override fun initListener() {
@@ -216,7 +228,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
             override fun onItemClick(position: Int) {
                 startActivity(Intent(context!!, CityPostActivity::class.java).apply {
                     putExtra(CityPostActivity.BANNER_CITY_POST, mListHotCities!![position].app_image)
-                    putExtra(CityPostActivity.CITY_POST,mListHotCities!![position].name)
+                    putExtra(CityPostActivity.CITY_POST, mListHotCities!![position].name)
                 })
             }
 
@@ -275,6 +287,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     }
 
     override fun showListDriverPost(list: List<DriverPostResponse>) {
+        swipeRefresh.isRefreshing = false
         if (CarBookingSharePreference.getUserData()!!.isDriver) {
             mCarFindUserFragment!!.showListCarFindUser(list)
             mCarFindUserFragment!!.showNoResult(list.size == 0)

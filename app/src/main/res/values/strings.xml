@@ -327,4 +327,8 @@
     <string name="update_driver_car_error_number_seat">Vui lòng chọn số ghế</string>
     <string name="update_driver_car_error_license_plate">Vui lòng chọn biển số</string>
     <string name="update_driver_car_error_color">Vui lòng chọn màu sắc</string>
+    <string name="update_driver_car_error_date_regis_empty">Vui lòng chọn ngày đăng ký</string>
+    <string name="update_driver_car_error_date_registration_empty">Vui lòng chọn ngày đăng kiếm</string>
+    <string name="update_driver_car_error_date_regis_future">Không được chọn ngày trong tương lai</string>
+    <string name="update_driver_car_error_registration_not_less_than_regiter_date">Hạn đăng kiểm không thể trước ngày đăng ký</string>
 </resources>

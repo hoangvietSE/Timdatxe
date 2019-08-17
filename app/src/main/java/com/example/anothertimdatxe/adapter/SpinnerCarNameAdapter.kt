@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.entity.response.DriverCarBrandDetailResponse
 
-class SpinnerCarNameAdapter(var context: Context, var mListName: List<DriverCarBrandDetailResponse>) : BaseAdapter() {
+class SpinnerCarNameAdapter(var context: Context, var mListName: MutableList<DriverCarBrandDetailResponse>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: TextView = convertView as TextView?
                 ?: LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false) as TextView
@@ -34,5 +34,15 @@ class SpinnerCarNameAdapter(var context: Context, var mListName: List<DriverCarB
 
     override fun getCount(): Int {
         return mListName.size
+    }
+
+    fun clear() {
+        mListName?.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addItem(item: DriverCarBrandDetailResponse) {
+        mListName?.add(item)
+        notifyDataSetChanged()
     }
 }

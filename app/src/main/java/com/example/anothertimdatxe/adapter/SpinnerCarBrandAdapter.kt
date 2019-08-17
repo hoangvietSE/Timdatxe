@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.entity.response.DriverCarBrandResponse
 
-class SpinnerCarBrandAdapter(var context: Context,var mListBrand:List<DriverCarBrandResponse>) : BaseAdapter() {
+class SpinnerCarBrandAdapter(var context: Context, var mListBrand: MutableList<DriverCarBrandResponse>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: TextView = convertView as TextView?
                 ?: LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false) as TextView
