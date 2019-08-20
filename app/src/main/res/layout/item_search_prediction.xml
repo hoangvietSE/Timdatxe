@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/content_padding_normal">
+
+    <ImageView
+        android:id="@+id/imv_gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_gps" />
+
+    <TextView
+        android:id="@+id/tv_location_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_4_dp"
+        android:layout_toRightOf="@id/imv_gps"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        tools:text="Hầm Thủ Thiêm" />
+
+    <TextView
+        android:id="@+id/tv_location_secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_location_primary"
+        android:layout_marginStart="@dimen/margin_4_dp"
+        android:layout_marginTop="@dimen/margin_4_dp"
+        android:layout_toRightOf="@id/imv_gps"
+        tools:text="Quận 1, Hồ Chí Minh, Việt Nam" />
+</RelativeLayout>

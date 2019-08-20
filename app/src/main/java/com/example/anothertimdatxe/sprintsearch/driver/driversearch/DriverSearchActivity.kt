@@ -8,9 +8,9 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.adapter.DriverSearchUserPostAdapter
-import com.example.anothertimdatxe.adapter.SpinnerSeatSearchAdapter
+import com.example.anothertimdatxe.adapter.*
 import com.example.anothertimdatxe.base.activity.BaseActivity
+import com.example.anothertimdatxe.base.adapter.BaseRvListener
 import com.example.anothertimdatxe.common.ItemRecyclerViewDecoration
 import com.example.anothertimdatxe.entity.response.DriverSearchResponse
 import com.example.anothertimdatxe.extension.gone
@@ -18,9 +18,12 @@ import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.request.DriverSearchRequest
 import com.example.anothertimdatxe.sprinthome.listrequest.driver.detail.DriverRequestDetailActivity
 import com.example.anothertimdatxe.util.DateUtil
+import com.example.anothertimdatxe.util.MapUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
+import com.example.anothertimdatxe.widget.MapSearchTextWatcher
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import com.example.kotlinapplication.RecyclerViewAdapter
+import com.google.android.libraries.places.api.model.AutocompletePrediction
 import kotlinx.android.synthetic.main.activity_driver_search.*
 
 class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearchView,
@@ -30,6 +33,9 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
     private var mList: MutableList<DriverSearchResponse>? = mutableListOf()
     private var mDriverSearchUserPostAdapter: DriverSearchUserPostAdapter? = null
     private var mSpinnerSeatSearchAdapter: SpinnerSeatSearchAdapter? = null
+    private var mBaseMapSearch: BaseMapSearch? = null
+    private var mMapSearchStartingPointAdapter: MapSearchAdapter? = null
+    private var mMapSearchEndingPointAdapter: MapSearchAdapter? = null
     private var mDatePickerDialogWidget: DatePickerDialogWidget? = null
     private val mSeatSearch: ArrayList<String> = arrayListOf("Chọn số ghế", "Từ 1 đến 10 ghế", "Từ 10 đến 20 ghế", "Lớn hơn 20 ghế")
     private var isLoading = false
@@ -44,10 +50,54 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
 
     override fun initView() {
         setToolbar()
+        initMapSearchAdapter()
+        initMapSearch()
         initSearSearch()
         setDateSearch()
         initAdapter()
         fetchData()
+    }
+
+    private fun initMapSearchAdapter() {
+        mMapSearchStartingPointAdapter = MapSearchAdapter(this, object : BaseRvListener {
+            override fun onItemClick(position: Int) {
+
+            }
+
+        })
+        mMapSearchEndingPointAdapter = MapSearchAdapter(this, object : BaseRvListener {
+            override fun onItemClick(position: Int) {
+            }
+
+        })
+        recyclerViewStartingPoint.adapter = mMapSearchStartingPointAdapter
+        recyclerViewStartingPoint.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        recyclerViewEndingPoint.adapter = mMapSearchEndingPointAdapter
+        recyclerViewEndingPoint.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+    }
+
+    private fun initMapSearch() {
+        mBaseMapSearch = BaseMapSearch(this, object : MapSearchListener {
+            override fun onMapSearchSuccess(list: List<AutocompletePrediction>, role: String) {
+                when (role) {
+                    MapUtil.ROLE_MAP_SEARCH_STARTING_POINT -> {
+                        recyclerViewStartingPoint.visible()
+                        recyclerViewEndingPoint.gone()
+                        mMapSearchStartingPointAdapter?.setListItems(list)
+                    }
+                    MapUtil.ROLE_MAP_SEARCH_ENDING_POINT -> {
+                        recyclerViewStartingPoint.gone()
+                        recyclerViewEndingPoint.visible()
+                        mMapSearchEndingPointAdapter?.setListItems(list)
+                    }
+                }
+            }
+
+            override fun onMapSearchFail(exception: Exception) {
+            }
+        })
+        edt_starting_point.addTextChangedListener(MapSearchTextWatcher(mBaseMapSearch!!, MapUtil.ROLE_MAP_SEARCH_STARTING_POINT))
+        edt_ending_point.addTextChangedListener(MapSearchTextWatcher(mBaseMapSearch!!, MapUtil.ROLE_MAP_SEARCH_ENDING_POINT))
     }
 
     override fun setListener() {
@@ -97,22 +147,22 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
         }
         nestedScroolView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (v.getChildAt(v.childCount - 1) != null) {
-            if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-                if (isLoading || !enableLoadmore) {
-                    return@OnScrollChangeListener
-                }
-                val visibleItemCount = recyclerView.layoutManager?.childCount!!
-                val totalItemCount = recyclerView.layoutManager?.itemCount!!
-                val pastVisiblesItems =
-                        (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                if (!isLoading) {
-                    isLoading = true
-                    if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
-                        onLoadMore()
+                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
+                    if (isLoading || !enableLoadmore) {
+                        return@OnScrollChangeListener
+                    }
+                    val visibleItemCount = recyclerView.layoutManager?.childCount!!
+                    val totalItemCount = recyclerView.layoutManager?.itemCount!!
+                    val pastVisiblesItems =
+                            (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    if (!isLoading) {
+                        isLoading = true
+                        if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
+                            onLoadMore()
+                        }
                     }
                 }
             }
-        }
         })
     }
 

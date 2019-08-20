@@ -12,6 +12,7 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<T>>(var context: Context) : Re
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bindData(mListItem[position])
+        holder.setIsRecyclable(false)
     }
 
     fun clear() {

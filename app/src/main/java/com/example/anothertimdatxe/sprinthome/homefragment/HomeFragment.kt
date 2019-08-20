@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.BannerHomeAdapter
 import com.example.anothertimdatxe.adapter.HomeAdapter
+import com.example.anothertimdatxe.adapter.HotCitiesHomeAdapter
 import com.example.anothertimdatxe.adapter.PostCreatedMoreFindUserAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.response.BannerHomeResponse
@@ -21,10 +22,14 @@ import com.example.anothertimdatxe.entity.response.UserPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.sprinthome.carfinduser.CarFindUserFragment
+import com.example.anothertimdatxe.sprinthome.city_post.CityPostActivity
+import com.example.anothertimdatxe.sprinthome.homefragment.listener.OnItemListner
 import com.example.anothertimdatxe.sprinthome.hotcities.HotCitiesActivity
 import com.example.anothertimdatxe.sprinthome.userfindcar.UserFindCarFragment
 import com.example.anothertimdatxe.sprintsearch.driver.driversearch.DriverSearchActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
+import com.example.anothertimdatxe.widget.UltraViewPager
+import com.example.anothertimdatxe.widget.transformer.UltraDepthScaleTransformer
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -41,6 +46,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     private var mHomeAdapter: HomeAdapter? = null
     private var mCurrentSelectedScreen = 0
     private var mNextSelectedScreen = 0
+    private var mHotCitiesHomeAdapter: HotCitiesHomeAdapter? = null
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -62,6 +68,18 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     override fun initView() {
         setUpHomePosted()
         mPresenter!!.getData()
+        initRefreshListener()
+    }
+
+    private fun initRefreshListener() {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary, null))
+        }else{
+            swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
+        }
+        swipeRefresh.setOnRefreshListener {
+            mPresenter?.getData()
+        }
     }
 
     override fun initListener() {
@@ -206,6 +224,24 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
 
     override fun showListHotCities(data: ArrayList<HotCitiesResponse>) {
         mListHotCities = data
+        mHotCitiesHomeAdapter = HotCitiesHomeAdapter(context!!, mListHotCities!!, object : OnItemListner {
+            override fun onItemClick(position: Int) {
+                startActivity(Intent(context!!, CityPostActivity::class.java).apply {
+                    putExtra(CityPostActivity.BANNER_CITY_POST, mListHotCities!![position].app_image)
+                    putExtra(CityPostActivity.CITY_POST, mListHotCities!![position].name)
+                })
+            }
+
+        })
+        vp_city.adapter = mHotCitiesHomeAdapter
+        vp_city.setMultiScreen(0.7f)
+        vp_city.setItemRatio(0.8)
+        vp_city.setRatio(2.3f)
+        vp_city.setAutoMeasureHeight(true)
+        vp_city.setInfiniteLoop(true)
+        vp_city.setPageTransformer(true, UltraDepthScaleTransformer())
+        vp_city.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL)
+        vp_city.currentItem = mListHotCities!!.size - 1
     }
 
     override fun showListBanners(list: List<BannerHomeResponse>) {
@@ -251,6 +287,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     }
 
     override fun showListDriverPost(list: List<DriverPostResponse>) {
+        swipeRefresh.isRefreshing = false
         if (CarBookingSharePreference.getUserData()!!.isDriver) {
             mCarFindUserFragment!!.showListCarFindUser(list)
             mCarFindUserFragment!!.showNoResult(list.size == 0)
@@ -261,7 +298,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
             recycler_view_home.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
             if (list.size == 0) {
                 no_result_home.visible()
-            }else{
+            } else {
                 no_result_home.gone()
             }
         }

@@ -6,6 +6,13 @@ import android.location.Geocoder
 import java.util.*
 
 object MapUtil {
+    const val FIRST_LEFT_LATITUDE = -33.880490
+    const val FIRST_RIGHT_LONGITUDE = 151.184363
+    const val SECOND_LEFT_LATITUDE = -33.858754
+    const val SECOND_RIGHT_LONGITUDE = 151.229596
+    const val COUNTRY_CODE = "VN"
+    const val ROLE_MAP_SEARCH_STARTING_POINT = "role starting point"
+    const val ROLE_MAP_SEARCH_ENDING_POINT = "role ending point"
     fun getListAddress(context: Context, lat: Double, lng: Double): List<Address> {
         val geocoder = Geocoder(context, Locale.getDefault())
         return geocoder.getFromLocation(lat, lng, 1)

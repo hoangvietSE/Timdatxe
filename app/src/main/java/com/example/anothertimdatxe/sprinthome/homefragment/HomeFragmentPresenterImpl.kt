@@ -10,42 +10,39 @@ import com.example.anothertimdatxe.entity.response.BannerHomeResponse
 import com.example.anothertimdatxe.entity.response.DriverPostResponse
 import com.example.anothertimdatxe.entity.response.HotCitiesResponse
 import com.example.anothertimdatxe.entity.response.UserPostResponse
+import com.example.anothertimdatxe.util.NetworkUtil
+import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 
 class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<HomeFragmentView>(mView), HomeFragmentPresenter {
     override fun getData() {
         getHotCities()
         getHotBanners()
-        getUserPost()
-        getDriverPost()
+        getPost()
     }
 
-    private fun getUserPost() {
-        mView!!.showLoadingData()
-        val disposable = RetrofitManager.userPostHome(object : ICallBack<BaseResult<List<UserPostResponse>>> {
-            override fun onSuccess(result: BaseResult<List<UserPostResponse>>?) {
-                mView!!.hideLoadingData()
-                mView!!.showListUserPost(result?.data!!)
-            }
-
-            override fun onError(e: ApiException) {
-            }
-
-        })
-        addDispose(disposable)
-    }
-
-    private fun getDriverPost() {
-        mView!!.showLoadingData()
-        val disposable = RetrofitManager.driverPostHome(object : ICallBack<BaseResult<List<DriverPostResponse>>> {
-            override fun onSuccess(result: BaseResult<List<DriverPostResponse>>?) {
-                mView!!.hideLoadingData()
-                mView!!.showListDriverPost(result?.data!!)
-            }
-
-            override fun onError(e: ApiException) {
-            }
-
-        })
+    private fun getPost() {
+        //UserPostAndDriverPostResponse : Result value
+        val disposable = Single.zip(RetrofitManager.userPostHome(), RetrofitManager.driverPostHome(),
+                BiFunction<BaseResult<List<UserPostResponse>>, BaseResult<List<DriverPostResponse>>, UserPostAndDriverPostResponse> { userPost, driverPost ->
+                    UserPostAndDriverPostResponse(userPost, driverPost)
+                }).doOnSubscribe {
+            mView!!.showLoadingData()
+        }
+                .doFinally {
+                    mView!!.hideLoadingData()
+                }
+                .subscribe(
+                        {
+                            if (it.userPost.status == 200 && it.driverPost.status == 200) {
+                                mView!!.showListUserPost(it.userPost.data!!)
+                                mView!!.showListDriverPost(it.driverPost.data!!)
+                            }
+                        },
+                        {
+                            NetworkUtil.handleError(it)
+                        }
+                )
         addDispose(disposable)
     }
 
@@ -62,6 +59,11 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
         })
         addDispose(disposable)
     }
+
+    class UserPostAndDriverPostResponse(
+            val userPost: BaseResult<List<UserPostResponse>>,
+            val driverPost: BaseResult<List<DriverPostResponse>>
+    )
 
     private fun getHotCities() {
         val disposable = RetrofitManager.getListHotCities(object : ICallBack<BaseResult<ArrayList<HotCitiesResponse>>> {
