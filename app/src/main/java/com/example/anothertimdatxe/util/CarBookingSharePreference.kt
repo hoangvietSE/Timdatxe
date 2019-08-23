@@ -2,12 +2,13 @@ package com.example.anothertimdatxe.util
 
 import android.preference.PreferenceManager
 import com.example.anothertimdatxe.application.CarBookingApplication
-import com.example.anothertimdatxe.base.RequestParam
+import com.example.anothertimdatxe.base.constant.RequestParam
 import com.example.anothertimdatxe.entity.UserData
 import com.google.gson.Gson
 
 object CarBookingSharePreference {
     private const val USER_DATA = "user_data"
+    private const val GOOGLE_MAP_API_KEY = "google_map_api_key"
     private var mUserId: Int? = null
     private var mAccessToken: String? = null
 

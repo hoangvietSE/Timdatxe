@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapsActivity" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clsForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/csl_confirm"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/margin_8_dp"
+        android:layout_marginEnd="@dimen/margin_8_dp"
+        android:layout_marginBottom="@dimen/margin_8_dp"
+        android:background="@drawable/bg_white_10dp"
+        android:padding="@dimen/content_padding_resend">
+
+        <ImageView
+            android:id="@+id/imv_starting_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_starting_point_two"
+            app:layout_constraintBottom_toTopOf="@id/dash_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.example.anothertimdatxe.widget.DashView
+            android:id="@+id/dash_view"
+            android:layout_width="2dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="@dimen/margin_4_dp"
+            app:dashLineColor="@color/color_bg"
+            app:dashLineWidth="2dp"
+            app:dashOrientation="1"
+            app:dashWidth="5dp"
+            app:layout_constraintBottom_toTopOf="@id/imv_ending_point"
+            app:layout_constraintEnd_toEndOf="@id/imv_ending_point"
+            app:layout_constraintStart_toStartOf="@id/imv_ending_point"
+            app:layout_constraintTop_toBottomOf="@id/imv_starting_point"
+            app:lineHeight="2dp" />
+
+        <ImageView
+            android:id="@+id/imv_ending_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dash_view" />
+
+        <EditText
+            android:id="@+id/edt_starting_point"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white"
+            android:editable="false"
+            android:hint="@string/timdatxe_basemap_starting_point"
+            android:paddingStart="@dimen/content_padding_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imv_starting_point"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/margin_16_dp"
+            android:background="@color/color_bg"
+            app:layout_constraintBottom_toTopOf="@id/edt_ending_point"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dash_view"
+            app:layout_constraintTop_toBottomOf="@id/edt_starting_point" />
+
+        <EditText
+            android:id="@+id/edt_ending_point"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white"
+            android:editable="false"
+            android:hint="@string/timdatxe_basemap_ending_point"
+            android:paddingStart="@dimen/content_padding_normal"
+            android:textColorHint="@color/color_quantity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imv_ending_point" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/csl_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_white"
+        android:paddingTop="@dimen/content_padding_resend"
+        android:paddingBottom="@dimen/content_padding_resend"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_mase_base"
+            android:gravity="center"
+            android:paddingTop="@dimen/content_padding_resend"
+            android:paddingBottom="@dimen/content_padding_resend"
+            android:text="@string/timdatxe_basemap_button"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.75" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/clsForm"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/margin_8_dp"
+        android:layout_marginBottom="@dimen/margin_8_dp"
+        android:background="@drawable/bg_white_6dp"
+        android:padding="@dimen/content_padding_resend"
+        android:src="@drawable/ic_gps" />
+
+</RelativeLayout>

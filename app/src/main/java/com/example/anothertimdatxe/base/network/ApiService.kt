@@ -1,7 +1,7 @@
 package com.example.anothertimdatxe.base.network
 
-import com.example.anothertimdatxe.base.ApiConstant
-import com.example.anothertimdatxe.base.RequestParam
+import com.example.anothertimdatxe.base.constant.ApiConstant
+import com.example.anothertimdatxe.base.constant.RequestParam
 import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData

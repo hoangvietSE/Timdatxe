@@ -1,7 +1,7 @@
 package com.example.anothertimdatxe.base.network
 
 import com.example.anothertimdatxe.BuildConfig
-import com.example.anothertimdatxe.base.ApiConstant
+import com.example.anothertimdatxe.base.constant.ApiConstant
 import com.example.anothertimdatxe.entity.ForgotResult
 import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
@@ -31,9 +31,9 @@ object RetrofitManager {
     private fun createRetrofit(baseUrl: String): Retrofit {
         //timeout for connection is 120s
         var client = OkHttpClient.Builder()
-                .writeTimeout(RetrofitManager.TIME, TimeUnit.SECONDS)
-                .readTimeout(RetrofitManager.TIME, TimeUnit.SECONDS)
-                .connectTimeout(RetrofitManager.TIME, TimeUnit.SECONDS)
+                .writeTimeout(TIME, TimeUnit.SECONDS)
+                .readTimeout(TIME, TimeUnit.SECONDS)
+                .connectTimeout(TIME, TimeUnit.SECONDS)
         if (BuildConfig.DEBUG) {
             var logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BODY

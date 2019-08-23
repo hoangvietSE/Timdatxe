@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.base
+package com.example.anothertimdatxe.base.constant
 
 object RequestParam {
     const val ID = "id"
@@ -9,4 +9,10 @@ object RequestParam {
     const val BEARER = "Bearer "
     const val SLUG = "slug"
     const val TYPE = "type"
+    const val ORIGIN = "origin"
+    const val DESTINATION = "destination"
+    const val WAYPOINTS = "waypoints"
+    const val KEY = "key"
+    const val MODE = "mode"
+
 }

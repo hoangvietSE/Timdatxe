@@ -332,4 +332,13 @@
     <string name="update_driver_car_error_date_registration_empty">Vui lòng chọn ngày đăng kiếm</string>
     <string name="update_driver_car_error_date_regis_future">Không được chọn ngày trong tương lai</string>
     <string name="update_driver_car_error_registration_not_less_than_regiter_date">Hạn đăng kiểm không thể trước ngày đăng ký</string>
+
+    //base map
+    <string name="timdatxe_basemap_title">Đăng tin chuyến đi</string>
+    <string name="timdatxe_basemap_button">Xác nhận chuyến đi</string>
+    <string name="timdatxe_basemap_starting_point">Điểm xuất phát</string>
+    <string name="timdatxe_basemap_ending_point">Điểm kết thúc</string>
+    <string name="timdatxe_basemap_dialog_content">Vui lòng cấp quyền truy cập vị trí của ứng dụng</string>
+    <string name="timdatxe_basemap_dialog_postive">Đi tới cài đặt</string>
+    <string name="timdatxe_basemap_dialog_negative">Thoát</string>
 </resources>
