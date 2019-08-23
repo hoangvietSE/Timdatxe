@@ -64,6 +64,9 @@ class BottomTabLayout : LinearLayout {
             listener.onNews()
             setSelectedItem(1)
         }
+        tvTabNewPost.setOnClickListener {
+            listener.onCreateNews()
+        }
         tvTabList.setOnClickListener {
             listener.onRequest()
             setSelectedItem(2)
@@ -80,7 +83,7 @@ class BottomTabLayout : LinearLayout {
                 mTabs[i].setCompoundDrawablesWithIntrinsicBounds(0, listIconSelected[i], 0, 0)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     mTabs[i].setTextColor(resources.getColor(R.color.colorPrimary, null))
-                }else{
+                } else {
                     mTabs[i].setTextColor(resources.getColor(R.color.colorPrimary))
                 }
                 mTabs[i].isSelected = true
@@ -88,7 +91,7 @@ class BottomTabLayout : LinearLayout {
                 mTabs[i].setCompoundDrawablesWithIntrinsicBounds(0, listIconNormal[i], 0, 0)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     mTabs[i].setTextColor(resources.getColor(R.color.text_secondary, null))
-                }else{
+                } else {
                     mTabs[i].setTextColor(resources.getColor(R.color.text_secondary))
                 }
                 mTabs[i].isSelected = false

@@ -17,6 +17,7 @@ import com.example.anothertimdatxe.eventbus.GetProfileSuccess
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.presentation.map.mapparent.MapParentActivity
 import com.example.anothertimdatxe.sprinthome.help.SupportActivity
 import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
@@ -360,7 +361,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onCreateNews() {
-        //new_activity
+        startActivity(Intent(this, MapParentActivity::class.java))
     }
 
     override fun onRequest() {
