@@ -1,9 +1,15 @@
 package com.example.anothertimdatxe.base.network
 
 import com.example.anothertimdatxe.BuildConfig
+import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.application.CarBookingApplication
 import com.example.anothertimdatxe.base.constant.ApiConstant
+import com.example.anothertimdatxe.map.response.GoogleMapDirectionResponse
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -31,7 +37,7 @@ object MapRetrofitManager {
                 .build()
     }
 
-    val mapApiService = createRetrofit(BuildConfig.BASE_URL).create(MapApiService::class.java)
+    val mapApiService = createRetrofit(BuildConfig.MAP_BASE_URL).create(MapApiService::class.java)
 
     private fun <T> getSubcriber(callBack: ICallBack<T>): DisposableSingleObserver<Response<T>> {
         return object : DisposableSingleObserver<Response<T>>() {
@@ -65,6 +71,17 @@ object MapRetrofitManager {
 
     private fun <T> handleErrorResponse(callBack: ICallBack<T>, response: Response<T>) {
 //        callBack.onError(ApiException("Error"))
+    }
+
+    fun fetchWayPoints(iCallBack: ICallBack<GoogleMapDirectionResponse>, origin: String, destination: String): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return mapApiService.getDirection(
+                origin,
+                destination,
+                CarBookingApplication.instance.resources.getString(R.string.google_services_api_key)
+        ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
     }
 
 }

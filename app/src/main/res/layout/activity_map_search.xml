@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginTop="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:layout_marginBottom="@dimen/margin_8_dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="6dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clsForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/content_padding_resend">
+
+                <ImageView
+                    android:id="@+id/imv_starting_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    android:src="@drawable/ic_starting_point_two"
+                    app:layout_constraintBottom_toTopOf="@id/dash_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.example.anothertimdatxe.widget.DashView
+                    android:id="@+id/dash_view"
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    app:dashLineColor="@color/color_bg"
+                    app:dashLineWidth="2dp"
+                    app:dashOrientation="1"
+                    app:dashWidth="5dp"
+                    app:layout_constraintBottom_toTopOf="@id/imv_ending_point"
+                    app:layout_constraintEnd_toEndOf="@id/imv_ending_point"
+                    app:layout_constraintStart_toStartOf="@id/imv_ending_point"
+                    app:layout_constraintTop_toBottomOf="@id/imv_starting_point"
+                    app:lineHeight="2dp" />
+
+                <ImageView
+                    android:id="@+id/imv_ending_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:src="@drawable/ic_end"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dash_view" />
+
+                <EditText
+                    android:id="@+id/edt_starting_point"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white"
+                    android:hint="@string/timdatxe_basemap_starting_point"
+                    android:padding="@dimen/margin_4_dp"
+                    android:paddingStart="@dimen/content_padding_normal"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imv_starting_point"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/line_view"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/margin_20_dp"
+                    android:background="@color/color_bg"
+                    app:layout_constraintBottom_toTopOf="@id/edt_ending_point"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dash_view"
+                    app:layout_constraintTop_toBottomOf="@id/edt_starting_point" />
+
+                <EditText
+                    android:id="@+id/edt_ending_point"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white"
+
+                    android:hint="@string/timdatxe_basemap_ending_point"
+                    android:padding="@dimen/margin_4_dp"
+                    android:paddingStart="@dimen/content_padding_normal"
+                    android:textColorHint="@color/color_quantity"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imv_ending_point" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_view"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_white_stroke_1dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/content_padding_resend">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_gps" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_8_dp"
+                android:text="Chọn vị trí"
+                android:textSize="@dimen/text_size_16" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/csl_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="@dimen/content_padding_resend"
+            android:paddingBottom="@dimen/content_padding_resend"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button_mase_base"
+                android:gravity="center"
+                android:paddingTop="@dimen/content_padding_resend"
+                android:paddingBottom="@dimen/content_padding_resend"
+                android:text="@string/map_search_button"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.75" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

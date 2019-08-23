@@ -5,12 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar" />
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         tools:context=".MapsActivity" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/csl_confirm"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/margin_8_dp"
-        android:layout_marginEnd="@dimen/margin_8_dp"
-        android:layout_marginBottom="@dimen/margin_8_dp"
+        android:layout_marginStart="@dimen/margin_4_dp"
+        android:layout_marginEnd="@dimen/margin_4_dp"
+        android:layout_marginBottom="@dimen/margin_4_dp"
         android:background="@drawable/bg_white_10dp"
         android:padding="@dimen/content_padding_resend">
 
@@ -29,6 +32,8 @@
             android:id="@+id/imv_starting_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_4_dp"
+            android:layout_marginTop="@dimen/margin_4_dp"
             android:src="@drawable/ic_starting_point_two"
             app:layout_constraintBottom_toTopOf="@id/dash_view"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +58,7 @@
             android:id="@+id/imv_ending_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_4_dp"
             android:src="@drawable/ic_end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +71,9 @@
             android:background="@drawable/bg_white"
             android:editable="false"
             android:hint="@string/timdatxe_basemap_starting_point"
+            android:padding="@dimen/margin_4_dp"
             android:paddingStart="@dimen/content_padding_normal"
+            android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imv_starting_point"
             app:layout_constraintTop_toTopOf="parent" />
@@ -88,8 +96,10 @@
             android:background="@drawable/bg_white"
             android:editable="false"
             android:hint="@string/timdatxe_basemap_ending_point"
+            android:padding="@dimen/margin_4_dp"
             android:paddingStart="@dimen/content_padding_normal"
             android:textColorHint="@color/color_quantity"
+            android:textSize="@dimen/text_size_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imv_ending_point" />
@@ -126,6 +136,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
+        android:id="@+id/btn_gps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/clsForm"

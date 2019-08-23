@@ -3,6 +3,7 @@ package com.example.anothertimdatxe.util
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.Place
 import java.util.*
 
@@ -18,6 +19,13 @@ object MapUtil {
     val FIELD_ADDRESS = Place.Field.ADDRESS
     val FIELD_LATLNG = Place.Field.LAT_LNG
     val FIELD_PHONE_NUMBER = Place.Field.PHONE_NUMBER
+
+    fun getLatLngFromAddress(context: Context, location: String): LatLng {
+        val geocoder = Geocoder(context)
+        val list = geocoder.getFromLocationName(location, 1)
+        return LatLng(list[0].latitude, list[0].longitude)
+    }
+
     fun getListAddress(context: Context, lat: Double, lng: Double): List<Address> {
         val geocoder = Geocoder(context, Locale.getDefault())
         return geocoder.getFromLocation(lat, lng, 1)
