@@ -53,6 +53,7 @@ class BaseMapSearch(context: Context, var mListener: MapSearchListener) {
             for (i in 0..response.autocompletePredictions.size - 1) {
                 Log.d(TAG, response.autocompletePredictions[i].getPrimaryText(null).toString())
                 Log.d(TAG, response.autocompletePredictions[i].getSecondaryText(null).toString())
+                Log.d(TAG, response.autocompletePredictions[i].getFullText(null).toString())
             }
             mListener.onMapSearchSuccess(response.autocompletePredictions, role)
         }?.addOnFailureListener {

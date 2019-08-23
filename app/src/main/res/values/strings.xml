@@ -341,4 +341,9 @@
     <string name="timdatxe_basemap_dialog_content">Vui lòng cấp quyền truy cập vị trí của ứng dụng</string>
     <string name="timdatxe_basemap_dialog_postive">Đi tới cài đặt</string>
     <string name="timdatxe_basemap_dialog_negative">Thoát</string>
+
+    //map search
+    <string name="map_search_starting_point">Điểm xuất phát</string>
+    <string name="map_search_ending_point">Điểm kết thúc</string>
+    <string name="map_search_button">Xác nhận</string>
 </resources>

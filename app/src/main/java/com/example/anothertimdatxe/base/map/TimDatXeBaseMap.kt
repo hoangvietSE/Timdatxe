@@ -77,7 +77,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         checkPermissionFromDevice()
         initInterface()
         btn_gps.setOnClickListener {
-
+            gpsLocation()
         }
     }
 
@@ -282,6 +282,10 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
 
     protected fun moveCamera(position: LatLng, zoom: Float) {
         mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, zoom))
+    }
+
+    protected fun moveCamera(route: Route) {
+
     }
 
     protected fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
