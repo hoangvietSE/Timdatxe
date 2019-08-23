@@ -2,7 +2,7 @@ package com.example.anothertimdatxe.splash
 
 import android.content.Context
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.ApiConstant
+import com.example.anothertimdatxe.base.constant.ApiConstant
 import com.example.anothertimdatxe.base.network.NetworkConnectionInterceptor
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.UserData

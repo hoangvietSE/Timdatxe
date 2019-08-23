@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.base
+package com.example.anothertimdatxe.base.constant
 
 object ApiConstant {
     //[USER]
