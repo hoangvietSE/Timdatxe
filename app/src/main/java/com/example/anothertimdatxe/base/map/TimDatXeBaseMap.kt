@@ -25,6 +25,7 @@ import com.example.anothertimdatxe.util.DialogUtil
 import com.example.anothertimdatxe.util.MapUtil
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -35,6 +36,7 @@ import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.Task
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.PolyUtil
@@ -62,13 +64,18 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected var mFusedLocationProviderClient: FusedLocationProviderClient? = null
     protected var mPlaceFiled: List<Place.Field>? = null
     protected var request: FindCurrentPlaceRequest? = null
+    protected var requestByPlaceId: FetchPlaceRequest? = null
     protected var mCurrentPlaceName: Array<String?>? = null
     protected var mCurrentPlaceAddress: Array<String?>? = null
     protected var mPlaceClient: PlacesClient? = null
     protected var mListener: DialogInterface.OnClickListener? = null
 
-    override val layoutRes: Int
-        get() = R.layout.activity_base_map
+    init {
+        if (!Places.isInitialized()) {
+            Places.initialize(this, resources.getString(R.string.google_api_key))
+        }
+        mPlaceClient = Places.createClient(this)
+    }
 
     override fun initView() {
         setUpToolbar()
@@ -327,11 +334,9 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     }
 
     protected fun getCurrentPlace() {
-        if (!Places.isInitialized()) {
-            Places.initialize(this, resources.getString(R.string.google_api_key))
-        }
-        mPlaceClient = Places.createClient(this)
         mPlaceFiled = listOf(
+                MapUtil.FIELD_PLACE_ID,
+                MapUtil.FIELD_LATLNG,
                 MapUtil.FIELD_NAME,
                 MapUtil.FIELD_ADDRESS,
                 MapUtil.FIELD_LATLNG)
@@ -353,6 +358,20 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         } catch (e: SecurityException) {
             Log.e(TAG, "Get current place: error", e)
         }
+    }
+
+    protected fun fetchPlaceById(placeId: String): LatLng? {
+        var place: Place? = null
+        requestByPlaceId = FetchPlaceRequest.builder(placeId, mPlaceFiled!!).build()
+        mPlaceClient?.fetchPlace(requestByPlaceId!!)?.addOnSuccessListener { response ->
+            place = response.place
+            Log.d(TAG, "Place found: ${place?.name}")
+        }?.addOnFailureListener { exception ->
+            if (exception is ApiException) {
+                Log.e(TAG, "Place not found: ${exception.message}", exception)
+            }
+        }
+        return place?.latLng ?: null
     }
 
     private fun showDialogSetCurrentPlace() {

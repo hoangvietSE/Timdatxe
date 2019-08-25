@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.adapter
+package com.example.anothertimdatxe.common
 
 import android.content.Context
 import android.util.Log
@@ -10,7 +10,6 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
 import com.google.android.libraries.places.api.model.RectangularBounds
-import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 
@@ -46,7 +45,6 @@ class BaseMapSearch(context: Context, var mListener: MapSearchListener) {
                 .setLocationBias(bounds)
                 .setSessionToken(token)
                 .setCountry(MapUtil.COUNTRY_CODE)
-                .setTypeFilter(TypeFilter.ADDRESS)
                 .setQuery(queryText)
                 .build()
         mPlacesClient?.findAutocompletePredictions(request!!)?.addOnSuccessListener { response ->

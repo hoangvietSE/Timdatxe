@@ -22,6 +22,9 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     private var mLocationStartingPoint: String? = null
     private var mLocationEndingPoint: String? = null
 
+    override val layoutRes: Int
+        get() = R.layout.activity_base_map
+
     override fun getPresenter(): MapParentPresenter {
         return MapParentPresenterImpl(this)
     }

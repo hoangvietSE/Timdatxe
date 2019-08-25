@@ -12,12 +12,13 @@ object MapUtil {
     const val FIRST_RIGHT_LONGITUDE = 151.184363
     const val SECOND_LEFT_LATITUDE = -33.858754
     const val SECOND_RIGHT_LONGITUDE = 151.229596
-    const val COUNTRY_CODE = "VN"
+    const val COUNTRY_CODE = "vn"
     const val ROLE_MAP_SEARCH_STARTING_POINT = "role starting point"
     const val ROLE_MAP_SEARCH_ENDING_POINT = "role ending point"
+    val FIELD_PLACE_ID = Place.Field.ID
+    val FIELD_LATLNG = Place.Field.LAT_LNG
     val FIELD_NAME = Place.Field.NAME
     val FIELD_ADDRESS = Place.Field.ADDRESS
-    val FIELD_LATLNG = Place.Field.LAT_LNG
     val FIELD_PHONE_NUMBER = Place.Field.PHONE_NUMBER
 
     fun getLatLngFromAddress(context: Context, location: String): LatLng {

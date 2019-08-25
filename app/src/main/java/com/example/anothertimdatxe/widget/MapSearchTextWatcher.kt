@@ -2,7 +2,7 @@ package com.example.anothertimdatxe.widget
 
 import android.text.Editable
 import android.text.TextWatcher
-import com.example.anothertimdatxe.adapter.BaseMapSearch
+import com.example.anothertimdatxe.common.BaseMapSearch
 
 class MapSearchTextWatcher(var mBaseMapSearch: BaseMapSearch, var role: String) : TextWatcher {
     override fun afterTextChanged(s: Editable?) {

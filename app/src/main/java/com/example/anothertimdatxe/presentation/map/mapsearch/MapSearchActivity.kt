@@ -5,11 +5,11 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.adapter.BaseMapSearch
 import com.example.anothertimdatxe.adapter.MapSearchAdapter
-import com.example.anothertimdatxe.adapter.MapSearchListener
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
+import com.example.anothertimdatxe.common.BaseMapSearch
+import com.example.anothertimdatxe.common.MapSearchListener
 import com.example.anothertimdatxe.util.MapUtil
 import com.example.anothertimdatxe.widget.MapSearchTextWatcher
 import com.google.android.libraries.places.api.model.AutocompletePrediction
