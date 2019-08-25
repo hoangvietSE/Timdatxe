@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_white"
             android:editable="false"
+            android:focusableInTouchMode="false"
             android:hint="@string/timdatxe_basemap_starting_point"
             android:padding="@dimen/margin_4_dp"
             android:paddingStart="@dimen/content_padding_normal"
@@ -95,6 +96,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_white"
             android:editable="false"
+            android:focusableInTouchMode="false"
             android:hint="@string/timdatxe_basemap_ending_point"
             android:padding="@dimen/margin_4_dp"
             android:paddingStart="@dimen/content_padding_normal"
@@ -102,6 +104,7 @@
             android:textSize="@dimen/text_size_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/imv_ending_point" />
 
 
