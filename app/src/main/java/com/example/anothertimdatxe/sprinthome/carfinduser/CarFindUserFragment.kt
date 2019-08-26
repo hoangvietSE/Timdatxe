@@ -43,6 +43,10 @@ class CarFindUserFragment : BaseFragment<CarFindUserPresenter>(), CarFindUserVie
         mPostCreatedMoreFindUserAdapter!!.addModels(list, false)
     }
 
+    fun clear() {
+        mPostCreatedMoreFindUserAdapter!!.clear()
+    }
+
     fun showNoResult(check: Boolean) {
         if (check) {
             no_result_car_find_user.visible()

@@ -18,6 +18,7 @@ import com.example.anothertimdatxe.entity.response.DriverCar
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.presentation.map.mapshow.MapShowActivity
 import com.example.anothertimdatxe.sprinthome.profile.driver.driver_car.DriverCarActivity
 import com.example.anothertimdatxe.util.*
 import com.example.anothertimdatxe.widget.NumberTextWatcher
@@ -49,6 +50,19 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
             layout_action.gone()
         }
         fetchData()
+    }
+
+    override fun setListener() {
+        btn_show_map.setOnClickListener {
+            startActivity(Intent(this, MapShowActivity::class.java).apply {
+                putExtra(MapShowActivity.LAT_FROM, response?.lat_from?.toDouble())
+                putExtra(MapShowActivity.LNG_FROM, response?.lng_from?.toDouble())
+                putExtra(MapShowActivity.LAT_TO, response?.lat_to?.toDouble())
+                putExtra(MapShowActivity.LNG_TO, response?.lng_to?.toDouble())
+                putExtra(MapShowActivity.ORIGIN_LOCATION, response?.start_point)
+                putExtra(MapShowActivity.DESTINATION_LOCATION, response?.end_point)
+            })
+        }
     }
 
     private fun fetchData() {
@@ -189,7 +203,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                         showConfirmRequestDialog(data.driverCars)
                     } else if (data.driverCarPending == 0) {
                         ToastUtil.show(data.driverCarMsg!!)
-                    }else{
+                    } else {
                         ToastUtil.show(data.driverCarMsg!!)
                     }
                 }

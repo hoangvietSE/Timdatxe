@@ -9,8 +9,8 @@ import com.example.anothertimdatxe.entity.response.UserPostResponse
 interface HomeFragmentView : BaseView {
     fun showListHotCities(data: ArrayList<HotCitiesResponse>)
     fun showListBanners(list: List<BannerHomeResponse>)
-    fun showListUserPost(list: List<UserPostResponse>)
-    fun showListDriverPost(list: List<DriverPostResponse>)
+    fun showListUserPost(list: List<UserPostResponse>, isRefreshing: Boolean)
+    fun showListDriverPost(list: List<DriverPostResponse>, isRefreshing: Boolean)
     fun showLoadingData()
     fun hideLoadingData()
 }

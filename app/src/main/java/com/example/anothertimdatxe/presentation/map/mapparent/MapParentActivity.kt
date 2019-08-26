@@ -38,6 +38,9 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
         edt_ending_point.setOnClickListener {
             startActivityForResult(Intent(this, MapSearchActivity::class.java), REQUEST_CODE_LOCATION)
         }
+        btn_gps.setOnClickListener {
+            gpsLocation()
+        }
     }
 
     override fun initMap() {
@@ -61,7 +64,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
 
     override fun setUpToolbar() {
         toolbarTitle?.let {
-            it.text = resources.getString(R.string.timdatxe_basemap_title)
+            it.text = resources.getString(R.string.timdatxe_basemap_title).toUpperCase()
         }
     }
 
@@ -112,7 +115,6 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
 
         override fun onErrorFetchPlaces() {
         }
-
     }
 
     override fun routeSuccess(route: Route) {

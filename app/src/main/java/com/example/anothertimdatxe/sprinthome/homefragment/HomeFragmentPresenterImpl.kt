@@ -15,13 +15,13 @@ import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 
 class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<HomeFragmentView>(mView), HomeFragmentPresenter {
-    override fun getData() {
+    override fun getData(isRefreshing: Boolean) {
         getHotCities()
         getHotBanners()
-        getPost()
+        getPost(isRefreshing)
     }
 
-    private fun getPost() {
+    private fun getPost(isRefreshing: Boolean) {
         //UserPostAndDriverPostResponse : Result value
         val disposable = Single.zip(RetrofitManager.userPostHome(), RetrofitManager.driverPostHome(),
                 BiFunction<BaseResult<List<UserPostResponse>>, BaseResult<List<DriverPostResponse>>, UserPostAndDriverPostResponse> { userPost, driverPost ->
@@ -35,8 +35,8 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
                 .subscribe(
                         {
                             if (it.userPost.status == 200 && it.driverPost.status == 200) {
-                                mView!!.showListUserPost(it.userPost.data!!)
-                                mView!!.showListDriverPost(it.driverPost.data!!)
+                                mView!!.showListUserPost(it.userPost.data!!, isRefreshing)
+                                mView!!.showListDriverPost(it.driverPost.data!!, isRefreshing)
                             }
                         },
                         {

@@ -40,7 +40,6 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.PolyUtil
-import kotlinx.android.synthetic.main.activity_base_map.*
 
 abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener,
         GoogleMap.OnPolylineClickListener, OnMapReadyCallback {
@@ -77,9 +76,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         setPermissionArray()
         checkPermissionFromDevice()
         initInterface()
-        btn_gps.setOnClickListener {
-            gpsLocation()
-        }
+        initData()
     }
 
     private fun initClient() {
@@ -99,6 +96,9 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     }
 
     protected open fun initInterface() {
+    }
+
+    protected open fun initData() {
     }
 
     protected open fun gpsLocation() {
@@ -310,6 +310,14 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         mGoogleMap?.animateCamera(mCameraUpdate)
     }
 
+    protected fun moveCameraShow(mLatLngFrom: LatLng, mLatLngTo: LatLng) {
+        val builder = LatLngBounds.Builder()
+        builder.include(mLatLngFrom)
+        builder.include(mLatLngTo)
+        val bounds = builder.build()
+        mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 80))
+    }
+
     protected fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
         var canvas = Canvas()
         var bitmap =
@@ -325,11 +333,15 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         try {
             if (isCheckedPermissionSuccess) {
                 mGoogleMap?.isMyLocationEnabled = true
+                mGoogleMap?.isBuildingsEnabled = true
                 mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
                 mGoogleMap?.uiSettings?.isCompassEnabled = true
                 addMapStyle(resource)
             } else {
-
+                mGoogleMap?.isMyLocationEnabled = false
+                mGoogleMap?.isBuildingsEnabled = false
+                mGoogleMap?.uiSettings?.isCompassEnabled = false
+                mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
             }
         } catch (e: SecurityException) {
             Log.e(TAG, "Can't update location UI", e)
