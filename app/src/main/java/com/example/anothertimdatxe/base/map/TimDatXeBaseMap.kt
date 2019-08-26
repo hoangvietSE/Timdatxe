@@ -298,8 +298,16 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, zoom))
     }
 
-    protected fun moveCamera(route: Route) {
-
+    protected fun moveCameraBound(route: Route) {
+        val originLatLng = LatLng(route.originLat, route.originLng)
+        val destinationLatLng = LatLng(route.destinationLat, route.destinationLng)
+        val builder = LatLngBounds.builder()
+        builder.include(originLatLng)
+        builder.include(destinationLatLng)
+        val bounds = builder.build()
+        mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(bounds.center, 50f))//ZOOM TO INSIDE WITH ZOOM_CAMERA IS 50f
+        val mCameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 80)//animate from inside to outside with padding screen is 80
+        mGoogleMap?.animateCamera(mCameraUpdate)
     }
 
     protected fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
@@ -399,9 +407,13 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
 
     protected fun drawRouteSuccess(route: Route) {
         val mPolylineOptions = styleWithPolyline()
-        val wayPoints = PolyUtil.decode(route.overviewPolyline)
-        wayPoints.forEach {
-            mPolylineOptions.add(it)
+        route?.steps?.let {
+            it.forEach {
+                val points = PolyUtil.decode(it?.polyline?.points)//List<LatLng>
+                for (point in points) {
+                    mPolylineOptions.add(point)
+                }
+            }
         }
         mRoutePolyline = mGoogleMap?.addPolyline(mPolylineOptions)
     }

@@ -19,10 +19,11 @@ class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParent
                                 it.get(0)?.legs!![0]?.endLocation?.lat!!,
                                 it.get(0)?.legs!![0]?.endLocation?.lng!!,
                                 it.get(0)?.overviewPolyline?.points!!,
+                                it.get(0)?.legs!![0]?.steps!!,
                                 it.get(0)?.legs!![0]?.distance?.value!!,
                                 it.get(0)?.legs!![0]?.duration?.value!!
                         ))
-                    }else{
+                    } else {
                         mView!!.routeFail()
                     }
                 } ?: mView!!.routeFail()

@@ -117,6 +117,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
 
     override fun routeSuccess(route: Route) {
         drawRouteSuccess(route)
+        moveCameraBound(route)
     }
 
     override fun routeFail() {
