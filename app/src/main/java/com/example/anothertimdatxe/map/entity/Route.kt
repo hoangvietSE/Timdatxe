@@ -6,5 +6,6 @@ class Route(
         val destinationLat: Double,
         val destinationLng: Double,
         val overviewPolyline: String,
+        val steps: List<StepsItem?>,
         val distance: Int,
         val time: Int)

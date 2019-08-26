@@ -40,7 +40,6 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.PolyUtil
-import kotlinx.android.synthetic.main.activity_base_map.*
 
 abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener,
         GoogleMap.OnPolylineClickListener, OnMapReadyCallback {
@@ -70,22 +69,27 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected var mPlaceClient: PlacesClient? = null
     protected var mListener: DialogInterface.OnClickListener? = null
 
-    init {
-        if (!Places.isInitialized()) {
-            Places.initialize(this, resources.getString(R.string.google_api_key))
-        }
-        mPlaceClient = Places.createClient(this)
-    }
-
     override fun initView() {
         setUpToolbar()
+        initClient()
         isGooglePlayServicesAvailable()
         setPermissionArray()
         checkPermissionFromDevice()
         initInterface()
-        btn_gps.setOnClickListener {
-            gpsLocation()
+        initData()
+    }
+
+    private fun initClient() {
+        if (!Places.isInitialized()) {
+            Places.initialize(this, resources.getString(R.string.google_services_api_key))
         }
+        mPlaceClient = Places.createClient(this)
+        mPlaceFiled = listOf(
+                MapUtil.FIELD_PLACE_ID,
+                MapUtil.FIELD_LATLNG,
+                MapUtil.FIELD_NAME,
+                MapUtil.FIELD_ADDRESS,
+                MapUtil.FIELD_LATLNG)
     }
 
     protected open fun setUpToolbar() {
@@ -94,10 +98,13 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected open fun initInterface() {
     }
 
+    protected open fun initData() {
+    }
+
     protected open fun gpsLocation() {
     }
 
-    fun isGooglePlayServicesAvailable() {
+    private fun isGooglePlayServicesAvailable() {
         val available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this)
         if (available == ConnectionResult.SUCCESS) {
             Log.d(TAG, "Google play Service is working")
@@ -291,8 +298,24 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, zoom))
     }
 
-    protected fun moveCamera(route: Route) {
+    protected fun moveCameraBound(route: Route) {
+        val originLatLng = LatLng(route.originLat, route.originLng)
+        val destinationLatLng = LatLng(route.destinationLat, route.destinationLng)
+        val builder = LatLngBounds.builder()
+        builder.include(originLatLng)
+        builder.include(destinationLatLng)
+        val bounds = builder.build()
+        mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(bounds.center, 50f))//ZOOM TO INSIDE WITH ZOOM_CAMERA IS 50f
+        val mCameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 80)//animate from inside to outside with padding screen is 80
+        mGoogleMap?.animateCamera(mCameraUpdate)
+    }
 
+    protected fun moveCameraShow(mLatLngFrom: LatLng, mLatLngTo: LatLng) {
+        val builder = LatLngBounds.Builder()
+        builder.include(mLatLngFrom)
+        builder.include(mLatLngTo)
+        val bounds = builder.build()
+        mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 80))
     }
 
     protected fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
@@ -310,11 +333,15 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         try {
             if (isCheckedPermissionSuccess) {
                 mGoogleMap?.isMyLocationEnabled = true
+                mGoogleMap?.isBuildingsEnabled = true
                 mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
                 mGoogleMap?.uiSettings?.isCompassEnabled = true
                 addMapStyle(resource)
             } else {
-
+                mGoogleMap?.isMyLocationEnabled = false
+                mGoogleMap?.isBuildingsEnabled = false
+                mGoogleMap?.uiSettings?.isCompassEnabled = false
+                mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
             }
         } catch (e: SecurityException) {
             Log.e(TAG, "Can't update location UI", e)
@@ -334,12 +361,6 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     }
 
     protected fun getCurrentPlace() {
-        mPlaceFiled = listOf(
-                MapUtil.FIELD_PLACE_ID,
-                MapUtil.FIELD_LATLNG,
-                MapUtil.FIELD_NAME,
-                MapUtil.FIELD_ADDRESS,
-                MapUtil.FIELD_LATLNG)
         request = FindCurrentPlaceRequest.builder(mPlaceFiled!!).build()
         try {
             mPlaceClient?.findCurrentPlace(request!!)?.addOnSuccessListener { response ->
@@ -360,19 +381,20 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         }
     }
 
-    protected fun fetchPlaceById(placeId: String): LatLng? {
-        var place: Place? = null
+    protected fun fetchPlaceById(placeId: String, mListener: FetchPlaceListener) {
         requestByPlaceId = FetchPlaceRequest.builder(placeId, mPlaceFiled!!).build()
         mPlaceClient?.fetchPlace(requestByPlaceId!!)?.addOnSuccessListener { response ->
-            place = response.place
-            Log.d(TAG, "Place found: ${place?.name}")
+            val place = response.place
+            Log.d(TAG, "Place found: ${place.name}")
+            mListener.onSuccessFetchPlaces(place.latLng!!)
         }?.addOnFailureListener { exception ->
             if (exception is ApiException) {
                 Log.e(TAG, "Place not found: ${exception.message}", exception)
             }
+            mListener.onErrorFetchPlaces()
         }
-        return place?.latLng ?: null
     }
+
 
     private fun showDialogSetCurrentPlace() {
         AlertDialog.Builder(this)
@@ -397,9 +419,13 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
 
     protected fun drawRouteSuccess(route: Route) {
         val mPolylineOptions = styleWithPolyline()
-        val wayPoints = PolyUtil.decode(route.overviewPolyline)
-        wayPoints.forEach {
-            mPolylineOptions.add(it)
+        route?.steps?.let {
+            it.forEach {
+                val points = PolyUtil.decode(it?.polyline?.points)//List<LatLng>
+                for (point in points) {
+                    mPolylineOptions.add(point)
+                }
+            }
         }
         mRoutePolyline = mGoogleMap?.addPolyline(mPolylineOptions)
     }

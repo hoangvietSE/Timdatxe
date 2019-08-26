@@ -1,15 +1,15 @@
-package com.example.anothertimdatxe.presentation.map.mapparent
+package com.example.anothertimdatxe.presentation.map.mapshow
 
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 import com.example.anothertimdatxe.base.network.ApiException
 import com.example.anothertimdatxe.base.network.ICallBack
-import com.example.anothertimdatxe.base.network.MapRetrofitManager
+import com.example.anothertimdatxe.base.network.MapRetrofitManager.fetchWayPoints
 import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.map.response.GoogleMapDirectionResponse
 
-class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParentView>(mView), MapParentPresenter {
+class MapShowPresenterImpl(mView: MapShowView) : BasePresenterImpl<MapShowView>(mView), MapShowPresenter {
     override fun fetchWayPoints(origin: String, destination: String) {
-        val disposable = MapRetrofitManager.fetchWayPoints(object : ICallBack<GoogleMapDirectionResponse> {
+        val disposable = fetchWayPoints(object : ICallBack<GoogleMapDirectionResponse> {
             override fun onSuccess(result: GoogleMapDirectionResponse?) {
                 result?.routes?.let {
                     if (it.size > 0) {

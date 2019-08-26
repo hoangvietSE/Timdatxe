@@ -3,10 +3,10 @@ package com.example.anothertimdatxe.presentation.map.mapparent
 import android.content.Intent
 import android.os.Build
 import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.base.map.FetchPlaceListener
 import com.example.anothertimdatxe.base.map.TimDatXeBaseMap
 import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.presentation.map.mapsearch.MapSearchActivity
-import com.example.anothertimdatxe.util.MapUtil
 import com.example.anothertimdatxe.util.ToastUtil
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -19,6 +19,8 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
         const val REQUEST_CODE_LOCATION = 9001
     }
 
+    private var mLocationStartingPointId: String? = null
+    private var mLocationEndingPointId: String? = null
     private var mLocationStartingPoint: String? = null
     private var mLocationEndingPoint: String? = null
 
@@ -35,6 +37,9 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
         }
         edt_ending_point.setOnClickListener {
             startActivityForResult(Intent(this, MapSearchActivity::class.java), REQUEST_CODE_LOCATION)
+        }
+        btn_gps.setOnClickListener {
+            gpsLocation()
         }
     }
 
@@ -59,7 +64,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
 
     override fun setUpToolbar() {
         toolbarTitle?.let {
-            it.text = resources.getString(R.string.timdatxe_basemap_title)
+            it.text = resources.getString(R.string.timdatxe_basemap_title).toUpperCase()
         }
     }
 
@@ -68,28 +73,53 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
             REQUEST_CODE_LOCATION -> {
                 when (resultCode) {
                     MapSearchActivity.RESULT_CODE -> {
-                        mLocationStartingPoint = data?.extras?.getString(MapSearchActivity.STARTING_LOCATION_POINT)!!
-                        mLocationEndingPoint = data?.extras?.getString(MapSearchActivity.ENDING_LOCATION_POINT)!!
-                        setMarkerLocation(mLocationStartingPoint!!, mLocationEndingPoint!!)
+                        mLocationStartingPointId = data?.extras?.getString(MapSearchActivity.STARTING_LOCATION_POINT_ID)
+                        mLocationEndingPointId = data?.extras?.getString(MapSearchActivity.ENDING_LOCATION_POINT_ID)
+                        mLocationStartingPoint = data?.extras?.getString(MapSearchActivity.STARTING_LOCATION_POINT)
+                        mLocationEndingPoint = data?.extras?.getString(MapSearchActivity.ENDING_LOCATION_POINT)
+                        setMarkerLocation(mLocationStartingPointId!!, mLocationEndingPointId!!)
                     }
                 }
             }
         }
     }
 
-    private fun setMarkerLocation(mLocationStartingPoint: String, mLocationEndingPoint: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            addMarker(MapUtil.getLatLngFromAddress(this, mLocationStartingPoint), "Điểm xuất phát", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_start_point_new, null)))
-            addMarker(MapUtil.getLatLngFromAddress(this, mLocationEndingPoint), "Điểm kết thúc", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_end_point_new, null)))
-        } else {
-            addMarker(MapUtil.getLatLngFromAddress(this, mLocationStartingPoint), "Điểm xuất phát", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_start_point_new)))
-            addMarker(MapUtil.getLatLngFromAddress(this, mLocationEndingPoint), "Điểm kết thúc", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_end_point_new)))
+    private fun setMarkerLocation(mLocationStartingPointId: String, mLocationEndingPointId: String) {
+        fetchPlaceById(mLocationStartingPointId, mListenerFetchPlaceStartingById)
+        fetchPlaceById(mLocationEndingPointId, mListenerFetchPlaceEndingById)
+        mPresenter?.fetchWayPoints(mLocationStartingPoint!!, mLocationEndingPoint!!)
+    }
+
+    val mListenerFetchPlaceStartingById = object : FetchPlaceListener {
+        override fun onSuccessFetchPlaces(mLatLng: LatLng) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                addMarker(mLatLng, "Điểm xuất phát", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_start_point_new, null)))
+            } else {
+                addMarker(mLatLng, "Điểm xuất phát", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_start_point_new)))
+            }
         }
-        mPresenter?.fetchWayPoints(mLocationStartingPoint, mLocationEndingPoint)
+
+        override fun onErrorFetchPlaces() {
+        }
+
+    }
+
+    val mListenerFetchPlaceEndingById = object : FetchPlaceListener {
+        override fun onSuccessFetchPlaces(mLatLng: LatLng) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                addMarker(mLatLng, "Điểm kết thúc", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_end_point_new, null)))
+            } else {
+                addMarker(mLatLng, "Điểm kết thúc", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_end_point_new)))
+            }
+        }
+
+        override fun onErrorFetchPlaces() {
+        }
     }
 
     override fun routeSuccess(route: Route) {
         drawRouteSuccess(route)
+        moveCameraBound(route)
     }
 
     override fun routeFail() {

@@ -67,18 +67,24 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
 
     override fun initView() {
         setUpHomePosted()
-        mPresenter!!.getData()
+        mPresenter!!.getData(false)
         initRefreshListener()
     }
 
     private fun initRefreshListener() {
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary, null))
-        }else{
+        } else {
             swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
         }
         swipeRefresh.setOnRefreshListener {
-            mPresenter?.getData()
+            if(CarBookingSharePreference?.getUserData()?.isDriver!!){
+                mUserFindCarFragment!!.clear()
+                mCarFindUserFragment!!.clear()
+            }else{
+                mPostCreatedMoreFindUserAdapter?.clear()
+            }
+            mPresenter?.getData(true)
         }
     }
 
@@ -279,14 +285,14 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
         })
     }
 
-    override fun showListUserPost(list: List<UserPostResponse>) {
+    override fun showListUserPost(list: List<UserPostResponse>, isRefreshing: Boolean) {
         if (CarBookingSharePreference.getUserData()!!.isDriver) {
             mUserFindCarFragment!!.showListUserFindCar(list)
             mUserFindCarFragment!!.showNoResult(list.size == 0)
         }
     }
 
-    override fun showListDriverPost(list: List<DriverPostResponse>) {
+    override fun showListDriverPost(list: List<DriverPostResponse>, isRefreshing: Boolean) {
         swipeRefresh.isRefreshing = false
         if (CarBookingSharePreference.getUserData()!!.isDriver) {
             mCarFindUserFragment!!.showListCarFindUser(list)
