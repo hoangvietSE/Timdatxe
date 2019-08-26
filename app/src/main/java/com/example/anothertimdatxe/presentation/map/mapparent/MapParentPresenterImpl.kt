@@ -11,15 +11,21 @@ class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParent
     override fun fetchWayPoints(origin: String, destination: String) {
         val disposable = MapRetrofitManager.fetchWayPoints(object : ICallBack<GoogleMapDirectionResponse> {
             override fun onSuccess(result: GoogleMapDirectionResponse?) {
-                mView!!.routeSuccess(Route(
-                        result?.routes?.get(0)?.legs!![0]?.startLocation?.lat!!,
-                        result?.routes?.get(0)?.legs!![0]?.startLocation?.lng!!,
-                        result?.routes?.get(0)?.legs!![0]?.endLocation?.lat!!,
-                        result?.routes?.get(0)?.legs!![0]?.endLocation?.lng!!,
-                        result?.routes?.get(0)?.overviewPolyline?.points!!,
-                        result?.routes?.get(0)?.legs!![0]?.distance?.value!!,
-                        result?.routes?.get(0)?.legs!![0]?.duration?.value!!
-                ))
+                result?.routes?.let {
+                    if (it.size > 0) {
+                        mView!!.routeSuccess(Route(
+                                it.get(0)?.legs!![0]?.startLocation?.lat!!,
+                                it.get(0)?.legs!![0]?.startLocation?.lng!!,
+                                it.get(0)?.legs!![0]?.endLocation?.lat!!,
+                                it.get(0)?.legs!![0]?.endLocation?.lng!!,
+                                it.get(0)?.overviewPolyline?.points!!,
+                                it.get(0)?.legs!![0]?.distance?.value!!,
+                                it.get(0)?.legs!![0]?.duration?.value!!
+                        ))
+                    }else{
+                        mView!!.routeFail()
+                    }
+                } ?: mView!!.routeFail()
             }
 
             override fun onError(e: ApiException) {

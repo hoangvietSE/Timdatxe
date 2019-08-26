@@ -70,15 +70,9 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected var mPlaceClient: PlacesClient? = null
     protected var mListener: DialogInterface.OnClickListener? = null
 
-    init {
-        if (!Places.isInitialized()) {
-            Places.initialize(this, resources.getString(R.string.google_api_key))
-        }
-        mPlaceClient = Places.createClient(this)
-    }
-
     override fun initView() {
         setUpToolbar()
+        initClient()
         isGooglePlayServicesAvailable()
         setPermissionArray()
         checkPermissionFromDevice()
@@ -86,6 +80,19 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         btn_gps.setOnClickListener {
             gpsLocation()
         }
+    }
+
+    private fun initClient() {
+        if (!Places.isInitialized()) {
+            Places.initialize(this, resources.getString(R.string.google_services_api_key))
+        }
+        mPlaceClient = Places.createClient(this)
+        mPlaceFiled = listOf(
+                MapUtil.FIELD_PLACE_ID,
+                MapUtil.FIELD_LATLNG,
+                MapUtil.FIELD_NAME,
+                MapUtil.FIELD_ADDRESS,
+                MapUtil.FIELD_LATLNG)
     }
 
     protected open fun setUpToolbar() {
@@ -97,7 +104,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected open fun gpsLocation() {
     }
 
-    fun isGooglePlayServicesAvailable() {
+    private fun isGooglePlayServicesAvailable() {
         val available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this)
         if (available == ConnectionResult.SUCCESS) {
             Log.d(TAG, "Google play Service is working")
@@ -334,12 +341,6 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     }
 
     protected fun getCurrentPlace() {
-        mPlaceFiled = listOf(
-                MapUtil.FIELD_PLACE_ID,
-                MapUtil.FIELD_LATLNG,
-                MapUtil.FIELD_NAME,
-                MapUtil.FIELD_ADDRESS,
-                MapUtil.FIELD_LATLNG)
         request = FindCurrentPlaceRequest.builder(mPlaceFiled!!).build()
         try {
             mPlaceClient?.findCurrentPlace(request!!)?.addOnSuccessListener { response ->
@@ -360,19 +361,20 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         }
     }
 
-    protected fun fetchPlaceById(placeId: String): LatLng? {
-        var place: Place? = null
+    protected fun fetchPlaceById(placeId: String, mListener: FetchPlaceListener) {
         requestByPlaceId = FetchPlaceRequest.builder(placeId, mPlaceFiled!!).build()
         mPlaceClient?.fetchPlace(requestByPlaceId!!)?.addOnSuccessListener { response ->
-            place = response.place
-            Log.d(TAG, "Place found: ${place?.name}")
+            val place = response.place
+            Log.d(TAG, "Place found: ${place.name}")
+            mListener.onSuccessFetchPlaces(place.latLng!!)
         }?.addOnFailureListener { exception ->
             if (exception is ApiException) {
                 Log.e(TAG, "Place not found: ${exception.message}", exception)
             }
+            mListener.onErrorFetchPlaces()
         }
-        return place?.latLng ?: null
     }
+
 
     private fun showDialogSetCurrentPlace() {
         AlertDialog.Builder(this)

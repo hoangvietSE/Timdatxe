@@ -21,6 +21,8 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
         const val RESULT_CODE = 1998
         const val STARTING_LOCATION_POINT = "starting_location_point"
         const val ENDING_LOCATION_POINT = "ending_location_point"
+        const val STARTING_LOCATION_POINT_ID = "starting_location_point_id"
+        const val ENDING_LOCATION_POINT_ID = "ending_location_point_id"
     }
 
     override val layoutRes: Int
@@ -29,8 +31,8 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
     private var mSearchLocation: MapSearchAdapter? = null
     private var mRole: String? = null
     private var mList: List<AutocompletePrediction>? = null
-    private var mLocationStartingPoint: ArrayList<String> = arrayListOf()
-    private var mLocationEndingPoint: ArrayList<String> = arrayListOf()
+    private var mLocationStarting: MutableMap<String, String> = mutableMapOf()
+    private var mLocationEnding: MutableMap<String, String> = mutableMapOf()
 
     override fun getPresenter(): MapSearchPresenter {
         return MapSearchPresenterImpl(this)
@@ -44,10 +46,18 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
 
     override fun setListener() {
         btn_confirm.setOnClickListener {
-            if (mLocationStartingPoint.size > 0 || mLocationEndingPoint.size > 0) {
+            if (mLocationStarting.size > 0 || mLocationStarting.size > 0) {
                 val intent = Intent()
-                intent.putExtra(STARTING_LOCATION_POINT, mLocationStartingPoint[0])
-                intent.putExtra(ENDING_LOCATION_POINT, mLocationEndingPoint[0])
+                val keySetStarting = mLocationStarting.keys
+                val keySetEnding = mLocationEnding.keys
+                for (keyStarting in keySetStarting) {
+                    intent.putExtra(STARTING_LOCATION_POINT_ID, keyStarting)
+                    intent.putExtra(STARTING_LOCATION_POINT, mLocationStarting.get(keyStarting))
+                }
+                for (keyEnding in keySetEnding) {
+                    intent.putExtra(ENDING_LOCATION_POINT_ID, keyEnding)
+                    intent.putExtra(ENDING_LOCATION_POINT, mLocationEnding.get(keyEnding))
+                }
                 setResult(RESULT_CODE, intent)
                 finish()
             }
@@ -88,10 +98,10 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
             override fun onItemClick(position: Int) {
                 when (mRole) {
                     MapUtil.ROLE_MAP_SEARCH_STARTING_POINT -> {
-                        mPresenter?.setStartingPointLocation(mList!![position].getFullText(null).toString())
+                        mPresenter?.setStartingPointLocation(mList!![position].getFullText(null).toString(), mList!![position].placeId)
                     }
                     MapUtil.ROLE_MAP_SEARCH_ENDING_POINT -> {
-                        mPresenter?.setEndingPointLocation(mList!![position].getFullText(null).toString())
+                        mPresenter?.setEndingPointLocation(mList!![position].getFullText(null).toString(), mList!![position].placeId)
                     }
                 }
             }
@@ -101,18 +111,17 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
         recycler_view.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
-    override fun showLocationStarting(location: String) {
+    override fun showLocationStarting(location: String, placeId: String) {
         hideLoading()
         edt_starting_point.setText(location)
-        mLocationStartingPoint.clear()
-        mLocationStartingPoint.add(location)
+        mLocationStarting?.clear()
+        mLocationStarting?.put(placeId, location)
     }
 
-    override fun showLocationEnding(location: String) {
+    override fun showLocationEnding(location: String, placeId: String) {
         hideLoading()
         edt_ending_point.setText(location)
-        mLocationEndingPoint.clear()
-        mLocationEndingPoint.add(location)
-
+        mLocationEnding?.clear()
+        mLocationEnding?.put(placeId, location)
     }
 }
