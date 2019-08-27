@@ -15,6 +15,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.anothertimdatxe.R
@@ -74,9 +75,13 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         initClient()
         isGooglePlayServicesAvailable()
         setPermissionArray()
-        checkPermissionFromDevice()
         initInterface()
         initData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkPermissionFromDevice()
     }
 
     private fun initClient() {
@@ -139,10 +144,13 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             REQUEST_CODE_PERMISSION -> {
-                if (grantResults.size > 0) {
+                val isHasPermission = false
+
+                if (grantResults.isNotEmpty()) {
                     grantResults.forEach {
                         if (it != PackageManager.PERMISSION_GRANTED) {
                             Log.d(TAG, "Can't access permission device")
@@ -197,8 +205,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.fromParts("package", packageName, null))
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivityForResult(intent, REQUEST_CODE_SETTINGS_APP)
-
+        startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -329,6 +336,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     }
 
     protected fun updateLocationUI(resource: Int) {
+        addMapStyle(resource)
         if (mGoogleMap == null) return
         try {
             if (isCheckedPermissionSuccess) {
@@ -336,7 +344,6 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                 mGoogleMap?.isBuildingsEnabled = true
                 mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
                 mGoogleMap?.uiSettings?.isCompassEnabled = true
-                addMapStyle(resource)
             } else {
                 mGoogleMap?.isMyLocationEnabled = false
                 mGoogleMap?.isBuildingsEnabled = false
