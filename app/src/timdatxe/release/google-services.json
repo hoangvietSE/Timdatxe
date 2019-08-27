@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "434662009688",
+    "firebase_url": "https://timdatxe-b49c7.firebaseio.com",
+    "project_id": "timdatxe-b49c7",
+    "storage_bucket": "timdatxe-b49c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434662009688:android:e5af28d951161100",
+        "android_client_info": {
+          "package_name": "com.example.anothertimdatxe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434662009688-epch4em6j53impncfarfqc650qqui0sh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anothertimdatxe",
+            "certificate_hash": "1ec95054b363151645e46c3f8b78fe0ab2b9e179"
+          }
+        },
+        {
+          "client_id": "434662009688-ql2l0g2du8qtagf7uqpf52b599hie97l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh1YOTRDw5wxTfTB_DsOuTGj8GfslH77k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434662009688-ql2l0g2du8qtagf7uqpf52b599hie97l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -125,4 +125,5 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     override fun routeFail() {
         ToastUtil.show("Có lỗi xảy ra, vui lòng thử lại sau!")
     }
+
 }

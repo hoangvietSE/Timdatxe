@@ -1,6 +1,5 @@
 <resources>
     <string name="google_services_api_key">AIzaSyCkl7ejitQmVtgAYVvQm1P9Jmy5O13za0A</string>
-    <string name="app_name">TimDatXe</string>
 
     //splash
     <string name="dialog_no_connectivity_title">Thông báo</string>
