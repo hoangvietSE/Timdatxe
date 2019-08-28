@@ -90,9 +90,39 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         startActivityAndClearTask(this, cls)
     }
 
+    fun startActivityAndClearTaskOrNewTask(cls: Class<*>) {
+        startActivityAndClearTaskOrNewTask(this, cls)
+    }
+
+    fun startActivityAndClearTop(cls: Class<*>) {
+        startActivityAndClearTop(this, cls)
+    }
+
+    fun startActivityAndSingleTop(cls: Class<*>) {
+        startActivityAndSingleTop(this, cls)
+    }
+
     fun startActivityAndClearTask(context: Context, cls: Class<*>) {
         startActivity(Intent(context, cls).apply {
+//            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
+    }
+
+    fun startActivityAndClearTaskOrNewTask(context: Context, cls: Class<*>) {
+        startActivity(Intent(context, cls).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
+    }
+
+    fun startActivityAndClearTop(context: Context, cls: Class<*>) {
+        startActivity(Intent(context, cls).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        })
+    }
+
+    fun startActivityAndSingleTop(context: Context, cls: Class<*>) {
+        startActivity(Intent(context, cls).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         })
     }
 }

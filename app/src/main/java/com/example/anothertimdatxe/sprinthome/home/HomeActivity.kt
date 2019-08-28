@@ -362,6 +362,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
     override fun onCreateNews() {
         startActivity(Intent(this, MapParentActivity::class.java))
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
     }
 
     override fun onRequest() {
