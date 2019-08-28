@@ -40,7 +40,7 @@ android {
         }
         debug {
             minifyEnabled false
-            buildConfigField 'String', 'BASE_URL', '"http://api.timdatxe.com/"'
+            buildConfigField 'String', 'BASE_URL', '"http://api-staging.timdatxe.com/"'
             buildConfigField 'String', 'MAP_BASE_URL', '"https://maps.googleapis.com/"'
         }
     }

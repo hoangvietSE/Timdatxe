@@ -116,6 +116,9 @@
         <activity
             android:name=".presentation.map.mapshow.MapShowActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".introduce.IntroduceActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

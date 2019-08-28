@@ -9,10 +9,12 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidEmail
 import com.example.anothertimdatxe.extension.isValidPhone
+import com.example.anothertimdatxe.introduce.IntroduceActivity
 import com.example.anothertimdatxe.sprinthome.HomeActivity
 import com.example.anothertimdatxe.sprintlogin.forgotpassword.ForgotActivity
 import com.example.anothertimdatxe.sprintlogin.register.RegisterActivity
 import com.example.anothertimdatxe.sprintlogin.updateinfo.UpdateInfoActivity
+import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.widget.TextWatcherPassword
 import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activity_login.*
@@ -115,9 +117,21 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
     }
 
     override fun goToNextScreen() {
-        startActivity(Intent(this@LoginActivity, HomeActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        })
+        if (CarBookingSharePreference.getUserData()?.isDriver!!) {
+            if (CarBookingSharePreference.getWelcomeDriverApp()) {
+                startActivityAndClearTask(IntroduceActivity::class.java)
+                finish()
+                return
+            }
+        } else {
+            if (CarBookingSharePreference.getWelcomeUserApp()) {
+                startActivityAndClearTask(IntroduceActivity::class.java)
+                finish()
+                return
+            }
+        }
+        startActivityAndClearTask(HomeActivity::class.java)
+        finish()
     }
 
     private fun goToRegis(key_register: Boolean) {
