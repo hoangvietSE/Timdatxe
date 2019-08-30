@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.extension.gone
@@ -32,12 +33,14 @@ class IntroduceAdapter(var context: Context, var mListImage: ArrayList<String>, 
         val view = context.inflate(R.layout.item_introduce, container, false)
         GlideApp.with(context)
                 .load(toturial_url_prefix + mListImage[position])
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.bg_white)
                 .placeholder(R.drawable.bg_white)
                 .into(view.imv_introduce)
         if (position == mListImage.size.minus(1)) {
             view.btn_go_to_home.visible()
-        }else{
+        } else {
             view.btn_go_to_home.gone()
         }
         view.btn_go_to_home.setOnClickListener {
