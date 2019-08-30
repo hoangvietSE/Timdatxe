@@ -15,18 +15,51 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore/keydebug.jks")
+            storePassword "Aa234566"
+            keyAlias "keyDebug"
+            keyPassword "Aa234566"
+        }
+        release {
+            storeFile file('../keystore/keyrelease.jks')
+            storePassword "Aa234566"
+            keyAlias "keyRelease"
+            keyPassword "Aa234566"
+        }
+
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"http://api.timdatxe.com/"'
+            buildConfigField 'String', 'MAP_BASE_URL', '"https://maps.googleapis.com/"'
         }
         debug {
             minifyEnabled false
-            buildConfigField 'String', 'BASE_URL', '"http://api.timdatxe.com/"'
+            buildConfigField 'String', 'BASE_URL', '"http://api-staging.timdatxe.com/"'
             buildConfigField 'String', 'MAP_BASE_URL', '"https://maps.googleapis.com/"'
         }
     }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        develop {
+            dimension "version"
+            applicationId "com.example.anothertimdatxe.dev"
+            resValue "string", "app_name", "Tìm đặt xe development"
+        }
+        timdatxe {
+            dimension "version"
+            applicationId "com.example.anothertimdatxe"
+            resValue "string", "app_name", "Tìm đặt xe"
+        }
+    }
+
 }
 
 dependencies {

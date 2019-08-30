@@ -9,6 +9,8 @@ import com.google.gson.Gson
 object CarBookingSharePreference {
     private const val USER_DATA = "user_data"
     private const val GOOGLE_MAP_API_KEY = "google_map_api_key"
+    private const val WELCOME_DRIVER_APP = "welcome_driver_app"
+    private const val WELCOME_USER_APP = "welcome_user_app"
     private var mUserId: Int? = null
     private var mAccessToken: String? = null
 
@@ -44,10 +46,37 @@ object CarBookingSharePreference {
         return mUserId ?: -1
     }
 
+    fun getWelcomeDriverApp(): Boolean {
+        val preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
+        val isWelcome = preference.getBoolean(WELCOME_DRIVER_APP, true)
+        return isWelcome
+    }
+
+    fun setWelcomeDriverApp() {
+        val preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
+        val editor = preference.edit()
+        editor.putBoolean(WELCOME_DRIVER_APP, false)
+        editor.apply()
+    }
+
+    fun getWelcomeUserApp(): Boolean {
+        val preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
+        val isWelcome = preference.getBoolean(WELCOME_USER_APP, true)
+        return isWelcome
+    }
+
+    fun setWelcomeUserApp() {
+        val preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
+        val editor = preference.edit()
+        editor.putBoolean(WELCOME_USER_APP, false)
+        editor.apply()
+    }
+
     fun getAccessToken(): String {
         if (mAccessToken == null) getUserData()?.let { mAccessToken = RequestParam.BEARER + it.session_token }
         return mAccessToken ?: ""
     }
+
 
     fun clearAllPreference() {
         var preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
@@ -55,6 +84,8 @@ object CarBookingSharePreference {
         mUserId = null
         mAccessToken = null
         editor.clear()
+        editor.putBoolean(WELCOME_USER_APP, false)
+        editor.putBoolean(WELCOME_DRIVER_APP, false)
         editor.apply()
     }
 }

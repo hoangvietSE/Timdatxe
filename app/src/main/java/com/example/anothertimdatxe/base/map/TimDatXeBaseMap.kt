@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
@@ -14,6 +15,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.anothertimdatxe.R
@@ -24,6 +26,7 @@ import com.example.anothertimdatxe.util.DialogUtil
 import com.example.anothertimdatxe.util.MapUtil
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -34,6 +37,7 @@ import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.Task
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.PolyUtil
@@ -45,39 +49,67 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         const val REQUEST_CODE_DIALOG_GOOGLE_PLAY_SERVICE = 9001
         const val REQUEST_CODE_PERMISSION = 1998
         const val REQUEST_CODE_SETTINGS_APP = 1999
-        const val ZOOM_CAMERA = 15f
+        const val ZOOM_CAMERA = 13f
     }
 
     protected var mGoogleMap: GoogleMap? = null
-    protected val permission: Array<String> = arrayOf()
+    protected val permission: Array<String?> = arrayOfNulls(2)
+    private var permissionNumber = 0
     protected var isCheckedPermissionSuccess = false
     protected var mFragment: SupportMapFragment? = null
     protected var mRoutePolyline: Polyline? = null
 
     //location device
+    protected var mLastKnowLocation: Location? = null
     protected var mFusedLocationProviderClient: FusedLocationProviderClient? = null
     protected var mPlaceFiled: List<Place.Field>? = null
     protected var request: FindCurrentPlaceRequest? = null
+    protected var requestByPlaceId: FetchPlaceRequest? = null
     protected var mCurrentPlaceName: Array<String?>? = null
     protected var mCurrentPlaceAddress: Array<String?>? = null
     protected var mPlaceClient: PlacesClient? = null
     protected var mListener: DialogInterface.OnClickListener? = null
 
-    override val layoutRes: Int
-        get() = R.layout.activity_base_map
-
     override fun initView() {
+        setUpToolbar()
+        initClient()
         isGooglePlayServicesAvailable()
         setPermissionArray()
-        checkPermissionFromDevice()
         initInterface()
+        initData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkPermissionFromDevice()
+    }
+
+    private fun initClient() {
+        if (!Places.isInitialized()) {
+            Places.initialize(this, resources.getString(R.string.google_services_api_key))
+        }
+        mPlaceClient = Places.createClient(this)
+        mPlaceFiled = listOf(
+                MapUtil.FIELD_PLACE_ID,
+                MapUtil.FIELD_LATLNG,
+                MapUtil.FIELD_NAME,
+                MapUtil.FIELD_ADDRESS,
+                MapUtil.FIELD_LATLNG)
+    }
+
+    protected open fun setUpToolbar() {
     }
 
     protected open fun initInterface() {
     }
 
+    protected open fun initData() {
+    }
 
-    fun isGooglePlayServicesAvailable() {
+    protected open fun gpsLocation() {
+    }
+
+    private fun isGooglePlayServicesAvailable() {
         val available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this)
         if (available == ConnectionResult.SUCCESS) {
             Log.d(TAG, "Google play Service is working")
@@ -98,6 +130,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 Log.d(TAG, "Checked Permission: GRANTED ACCESS_FINE_LOCATION")
                 isCheckedPermissionSuccess = true
+                initMap()
             } else {
                 Log.d(TAG, "Checked Permission: DENIED ACCESS_FINE_LOCATION")
                 isCheckedPermissionSuccess = false
@@ -111,10 +144,13 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             REQUEST_CODE_PERMISSION -> {
-                if (grantResults.size > 0) {
+                val isHasPermission = false
+
+                if (grantResults.isNotEmpty()) {
                     grantResults.forEach {
                         if (it != PackageManager.PERMISSION_GRANTED) {
                             Log.d(TAG, "Can't access permission device")
@@ -135,11 +171,11 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
 
     private fun setPermissionArray() {
         addPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-        addPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        addPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
     }
 
     private fun addPermission(permissionLocation: String) {
-        permission.set(permission.size, permissionLocation)
+        permission[permissionNumber++] = permissionLocation
     }
 
     fun showDialogConfirmPermission() {
@@ -157,6 +193,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
 
                     override fun onNegativeClick(dialogInterface: DialogInterface) {
                         Log.d(TAG, "Map isn't ready because permission isn't allowed by user")
+                        isCheckedPermissionSuccess = false
                         dialogInterface.dismiss()
                         finish()
                     }
@@ -168,8 +205,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.fromParts("package", packageName, null))
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivityForResult(intent, REQUEST_CODE_SETTINGS_APP)
-
+        startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -179,6 +215,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                     isCheckedPermissionSuccess = false
                     finish()
                 } else {
+                    isCheckedPermissionSuccess = true
                     initMap()
                 }
             }
@@ -188,19 +225,20 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected open fun initMap() {
     }
 
-    private fun getLocationDevice() {
+    protected fun getLocationDevice() {
         if (isCheckedPermissionSuccess) {
             try {
                 mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
                 val location: Task<Location>? = mFusedLocationProviderClient?.lastLocation
                 location?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val mLocation = task.result
-                        LatLng(mLocation?.latitude!!, mLocation?.longitude!!)?.let {
+                        mLastKnowLocation = task.result
+                        LatLng(mLastKnowLocation?.latitude!!, mLastKnowLocation?.longitude!!)?.let {
                             moveCamera(
                                     it,
                                     ZOOM_CAMERA
                             )
+                            addCircleShapeMarker(it, R.color.fillColor, R.color.strokeColor, 400.0)
                         }
                     } else {
                         Log.e(TAG, "Location Device Error!")
@@ -246,15 +284,45 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     }
 
     protected fun addCircleShapeMarker(position: LatLng, fillColor: Int, strokeColor: Int, radius: Double) {
+        val fillColorRes: Int?
+        val strokeColorRes: Int?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            fillColorRes = resources.getColor(fillColor, null)
+            strokeColorRes = resources.getColor(strokeColor, null)
+        } else {
+            fillColorRes = resources.getColor(fillColor)
+            strokeColorRes = resources.getColor(strokeColor)
+        }
         mGoogleMap?.addCircle(CircleOptions()
                 .center(position)
                 .radius(radius)
-                .strokeColor(strokeColor)
-                .fillColor(fillColor))
+                .strokeColor(strokeColorRes)
+                .fillColor(0x220000FF)
+                .strokeWidth(2f))
     }
 
     protected fun moveCamera(position: LatLng, zoom: Float) {
-        mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(position, zoom))
+        mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, zoom))
+    }
+
+    protected fun moveCameraBound(route: Route) {
+        val originLatLng = LatLng(route.originLat, route.originLng)
+        val destinationLatLng = LatLng(route.destinationLat, route.destinationLng)
+        val builder = LatLngBounds.builder()
+        builder.include(originLatLng)
+        builder.include(destinationLatLng)
+        val bounds = builder.build()
+        mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(bounds.center, 50f))//ZOOM TO INSIDE WITH ZOOM_CAMERA IS 50f
+        val mCameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 80)//animate from inside to outside with padding screen is 80
+        mGoogleMap?.animateCamera(mCameraUpdate)
+    }
+
+    protected fun moveCameraShow(mLatLngFrom: LatLng, mLatLngTo: LatLng) {
+        val builder = LatLngBounds.Builder()
+        builder.include(mLatLngFrom)
+        builder.include(mLatLngTo)
+        val bounds = builder.build()
+        mGoogleMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 80))
     }
 
     protected fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
@@ -267,30 +335,39 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
-    protected fun updateLocationUI() {
+    protected fun updateLocationUI(resource: Int) {
+        addMapStyle(resource)
         if (mGoogleMap == null) return
         try {
             if (isCheckedPermissionSuccess) {
                 mGoogleMap?.isMyLocationEnabled = true
+                mGoogleMap?.isBuildingsEnabled = true
                 mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
                 mGoogleMap?.uiSettings?.isCompassEnabled = true
             } else {
+                mGoogleMap?.isMyLocationEnabled = false
+                mGoogleMap?.isBuildingsEnabled = false
+                mGoogleMap?.uiSettings?.isCompassEnabled = false
+                mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
             }
         } catch (e: SecurityException) {
             Log.e(TAG, "Can't update location UI", e)
+        } catch (rn: Resources.NotFoundException) {
+            Log.e(TAG, "Can't find style. Error: ", rn);
         }
 
     }
 
-    protected fun getCurrentPlace() {
-        if (!Places.isInitialized()) {
-            Places.initialize(this, resources.getString(R.string.google_api_key))
+    protected fun addMapStyle(resource: Int) {
+        val success = mGoogleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, resource))
+        if (success!!) {
+            Log.d(TAG, "Style parsing success")
+        } else {
+            Log.d(TAG, "Style parsing fail")
         }
-        mPlaceClient = Places.createClient(this)
-        mPlaceFiled = listOf(
-                MapUtil.FIELD_NAME,
-                MapUtil.FIELD_ADDRESS,
-                MapUtil.FIELD_LATLNG)
+    }
+
+    protected fun getCurrentPlace() {
         request = FindCurrentPlaceRequest.builder(mPlaceFiled!!).build()
         try {
             mPlaceClient?.findCurrentPlace(request!!)?.addOnSuccessListener { response ->
@@ -310,6 +387,21 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
             Log.e(TAG, "Get current place: error", e)
         }
     }
+
+    protected fun fetchPlaceById(placeId: String, mListener: FetchPlaceListener) {
+        requestByPlaceId = FetchPlaceRequest.builder(placeId, mPlaceFiled!!).build()
+        mPlaceClient?.fetchPlace(requestByPlaceId!!)?.addOnSuccessListener { response ->
+            val place = response.place
+            Log.d(TAG, "Place found: ${place.name}")
+            mListener.onSuccessFetchPlaces(place.latLng!!)
+        }?.addOnFailureListener { exception ->
+            if (exception is ApiException) {
+                Log.e(TAG, "Place not found: ${exception.message}", exception)
+            }
+            mListener.onErrorFetchPlaces()
+        }
+    }
+
 
     private fun showDialogSetCurrentPlace() {
         AlertDialog.Builder(this)
@@ -334,9 +426,13 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
 
     protected fun drawRouteSuccess(route: Route) {
         val mPolylineOptions = styleWithPolyline()
-        val wayPoints = PolyUtil.decode(route.overviewPolyline)
-        wayPoints.forEach {
-            mPolylineOptions.add(it)
+        route?.steps?.let {
+            it.forEach {
+                val points = PolyUtil.decode(it?.polyline?.points)//List<LatLng>
+                for (point in points) {
+                    mPolylineOptions.add(point)
+                }
+            }
         }
         mRoutePolyline = mGoogleMap?.addPolyline(mPolylineOptions)
     }

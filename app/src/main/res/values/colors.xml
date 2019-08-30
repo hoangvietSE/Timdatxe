@@ -3,6 +3,8 @@
     <color name="colorPrimary">#ffc000</color>
     <color name="colorPrimaryDark">#f19c01</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="fillColor">#990067BB</color>
+    <color name="strokeColor">#3367BB</color>
     <color name="black">#000000</color>
     <color name="color_white">#ffffff</color>
     <color name="login_direct">#DDBEBEBE</color>
