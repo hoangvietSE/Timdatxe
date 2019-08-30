@@ -1,6 +1,8 @@
 package com.example.anothertimdatxe.sprinthome
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -48,6 +50,9 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         const val ITEM_MENU_REVENUE = "revenue"
         const val ITEM_MENU_HISTORY = "history"
         const val ITEM_MENU_SUPPORT = "support"
+        const val ITEM_MENU_SHARE = "share"
+        const val ITEM_MENU_RATING = "rating"
+        const val ITEM_MENU_CONNECT_FB = "connectfb"
         //        const val ITEM_MENU_LOG_OUT = "logout"
         const val VP_ITEM_HOME = 0
         const val VP_ITEM_NEWS = 1
@@ -75,6 +80,15 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
                 ITEM_MENU_SUPPORT -> {
                     goToSupportActivity()
+                }
+                ITEM_MENU_SHARE -> {
+                    goToshareApp()
+                }
+                ITEM_MENU_RATING -> {
+                    goToChPlay()
+                }
+                ITEM_MENU_CONNECT_FB -> {
+                    goToWebBrowser()
                 }
 
 //                ITEM_MENU_LOG_OUT -> {
@@ -318,12 +332,32 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 //                R.drawable.ic_logout_normal,
 //                "Đăng xuất"
 //        )
-
+        val itemShare = MenuItemData(
+                resources.getString(R.string.home_menu_share),
+                R.drawable.ic_share,
+                R.drawable.ic_share,
+                "Chia sẻ"
+        )
+        val itemRating = MenuItemData(
+                resources.getString(R.string.home_menu_rating),
+                R.drawable.ic_rating_app,
+                R.drawable.ic_rating_app,
+                "Đánh giá ứng dụng"
+        )
+        val itemFacebook = MenuItemData(
+                resources.getString(R.string.home_menu_connect_facebook),
+                R.drawable.ic_facebook,
+                R.drawable.ic_facebook,
+                "Kết nối Facebook"
+        )
         if (CarBookingSharePreference.getUserData()!!.isDriver) mAdapter.add(itemRevenue)
         mAdapter.add(itemTrip)
 //        mAdapter.add(itemMessage)
 //        mAdapter.add(itemPromotion)
         mAdapter.add(itemHelp)
+        mAdapter.add(itemShare)
+        mAdapter.add(itemRating)
+        mAdapter.add(itemFacebook)
 //        mAdapter.add(itemLogout)
         rv_menu.adapter = mAdapter
         rv_menu.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
@@ -392,6 +426,45 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
     private fun goToSupportActivity() {
         startActivity(Intent(this@HomeActivity, SupportActivity::class.java))
+    }
+
+    private fun goToWebBrowser() {
+        val intent = Intent().apply {
+            action = Intent.ACTION_VIEW
+            data = Uri.parse("https://facebook.com.vn")
+        }
+        val intentChooser = Intent.createChooser(intent, "Choose web browser")
+        //if no activity that satisfy, return nul
+        //if only activity, start immidiately this
+        //if multiple satisfy activity, show chooser dialog
+        if (intentChooser.resolveActivity(packageManager) != null) {
+            startActivity(intentChooser)
+        }
+    }
+
+    private fun goToChPlay() {
+        val packageName = packageName
+        try {
+            startActivity(Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse("market://details?id=${packageName}")
+            })
+        } catch (e: ActivityNotFoundException) {
+            startActivity(Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse("https://play.google.com/store/apps/details?id=${packageName}")
+            })
+        }
+    }
+
+    private fun goToshareApp() {
+        val intentShare = Intent(Intent.ACTION_SEND)
+        intentShare.setType("text/plain");
+        val intentChooser = Intent.createChooser(intentShare, "Chia sẻ ứng ụng Tìm Đặt Xe")
+        //Verify the original intent will resolve to at least one activity
+        if (intentChooser.resolveActivity(packageManager) != null) {
+            startActivity(intentChooser)
+        }
     }
 
 }

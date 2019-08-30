@@ -21,6 +21,9 @@
     <string name="home_menu_revenue">revenue</string>
     <string name="home_menu_history">history</string>
     <string name="home_menu_support">support</string>
+    <string name="home_menu_share">share</string>
+    <string name="home_menu_rating">rating</string>
+    <string name="home_menu_connect_facebook">connectfb</string>
     <string name="home_post_more">Xem thêm các chuyến đi khác ></string>
 
     <string name="login_text_welcome">Chào mừng đến với</string>
