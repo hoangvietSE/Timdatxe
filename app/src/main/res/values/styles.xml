@@ -14,13 +14,13 @@
     </style>
 
     <style name="BottomTabStyle">
-        <item name="android:background">@drawable/bg_bottom_tab_layout</item>
+        <item name="android:theme">@style/Ripple</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">4dp</item>
         <item name="android:textColor">@color/text_secondary</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">8sp</item>
     </style>
 
     <style name="RegisTextView">
@@ -71,8 +71,7 @@
         <item name="android:background">@color/color_bg</item>
     </style>
 
-    <style name="SmallRatingBar" parent="android:style/Widget.Material.RatingBar.Small">
-    </style>
+    <style name="SmallRatingBar" parent="android:style/Widget.Material.RatingBar.Small"></style>
 
     <style name="TextViewUpdateCar">
         <item name="android:layout_width">wrap_content</item>
@@ -87,5 +86,15 @@
         <item name="android:padding">@dimen/content_padding_resend</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Ripple">
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:colorControlHighlight">@color/colorPrimary</item>
+    </style>
+
+    <style name="RippleToolbar">
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:colorControlHighlight">@color/gray_e6e6e6</item>
     </style>
 </resources>

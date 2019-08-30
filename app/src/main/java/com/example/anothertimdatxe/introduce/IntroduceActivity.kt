@@ -1,6 +1,5 @@
 package com.example.anothertimdatxe.introduce
 
-import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.anothertimdatxe.R
@@ -16,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_introduce.*
 class IntroduceActivity : BaseActivity<IntroducePresenter>(), IntroduceView {
     private var mListImage: ArrayList<String>? = null
     private var mIntroduceAdapter: IntroduceAdapter? = null
-    private var mContainer: ViewGroup? = null
     override val layoutRes: Int
         get() = R.layout.activity_introduce
 

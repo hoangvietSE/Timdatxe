@@ -8,6 +8,7 @@
     android:background="@color/colorPrimary">
 
     <ImageView
+        android:theme="@style/RippleToolbar"
         android:id="@+id/btn_left"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="0dp"
@@ -32,13 +33,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:padding="@dimen/content_padding_normal"
+        tools:src="@drawable/ic_edit"
+        android:theme="@style/RippleToolbar"
         android:id="@+id/btn_right"
-        android:layout_width="@dimen/margin_20_dp"
-        android:layout_height="@dimen/margin_20_dp"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/content_padding_normal"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
