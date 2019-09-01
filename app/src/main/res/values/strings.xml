@@ -348,4 +348,7 @@
     <string name="map_search_starting_point">Điểm xuất phát</string>
     <string name="map_search_ending_point">Điểm kết thúc</string>
     <string name="map_search_button">Xác nhận</string>
+
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+
 </resources>

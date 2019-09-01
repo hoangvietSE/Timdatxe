@@ -97,4 +97,8 @@
         <item name="android:background">?selectableItemBackgroundBorderless</item>
         <item name="android:colorControlHighlight">@color/gray_e6e6e6</item>
     </style>
+
+    <style name="ThemePickerImage">
+        <item name="android:color">@color/colorPrimary</item>
+    </style>
 </resources>

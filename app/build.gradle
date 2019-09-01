@@ -18,13 +18,13 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file("../keystore/keydebug.jks")
+            storeFile file('C:\\Users\\Hoang Viet\\Desktop\\keydebug.jks')
             storePassword "Aa234566"
             keyAlias "keyDebug"
             keyPassword "Aa234566"
         }
         release {
-            storeFile file('../keystore/keyrelease.jks')
+            storeFile file('C:\\Users\\Hoang Viet\\Desktop\\keyrelease.jks')
             storePassword "Aa234566"
             keyAlias "keyRelease"
             keyPassword "Aa234566"
@@ -37,9 +37,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"http://api.timdatxe.com/"'
             buildConfigField 'String', 'MAP_BASE_URL', '"https://maps.googleapis.com/"'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"http://api-staging.timdatxe.com/"'
             buildConfigField 'String', 'MAP_BASE_URL', '"https://maps.googleapis.com/"'
         }
@@ -105,5 +107,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'com.google.android.libraries.places:places:2.0.0'
     implementation 'com.google.maps.android:android-maps-utils:0.5'
+
+    //image picker
+    implementation "com.zhihu.android:matisse:$latest_version"
 
 }
