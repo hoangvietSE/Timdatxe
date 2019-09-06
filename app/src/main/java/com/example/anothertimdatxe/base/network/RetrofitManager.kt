@@ -426,4 +426,13 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun fetchListDriverBook(data: MutableMap<String, Any>): Single<BaseResult<List<DriverListRequestResponse>>> {
+        return apiService.driverListRequest(
+                CarBookingSharePreference.getAccessToken(),
+                data
+        )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

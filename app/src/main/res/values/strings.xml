@@ -118,6 +118,9 @@
     <string name="facebook_app_id">366213034009507</string>
     <string name="fb_login_protocol_scheme">fb366213034009507</string>
 
+    //Driver List Request
+    <string name="driver_list_request_toolbar_title">Danh sách yêu cầu</string>
+
     //User Profile
     <string name="user_profile_number_trip">Số chuyến đã đi:</string>
     <string name="user_profile_detail">Thông tin chi tiết</string>

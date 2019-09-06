@@ -48,4 +48,6 @@
     <color name="color_finish">#c1272d</color>
     <color name="color_cancel">#000</color>
     <color name="color_revenue">#026838</color>
+
+    <color name="shimmer_cell_background">#EEEDED</color>
 </resources>

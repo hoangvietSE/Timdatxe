@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.base.mvp.BaseView
+import kotlinx.android.synthetic.main.shimmer_layout.*
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), BaseView {
     protected abstract val layoutRes: Int
@@ -55,4 +56,12 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), BaseView {
     }
 
     abstract fun getPresenter(): T
+
+    protected fun showPreviewLoading(){
+        shimmer_layout.startShimmer()
+    }
+
+    protected fun hidePreviewLoading(){
+        shimmer_layout.stopShimmer()
+    }
 }

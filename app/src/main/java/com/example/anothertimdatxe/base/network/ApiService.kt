@@ -246,4 +246,9 @@ interface ApiService {
     @GET(ApiConstant.DRIVER_POST_CREATED)
     @Headers("Content-Type: application/json")
     fun driverPostHome(@Query(RequestParam.TYPE) type: Int): Single<BaseResult<List<DriverPostResponse>>>
+
+    //Driver List Request
+    @GET(ApiConstant.DRIVER_REQUEST_USER_POST)
+    @Headers("Content-Type: application/json")
+    fun driverListRequest(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverListRequestResponse>>>
 }
