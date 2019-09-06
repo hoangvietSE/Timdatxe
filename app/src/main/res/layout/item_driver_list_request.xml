@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_8_dp"
+    android:layout_marginTop="@dimen/margin_8_dp"
+    android:layout_marginEnd="@dimen/margin_8_dp"
+    android:background="@drawable/bg_search_city_post"
+    android:paddingBottom="@dimen/margin_4_dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/margin_20_dp"
+        android:background="@drawable/bg_search_city_post_up"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:minLines="1"
+        android:paddingStart="@dimen/content_padding_resend"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Hà Nội - Thái Nguyên" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_imv"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="@dimen/margin_4_dp"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/ic_avatar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_imv"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_4_dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="@id/guideline_imv"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8_dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_starting_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_place"
+                android:drawablePadding="@dimen/margin_4_dp"
+                android:textColor="@color/color_quantity"
+                android:textSize="@dimen/margin_12_dp"
+                android:textStyle="bold"
+                tools:text="Hà Nội" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_4_dp"
+                android:src="@drawable/ic_arrow" />
+
+            <TextView
+                android:id="@+id/tv_ending_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_4_dp"
+                android:textColor="@color/color_quantity"
+                android:textSize="@dimen/margin_12_dp"
+                android:textStyle="bold"
+                tools:text="Thái Nguyên" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_seat"
+                android:drawablePadding="@dimen/margin_4_dp"
+                android:text="@string/seat_book"
+                android:textColor="@color/black"
+                android:textSize="@dimen/margin_12_dp" />
+
+            <TextView
+                android:id="@+id/tv_number_seat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_4_dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                tools:text="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imv_status"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_status" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_4_dp"
+                android:drawablePadding="@dimen/margin_4_dp"
+                android:text="@string/post_more_status"
+                android:textColor="@color/black"
+                android:textSize="@dimen/margin_12_dp" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_4_dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                tools:text="Công khai" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_time_start"
+                android:drawablePadding="@dimen/margin_4_dp"
+                android:textColor="@color/blue_text"
+                android:textStyle="bold"
+                tools:text="11:21 AM" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_4_dp"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="@dimen/margin_4_dp"
+                android:textColor="@color/blue_text"
+                android:textStyle="bold"
+                tools:text="28/07/2019" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

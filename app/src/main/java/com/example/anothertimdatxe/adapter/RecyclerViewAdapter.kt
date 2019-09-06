@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 
 abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Boolean) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listWrapperModels: ArrayList<ModelWrapper>? = null
     private var listWrapperModelsBackup: ArrayList<ModelWrapper>? = null
@@ -69,10 +69,10 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
     }
 
     private fun notifyItemClickListener(
-        adapter: RecyclerView.Adapter<*>,
-        viewHolder: RecyclerView.ViewHolder?,
-        viewType: Int,
-        position: Int
+            adapter: RecyclerView.Adapter<*>,
+            viewHolder: RecyclerView.ViewHolder?,
+            viewType: Int,
+            position: Int
     ) {
         for (onItemClickListener in onItemClickListeners) {
             onItemClickListener.onItemClick(adapter, viewHolder, viewType, position)
@@ -97,14 +97,14 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
         notifyItemRangeRemoved(0, itemCount)
     }
 
-    fun  refresh(models: List<Any>) {
+    fun refresh(models: List<Any>) {
         val itemCount = itemCount
         listWrapperModels!!.clear()
         notifyItemRangeRemoved(0, itemCount)
         addModels(models, false)
     }
 
-    fun  addModels(listModels: List<Any>, isScroll: Boolean) {
+    fun addModels(listModels: List<Any>, isScroll: Boolean) {
         addModels(listModels, VIEW_TYPE_NORMAL, isScroll)
     }
 
@@ -224,7 +224,7 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
             })
 
             val diffResult = DiffUtil
-                .calculateDiff(initDiffUtilCallback(listWrapperModels!!, listItemLeft))
+                    .calculateDiff(initDiffUtilCallback(listWrapperModels!!, listItemLeft))
 
             listWrapperModels = listItemLeft
             diffResult.dispatchUpdatesTo(this)
@@ -366,10 +366,10 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
 
     interface OnItemClickListener {
         fun onItemClick(
-            adapter: RecyclerView.Adapter<*>,
-            viewHolder: RecyclerView.ViewHolder?,
-            viewType: Int,
-            position: Int
+                adapter: RecyclerView.Adapter<*>,
+                viewHolder: RecyclerView.ViewHolder?,
+                viewType: Int,
+                position: Int
         )
     }
 

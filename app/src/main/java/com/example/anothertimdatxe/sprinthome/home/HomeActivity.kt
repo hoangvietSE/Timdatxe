@@ -25,6 +25,7 @@ import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
+import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListRequestFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.driver.profile.DriverProfileFragment
 import com.example.anothertimdatxe.sprinthome.profile.driver.updateprofile.DriverUpdateProfileActivity
@@ -56,7 +57,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         //        const val ITEM_MENU_LOG_OUT = "logout"
         const val VP_ITEM_HOME = 0
         const val VP_ITEM_NEWS = 1
-        const val VP_ITEM_LISTS = 2
+        const val VP_ITEM_LIST_REQUEST = 2
         const val VP_ITEM_PROFILES = 3
         const val TIME_BACK_LIMIT = 2000L
     }
@@ -156,14 +157,15 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         var userProfileFragment: Fragment? = null
         var driverProfileFragment: Fragment? = null
         var listRequestFragment: Fragment? = null
+        var driverListRequestFragment: Fragment? = null
         if (CarBookingSharePreference.getUserData()!!.isUser) {
             listPostCreatedFragment = UserPostCreatedFragment.getInstance()
             listRequestFragment = ListRequestFragment.getInstance()
             userProfileFragment = UserProfileFragment.getInstance()
         } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
             listPostCreatedFragment = UserPostCreatedFragment.getInstance()
-            listRequestFragment = ListRequestFragment.getInstance()
             driverProfileFragment = DriverProfileFragment.getInstance()
+            driverListRequestFragment = DriverListRequestFragment.getInstance()
         }
         mListFragment.add(homeFragment)
         if (CarBookingSharePreference.getUserData()!!.isUser) {
@@ -172,7 +174,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             mListFragment.add(userProfileFragment!!)
         } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
             mListFragment.add(listPostCreatedFragment!!)
-            mListFragment.add(listRequestFragment!!)
+            mListFragment.add(driverListRequestFragment!!)
             mListFragment.add(driverProfileFragment!!)
         }
         mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
@@ -193,6 +195,17 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 when (position) {
                     VP_ITEM_HOME -> {
                         setToolbarHome()
+                    }
+                    VP_ITEM_LIST_REQUEST -> {
+                        setToolbarListRequest()
+                        when {
+                            CarBookingSharePreference.getUserData()!!.isUser -> {
+                                setToolbarTitle(resources.getString(R.string.driver_list_request_toolbar_title).toUpperCase())
+                            }
+                            CarBookingSharePreference.getUserData()!!.isDriver -> {
+                                setToolbarTitle(resources.getString(R.string.driver_list_request_toolbar_title).toUpperCase())
+                            }
+                        }
                     }
                     VP_ITEM_PROFILES -> {
                         setToolbarProfile()
@@ -276,6 +289,25 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     private fun setToolbarProfile() {
+        toolbarTitle?.visible()
+        imvCenter?.gone()
+        toolbar?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.background = resources.getDrawable(R.color.colorPrimary, null)
+            } else {
+                it.background = resources.getDrawable(R.color.colorPrimary)
+            }
+        }
+        leftbutton?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.setImageResource(R.drawable.ic_menu)
+            } else {
+                it.setImageResource(R.drawable.ic_menu)
+            }
+        }
+    }
+
+    private fun setToolbarListRequest() {
         toolbarTitle?.visible()
         imvCenter?.gone()
         toolbar?.let {
@@ -400,7 +432,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onRequest() {
-        vp_home.currentItem = VP_ITEM_LISTS
+        vp_home.currentItem = VP_ITEM_LIST_REQUEST
     }
 
     override fun onProfile() {
