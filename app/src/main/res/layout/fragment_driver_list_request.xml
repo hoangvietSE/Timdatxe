@@ -75,8 +75,10 @@
                             android:id="@+id/tv_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
                             android:background="@drawable/bg_white_10dp"
                             android:editable="false"
+                            android:focusableInTouchMode="false"
                             android:hint="Ngày/tháng/năm"
                             android:paddingStart="@dimen/content_padding_resend"
                             android:paddingTop="@dimen/margin_4_dp"
@@ -87,6 +89,18 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_choose_date" />
+
+                        <ImageView
+                            android:id="@+id/imv_close"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_6_dp"
+                            android:src="@drawable/ic_round_close"
+                            android:tint="@color/black"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_date"
+                            app:layout_constraintEnd_toEndOf="@id/tv_date"
+                            app:layout_constraintTop_toTopOf="@id/tv_date" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -137,6 +151,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/formSearch"
@@ -148,6 +163,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/formSearch" />
 
+            <include
+                layout="@layout/layout_no_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/formSearch" />
 
         </RelativeLayout>
 

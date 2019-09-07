@@ -46,17 +46,17 @@
                         android:layout_marginTop="@dimen/margin_16_dp"
                         android:layout_marginEnd="@dimen/margin_10_dp"
                         android:layout_toEndOf="@id/rcv_car"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                 </RelativeLayout>
             </HorizontalScrollView>
 
             <TextView
-                android:background="@color/color_bottom_bg"
-                android:padding="@dimen/content_padding_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rcv_car"
+                android:background="@color/color_bottom_bg"
+                android:padding="@dimen/content_padding_normal"
                 android:text="@string/update_driver_car_condition_image" />
 
             <LinearLayout
@@ -310,11 +310,11 @@
                         android:text="@string/update_driver_car_date_regis" />
 
                     <EditText
-                        android:editable="false"
-                        android:focusableInTouchMode="true"
-                        android:focusable="true"
                         android:id="@+id/edt_date_regis"
                         style="@style/EditTextUpdateCar"
+                        android:editable="false"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
                         android:hint="@string/update_driver_car_hint_date_regis"
                         android:visibility="visible" />
 
@@ -336,11 +336,11 @@
                         android:text="@string/driver_car_title_handangkiem" />
 
                     <EditText
-                        android:editable="false"
-                        android:focusableInTouchMode="true"
-                        android:focusable="true"
                         android:id="@+id/edt_handangkiem"
                         style="@style/EditTextUpdateCar"
+                        android:editable="false"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
                         android:hint="@string/update_driver_car_hint_date_regis"
                         android:visibility="visible" />
 

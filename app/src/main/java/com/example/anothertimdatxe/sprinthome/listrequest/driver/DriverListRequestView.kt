@@ -11,4 +11,5 @@ interface DriverListRequestView : BaseView {
     fun setListItem(list: List<DriverListRequestResponse>)
     fun showPreview()
     fun hidePreview()
+    fun showNoResult(check: Boolean)
 }
