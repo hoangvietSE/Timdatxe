@@ -5,6 +5,7 @@ import android.os.Build
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.map.FetchPlaceListener
 import com.example.anothertimdatxe.base.map.TimDatXeBaseMap
+import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.presentation.map.mapsearch.MapSearchActivity
 import com.example.anothertimdatxe.util.ToastUtil
@@ -50,7 +51,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
-        ToastUtil.show("Map on ready")
+        if (isTheFirstTime) ToastUtil.show("Map on ready")
         mGoogleMap = googleMap
         mGoogleMap?.setOnMapClickListener(this)
         mGoogleMap?.setOnPolylineClickListener(this)
@@ -77,6 +78,9 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
                         mLocationEndingPointId = data?.extras?.getString(MapSearchActivity.ENDING_LOCATION_POINT_ID)
                         mLocationStartingPoint = data?.extras?.getString(MapSearchActivity.STARTING_LOCATION_POINT)
                         mLocationEndingPoint = data?.extras?.getString(MapSearchActivity.ENDING_LOCATION_POINT)
+                        edt_starting_point.setText(mLocationStartingPoint)
+                        edt_ending_point.setText(mLocationEndingPoint)
+                        csl_confirm.visible()
                         setMarkerLocation(mLocationStartingPointId!!, mLocationEndingPointId!!)
                     }
                 }

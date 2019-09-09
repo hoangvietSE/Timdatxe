@@ -354,4 +354,24 @@
 
     <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
 
+    //driver create post
+    <string name="driver_create_post_title">Đăng tin chuyến đi</string>
+    <string name="driver_create_post_row_title">Tiêu đề</string>
+    <string name="driver_create_post_row_title_hint">Nhập tiêu đề</string>
+    <string name="driver_create_post_row_distance">Khoảng cách</string>
+    <string name="driver_create_post_row_starting_date">Ngày đi</string>
+    <string name="driver_create_post_row_starting_date_hint">Chọn ngày xuất phát</string>
+    <string name="driver_create_post_row_time">Thời gian</string>
+    <string name="driver_create_post_row_time_title">Chọn thời gian</string>
+    <string name="driver_create_post_row_estimate_time">Thời gian dự kiến (h)</string>
+    <string name="driver_create_post_row_estimate_hint">Tổng hành trình</string>
+    <string name="driver_create_post_row_car">Loại xe</string>
+    <string name="driver_create_post_row_number_seat">Sô chỗ</string>
+    <string name="driver_create_post_row_highway">Xe đi cao tốc</string>
+    <string name="driver_craete_post_attemp">*Chú ý: Giá được chia theo tỉ lệ % quãng đường</string>
+    <string name="convinent_hint_30_percent">* Giá tiện chuyến 30%</string>
+    <string name="convinent_hint_50_percent">* Giá tiện chuyến 50%</string>
+    <string name="convinent_hint_70_percent">* Giá tiện chuyến 70%</string>
+    <string name="convinent_hint_100_percent">* Giá tiện chuyến 100%</string>
+    <string name="driver_create_post_btn_create">Tạo chuyến đi</string>
 </resources>

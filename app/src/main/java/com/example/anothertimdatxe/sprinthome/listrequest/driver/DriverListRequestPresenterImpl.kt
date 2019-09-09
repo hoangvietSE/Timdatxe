@@ -65,7 +65,6 @@ class DriverListRequestPresenterImpl(mView: DriverListRequestView) : BasePresent
         val disposable = RetrofitManager.fetchListDriverBook(data)
                 .doOnSubscribe {
                     mView!!.showPreview()
-                    if (pageIndex >= 2) mView!!.showLoadingItem()
                 }
                 .doFinally {
                     mView!!.hidePreview()

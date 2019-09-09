@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_convenient_trip"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/margin_8_dp"
+        android:text="Tiện chuyến (Giá trên 1 ghế)"
+        android:textColor="@color/black" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8_dp">
+
+        <EditText
+            android:id="@+id/edt_30_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_create_post"
+            android:hint="@string/convinent_hint_30_percent"
+            android:paddingStart="@dimen/content_padding_resend"
+            android:paddingTop="@dimen/margin_4_dp"
+            android:paddingBottom="@dimen/margin_4_dp"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintEnd_toStartOf="@id/edt_50_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edt_50_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_create_post"
+            android:hint="@string/convinent_hint_50_percent"
+            android:paddingStart="@dimen/content_padding_resend"
+            android:paddingTop="@dimen/margin_4_dp"
+            android:paddingBottom="@dimen/margin_4_dp"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edt_30_percent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8_dp"
+        app:layout_constraintEnd_toEndOf="@+id/edt_70_percent"
+        app:layout_constraintStart_toEndOf="@+id/edt_70_percent">
+
+        <EditText
+            android:id="@+id/edt_70_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_create_post"
+            android:hint="@string/convinent_hint_70_percent"
+            android:paddingStart="@dimen/content_padding_resend"
+            android:paddingTop="@dimen/margin_4_dp"
+            android:paddingBottom="@dimen/margin_4_dp"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintEnd_toStartOf="@id/edt_100_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edt_100_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_create_post"
+            android:hint="@string/convinent_hint_100_percent"
+            android:paddingStart="@dimen/content_padding_resend"
+            android:paddingTop="@dimen/margin_4_dp"
+            android:paddingBottom="@dimen/margin_4_dp"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edt_70_percent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

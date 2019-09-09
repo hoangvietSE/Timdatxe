@@ -68,7 +68,7 @@
     <style name="LineView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/color_bg</item>
+        <item name="android:background">@color/forgot_description</item>
     </style>
 
     <style name="SmallRatingBar" parent="android:style/Widget.Material.RatingBar.Small"></style>

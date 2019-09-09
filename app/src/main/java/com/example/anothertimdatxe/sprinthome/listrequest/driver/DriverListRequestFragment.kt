@@ -148,6 +148,7 @@ class DriverListRequestFragment : BaseFragment<DriverListRequestPresenter>(), Dr
     }
 
     override fun onLoadMore() {
+        showLoadingItem()
         isLoading = true
         mDriverListRequestAdapter?.setIsLoading(true)
         mPresenter?.fetListDriverBook()
