@@ -12,6 +12,7 @@ import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.DriverListRequestResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.util.Constant
+import com.example.anothertimdatxe.util.DateUtil
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class DriverListRequestAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
@@ -30,13 +31,17 @@ class DriverListRequestAdapter(context: Context) : EndlessLoadingRecyclerViewAda
         val data = getItem(position, DriverListRequestResponse::class.java)
         val viewHolder = holder as ViewHolder
         GlideApp.with(context!!)
-                .load(data?.avatar)
+                .load(data?.user?.avatar)
                 .placeholder(R.drawable.ic_avatar)
                 .error(R.drawable.ic_avatar)
                 .into(viewHolder.avatar)
-        viewHolder.startingPoint.text = data?.startPoint
-        viewHolder.endingPoint.text = data?.endPoint
+        viewHolder.title.text = data?.userPost?.title
+        viewHolder.startingPoint.text = data?.userPost?.app_start_province
+        viewHolder.endingPoint.text = data?.userPost?.app_end_province
+        viewHolder.numberSeat.text = data?.userPost?.numberSeat.toString()
         viewHolder.status.text = data?.strStatus
+        viewHolder.time.text = DateUtil.formatDate(data?.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
+        viewHolder.date.text = DateUtil.formatDate(data?.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
         when (data?.status) {
             Constant.DRIVER_BOOK_PENDING -> {
                 setTextColor(viewHolder.status, R.color.color_pending)
@@ -78,6 +83,7 @@ class DriverListRequestAdapter(context: Context) : EndlessLoadingRecyclerViewAda
     }
 
     class ViewHolder(itemView: View) : NormalViewHolder(itemView) {
+        val title: TextView = itemView.findViewById(R.id.tv_title)
         val avatar: ImageView = itemView.findViewById(R.id.imv_avatar)
         val startingPoint: TextView = itemView.findViewById(R.id.tv_starting_point)
         val endingPoint: TextView = itemView.findViewById(R.id.tv_ending_point)

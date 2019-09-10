@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_type_trip"
+        android:background="@drawable/bg_type_trip_create_post"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/content_padding_normal"
         android:paddingTop="@dimen/content_padding_resend"

@@ -8,6 +8,8 @@
     android:layout_marginTop="@dimen/margin_8_dp"
     android:layout_marginEnd="@dimen/margin_8_dp"
     android:background="@drawable/bg_search_city_post"
+    android:clickable="true"
+    android:focusable="true"
     android:paddingBottom="@dimen/margin_4_dp">
 
     <TextView
@@ -53,7 +55,7 @@
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_begin="258dp" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -61,7 +63,7 @@
         android:layout_marginStart="@dimen/margin_4_dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline_imv"
         app:layout_constraintTop_toBottomOf="@id/tv_title">
 
@@ -94,6 +96,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_4_dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:minLines="1"
                 android:textColor="@color/color_quantity"
                 android:textSize="@dimen/margin_12_dp"
                 android:textStyle="bold"

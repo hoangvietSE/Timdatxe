@@ -24,9 +24,12 @@ import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.util.DialogUtil
 import com.example.anothertimdatxe.util.MapUtil
+import com.example.anothertimdatxe.util.ToastUtil
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -60,6 +63,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected var mRoutePolyline: Polyline? = null
 
     //location device
+    protected var isTheFirstTime: Boolean = true
     protected var mLastKnowLocation: Location? = null
     protected var mFusedLocationProviderClient: FusedLocationProviderClient? = null
     protected var mPlaceFiled: List<Place.Field>? = null
@@ -69,6 +73,8 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     protected var mCurrentPlaceAddress: Array<String?>? = null
     protected var mPlaceClient: PlacesClient? = null
     protected var mListener: DialogInterface.OnClickListener? = null
+    protected var isGpsOnReady: Boolean = false
+    protected var mGoogleApiClient: GoogleApiClient? = null
 
     override fun initView() {
         setUpToolbar()
@@ -95,6 +101,8 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                 MapUtil.FIELD_NAME,
                 MapUtil.FIELD_ADDRESS,
                 MapUtil.FIELD_LATLNG)
+        mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).build()
+        mGoogleApiClient?.connect()
     }
 
     protected open fun setUpToolbar() {
@@ -130,7 +138,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 Log.d(TAG, "Checked Permission: GRANTED ACCESS_FINE_LOCATION")
                 isCheckedPermissionSuccess = true
-                initMap()
+                checkGpsInDevice()
             } else {
                 Log.d(TAG, "Checked Permission: DENIED ACCESS_FINE_LOCATION")
                 isCheckedPermissionSuccess = false
@@ -159,7 +167,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                         }
                     }
                     isCheckedPermissionSuccess = true
-                    initMap()
+                    checkGpsInDevice()
                 }
             }
         }
@@ -216,11 +224,39 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                     finish()
                 } else {
                     isCheckedPermissionSuccess = true
+                    checkGpsInDevice()
+                }
+            }
+            GpsUtil.GPS_REQUEST -> {
+                if (resultCode == Activity.RESULT_OK) {
                     initMap()
+                } else {
+                    ToastUtil.show("Vui lòng bật định vị trên thiết bị của bạn!")
+                    finish()
                 }
             }
         }
     }
+
+    private fun checkGpsInDevice() {
+        GpsUtil(this).turnGPSOn(object : GpsUtil.onGpsListener {
+            override fun startSettingGps() {
+                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            }
+
+            override fun startResolution(status: Status) {
+                status.startResolutionForResult(this@TimDatXeBaseMap, GpsUtil.GPS_REQUEST)
+            }
+
+            override fun gpsStatus(isGPSEnable: Boolean) {
+                isGpsOnReady = isGPSEnable
+                if (isGpsOnReady) {
+                    initMap()
+                }
+            }
+        }, mGoogleApiClient!!)
+    }
+
 
     protected open fun initMap() {
     }
@@ -238,7 +274,10 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                                     it,
                                     ZOOM_CAMERA
                             )
-                            addCircleShapeMarker(it, R.color.fillColor, R.color.strokeColor, 400.0)
+                            if (isTheFirstTime) {
+                                isTheFirstTime = false
+                                addCircleShapeMarker(it, R.color.fillColor, R.color.strokeColor, 400.0)
+                            }
                         }
                     } else {
                         Log.e(TAG, "Location Device Error!")

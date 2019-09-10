@@ -207,7 +207,7 @@
                     android:id="@+id/tv_hot_cities"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/bg_type_trip"
+                    android:background="@drawable/bg_type_trip_create_post"
                     android:drawableEnd="@drawable/ic_arrow"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/content_padding_normal"

@@ -82,7 +82,7 @@
             <TextView
                 style="@style/TextViewBold"
                 android:layout_width="match_parent"
-                android:background="@drawable/bg_type_trip"
+                android:background="@drawable/bg_type_trip_create_post"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/content_padding_normal"
                 android:paddingTop="4dp"
