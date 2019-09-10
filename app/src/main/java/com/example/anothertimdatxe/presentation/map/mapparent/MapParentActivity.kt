@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.presentation.map.mapparent
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import com.example.anothertimdatxe.R
@@ -19,6 +20,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     companion object {
         val TAG = MapParentActivity::class.java.simpleName
         const val REQUEST_CODE_LOCATION = 9001
+        const val REQUEST_CODE_CREATE_POST = 9002
     }
 
     private var mLocationStartingPointId: String? = null
@@ -47,13 +49,13 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
             gpsLocation()
         }
         btn_confirm.setOnClickListener {
-            startActivity(Intent(this, DriverCreatePostActivity::class.java).apply {
+            startActivityForResult(Intent(this, DriverCreatePostActivity::class.java).apply {
                 putExtra(DriverCreatePostActivity.EXTRA_STARTING_POINT, mLocationStartingPoint)
                 putExtra(DriverCreatePostActivity.EXTRA_ENDING_POINT, mLocationEndingPoint)
                 putExtra(DriverCreatePostActivity.EXTRA_DISTANCE, mDistance)
                 putExtra(DriverCreatePostActivity.EXTRA_DURATION, mDuration)
                 putParcelableArrayListExtra(DriverCreatePostActivity.EXTRA_LIST_WAYPOINT, mList)
-            })
+            }, REQUEST_CODE_CREATE_POST)
         }
     }
 
@@ -97,6 +99,10 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
                         setMarkerLocation(mLocationStartingPointId!!, mLocationEndingPointId!!)
                     }
                 }
+            }
+            REQUEST_CODE_CREATE_POST -> {
+                setResult(Activity.RESULT_OK,Intent())
+                finish()
             }
         }
     }

@@ -146,7 +146,7 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
         val disposable = RetrofitManager.driverCreatePost(object : ICallBack<BaseResult<DriverCreatePostResponse>> {
             override fun onSuccess(result: BaseResult<DriverCreatePostResponse>?) {
                 mView!!.hideLoading()
-                Log.d("myLog", "Success")
+                mView!!.onSuccessCreatePost()
             }
 
             override fun onError(e: ApiException) {

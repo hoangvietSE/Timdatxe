@@ -121,6 +121,9 @@
     //Driver List Request
     <string name="driver_list_request_toolbar_title">Danh sách yêu cầu</string>
 
+    //Driver List Post
+    <string name="driver_list_post_toolbar_title">Danh sách chuyến đã đăng</string>
+
     //User Profile
     <string name="user_profile_number_trip">Số chuyến đã đi:</string>
     <string name="user_profile_detail">Thông tin chi tiết</string>

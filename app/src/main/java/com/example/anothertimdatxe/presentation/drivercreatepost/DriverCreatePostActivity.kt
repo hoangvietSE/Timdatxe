@@ -1,5 +1,7 @@
 package com.example.anothertimdatxe.presentation.drivercreatepost
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -380,6 +382,11 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
 
     override fun onErrorMinMoney() {
         ToastUtil.show(resources.getString(R.string.driver_create_post_min_money))
+    }
+
+    override fun onSuccessCreatePost() {
+        setResult(Activity.RESULT_OK, Intent())
+        finish()
     }
 
 }

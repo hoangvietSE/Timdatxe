@@ -68,9 +68,13 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
             swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
         }
         swipeRefresh.setOnRefreshListener {
-            clearData()
-            fetchListDriverPost()
+            refreshData()
         }
+    }
+
+    fun refreshData(){
+        clearData()
+        fetchListDriverPost()
     }
 
     private fun setAdapter() {

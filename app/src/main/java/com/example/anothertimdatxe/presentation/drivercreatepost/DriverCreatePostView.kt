@@ -16,4 +16,5 @@ interface DriverCreatePostView : BaseView {
     fun onErrorNoMoney()
     fun onErrorInvalidMoney()
     fun onErrorMinMoney()
+    fun onSuccessCreatePost()
 }
