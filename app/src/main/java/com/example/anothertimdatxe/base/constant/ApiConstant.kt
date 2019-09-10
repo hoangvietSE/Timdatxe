@@ -33,6 +33,8 @@ object ApiConstant {
     const val DRIVER_REQUEST_USER_POST = "/v1/driver_book_options"
     const val DRIVER_CAR_DETAIL = "/v1/driver_cars/{${RequestParam.ID}}"
     const val DRIVER_USER_REVIEW = "/v1/user_review/{${RequestParam.DRIVER_ID}}"
+    const val DRIVER_CAR = "v1/driver_posts/add"
+    const val DRIVER_LIST_POST = "/v1/drivers/{${RequestParam.ID}}/posts"
 
     //Login Soical
     const val LOGIN_SOCIAL = "/v1/login_social"

@@ -435,4 +435,30 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun driverCarInfo(iCallBack: ICallBack<BaseResult<List<DriverCarResponse>>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.driverCarInfo(CarBookingSharePreference.getAccessToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun driverCreatePost(iCallBack: ICallBack<BaseResult<DriverCreatePostResponse>>, request: DriverCreatePostRequest): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.driverCreatePost(CarBookingSharePreference.getAccessToken(), createPostRequest(request))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun driverListPost(data: MutableMap<String, Any>): Single<BaseResult<List<DriverListPostResponse>>> {
+        return apiService.driverListPost(
+                CarBookingSharePreference.getAccessToken(),
+                CarBookingSharePreference.getUserId(),
+                data
+        )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

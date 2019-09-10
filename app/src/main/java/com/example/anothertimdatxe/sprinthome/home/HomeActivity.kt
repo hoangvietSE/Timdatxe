@@ -25,6 +25,7 @@ import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
+import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListPostFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListRequestFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.driver.profile.DriverProfileFragment
@@ -163,9 +164,9 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             listRequestFragment = ListRequestFragment.getInstance()
             userProfileFragment = UserProfileFragment.getInstance()
         } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
-            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
-            driverProfileFragment = DriverProfileFragment.getInstance()
+            listPostCreatedFragment = DriverListPostFragment.getInstance()
             driverListRequestFragment = DriverListRequestFragment.getInstance()
+            driverProfileFragment = DriverProfileFragment.getInstance()
         }
         mListFragment.add(homeFragment)
         if (CarBookingSharePreference.getUserData()!!.isUser) {

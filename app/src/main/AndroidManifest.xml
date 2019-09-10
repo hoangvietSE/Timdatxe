@@ -119,6 +119,9 @@
         <activity
             android:name=".introduce.IntroduceActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.drivercreatepost.DriverCreatePostActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

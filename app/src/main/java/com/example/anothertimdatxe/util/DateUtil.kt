@@ -1,6 +1,7 @@
 package com.example.anothertimdatxe.util
 
 import java.text.SimpleDateFormat
+import java.util.*
 
 object DateUtil {
     val DATE_FORMAT_1 = "yyyy-MM-dd"
@@ -38,6 +39,10 @@ object DateUtil {
         val initFormater = SimpleDateFormat(initFormat)
         val resultFormater = SimpleDateFormat(resultFormat)
         return resultFormater.format(initFormater.parse(day))
+    }
+
+    fun formatStringToDate(day: String, format: String): Date {
+        return SimpleDateFormat(format).parse(day)
     }
 
     fun formatValue(value: String): String {

@@ -140,6 +140,7 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/btn_confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_button_mase_base"

@@ -29,10 +29,10 @@
         android:paddingBottom="@dimen/margin_4_dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_centerVertical="true"
             android:id="@+id/formAvatar"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/margin_4_dp"
             android:scaleX="0.9"
             android:scaleY="0.9"
@@ -131,6 +131,38 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imv_status"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_status" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:drawablePadding="@dimen/margin_4_dp"
+                    android:text="@string/post_more_status"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/margin_12_dp" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    tools:text="Công khai" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -167,49 +199,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/formXeRieng"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingEnd="@dimen/margin_4_dp">
-
-                    <ImageView
-                        android:layout_width="@dimen/margin_14_dp"
-                        android:layout_height="@dimen/margin_14_dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_ic_baoxe" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        android:text="Xe riêng"
-                        android:textColor="@color/red_text"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/formTienChuyen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/margin_14_dp"
-                        android:layout_height="@dimen/margin_14_dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_tienchuyen" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        android:text="Tiện chuyến"
-                        android:textColor="@color/red_text"
-                        android:textStyle="bold" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -242,21 +231,8 @@
                     android:layout_marginStart="@dimen/margin_4_dp"
                     android:textColor="@color/red_text"
                     android:textStyle="bold"
-                    tools:text="19/7/2019" />
+                    tools:text="50,000 VND" />
             </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:padding="@dimen/margin_4_dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/margin_8_dp"
-            android:background="@drawable/bg_btn_book_car"
-            android:text="@string/book_car"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
     </RelativeLayout>
 </LinearLayout>

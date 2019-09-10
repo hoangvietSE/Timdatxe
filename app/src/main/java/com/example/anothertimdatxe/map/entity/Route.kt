@@ -7,5 +7,5 @@ class Route(
         val destinationLng: Double,
         val overviewPolyline: String,
         val steps: List<StepsItem?>,
-        val distance: Int,
-        val time: Int)
+        val distance: String,
+        val time: String)

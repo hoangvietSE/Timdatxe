@@ -5,14 +5,14 @@ import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NetworkUtil
 
-class DriverListRequestPresenterImpl(mView: DriverListRequestView) : BasePresenterImpl<DriverListRequestView>(mView), DriverListRequestPresenter {
+class DriverListPostPresenterImpl(mView: DriverListPostView) : BasePresenterImpl<DriverListPostView>(mView), DriverListPostPresenter {
     companion object {
         const val LIMIT = 6
     }
 
     private var pageIndex = 1
     private var total = 0
-    private var bookTime = ""
+    private var startTime = ""
     private var startPoint = ""
     private var endPoint = ""
     private var status: Int? = null
@@ -20,9 +20,8 @@ class DriverListRequestPresenterImpl(mView: DriverListRequestView) : BasePresent
     override fun setSpinnerStatus() {
         var mListStatus: List<String> = listOf(
                 "Chọn trạng thái",
-                "Đang chờ",
-                "Được chấp nhận",
-                "Bị từ chối",
+                "Đang chờ phê duyệt",
+                "Công khai",
                 "Chuyến đi đã kết thúc",
                 "Hủy bỏ")
         mView!!.setSpinnerStatus(mListStatus)
@@ -31,38 +30,38 @@ class DriverListRequestPresenterImpl(mView: DriverListRequestView) : BasePresent
     override fun refreshList() {
         pageIndex = 1
         total = 0
-        fetListDriverBook()
+        fetListDriverPost()
     }
 
-    override fun fetchListDriverBook(date: String) {
+    override fun fetchListDriverPost(date: String) {
         pageIndex = 1
         total = 0
         if (date.length > 0) {
-            bookTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
+            startTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
         } else {
-            bookTime = date
+            startTime = date
         }
-        fetListDriverBook()
+        fetListDriverPost()
     }
 
-    override fun fetchListDriverBook(status: Int?) {
+    override fun fetchListDriverPost(status: Int?) {
         pageIndex = 1
         total = 0
         this.status = status
-        fetListDriverBook()
+        fetListDriverPost()
     }
 
-    override fun fetListDriverBook() {
+    override fun fetListDriverPost() {
         var data: MutableMap<String, Any> = mutableMapOf()
         data["page"] = pageIndex
         data["limit"] = LIMIT
-        data["book_time"] = bookTime
+        data["start_time"] = startTime
         data["start_point"] = startPoint
         data["end_point"] = endPoint
         status?.let {
             data["status"] = it
         }
-        val disposable = RetrofitManager.fetchListDriverBook(data)
+        val disposable = RetrofitManager.driverListPost(data)
                 .doOnSubscribe {
                     if (pageIndex == 1) mView!!.showPreview()
                 }

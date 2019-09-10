@@ -7,6 +7,7 @@ import com.example.anothertimdatxe.base.map.FetchPlaceListener
 import com.example.anothertimdatxe.base.map.TimDatXeBaseMap
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.map.entity.Route
+import com.example.anothertimdatxe.presentation.drivercreatepost.DriverCreatePostActivity
 import com.example.anothertimdatxe.presentation.map.mapsearch.MapSearchActivity
 import com.example.anothertimdatxe.util.ToastUtil
 import com.google.android.gms.maps.GoogleMap
@@ -24,6 +25,9 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     private var mLocationEndingPointId: String? = null
     private var mLocationStartingPoint: String? = null
     private var mLocationEndingPoint: String? = null
+    private var mDistance: String? = null
+    private var mDuration: String? = null
+    private var mList: ArrayList<LatLng> = arrayListOf()
 
     override val layoutRes: Int
         get() = R.layout.activity_base_map
@@ -41,6 +45,15 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
         }
         btn_gps.setOnClickListener {
             gpsLocation()
+        }
+        btn_confirm.setOnClickListener {
+            startActivity(Intent(this, DriverCreatePostActivity::class.java).apply {
+                putExtra(DriverCreatePostActivity.EXTRA_STARTING_POINT, mLocationStartingPoint)
+                putExtra(DriverCreatePostActivity.EXTRA_ENDING_POINT, mLocationEndingPoint)
+                putExtra(DriverCreatePostActivity.EXTRA_DISTANCE, mDistance)
+                putExtra(DriverCreatePostActivity.EXTRA_DURATION, mDuration)
+                putParcelableArrayListExtra(DriverCreatePostActivity.EXTRA_LIST_WAYPOINT, mList)
+            })
         }
     }
 
@@ -124,10 +137,16 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     override fun routeSuccess(route: Route) {
         drawRouteSuccess(route)
         moveCameraBound(route)
+        mDistance = route.distance
+        mDuration = route.time
     }
 
     override fun routeFail() {
         ToastUtil.show("Có lỗi xảy ra, vui lòng thử lại sau!")
+    }
+
+    override fun fetchWayPoint(list: ArrayList<LatLng>) {
+        mList.addAll(list)
     }
 
 }

@@ -25,35 +25,35 @@ class BaseTitleRow : RelativeLayout {
     }
 
     private fun initStyleable(attrs: AttributeSet) {
-        val typeArray = context.obtainStyledAttributes(attrs, R.styleable.BaseTitleRow, 0, 0)
+        val typeArray = context!!.obtainStyledAttributes(attrs, R.styleable.BaseTitleRow, 0, 0)
         initDateFormStyleable(typeArray)
         typeArray.recycle()
     }
 
-    private fun initDateFormStyleable(typeArray: TypedArray?) {
-        val title = typeArray?.getString(R.styleable.BaseTitleRow_create_post_row_title)
-        val enable = typeArray?.getBoolean(R.styleable.BaseTitleRow_create_post_enable_importance, true)
-        val drawable = typeArray?.getDrawable(R.styleable.BaseTitleRow_create_post_row_icon)
+    private fun initDateFormStyleable(typeArray: TypedArray) {
+        val title = typeArray.getString(R.styleable.BaseTitleRow_create_post_row_title)
+        val enable = typeArray.getBoolean(R.styleable.BaseTitleRow_create_post_enable_importance, true)
+        val drawable = typeArray.getDrawable(R.styleable.BaseTitleRow_create_post_row_icon)
         setTitle(title)
         setEnable(enable)
         setIcon(drawable)
     }
 
-    private fun setTitle(title: String?) {
+    private fun setTitle(title: String) {
         if (!title.isNullOrEmpty()!!) {
             tv_title.text = title
         }
     }
 
-    private fun setEnable(enable: Boolean?) {
-        if (enable!!) {
+    private fun setEnable(enable: Boolean) {
+        if (enable) {
             tv_importance.visibility = View.VISIBLE
         } else {
             tv_importance.visibility = View.GONE
         }
     }
 
-    private fun setIcon(drawable: Drawable?) {
+    private fun setIcon(drawable: Drawable) {
         imv_title.setImageDrawable(drawable)
     }
 }
