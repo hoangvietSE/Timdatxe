@@ -268,4 +268,14 @@ interface ApiService {
     fun driverListPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String,
                        @Path(RequestParam.ID) id: Int,
                        @QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverListPostResponse>>>
+
+    //Driver List Car and Number Seat
+    @GET(ApiConstant.DRIVER_CAR)
+    @Headers("Content-Type: application/json")
+    fun driverCarInfoV1(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<BaseResult<List<DriverCarResponse>>>
+
+    //Driver Detail Post
+    @GET(ApiConstant.DRIVER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun getDriverPostDetailV1(@Path(RequestParam.ID) id: Int): Single<BaseResult<DriverPostDetailResponse>>
 }

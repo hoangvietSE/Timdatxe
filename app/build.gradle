@@ -111,5 +111,6 @@ dependencies {
     //image picker
     implementation "com.zhihu.android:matisse:$latest_version"
     implementation 'com.facebook.shimmer:shimmer:0.4.0'
+    implementation  project(path: ':prettydialog')
 
 }

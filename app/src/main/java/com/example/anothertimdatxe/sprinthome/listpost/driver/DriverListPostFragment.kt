@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome.listrequest.driver
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.DriverListPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.presentation.drivercreatepost.DriverCreatePostActivity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
@@ -72,7 +74,7 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
         }
     }
 
-    fun refreshData(){
+    fun refreshData() {
         clearData()
         fetchListDriverPost()
     }
@@ -167,7 +169,9 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
 
     override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
         if (!avoidDoubleClick()) {
-
+            startActivity(Intent(context!!, DriverCreatePostActivity::class.java).apply {
+                putExtra(DriverCreatePostActivity.EXTRA_IS_SHOW_DATA, true)
+            })
         }
     }
 

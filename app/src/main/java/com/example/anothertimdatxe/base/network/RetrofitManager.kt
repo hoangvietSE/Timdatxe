@@ -461,4 +461,16 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun driverCarInfoV1(): Single<BaseResult<List<DriverCarResponse>>> {
+        return apiService.driverCarInfoV1(CarBookingSharePreference.getAccessToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun driverPostDetailV1(driverId: Int): Single<BaseResult<DriverPostDetailResponse>> {
+        return apiService.getDriverPostDetailV1(driverId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

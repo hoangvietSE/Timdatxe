@@ -13,6 +13,7 @@ import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.WrapperItem
 import com.example.anothertimdatxe.entity.response.DriverCarResponse
+import com.example.anothertimdatxe.entity.response.DriverPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.request.DriverCreatePostRequest
@@ -27,6 +28,9 @@ import kotlinx.android.synthetic.main.layout_private_trip.*
 
 class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), DriverCreatePostView {
     companion object {
+        const val EXTRA_IS_CREATE_POST = "extra_is_create_post"
+        const val EXTRA_IS_SHOW_DATA = "extra_is_show_data"
+        const val EXTRA_DRIVER_ID = "extra_driver_id"
         const val EXTRA_STARTING_POINT = "extra_starting_point"
         const val EXTRA_ENDING_POINT = "extra_ending_point"
         const val EXTRA_DISTANCE = "extra_distance"
@@ -37,6 +41,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         const val ITEM_TYPE_BOTH = 2
     }
 
+    private var driverId: Int = -1
     private var startingPoint: String? = null
     private var endingPoint: String? = null
     private var distance: String? = null
@@ -64,9 +69,8 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     override fun initView() {
         setToolbar()
         setBanner()
-        initWrapperItem()
         getDataIntent()
-        getDriverCarInfo()
+
     }
 
     override fun setListener() {
@@ -209,7 +213,17 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         distance = intent.getStringExtra(EXTRA_DISTANCE)
         duration = intent.getStringExtra(EXTRA_DURATION)
         listWayPoint = intent.extras.getParcelableArrayList(EXTRA_LIST_WAYPOINT)
-        setDataIntent()
+        driverId = intent.getIntExtra(EXTRA_DRIVER_ID, -1)
+        if (intent.getBooleanExtra(EXTRA_IS_CREATE_POST, false)) {
+            setDataIntent()
+            initWrapperItem()
+            getDriverCarInfo()
+        }
+        if (intent.getBooleanExtra(EXTRA_IS_SHOW_DATA, false)) {
+            if (driverId != -1) {
+                mPresenter?.fetData(driverId)
+            }
+        }
     }
 
     private fun setDataIntent() {
@@ -260,8 +274,11 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 numberSeat = mListSeat.get(position).toInt()
             }
-
         }
+    }
+
+    override fun showDataCreatedPost(data: DriverPostDetailResponse) {
+
     }
 
     fun onSelectedItem(item: Int) {

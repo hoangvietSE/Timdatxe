@@ -55,6 +55,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
                 putExtra(DriverCreatePostActivity.EXTRA_DISTANCE, mDistance)
                 putExtra(DriverCreatePostActivity.EXTRA_DURATION, mDuration)
                 putParcelableArrayListExtra(DriverCreatePostActivity.EXTRA_LIST_WAYPOINT, mList)
+                putExtra(DriverCreatePostActivity.EXTRA_IS_CREATE_POST,true)
             }, REQUEST_CODE_CREATE_POST)
         }
     }

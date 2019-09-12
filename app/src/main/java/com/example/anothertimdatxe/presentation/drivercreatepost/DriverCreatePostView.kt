@@ -2,6 +2,7 @@ package com.example.anothertimdatxe.presentation.drivercreatepost
 
 import com.example.anothertimdatxe.base.mvp.BaseView
 import com.example.anothertimdatxe.entity.response.DriverCarResponse
+import com.example.anothertimdatxe.entity.response.DriverPostDetailResponse
 
 interface DriverCreatePostView : BaseView {
     fun initSpinner(list: List<DriverCarResponse>)
@@ -17,4 +18,5 @@ interface DriverCreatePostView : BaseView {
     fun onErrorInvalidMoney()
     fun onErrorMinMoney()
     fun onSuccessCreatePost()
+    fun showDataCreatedPost(data:DriverPostDetailResponse)
 }

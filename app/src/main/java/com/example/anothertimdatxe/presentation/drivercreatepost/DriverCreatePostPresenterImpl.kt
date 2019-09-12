@@ -8,9 +8,13 @@ import com.example.anothertimdatxe.base.network.ICallBack
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.entity.response.DriverCarResponse
 import com.example.anothertimdatxe.entity.response.DriverCreatePostResponse
+import com.example.anothertimdatxe.entity.response.DriverPostDetailResponse
 import com.example.anothertimdatxe.request.DriverCreatePostRequest
 import com.example.anothertimdatxe.util.DateUtil
+import com.example.anothertimdatxe.util.NetworkUtil.handleError
 import com.example.anothertimdatxe.util.NumberUtil
+import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 import java.util.*
 
 class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenterImpl<DriverCreatePostView>(mView), DriverCreatePostPresenter {
@@ -157,6 +161,30 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
         addDispose(disposable)
     }
 
+    override fun fetData(id: Int) {
+        val disposable = Single.zip(
+                RetrofitManager.driverCarInfoV1(),
+                RetrofitManager.driverPostDetailV1(id),
+                BiFunction<BaseResult<List<DriverCarResponse>>, BaseResult<DriverPostDetailResponse>, joinResult> { carInfoResponse, driverPostDetailResponse -> joinResult(carInfoResponse, driverPostDetailResponse) }
+        )
+                .doOnSubscribe {
+                    mView!!.showLoading()
+                }
+                .doFinally {
+                    mView!!.hideLoading()
+                }
+                .subscribe(
+                        {
+                            mView!!.initSpinner(it.carInfoResponse.data!!)
+                            mView!!.showDataCreatedPost(it.driverPostDetailResponse.data!!)
+                        },
+                        {
+                            handleError(it)
+                        }
+                )
+        addDispose(disposable)
+    }
+
     private fun setTime(request: DriverCreatePostRequest) {
         request.start_time = DateUtil.formatDate(request.date!!, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1) + " " + request.time?.trim() + ":00"
     }
@@ -171,4 +199,8 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
         }
         return false
     }
+
+    class joinResult(val carInfoResponse: BaseResult<List<DriverCarResponse>>,
+                     val driverPostDetailResponse: BaseResult<DriverPostDetailResponse>)
+
 }

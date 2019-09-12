@@ -6,4 +6,5 @@ import com.example.anothertimdatxe.request.DriverCreatePostRequest
 interface DriverCreatePostPresenter : BasePresenter {
     fun fetchDriverCarInfo()
     fun driverCreatePost(request: DriverCreatePostRequest)
+    fun fetData(id: Int)
 }

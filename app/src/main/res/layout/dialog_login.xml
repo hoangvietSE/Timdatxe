@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_dialog"
+        android:orientation="vertical">
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingLeft="@dimen/pdlg_space_1.0x"-->
+        <!--android:paddingTop="@dimen/pdlg_space_1.0x"-->
+        <!--android:paddingRight="@dimen/pdlg_space_1.0x"-->
+        <!--android:textColor="@color/pdlg_color_black"-->
+        <!--android:textSize="@dimen/pdlg_tv_title"-->
+        <!--android:textStyle="bold" />-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_dialog"
+                android:orientation="vertical">
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_message"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="@dimen/pdlg_space_1.0x"-->
+                <!--android:textColor="@color/pdlg_color_black"-->
+                <!--android:textSize="@dimen/pdlg_tv_message"/>-->
+
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_floating"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:id="@+id/formTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="16dp"
+                            android:text="Chọn hình thức đăng nhập"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <!--<TextView-->
+                        <!--android:id="@+id/tvCancel"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginRight="16dp"-->
+                        <!--android:text="x"-->
+                        <!--android:textSize="24sp" />-->
+
+                        <ImageView
+                            android:id="@+id/imv_icon_logo_direct"
+                            android:layout_width="150dp"
+                            android:layout_height="200dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="0dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/icon_logo_direct" />
+
+                        <ImageView
+                            android:id="@+id/imv_icon_car"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvTitle"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginTop="80dp"
+                            android:src="@drawable/icon_car" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/choose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/tv_driver_login_direct"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_login_direct"
+                            android:gravity="center"
+                            android:text="lái xe"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_user_login_direct"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_login_direct"
+                            android:gravity="center"
+                            android:text="Người dùng"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/content_padding_normal"
+                        android:background="@drawable/bg_bottom_title"
+                        android:orientation="vertical"
+                        android:padding="@dimen/content_padding_normal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Timdatxe.com"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Hệ thống tìm xe tiện chuyến lớn nhất Việt Nam"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/background_dialog_icon"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/margin_32_dp"
+            android:layout_height="@dimen/margin_32_dp"
+            android:layout_margin="@dimen/pdlg_border_size"
+            android:src="@drawable/ic_x_button" />
+    </LinearLayout>
+</RelativeLayout>
