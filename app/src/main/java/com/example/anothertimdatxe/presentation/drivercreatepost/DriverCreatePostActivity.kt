@@ -58,6 +58,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     private var numberSeat: Int? = null
     private var itemType: Int? = null
     private var carId: Int? = null
+    private var data: DriverPostDetailResponse? = null
 
     override val layoutRes: Int
         get() = R.layout.activity_driver_create_post
@@ -69,6 +70,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     override fun initView() {
         setToolbar()
         setBanner()
+        initWrapperItem()
         getDataIntent()
 
     }
@@ -212,11 +214,10 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         endingPoint = intent.getStringExtra(EXTRA_ENDING_POINT)
         distance = intent.getStringExtra(EXTRA_DISTANCE)
         duration = intent.getStringExtra(EXTRA_DURATION)
-        listWayPoint = intent.extras.getParcelableArrayList(EXTRA_LIST_WAYPOINT)
         driverId = intent.getIntExtra(EXTRA_DRIVER_ID, -1)
         if (intent.getBooleanExtra(EXTRA_IS_CREATE_POST, false)) {
+            listWayPoint = intent.extras.getParcelableArrayList(EXTRA_LIST_WAYPOINT)
             setDataIntent()
-            initWrapperItem()
             getDriverCarInfo()
         }
         if (intent.getBooleanExtra(EXTRA_IS_SHOW_DATA, false)) {
@@ -258,10 +259,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
                     sp_number_seat.isEnabled = false
                     carId = -1
                 } else {
-                    for (i in 1..mListDriverCarInfo?.get(position - 1)?.seatNumber!!) {
-                        mListSeat.add(i.toString())
-                    }
-                    mSpinnerSeatAdapter?.addAll(mListSeat)
+                    setSeatNumber(mListDriverCarInfo?.get(position - 1)?.seatNumber!!)
                     sp_number_seat.isEnabled = true
                     carId = list.get(position - 1).id
                 }
@@ -278,7 +276,113 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     }
 
     override fun showDataCreatedPost(data: DriverPostDetailResponse) {
+        this.data = data
+        tv_starting_point.text = data.startPoint
+        tv_ending_point.text = data.endPoint
+        edt_title.setText(data.title)
+        tv_distance.text = data.distance.toString() + " km"
+        edt_starting_point.setText(data.startTime)
+        edt_time.setText(data.startTime)
+        edt_estimate.setText(data.durationTime.toString())
+        mListCarBrand.forEachIndexed { index, carName ->
+            if (carName == data.car?.name) {
+                sp_brand_car.setSelection(index)
+            }
+        }
+        setSeatNumber(data.car?.seatNumber!!)
+        sp_number_seat.setSelection(data.createdSeat!! - 1)
+        if (data.high_way == 1) {
+            cb_highway.isChecked = true
+        } else if (data.high_way == 0) {
+            cb_highway.isChecked = false
+        }
+        handleTypeTrip(data.type)
+        edt_des.setText(data.description?.toString() ?: "")
+        if (data.flagEdit == 1) {
+            enableWidget(true)
+        } else if (data.flagEdit == 0) {
+            enableWidget(false)
+        }
+        if (data.flagDelete == 1) {
+            btn_status.visible()
+            btn_status.text = "XÓA BÀI ĐĂNG"
+            btn_create_post.background.level = 1
+        } else if (data.flagDelete == 0) {
+            btn_status.gone()
+        }
+        if (data.flagShowListBook == 1) {
+            btn_create_post.visible()
+            btn_create_post.text = "DANH SÁCH KHÁCH ĐẶT"
+            btn_create_post.background.level = 0
+        } else if (data.flagShowListBook == 0) {
+            btn_create_post.gone()
+        }
 
+    }
+
+    private fun enableWidget(check: Boolean) {
+        edt_title.isEnabled = check
+        edt_starting_point.isEnabled = check
+        edt_time.isEnabled = check
+        edt_estimate.isEnabled = check
+        sp_brand_car.isEnabled = check
+        sp_number_seat.isEnabled = check
+        cb_highway.isEnabled = check
+        if (data?.type == ITEM_TYPE_CONVINENT || data?.type == ITEM_TYPE_BOTH) {
+            edt_30_percent.isEnabled = check
+            edt_50_percent.isEnabled = check
+            edt_70_percent.isEnabled = check
+            edt_100_percent.isEnabled = check
+        }
+        if (data?.type == ITEM_TYPE_PRIVATE || data?.type == ITEM_TYPE_BOTH) {
+            edt_private_50_percent.isEnabled = check
+            edt_private_100_percent.isEnabled = check
+        }
+    }
+
+    private fun handleTypeTrip(type: Int?) {
+        tv_both_trip.gone()
+        tv_convinent_trip.gone()
+        tv_private_trip.gone()
+        showFormMoney(type!!)
+        when (type) {
+            ITEM_TYPE_CONVINENT -> {
+                tv_convinent_trip.visible()
+                onSelectedItem(ITEM_TYPE_CONVINENT)
+                setPriceConvinent()
+            }
+            ITEM_TYPE_PRIVATE -> {
+                tv_private_trip.visible()
+                onSelectedItem(ITEM_TYPE_PRIVATE)
+                setPricePrivate()
+            }
+            ITEM_TYPE_BOTH -> {
+                tv_convinent_trip.visible()
+                tv_private_trip.visible()
+                onSelectedItem(ITEM_TYPE_CONVINENT)
+                setPriceConvinent()
+                setPricePrivate()
+            }
+        }
+    }
+
+    private fun setPricePrivate() {
+        edt_private_50_percent.setText(data?.privatePrice1)
+        edt_private_100_percent.setText(data?.privatePrice2)
+    }
+
+    private fun setPriceConvinent() {
+        edt_30_percent.setText(data?.priceLevel1.toString())
+        edt_50_percent.setText(data?.priceLevel2.toString())
+        edt_70_percent.setText(data?.priceLevel3.toString())
+        edt_100_percent.setText(data?.regularPrice.toString())
+    }
+
+    fun setSeatNumber(seat: Int) {
+        for (i in 1..seat) {
+            mListSeat.add(i.toString())
+        }
+        mSpinnerSeatAdapter?.addAll(mListSeat)
     }
 
     fun onSelectedItem(item: Int) {
@@ -292,6 +396,10 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
                 setBackgroundUnselected(i)
             }
         }
+        showFormMoney(item)
+    }
+
+    fun showFormMoney(item: Int) {
         when (item) {
             ITEM_TYPE_CONVINENT -> {
                 form_convinent.visible()

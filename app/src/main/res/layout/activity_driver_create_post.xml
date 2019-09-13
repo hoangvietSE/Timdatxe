@@ -130,7 +130,6 @@
 
                 <EditText
                     android:id="@+id/edt_title"
-                    android:inputType="text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -138,6 +137,7 @@
                     android:background="@drawable/bg_white"
                     android:gravity="end"
                     android:hint="@string/driver_create_post_row_title_hint"
+                    android:inputType="text"
                     android:minLines="1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_14" />
@@ -375,6 +375,7 @@
                     android:textStyle="bold" />
 
                 <CheckBox
+                    android:id="@+id/cb_highway"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
@@ -396,10 +397,12 @@
                 android:textSize="@dimen/text_size_14"
                 android:textStyle="bold" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8_dp">
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/tv_convinent_trip"
@@ -407,16 +410,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_4_dp"
                     android:layout_marginEnd="@dimen/margin_4_dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_type_trip_create_post"
                     android:gravity="center"
                     android:padding="@dimen/margin_4_dp"
                     android:text="Tiện chuyến"
                     android:textAllCaps="true"
                     android:textSize="@dimen/text_size_12"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/tv_private_trip"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_private_trip"
@@ -424,16 +425,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_4_dp"
                     android:layout_marginEnd="@dimen/margin_4_dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_type_trip_create_post"
                     android:gravity="center"
                     android:padding="@dimen/margin_4_dp"
                     android:text="Xe Riêng"
                     android:textAllCaps="true"
                     android:textSize="@dimen/text_size_12"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/tv_both_trip"
-                    app:layout_constraintStart_toEndOf="@id/tv_convinent_trip"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_both_trip"
@@ -441,17 +440,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_4_dp"
                     android:layout_marginEnd="@dimen/margin_4_dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_type_trip_create_post"
                     android:gravity="center"
                     android:padding="@dimen/margin_4_dp"
                     android:text="Cả hai"
                     android:textAllCaps="true"
                     android:textSize="@dimen/text_size_12"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_private_trip"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -513,6 +510,25 @@
                 android:layout_marginBottom="@dimen/margin_16_dp"
                 android:background="@drawable/bg_btn_create_post"
                 android:gravity="center"
+                android:paddingTop="@dimen/content_padding_normal"
+                android:paddingBottom="@dimen/content_padding_normal"
+                android:text="@string/driver_create_post_btn_create"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btn_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8_dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_8_dp"
+                android:layout_marginBottom="@dimen/margin_16_dp"
+                android:background="@drawable/bg_btn_create_post"
+                android:gravity="center"
+                android:paddingTop="@dimen/content_padding_normal"
+                android:paddingBottom="@dimen/content_padding_normal"
                 android:text="@string/driver_create_post_btn_create"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16"

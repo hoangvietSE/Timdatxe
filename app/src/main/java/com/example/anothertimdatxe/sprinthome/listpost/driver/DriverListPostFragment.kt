@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.layout_no_result.*
 class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverListPostView,
         EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener,
         RecyclerViewAdapter.OnItemClickListener {
+    private var mList: MutableList<DriverListPostResponse> = mutableListOf()
     private var mDriverListPostAdapter: DriverListPostAdapter? = null
     private var mSpinnerAdapter: SpinnserStatus? = null
     private var mDatePickerDialogWidget: DatePickerDialogWidget? = null
@@ -171,6 +172,7 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
         if (!avoidDoubleClick()) {
             startActivity(Intent(context!!, DriverCreatePostActivity::class.java).apply {
                 putExtra(DriverCreatePostActivity.EXTRA_IS_SHOW_DATA, true)
+                putExtra(DriverCreatePostActivity.EXTRA_DRIVER_ID,mList.get(position).driver_id)
             })
         }
     }
@@ -189,6 +191,8 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
     }
 
     override fun setListItem(list: List<DriverListPostResponse>) {
+        mList.clear()
+        mList.addAll(list)
         isLoading = false
         enableRefreshLoading(false)
         hideLoadingItem()
