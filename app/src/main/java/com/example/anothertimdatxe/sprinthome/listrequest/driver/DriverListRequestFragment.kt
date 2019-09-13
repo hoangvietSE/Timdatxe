@@ -80,7 +80,12 @@ class DriverListRequestFragment : BaseFragment<DriverListRequestPresenter>(), Dr
         mDriverListRequestAdapter?.setLoadingMoreListener(this)
         mDriverListRequestAdapter?.addOnItemClickListener(this)
         recyclerView.adapter = mDriverListRequestAdapter
-        recyclerView.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+        val layoutManager = object : LinearLayoutManager(activity){
+            override fun canScrollVertically(): Boolean {
+                return true
+            }
+        }
+        recyclerView.layoutManager = layoutManager
         nestedScroolView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
             if (v?.getChildAt(v.childCount - 1) != null) {
                 if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) && (scrollY > oldScrollY)) {
@@ -92,6 +97,7 @@ class DriverListRequestFragment : BaseFragment<DriverListRequestPresenter>(), Dr
                     val pastVisiblesItems = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                     if (pastVisiblesItems + visibleItemCount!! >= totalItemCount!!) {
                         if (!isLoading) {
+                            isLoading = true
                             onLoadMore()
                         }
                     }
@@ -148,8 +154,11 @@ class DriverListRequestFragment : BaseFragment<DriverListRequestPresenter>(), Dr
     }
 
     override fun onLoadMore() {
+        nestedScroolView.post {
+            nestedScroolView.smoothScrollTo(0, nestedScroolView.bottom)
+            nestedScroolView.fullScroll(View.FOCUS_DOWN)
+        }
         showLoadingItem()
-        isLoading = true
         mDriverListRequestAdapter?.setIsLoading(true)
         mPresenter?.fetListDriverBook()
     }

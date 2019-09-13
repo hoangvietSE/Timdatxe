@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -25,6 +26,7 @@ import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
+import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListPostFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListRequestFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.driver.profile.DriverProfileFragment
@@ -60,6 +62,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         const val VP_ITEM_LIST_REQUEST = 2
         const val VP_ITEM_PROFILES = 3
         const val TIME_BACK_LIMIT = 2000L
+        const val REQUEST_CODE_FOR_CREATE_POST = 1998
     }
 
     private var mToggle: ActionBarDrawerToggle? = null
@@ -163,9 +166,9 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             listRequestFragment = ListRequestFragment.getInstance()
             userProfileFragment = UserProfileFragment.getInstance()
         } else if (CarBookingSharePreference.getUserData()!!.isDriver) {
-            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
-            driverProfileFragment = DriverProfileFragment.getInstance()
+            listPostCreatedFragment = DriverListPostFragment.getInstance()
             driverListRequestFragment = DriverListRequestFragment.getInstance()
+            driverProfileFragment = DriverProfileFragment.getInstance()
         }
         mListFragment.add(homeFragment)
         if (CarBookingSharePreference.getUserData()!!.isUser) {
@@ -195,6 +198,9 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 when (position) {
                     VP_ITEM_HOME -> {
                         setToolbarHome()
+                    }
+                    VP_ITEM_NEWS -> {
+                        setToolbarListPost()
                     }
                     VP_ITEM_LIST_REQUEST -> {
                         setToolbarListRequest()
@@ -254,6 +260,22 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQUEST_CODE_FOR_CREATE_POST -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    vp_home.currentItem = VP_ITEM_NEWS
+                    when{
+                        CarBookingSharePreference.getUserData()!!.isDriver->{
+                            val fragment = mListFragment[VP_ITEM_NEWS] as DriverListPostFragment
+                            fragment.refreshData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private fun setToolbarHome() {
         toolbarTitle?.gone()
         imvCenter?.visible()
@@ -286,6 +308,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 it.setImageDrawable(resources.getDrawable((R.drawable.ic_notification)))
             }
         }
+    }
+
+    private fun setToolbarListPost() {
+        setToolbarTitle(resources.getString(R.string.driver_list_post_toolbar_title).toUpperCase())
     }
 
     private fun setToolbarProfile() {
@@ -427,7 +453,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onCreateNews() {
-        startActivity(Intent(this, MapParentActivity::class.java))
+        startActivityForResult(Intent(this, MapParentActivity::class.java), REQUEST_CODE_FOR_CREATE_POST)
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
     }
 

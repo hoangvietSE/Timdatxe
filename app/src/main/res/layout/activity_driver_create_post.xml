@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/imv_banner"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
@@ -101,13 +102,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_type_trip_create_post"
+                android:background="@drawable/bg_type_trip"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/content_padding_normal"
+                android:text="Thông tin chuyến đi"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
-                tools:text="Thông tin chuyến đi" />
+                android:textSize="@dimen/text_size_16" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -128,6 +129,7 @@
                     app:create_post_row_title="@string/driver_create_post_row_title" />
 
                 <EditText
+                    android:id="@+id/edt_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -135,11 +137,13 @@
                     android:background="@drawable/bg_white"
                     android:gravity="end"
                     android:hint="@string/driver_create_post_row_title_hint"
+                    android:inputType="text"
+                    android:minLines="1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_14" />
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -160,6 +164,7 @@
                     app:create_post_row_title="@string/driver_create_post_row_distance" />
 
                 <TextView
+                    android:id="@+id/tv_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -171,7 +176,7 @@
                     tools:text="121 km" />
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -192,6 +197,7 @@
                     app:create_post_row_title="@string/driver_create_post_row_starting_date" />
 
                 <EditText
+                    android:id="@+id/edt_starting_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -205,7 +211,7 @@
                     android:textSize="@dimen/text_size_14" />
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -226,6 +232,7 @@
                     app:create_post_row_title="@string/driver_create_post_row_time" />
 
                 <EditText
+                    android:id="@+id/edt_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -239,7 +246,7 @@
                     android:textSize="@dimen/text_size_14" />
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -260,28 +267,30 @@
                     app:create_post_row_title="@string/driver_create_post_row_estimate_time" />
 
                 <EditText
+                    android:id="@+id/edt_estimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_toRightOf="@id/row_estimate"
                     android:background="@drawable/bg_white"
-                    android:focusableInTouchMode="false"
                     android:gravity="end"
                     android:hint="@string/driver_create_post_row_estimate_hint"
+                    android:inputType="number"
+                    android:maxLength="4"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_14" />
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_white"
                 android:paddingStart="@dimen/content_padding_resend"
-                android:paddingTop="@dimen/margin_8_dp"
+                android:paddingTop="@dimen/margin_4_dp"
                 android:paddingEnd="@dimen/content_padding_normal"
-                android:paddingBottom="@dimen/margin_8_dp">
+                android:paddingBottom="@dimen/margin_4_dp">
 
                 <com.example.anothertimdatxe.widget.BaseTitleRow
                     android:id="@+id/row_car"
@@ -293,6 +302,7 @@
                     app:create_post_row_title="@string/driver_create_post_row_car" />
 
                 <Spinner
+                    android:id="@+id/sp_brand_car"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -304,7 +314,7 @@
                 </Spinner>
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -325,6 +335,7 @@
                     app:create_post_row_title="@string/driver_create_post_row_number_seat" />
 
                 <Spinner
+                    android:id="@+id/sp_number_seat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -333,7 +344,7 @@
                     android:layout_toRightOf="@id/row_number_seat" />
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -364,6 +375,7 @@
                     android:textStyle="bold" />
 
                 <CheckBox
+                    android:id="@+id/cb_highway"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
@@ -371,7 +383,7 @@
                     android:layout_toLeftOf="@id/tv_yes" />
             </RelativeLayout>
 
-            <view style="@style/LineView" />
+            <View style="@style/LineView" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -385,10 +397,12 @@
                 android:textSize="@dimen/text_size_14"
                 android:textStyle="bold" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8_dp">
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/tv_convinent_trip"
@@ -396,16 +410,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_4_dp"
                     android:layout_marginEnd="@dimen/margin_4_dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_type_trip_create_post"
                     android:gravity="center"
                     android:padding="@dimen/margin_4_dp"
                     android:text="Tiện chuyến"
                     android:textAllCaps="true"
                     android:textSize="@dimen/text_size_12"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/tv_private_trip"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_private_trip"
@@ -413,16 +425,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_4_dp"
                     android:layout_marginEnd="@dimen/margin_4_dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_type_trip_create_post"
                     android:gravity="center"
                     android:padding="@dimen/margin_4_dp"
                     android:text="Xe Riêng"
                     android:textAllCaps="true"
                     android:textSize="@dimen/text_size_12"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/tv_both_trip"
-                    app:layout_constraintStart_toEndOf="@id/tv_convinent_trip"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_both_trip"
@@ -430,17 +440,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_4_dp"
                     android:layout_marginEnd="@dimen/margin_4_dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_type_trip_create_post"
                     android:gravity="center"
                     android:padding="@dimen/margin_4_dp"
                     android:text="Cả hai"
                     android:textAllCaps="true"
                     android:textSize="@dimen/text_size_12"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_private_trip"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -476,6 +484,7 @@
                 android:textColor="@color/black" />
 
             <EditText
+                android:id="@+id/edt_des"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8_dp"
@@ -485,13 +494,14 @@
                 android:gravity="top|left"
                 android:hint="VD: Giữ gìn vệ sinh,..."
                 android:inputType="textMultiLine"
-                android:lines="5"
+                android:lines="7"
                 android:paddingStart="@dimen/content_padding_resend"
                 android:paddingTop="@dimen/content_padding_resend"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_12" />
+                android:textSize="@dimen/text_size_14" />
 
             <TextView
+                android:id="@+id/btn_create_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8_dp"
@@ -500,6 +510,25 @@
                 android:layout_marginBottom="@dimen/margin_16_dp"
                 android:background="@drawable/bg_btn_create_post"
                 android:gravity="center"
+                android:paddingTop="@dimen/content_padding_normal"
+                android:paddingBottom="@dimen/content_padding_normal"
+                android:text="@string/driver_create_post_btn_create"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btn_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8_dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_8_dp"
+                android:layout_marginBottom="@dimen/margin_16_dp"
+                android:background="@drawable/bg_btn_create_post"
+                android:gravity="center"
+                android:paddingTop="@dimen/content_padding_normal"
+                android:paddingBottom="@dimen/content_padding_normal"
                 android:text="@string/driver_create_post_btn_create"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16"

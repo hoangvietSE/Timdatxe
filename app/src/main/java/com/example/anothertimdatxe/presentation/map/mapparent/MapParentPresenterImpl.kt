@@ -6,6 +6,7 @@ import com.example.anothertimdatxe.base.network.ICallBack
 import com.example.anothertimdatxe.base.network.MapRetrofitManager
 import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.map.response.GoogleMapDirectionResponse
+import com.google.android.gms.maps.model.LatLng
 
 class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParentView>(mView), MapParentPresenter {
     override fun fetchWayPoints(origin: String, destination: String) {
@@ -20,9 +21,17 @@ class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParent
                                 it.get(0)?.legs!![0]?.endLocation?.lng!!,
                                 it.get(0)?.overviewPolyline?.points!!,
                                 it.get(0)?.legs!![0]?.steps!!,
-                                it.get(0)?.legs!![0]?.distance?.value!!,
-                                it.get(0)?.legs!![0]?.duration?.value!!
+                                it.get(0)?.legs!![0]?.distance?.text!!,
+                                it.get(0)?.legs!![0]?.duration?.text!!
                         ))
+                        var listWayPoint: ArrayList<LatLng> = arrayListOf()
+                        listWayPoint.add(LatLng(it.get(0)?.legs!![0]?.startLocation?.lat!!, it.get(0)?.legs!![0]?.startLocation?.lng!!))
+                        it.get(0)?.legs!![0]?.steps?.let {
+                            for (i in 0..it.size!! - 1) {
+                                listWayPoint.add(LatLng(it.get(i)?.endLocation?.lat!!, it.get(i)?.endLocation?.lng!!))
+                            }
+                        }
+                        mView!!.fetchWayPoint(listWayPoint)
                     } else {
                         mView!!.routeFail()
                     }

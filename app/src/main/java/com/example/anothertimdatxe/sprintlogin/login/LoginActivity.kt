@@ -2,9 +2,13 @@ package com.example.anothertimdatxe.sprintlogin.login
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.text.TextUtils
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.widget.FrameLayout
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidEmail
@@ -18,8 +22,8 @@ import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.widget.TextWatcherPassword
 import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.dialog_direct_login.*
 import kotlinx.android.synthetic.main.dialog_direct_register.*
+import kotlinx.android.synthetic.main.dialog_login.*
 
 class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSocial.LoginSocialListener {
     private var mLoginSocial = LoginSocial(this, this)
@@ -37,6 +41,7 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
         btn_login.setOnClickListener {
             if (validate()) {
                 showDialogConfirmDirectLogin()
+                return@setOnClickListener
             }
         }
         btn_regis.setOnClickListener {
@@ -95,14 +100,15 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
     }
 
     private fun showDialogConfirmDirectLogin() {
+//        LoginDialogFrag().show(supportFragmentManager,"demo")
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_direct_login)
+        dialog.setContentView(R.layout.dialog_login)
         dialog.setCancelable(false)
-        dialog.window.setBackgroundDrawableResource(R.drawable.bg_direct_register)
+        dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val width = (resources.displayMetrics.widthPixels * 0.9).toInt()
         dialog.window!!.setLayout(width, WindowManager.LayoutParams.WRAP_CONTENT)
-        dialog.tvCancel.setOnClickListener {
+        dialog.iv_icon.setOnClickListener {
             dialog.dismiss()
         }
         dialog.tv_user_login_direct.setOnClickListener {
@@ -113,7 +119,13 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
             dialog.dismiss()
             mPresenter!!.loginDriver(et_email.getText().toString(), et_password.getText().toString())
         }
+//        setUpViewBase(dialog)
+//        dialog.tv_title.visibility = View.GONE
         dialog.show()
+//        PrettyDialog(this)
+////                .setTitle("PrettyDialog Title")
+////                .setMessage("PrettyDialog Message")
+//                .show();
     }
 
     override fun goToNextScreen() {
@@ -151,5 +163,49 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
 
     override fun goToUpdateInfo() {
         startActivityAndClearTask(UpdateInfoActivity::class.java)
+    }
+
+    fun setUpViewBase(dialog: Dialog) {
+        val lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+//        lp.setMargins(0, resources.getDimensionPixelSize(libs.mjn.prettydialog.R.dimen.pdlg_icon_size) / 2, 0, 0)
+        dialog.ll_content.layoutParams = lp
+//        dialog.ll_content.setPadding(0, (1.25 * resources.getDimensionPixelSize(libs.mjn.prettydialog.R.dimen.pdlg_icon_size) / 2).toInt(), 0, resources.getDimensionPixelSize(libs.mjn.prettydialog.R.dimen.pdlg_space_1_0x))
+//        dialog.tv_title.visibility = View.GONE
+//        close_rotation_animation = RotateAnimation(0f, 180f,
+//                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+//                0.5f)
+//        close_rotation_animation.setDuration(300)
+//        close_rotation_animation.setRepeatCount(Animation.ABSOLUTE)
+//        close_rotation_animation.setInterpolator(DecelerateInterpolator())
+//        close_rotation_animation.setAnimationListener(object : Animation.AnimationListener {
+//            override fun onAnimationStart(animation: Animation) {
+//
+//            }
+//
+//            override fun onAnimationEnd(animation: Animation) {
+//                thisDialog.dismiss()
+//            }
+//
+//            override fun onAnimationRepeat(animation: Animation) {
+//
+//            }
+//        })
+//
+//        iv_icon.setOnTouchListener { v, event ->
+//            when (event.action) {
+//                MotionEvent.ACTION_DOWN -> {
+//                    v.alpha = 0.7f
+//                    true
+//                }
+//                MotionEvent.ACTION_UP -> {
+//                    v.alpha = 1.0f
+//                    if (icon_animation) {
+//                        v.startAnimation(close_rotation_animation)
+//                    }
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
     }
 }

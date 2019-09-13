@@ -64,7 +64,7 @@ class DriverListRequestPresenterImpl(mView: DriverListRequestView) : BasePresent
         }
         val disposable = RetrofitManager.fetchListDriverBook(data)
                 .doOnSubscribe {
-                    mView!!.showPreview()
+                    if (pageIndex == 1) mView!!.showPreview()
                 }
                 .doFinally {
                     mView!!.hidePreview()
@@ -76,7 +76,7 @@ class DriverListRequestPresenterImpl(mView: DriverListRequestView) : BasePresent
                 }
                 .subscribe(
                         {
-                            total = it.total!!
+                            total = it.total_page!!
                             pageIndex++
                             mView!!.setListItem(it.data!!)
                             mView!!.showNoResult(it.data!!.size == 0)

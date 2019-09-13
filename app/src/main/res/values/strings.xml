@@ -121,6 +121,9 @@
     //Driver List Request
     <string name="driver_list_request_toolbar_title">Danh sách yêu cầu</string>
 
+    //Driver List Post
+    <string name="driver_list_post_toolbar_title">Danh sách chuyến đã đăng</string>
+
     //User Profile
     <string name="user_profile_number_trip">Số chuyến đã đi:</string>
     <string name="user_profile_detail">Thông tin chi tiết</string>
@@ -374,4 +377,15 @@
     <string name="convinent_hint_70_percent">* Giá tiện chuyến 70%</string>
     <string name="convinent_hint_100_percent">* Giá tiện chuyến 100%</string>
     <string name="driver_create_post_btn_create">Tạo chuyến đi</string>
+    <string name="driver_create_post_no_title">Vui lòng nhập tiêu đề</string>
+    <string name="driver_create_post_have_number">Tiêu đề không chứa số</string>
+    <string name="driver_create_post_no_date">Vui lòng chọn ngày xuất phát</string>
+    <string name="driver_create_post_in_past">Không được chọn ngày trong quá khứ</string>
+    <string name="driver_create_post_no_time">Vui lòng chọn thời gian</string>
+    <string name="driver_create_post_no_estimate">Vui lòng nhập thời gian dự kiến</string>
+    <string name="driver_create_post_invalid_estimate">Thời gian dự kiến phải lớn hơn 0</string>
+    <string name="driver_create_post_no_car_brand">Vui lòng chọn loại xe</string>
+    <string name="driver_create_post_no_money">Vui lòng nhập giá tiền</string>
+    <string name="driver_create_post_invalid_money">Các mức giá không phù hợp</string>
+    <string name="driver_create_post_min_money">Giá tiền nhỏ nhất là 10,000 đ</string>
 </resources>

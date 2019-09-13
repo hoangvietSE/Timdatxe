@@ -251,4 +251,31 @@ interface ApiService {
     @GET(ApiConstant.DRIVER_REQUEST_USER_POST)
     @Headers("Content-Type: application/json")
     fun driverListRequest(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverListRequestResponse>>>
+
+    //Driver List Car and Number Seat
+    @GET(ApiConstant.DRIVER_CAR)
+    @Headers("Content-Type: application/json")
+    fun driverCarInfo(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<Response<BaseResult<List<DriverCarResponse>>>>
+
+    //Driver Create Post
+    @POST(ApiConstant.DRIVER_POST_CREATED)
+    @Headers("Content-Type: application/json")
+    fun driverCreatePost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody): Single<Response<BaseResult<DriverCreatePostResponse>>>
+
+    //Driver List Post
+    @GET(ApiConstant.DRIVER_LIST_POST)
+    @Headers("Content-Type: application/json")
+    fun driverListPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String,
+                       @Path(RequestParam.ID) id: Int,
+                       @QueryMap data: MutableMap<String, Any>): Single<BaseResult<List<DriverListPostResponse>>>
+
+    //Driver List Car and Number Seat
+    @GET(ApiConstant.DRIVER_CAR)
+    @Headers("Content-Type: application/json")
+    fun driverCarInfoV1(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String): Single<BaseResult<List<DriverCarResponse>>>
+
+    //Driver Detail Post
+    @GET(ApiConstant.DRIVER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun getDriverPostDetailV1(@Path(RequestParam.ID) id: Int): Single<BaseResult<DriverPostDetailResponse>>
 }
