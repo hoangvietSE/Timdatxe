@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,7 +38,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
     private var mBannerHomeAdapter: BannerHomeAdapter? = null
     private var mTimer: Timer? = null
     private var mCountShowBanner = 0
-    private var mList: ArrayList<Fragment>? = ArrayList()
+    private var mList: ArrayList<Fragment> = ArrayList()
     private var mUserFindCarFragment: UserFindCarFragment? = null
     private var mCarFindUserFragment: CarFindUserFragment? = null
     private var mPostCreatedMoreFindUserAdapter: PostCreatedMoreFindUserAdapter? = null
@@ -118,12 +117,14 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
             rl_home_list.gone()
             mCarFindUserFragment = CarFindUserFragment.getInstance()
             mUserFindCarFragment = UserFindCarFragment.getInstance()
-            mList!!.add(mCarFindUserFragment!!)
-            mList!!.add(mUserFindCarFragment!!)
-            mHomeAdapter = HomeAdapter((context!! as AppCompatActivity).supportFragmentManager, mList!!, arrayListOf("", ""))
-            vp_home_list_post.adapter = mHomeAdapter!!
+            mList.add(mCarFindUserFragment!!)
+            mList.add(mUserFindCarFragment!!)
+            mHomeAdapter = HomeAdapter(childFragmentManager, mList, arrayListOf("", ""))
+            vp_home_list_post.adapter = mHomeAdapter
+            vp_home_list_post.offscreenPageLimit = 2
             vp_home_list_post.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
+
                 }
 
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -167,7 +168,6 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
                 }
 
             })
-            setSelectedItem(VP_ITEM_USER_FIND_CAR)
 
         } else {
             vp_home_list_post.gone()
@@ -287,8 +287,8 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
 
     override fun showListUserPost(list: List<UserPostResponse>, isRefreshing: Boolean) {
         if (CarBookingSharePreference.getUserData()!!.isDriver) {
-            mUserFindCarFragment!!.showListUserFindCar(list)
-            mUserFindCarFragment!!.showNoResult(list.size == 0)
+            mUserFindCarFragment?.showListUserFindCar(list)
+            mUserFindCarFragment?.showNoResult(list.size == 0)
         }
     }
 

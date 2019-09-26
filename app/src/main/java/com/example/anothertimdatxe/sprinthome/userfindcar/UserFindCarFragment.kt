@@ -35,13 +35,13 @@ class UserFindCarFragment : BaseFragment<UserFindCarPresenter>(), UserFindCarVie
     }
 
     private fun initAdapter() {
-        mPostCreatedMoreFindCarAdapter = PostCreatedMoreFindCarAdapter(context!!)
+        mPostCreatedMoreFindCarAdapter = PostCreatedMoreFindCarAdapter(mContext)
         recycler_view_user_find_car.adapter = mPostCreatedMoreFindCarAdapter
         recycler_view_user_find_car.layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
     }
 
     fun showListUserFindCar(list: List<UserPostResponse>) {
-        mPostCreatedMoreFindCarAdapter!!.addModels(list, false)
+        mPostCreatedMoreFindCarAdapter?.addModels(list, false)
     }
 
     fun clear() {

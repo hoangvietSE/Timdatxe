@@ -37,7 +37,7 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
         get() = R.layout.activity_login
 
 
-    override public fun initView() {
+    override fun initView() {
         btn_login.setOnClickListener {
             if (validate()) {
                 showDialogConfirmDirectLogin()

@@ -17,6 +17,7 @@ import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
+import com.example.anothertimdatxe.util.NumberUtil
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import com.example.kotlinapplication.RecyclerViewAdapter
 
@@ -78,10 +79,10 @@ class DriverListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapte
         }
         when (data.type) {
             TYPE_CONVINENT, TYPE_BOTH -> {
-                viewHolder.money.text = data.regular_price
+                viewHolder.money.text = NumberUtil.formatNumber(data.regular_price!!)
             }
             TYPE_PRIVATE -> {
-                viewHolder.money.text = data.private_price_2
+                viewHolder.money.text = NumberUtil.formatNumber(data.private_price_2!!)
             }
         }
     }

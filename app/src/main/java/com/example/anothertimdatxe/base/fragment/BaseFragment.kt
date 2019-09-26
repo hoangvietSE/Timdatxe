@@ -51,7 +51,7 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), BaseView {
         mPresenter?.destroy()
     }
 
-    abstract override fun initView()
+//    abstract override fun initView()
     protected open fun initListener() {
     }
 

@@ -37,7 +37,7 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
         get() = R.layout.fragment_driver_list_post
 
     companion object {
-        fun getInstance(): DriverListPostFragment {
+        fun getInstance(): DriverListPostFragment{
             val fragment = DriverListPostFragment()
             val bundle = Bundle()
             fragment.arguments = bundle
@@ -172,7 +172,7 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
         if (!avoidDoubleClick()) {
             startActivity(Intent(context!!, DriverCreatePostActivity::class.java).apply {
                 putExtra(DriverCreatePostActivity.EXTRA_IS_SHOW_DATA, true)
-                putExtra(DriverCreatePostActivity.EXTRA_DRIVER_ID,mList.get(position).driver_id)
+                putExtra(DriverCreatePostActivity.EXTRA_POST_ID,mList.get(position).id)
             })
         }
     }

@@ -17,7 +17,9 @@ import com.example.anothertimdatxe.entity.response.DriverPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.request.DriverCreatePostRequest
+import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
+import com.example.anothertimdatxe.util.NumberUtil
 import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.TimePickerDialogWidget
@@ -30,7 +32,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     companion object {
         const val EXTRA_IS_CREATE_POST = "extra_is_create_post"
         const val EXTRA_IS_SHOW_DATA = "extra_is_show_data"
-        const val EXTRA_DRIVER_ID = "extra_driver_id"
+        const val EXTRA_POST_ID = "extra_driver_id"
         const val EXTRA_STARTING_POINT = "extra_starting_point"
         const val EXTRA_ENDING_POINT = "extra_ending_point"
         const val EXTRA_DISTANCE = "extra_distance"
@@ -214,7 +216,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         endingPoint = intent.getStringExtra(EXTRA_ENDING_POINT)
         distance = intent.getStringExtra(EXTRA_DISTANCE)
         duration = intent.getStringExtra(EXTRA_DURATION)
-        driverId = intent.getIntExtra(EXTRA_DRIVER_ID, -1)
+        driverId = intent.getIntExtra(EXTRA_POST_ID, -1)
         if (intent.getBooleanExtra(EXTRA_IS_CREATE_POST, false)) {
             listWayPoint = intent.extras.getParcelableArrayList(EXTRA_LIST_WAYPOINT)
             setDataIntent()
@@ -281,8 +283,8 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         tv_ending_point.text = data.endPoint
         edt_title.setText(data.title)
         tv_distance.text = data.distance.toString() + " km"
-        edt_starting_point.setText(data.startTime)
-        edt_time.setText(data.startTime)
+        edt_starting_point.setText(DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23))
+        edt_time.setText(DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_15))
         edt_estimate.setText(data.durationTime.toString())
         mListCarBrand.forEachIndexed { index, carName ->
             if (carName == data.car?.name) {
@@ -317,6 +319,25 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         } else if (data.flagShowListBook == 0) {
             btn_create_post.gone()
         }
+        if (data.status == Constant.DRIVER_POST_CANCEL) {
+            when (data.reason) {
+                Constant.DRIVER_CANCEL_POST -> {
+                    btn_status.visible()
+                    btn_status.text = "TÀI XE HỦY BÀI ĐĂNG"
+                    btn_create_post.background.level = 1
+                }
+                Constant.DRIVER_CANCEL_BOOKING -> {
+                    btn_status.visible()
+                    btn_status.text = "TÀI XẾ HỦY BOOKING"
+                    btn_create_post.background.level = 1
+                }
+                Constant.POST_EXPIRE -> {
+                    btn_status.visible()
+                    btn_status.text = "CHUYẾN ĐI HẾT HẠN"
+                    btn_create_post.background.level = 1
+                }
+            }
+        }
 
     }
 
@@ -325,8 +346,8 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         edt_starting_point.isEnabled = check
         edt_time.isEnabled = check
         edt_estimate.isEnabled = check
-        sp_brand_car.isEnabled = check
-        sp_number_seat.isEnabled = check
+        sp_brand_car.isClickable = check
+        sp_number_seat.isClickable = check
         cb_highway.isEnabled = check
         if (data?.type == ITEM_TYPE_CONVINENT || data?.type == ITEM_TYPE_BOTH) {
             edt_30_percent.isEnabled = check
@@ -367,15 +388,15 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     }
 
     private fun setPricePrivate() {
-        edt_private_50_percent.setText(data?.privatePrice1)
-        edt_private_100_percent.setText(data?.privatePrice2)
+        edt_private_50_percent.setText(NumberUtil.formatNumber(data?.privatePrice1!!))
+        edt_private_100_percent.setText(NumberUtil.formatNumber(data?.privatePrice2!!))
     }
 
     private fun setPriceConvinent() {
-        edt_30_percent.setText(data?.priceLevel1.toString())
-        edt_50_percent.setText(data?.priceLevel2.toString())
-        edt_70_percent.setText(data?.priceLevel3.toString())
-        edt_100_percent.setText(data?.regularPrice.toString())
+        edt_30_percent.setText(NumberUtil.formatNumber(data?.priceLevel1.toString()))
+        edt_50_percent.setText(NumberUtil.formatNumber(data?.priceLevel2.toString()))
+        edt_70_percent.setText(NumberUtil.formatNumber(data?.priceLevel3.toString()))
+        edt_100_percent.setText(NumberUtil.formatNumber(data?.regularPrice.toString()))
     }
 
     fun setSeatNumber(seat: Int) {
