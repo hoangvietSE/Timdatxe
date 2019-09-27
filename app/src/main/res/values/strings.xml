@@ -1,6 +1,13 @@
 <resources>
     <string name="google_services_api_key">AIzaSyCkl7ejitQmVtgAYVvQm1P9Jmy5O13za0A</string>
 
+    <!--bottom navigation-->
+    <string name="navigation_view_title_home">Trang chủ</string>
+    <string name="navigation_view_title_list_post">Chuyến đã đăng</string>
+    <string name="navigation_view_title_post">Đăng bài</string>
+    <string name="navigation_view_title_list_request">Danh sách</string>
+    <string name="navigation_view_title_profile">Tài khoản</string>
+
     //splash
     <string name="dialog_no_connectivity_title">Thông báo</string>
     <string name="dialog_no_connectivity_positive">Tiếp tục</string>

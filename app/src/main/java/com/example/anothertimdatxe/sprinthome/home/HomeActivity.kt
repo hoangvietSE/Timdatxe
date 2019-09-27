@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -38,7 +39,9 @@ import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFra
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.ToastUtil
+import com.example.anothertimdatxe.widget.BottomNavigationViewHelper
 import com.example.anothertimdatxe.widget.BottomTabLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_nav_menu.*
 import org.greenrobot.eventbus.EventBus
@@ -200,7 +203,36 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 }
             }
         }
-        bottom_bar.setListener(this)
+//        bottom_bar.setListener(this)
+        BottomNavigationViewHelper.disableShiftMode(bottom_bar)
+        bottom_bar.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.item_home -> {
+                        onHomeClick()
+                        return true
+                    }
+                    R.id.item_list_post -> {
+                        onNews()
+                        return true
+                    }
+                    R.id.item_post -> {
+                        onCreateNews()
+                        return true
+                    }
+                    R.id.item_list_request -> {
+                        onRequest()
+                        return true
+                    }
+                    R.id.item_profile -> {
+                        onProfile()
+                        return true
+                    }
+                }
+                return false
+            }
+
+        })
         onCurrentItem(VP_ITEM_HOME)
 //        vp_home.adapter = mFragmentAdapter
 //        vp_home.offscreenPageLimit = 3
@@ -293,7 +325,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     private fun onCurrentItem(position: Int) {
-        val transaction =  supportFragmentManager.beginTransaction()
+        val transaction = supportFragmentManager.beginTransaction()
         for ((index, fragment) in mListFragment.withIndex()) {
             if (index == position) {
                 transaction.show(fragment)
