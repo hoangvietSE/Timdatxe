@@ -104,7 +104,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
     fun startActivityAndClearTask(context: Context, cls: Class<*>) {
         startActivity(Intent(context, cls).apply {
-//            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            //            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         })
     }
 

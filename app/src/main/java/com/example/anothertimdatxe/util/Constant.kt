@@ -42,4 +42,11 @@ object Constant {
     const val CONVENIENT_TRIP = 0
     const val PRIVATE_TRIP = 1
     const val BOTH_CONVENIENT_AND_PRIVATE = 2
+
+    /**
+     * DRIVER POST REASON CANCEL
+     */
+    const val DRIVER_CANCEL_POST = 0
+    const val DRIVER_CANCEL_BOOKING = 1
+    const val POST_EXPIRE = 2
 }

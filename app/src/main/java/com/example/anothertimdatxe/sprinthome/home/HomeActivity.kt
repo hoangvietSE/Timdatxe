@@ -6,12 +6,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseFragmentManager
@@ -39,7 +39,9 @@ import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFra
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.ToastUtil
+import com.example.anothertimdatxe.widget.BottomNavigationViewHelper
 import com.example.anothertimdatxe.widget.BottomTabLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_nav_menu.*
 import org.greenrobot.eventbus.EventBus
@@ -61,6 +63,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         const val VP_ITEM_NEWS = 1
         const val VP_ITEM_LIST_REQUEST = 2
         const val VP_ITEM_PROFILES = 3
+        const val TAG_ITEM_HOME = "home"
+        const val TAG_ITEM_NEWS = "news"
+        const val TAG_ITEM_LIST_REQUEST = "list_request"
+        const val TAG_ITEM_PROFILES = "profiles"
         const val TIME_BACK_LIMIT = 2000L
         const val REQUEST_CODE_FOR_CREATE_POST = 1998
     }
@@ -143,9 +149,9 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun initView() {
+        initViewPager()
         setToolbarHome()
         initDrawer()
-        initViewPager()
     }
 
     private fun setToolbarTitle(string: String) {
@@ -180,93 +186,165 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             mListFragment.add(driverListRequestFragment!!)
             mListFragment.add(driverProfileFragment!!)
         }
-        mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
-        bottom_bar.setListener(this)
-        vp_home.adapter = mFragmentAdapter
-        vp_home.offscreenPageLimit = 3
-        vp_home.currentItem = VP_ITEM_HOME
-        vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-
+//        mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
+        for ((index, fragment) in mListFragment.withIndex()) {
+            when (index) {
+                VP_ITEM_HOME -> {
+                    addFragment(fragment, TAG_ITEM_HOME)
+                }
+                VP_ITEM_NEWS -> {
+                    addFragment(fragment, TAG_ITEM_NEWS)
+                }
+                VP_ITEM_LIST_REQUEST -> {
+                    addFragment(fragment, TAG_ITEM_LIST_REQUEST)
+                }
+                VP_ITEM_PROFILES -> {
+                    addFragment(fragment, TAG_ITEM_PROFILES)
+                }
+            }
+        }
+//        bottom_bar.setListener(this)
+        BottomNavigationViewHelper.disableShiftMode(bottom_bar)
+        bottom_bar.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.item_home -> {
+                        onHomeClick()
+                        return true
+                    }
+                    R.id.item_list_post -> {
+                        onNews()
+                        return true
+                    }
+                    R.id.item_post -> {
+                        onCreateNews()
+                        return true
+                    }
+                    R.id.item_list_request -> {
+                        onRequest()
+                        return true
+                    }
+                    R.id.item_profile -> {
+                        onProfile()
+                        return true
+                    }
+                }
+                return false
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        })
+        onCurrentItem(VP_ITEM_HOME)
+//        vp_home.adapter = mFragmentAdapter
+//        vp_home.offscreenPageLimit = 3
+//        vp_home.currentItem = VP_ITEM_HOME
+//        vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrollStateChanged(state: Int) {
+//
+//            }
+//
+//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+//
+//            }
+//
+//            override fun onPageSelected(position: Int) {
+//
+//            }
+//
+//        })
+    }
 
+    private fun onPageSelected(position: Int) {
+        when (position) {
+            VP_ITEM_HOME -> {
+                setToolbarHome()
             }
+            VP_ITEM_NEWS -> {
+                setToolbarListPost()
+            }
+            VP_ITEM_LIST_REQUEST -> {
+                setToolbarListRequest()
+                when {
+                    CarBookingSharePreference.getUserData()!!.isUser -> {
+                        setToolbarTitle(resources.getString(R.string.driver_list_request_toolbar_title).toUpperCase())
+                    }
+                    CarBookingSharePreference.getUserData()!!.isDriver -> {
+                        setToolbarTitle(resources.getString(R.string.driver_list_request_toolbar_title).toUpperCase())
+                    }
+                }
+            }
+            VP_ITEM_PROFILES -> {
+                setToolbarProfile()
+                rightButton?.let {
+                    if (isLoadingProfileSuccess) {
+                        it.visible()
+                    } else {
+                        it.gone()
+                    }
+                    it.visible()
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit, null))
+                    } else {
+                        it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit))
+                    }
+                    it.setOnClickListener {
+                        var mfragment: Fragment = mListFragment[position]
+                        if (mfragment is UserProfileFragment) {
+                            val data = mfragment.getUserProfile()
+                            startActivity(Intent(this@HomeActivity, UpdateProfileActivity::class.java).apply {
+                                putExtra(UpdateProfileActivity.USER_PROFILE, data)
+                            })
+                        } else if (mfragment is DriverProfileFragment) {
+                            val data = mfragment.getDriverProfile()
+                            startActivity(Intent(this@HomeActivity, DriverUpdateProfileActivity::class.java).apply {
+                                val bundle = Bundle()
+                                bundle.putSerializable(DriverUpdateProfileActivity.DRIVER_PROFILE, data as Serializable)
+                                putExtras(bundle)
+                            })
 
-            override fun onPageSelected(position: Int) {
-                when (position) {
-                    VP_ITEM_HOME -> {
-                        setToolbarHome()
-                    }
-                    VP_ITEM_NEWS -> {
-                        setToolbarListPost()
-                    }
-                    VP_ITEM_LIST_REQUEST -> {
-                        setToolbarListRequest()
-                        when {
-                            CarBookingSharePreference.getUserData()!!.isUser -> {
-                                setToolbarTitle(resources.getString(R.string.driver_list_request_toolbar_title).toUpperCase())
-                            }
-                            CarBookingSharePreference.getUserData()!!.isDriver -> {
-                                setToolbarTitle(resources.getString(R.string.driver_list_request_toolbar_title).toUpperCase())
-                            }
                         }
                     }
-                    VP_ITEM_PROFILES -> {
-                        setToolbarProfile()
-                        rightButton?.let {
-                            if (isLoadingProfileSuccess) {
-                                it.visible()
-                            } else {
-                                it.gone()
-                            }
-                            it.visible()
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit, null))
-                            } else {
-                                it.setImageDrawable(resources.getDrawable(R.drawable.ic_edit))
-                            }
-                            it.setOnClickListener {
-                                var mfragment: Fragment = mListFragment[position]
-                                if (mfragment is UserProfileFragment) {
-                                    val data = mfragment.getUserProfile()
-                                    startActivity(Intent(this@HomeActivity, UpdateProfileActivity::class.java).apply {
-                                        putExtra(UpdateProfileActivity.USER_PROFILE, data)
-                                    })
-                                } else if (mfragment is DriverProfileFragment) {
-                                    val data = mfragment.getDriverProfile()
-                                    startActivity(Intent(this@HomeActivity, DriverUpdateProfileActivity::class.java).apply {
-                                        val bundle = Bundle()
-                                        bundle.putSerializable(DriverUpdateProfileActivity.DRIVER_PROFILE, data as Serializable)
-                                        putExtras(bundle)
-                                    })
-
-                                }
-                            }
-                            when {
-                                CarBookingSharePreference.getUserData()!!.isUser -> {
-                                    setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
-                                }
-                                CarBookingSharePreference.getUserData()!!.isDriver -> {
-                                    setToolbarTitle(resources.getString(R.string.driver_profile_toolbar_title))
-                                }
-                            }
+                    when {
+                        CarBookingSharePreference.getUserData()!!.isUser -> {
+                            setToolbarTitle(resources.getString(R.string.user_profile_toolbar_title))
+                        }
+                        CarBookingSharePreference.getUserData()!!.isDriver -> {
+                            setToolbarTitle(resources.getString(R.string.driver_profile_toolbar_title))
                         }
                     }
                 }
             }
+        }
+    }
 
-        })
+    private fun addFragment(mFragment: Fragment, tag: String) {
+        supportFragmentManager.beginTransaction().add(R.id.main_container, mFragment).commit()
+    }
+
+    private fun replaceFragment(mFragment: Fragment, tag: String) {
+        supportFragmentManager.beginTransaction().replace(R.id.main_container, mFragment).commit()
+    }
+
+    private fun onCurrentItem(position: Int) {
+        val transaction = supportFragmentManager.beginTransaction()
+        for ((index, fragment) in mListFragment.withIndex()) {
+            if (index == position) {
+                transaction.show(fragment)
+            } else {
+                transaction.hide(fragment)
+            }
+        }
+        transaction.commit()
+        onPageSelected(position)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             REQUEST_CODE_FOR_CREATE_POST -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    vp_home.currentItem = VP_ITEM_NEWS
-                    when{
-                        CarBookingSharePreference.getUserData()!!.isDriver->{
+                    onCurrentItem(VP_ITEM_NEWS)
+//                    vp_home.currentItem = VP_ITEM_NEWS
+                    when {
+                        CarBookingSharePreference.getUserData()!!.isDriver -> {
                             val fragment = mListFragment[VP_ITEM_NEWS] as DriverListPostFragment
                             fragment.refreshData()
                         }
@@ -445,11 +523,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onHomeClick() {
-        vp_home.currentItem = VP_ITEM_HOME
+//        vp_home.currentItem = VP_ITEM_HOME
+        onCurrentItem(VP_ITEM_HOME)
     }
 
     override fun onNews() {
-        vp_home.currentItem = VP_ITEM_NEWS
+//        vp_home.currentItem = VP_ITEM_NEWS
+        onCurrentItem(VP_ITEM_NEWS)
     }
 
     override fun onCreateNews() {
@@ -458,11 +538,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onRequest() {
-        vp_home.currentItem = VP_ITEM_LIST_REQUEST
+//        vp_home.currentItem = VP_ITEM_LIST_REQUEST
+        onCurrentItem(VP_ITEM_LIST_REQUEST)
     }
 
     override fun onProfile() {
-        vp_home.currentItem = VP_ITEM_PROFILES
+//        vp_home.currentItem = VP_ITEM_PROFILES
+        onCurrentItem(VP_ITEM_PROFILES)
     }
 
     fun logOut() {
