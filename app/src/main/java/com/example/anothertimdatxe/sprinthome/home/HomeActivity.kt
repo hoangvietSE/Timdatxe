@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseFragmentManager
@@ -186,23 +187,23 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             mListFragment.add(driverListRequestFragment!!)
             mListFragment.add(driverProfileFragment!!)
         }
-//        mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
-        for ((index, fragment) in mListFragment.withIndex()) {
-            when (index) {
-                VP_ITEM_HOME -> {
-                    addFragment(fragment, TAG_ITEM_HOME)
-                }
-                VP_ITEM_NEWS -> {
-                    addFragment(fragment, TAG_ITEM_NEWS)
-                }
-                VP_ITEM_LIST_REQUEST -> {
-                    addFragment(fragment, TAG_ITEM_LIST_REQUEST)
-                }
-                VP_ITEM_PROFILES -> {
-                    addFragment(fragment, TAG_ITEM_PROFILES)
-                }
-            }
-        }
+        mFragmentAdapter = BaseFragmentManager(supportFragmentManager, mListFragment)
+//        for ((index, fragment) in mListFragment.withIndex()) {
+//            when (index) {
+//                VP_ITEM_HOME -> {
+//                    addFragment(fragment, TAG_ITEM_HOME)
+//                }
+//                VP_ITEM_NEWS -> {
+//                    addFragment(fragment, TAG_ITEM_NEWS)
+//                }
+//                VP_ITEM_LIST_REQUEST -> {
+//                    addFragment(fragment, TAG_ITEM_LIST_REQUEST)
+//                }
+//                VP_ITEM_PROFILES -> {
+//                    addFragment(fragment, TAG_ITEM_PROFILES)
+//                }
+//            }
+//        }
 //        bottom_bar.setListener(this)
         BottomNavigationViewHelper.disableShiftMode(bottom_bar)
         bottom_bar.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
@@ -233,27 +234,27 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             }
 
         })
-        onCurrentItem(VP_ITEM_HOME)
-//        vp_home.adapter = mFragmentAdapter
-//        vp_home.offscreenPageLimit = 3
-//        vp_home.currentItem = VP_ITEM_HOME
-//        vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-//            override fun onPageScrollStateChanged(state: Int) {
-//
-//            }
-//
-//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-//
-//            }
-//
-//            override fun onPageSelected(position: Int) {
-//
-//            }
-//
-//        })
+//        onCurrentItem(VP_ITEM_HOME)
+        vp_home.adapter = mFragmentAdapter
+        vp_home.offscreenPageLimit = 3
+        vp_home.currentItem = VP_ITEM_HOME
+        vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                onPage(position)
+            }
+
+        })
     }
 
-    private fun onPageSelected(position: Int) {
+    private fun onPage(position: Int) {
         when (position) {
             VP_ITEM_HOME -> {
                 setToolbarHome()
@@ -316,33 +317,33 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         }
     }
 
-    private fun addFragment(mFragment: Fragment, tag: String) {
-        supportFragmentManager.beginTransaction().add(R.id.main_container, mFragment).commit()
-    }
+//    private fun addFragment(mFragment: Fragment, tag: String) {
+//        supportFragmentManager.beginTransaction().add(R.id.main_container, mFragment).commit()
+//    }
+//
+//    private fun replaceFragment(mFragment: Fragment, tag: String) {
+//        supportFragmentManager.beginTransaction().replace(R.id.main_container, mFragment).commit()
+//    }
 
-    private fun replaceFragment(mFragment: Fragment, tag: String) {
-        supportFragmentManager.beginTransaction().replace(R.id.main_container, mFragment).commit()
-    }
-
-    private fun onCurrentItem(position: Int) {
-        val transaction = supportFragmentManager.beginTransaction()
-        for ((index, fragment) in mListFragment.withIndex()) {
-            if (index == position) {
-                transaction.show(fragment)
-            } else {
-                transaction.hide(fragment)
-            }
-        }
-        transaction.commit()
-        onPageSelected(position)
-    }
+//    private fun onCurrentItem(position: Int) {
+//        val transaction = supportFragmentManager.beginTransaction()
+//        for ((index, fragment) in mListFragment.withIndex()) {
+//            if (index == position) {
+//                transaction.show(fragment)
+//            } else {
+//                transaction.hide(fragment)
+//            }
+//        }
+//        transaction.commit()
+//        onPageSelected(position)
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             REQUEST_CODE_FOR_CREATE_POST -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    onCurrentItem(VP_ITEM_NEWS)
-//                    vp_home.currentItem = VP_ITEM_NEWS
+//                    onCurrentItem(VP_ITEM_NEWS)
+                    vp_home.currentItem = VP_ITEM_NEWS
                     when {
                         CarBookingSharePreference.getUserData()!!.isDriver -> {
                             val fragment = mListFragment[VP_ITEM_NEWS] as DriverListPostFragment
@@ -523,13 +524,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onHomeClick() {
-//        vp_home.currentItem = VP_ITEM_HOME
-        onCurrentItem(VP_ITEM_HOME)
+        vp_home.currentItem = VP_ITEM_HOME
+//        onCurrentItem(VP_ITEM_HOME)
     }
 
     override fun onNews() {
-//        vp_home.currentItem = VP_ITEM_NEWS
-        onCurrentItem(VP_ITEM_NEWS)
+        vp_home.currentItem = VP_ITEM_NEWS
+//        onCurrentItem(VP_ITEM_NEWS)
     }
 
     override fun onCreateNews() {
@@ -538,13 +539,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
     }
 
     override fun onRequest() {
-//        vp_home.currentItem = VP_ITEM_LIST_REQUEST
-        onCurrentItem(VP_ITEM_LIST_REQUEST)
+        vp_home.currentItem = VP_ITEM_LIST_REQUEST
+//        onCurrentItem(VP_ITEM_LIST_REQUEST)
     }
 
     override fun onProfile() {
-//        vp_home.currentItem = VP_ITEM_PROFILES
-        onCurrentItem(VP_ITEM_PROFILES)
+        vp_home.currentItem = VP_ITEM_PROFILES
+//        onCurrentItem(VP_ITEM_PROFILES)
     }
 
     fun logOut() {

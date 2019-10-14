@@ -50,7 +50,7 @@ data class SearchCityPostResponse(
 	val priceLevel3: String? = null,
 
 	@field:SerializedName("private_price_2")
-	val privatePrice2: Any? = null,
+	val privatePrice2: String? = null,
 
 	@field:SerializedName("price_level_1")
 	val priceLevel1: String? = null,

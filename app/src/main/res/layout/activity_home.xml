@@ -13,8 +13,8 @@
 
         <include layout="@layout/toolbar" />
 
-        <FrameLayout
-            android:id="@+id/main_container"
+        <com.example.anothertimdatxe.widget.LockedViewPager
+            android:id="@+id/vp_home"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/bottom_bar"
