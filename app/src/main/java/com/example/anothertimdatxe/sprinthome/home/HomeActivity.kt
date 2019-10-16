@@ -27,6 +27,7 @@ import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
+import com.example.anothertimdatxe.sprinthome.listpost.user.UserListPostFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListPostFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListRequestFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
@@ -36,7 +37,6 @@ import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
 import com.example.anothertimdatxe.sprinthome.revenue.RevenueDriverActivity
 import com.example.anothertimdatxe.sprinthome.settings.SettingActivity
 import com.example.anothertimdatxe.sprinthome.updateprofile.UpdateProfileActivity
-import com.example.anothertimdatxe.sprinthome.userpostcreated.UserPostCreatedFragment
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.ToastUtil
@@ -169,7 +169,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         var listRequestFragment: Fragment? = null
         var driverListRequestFragment: Fragment? = null
         if (CarBookingSharePreference.getUserData()!!.isUser) {
-            listPostCreatedFragment = UserPostCreatedFragment.getInstance()
+            listPostCreatedFragment = UserListPostFragment.getInstance()
             listRequestFragment = ListRequestFragment.getInstance()
             userProfileFragment = UserProfileFragment.getInstance()
         } else if (CarBookingSharePreference.getUserData()!!.isDriver) {

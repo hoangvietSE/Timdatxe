@@ -473,4 +473,10 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun getUserListPost(data: MutableMap<String, Any?>): Single<BaseResult<List<UserListPostEntity>>> {
+        return apiService.getUserListPost(CarBookingSharePreference.getAccessToken(), CarBookingSharePreference.getUserId(), data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }
