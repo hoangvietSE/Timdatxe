@@ -47,4 +47,8 @@ class UserListPostEntity {
     var str_status: String? = null
     @SerializedName("can_delete")
     var can_delete: Int? = null
+    @SerializedName("app_start_province")
+    var app_start_province: String? = null
+    @SerializedName("app_end_province")
+    var app_end_province: String? = null
 }

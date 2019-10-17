@@ -1,14 +1,14 @@
-package com.example.anothertimdatxe.sprinthome.listrequest.user.list
+package com.example.anothertimdatxe.sprinthome.listpost.user
 
 import com.example.anothertimdatxe.base.mvp.BaseView
-import com.example.anothertimdatxe.entity.response.ListUserBookResponse
+import com.example.anothertimdatxe.entity.UserListPostEntity
 
-interface ListRequestView : BaseView {
+interface UserListPostView : BaseView {
     fun setSpinnerStatus(listStatus: List<String>)
     fun enableLoadingMore(enable: Boolean)
     fun showLoadingMore()
     fun hideLoadingMore()
-    fun showListUserPost(list: List<ListUserBookResponse>)
+    fun showListUserPost(list: List<UserListPostEntity>)
     fun showRefreshing()
     fun hideRefreshing()
 }

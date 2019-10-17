@@ -1,10 +1,10 @@
-package com.example.anothertimdatxe.sprinthome.listrequest.user.list
+package com.example.anothertimdatxe.sprinthome.listpost.user
 
 import com.example.anothertimdatxe.base.mvp.BasePresenter
 
-interface ListRequestPresenter : BasePresenter {
+interface UserListPostPresenter : BasePresenter {
     fun initSpinnerStatus()
-    fun fetchUserListBook()
+    fun fetchUserListPost()
     fun setStatus(status: Int)
     fun refreshData()
     fun setDate(date: String)

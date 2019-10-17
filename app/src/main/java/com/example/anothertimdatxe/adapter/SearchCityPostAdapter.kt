@@ -68,10 +68,10 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
                     cityPostHolder.tvMoney.text = "${NumberUtil.formatNumber(dataDriver!!.regularPrice!!)}/Người"
                 }
                 MyApp.KEY_PRIVATE_CAR -> {
-                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.priceLevel2!!)
+                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
                 }
                 MyApp.KEY_BOTH_CAR -> {
-                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.priceLevel2!!)
+                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
                 }
             }
             when (dataDriver!!.status) {

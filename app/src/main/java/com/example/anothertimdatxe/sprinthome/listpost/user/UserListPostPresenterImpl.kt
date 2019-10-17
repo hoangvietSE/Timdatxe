@@ -1,12 +1,12 @@
-package com.example.anothertimdatxe.sprinthome.listrequest.user.list
+package com.example.anothertimdatxe.sprinthome.listpost.user
 
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 import com.example.anothertimdatxe.base.network.RetrofitManager
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NetworkUtil
 
-class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListRequestView>(mView), ListRequestPresenter {
-    private var bookTime: String = ""
+class UserListPostPresenterImpl(mView: UserListPostView) : BasePresenterImpl<UserListPostView>(mView), UserListPostPresenter {
+    private var startTime: String = ""
     private var startPoint: String = ""
     private var endPoint: String = ""
     private var limit: Int = 6
@@ -18,10 +18,11 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
     override fun initSpinnerStatus() {
         val listOfStatus = listOf(
                 "Chọn trạng thái",
-                "Đặt thất bại",
-                "Đặt thành công",
+                "Đang chờ phê duyệt",
+                "Công khai",
+                "Đã thỏa thuận với tài xê",
                 "Kết thúc",
-                "Hủy chuyến"
+                "Hủy bỏ"
         )
         mView?.setSpinnerStatus(listOfStatus)
     }
@@ -33,12 +34,12 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
     private fun resetData() {
         pageIndex = 1
         totalPage = 0
-        fetchUserListBook()
+        fetchUserListPost()
     }
 
-    override fun fetchUserListBook() {
+    override fun fetchUserListPost() {
         setQueryParams()
-        addDispose(RetrofitManager.getUserListBook(data)
+        addDispose(RetrofitManager.getUserListPost(data)
                 .doOnSubscribe {
                     mView!!.showRefreshing()
                 }
@@ -63,7 +64,7 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
     }
 
     private fun setQueryParams() {
-        data["book_time"] = bookTime
+        data["start_time"] = startTime
         data["start_point"] = startPoint
         data["end_point"] = startPoint
         data["status"] = status
@@ -83,9 +84,9 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
 
     override fun setDate(date: String) {
         if (!date.isNullOrEmpty()) {
-            bookTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
+            startTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
         }else{
-            bookTime = ""
+            startTime = ""
         }
         resetData()
     }
