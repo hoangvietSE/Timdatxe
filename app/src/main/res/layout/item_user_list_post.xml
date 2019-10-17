@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/margin_16_dp"
-    android:layout_marginEnd="@dimen/margin_16_dp"
-    android:layout_marginBottom="@dimen/margin_8_dp"
     android:background="@drawable/bg_item_post_created_find_car"
     android:clickable="true"
     android:focusable="true"
@@ -14,7 +11,7 @@
     <TextView
         android:id="@+id/formTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_title_item_post_created"
         android:ellipsize="end"
         android:maxLines="1"
@@ -27,7 +24,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/margin_4_dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -41,7 +38,7 @@
             android:src="@drawable/ic_avatar" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/margin_4_dp"

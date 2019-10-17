@@ -10,6 +10,7 @@ import com.example.anothertimdatxe.adapter.SpinnserStatus
 import com.example.anothertimdatxe.adapter.UserListPostAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.base.util.GlideApp
+import com.example.anothertimdatxe.common.ItemRecyclerViewDecoration
 import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
@@ -44,7 +45,6 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
         initDatePicker()
         initStatus()
         setAdapter()
-        fetchUserListPost()
         initRefreshing()
     }
 
@@ -69,6 +69,7 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
         mUserListPostAdapter?.addOnItemClickListener(this)
         rcv_list_post.adapter = mUserListPostAdapter
         rcv_list_post.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+        rcv_list_post.addItemDecoration(ItemRecyclerViewDecoration(context!!, R.dimen.margin_8_dp))
     }
 
     private fun fetchUserListPost() {
@@ -88,7 +89,6 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 mPresenter?.setStatus(position)
-                mPresenter?.fetchUserListPost()
             }
 
         }
@@ -108,7 +108,6 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
         val date = "${DateUtil.formatValue(dayOfMonth.toString())}/${DateUtil.formatValue(month.toString())}/${DateUtil.formatValue(year.toString())}"
         tv_date.setText(date)
         mPresenter?.setDate(date)
-        mPresenter?.fetchUserListPost()
     }
 
     override fun enableLoadingMore(enable: Boolean) {
@@ -124,7 +123,7 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
     }
 
     override fun onLoadMore() {
-        mPresenter?.fetchUserListPost()
+        fetchUserListPost()
     }
 
     override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {

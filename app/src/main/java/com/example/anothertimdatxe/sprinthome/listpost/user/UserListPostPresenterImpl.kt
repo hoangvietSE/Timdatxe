@@ -67,6 +67,7 @@ class UserListPostPresenterImpl(mView: UserListPostView) : BasePresenterImpl<Use
         data["start_time"] = startTime
         data["start_point"] = startPoint
         data["end_point"] = startPoint
+        data["status"] = status
         data["limit"] = limit
         data["page"] = pageIndex
 
@@ -78,11 +79,13 @@ class UserListPostPresenterImpl(mView: UserListPostView) : BasePresenterImpl<Use
         } else {
             (status - 1).toString()
         }
+        resetData()
     }
 
     override fun setDate(date: String) {
-        if(date.isNullOrEmpty()){
+        if (!date.isNullOrEmpty()) {
             startTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
+            resetData()
         }
     }
 }

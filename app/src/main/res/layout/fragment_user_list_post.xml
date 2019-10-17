@@ -168,7 +168,8 @@
             android:id="@+id/rcv_list_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8_dp"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/margin_8_dp"
             tools:listitem="@layout/item_user_list_post" />
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
