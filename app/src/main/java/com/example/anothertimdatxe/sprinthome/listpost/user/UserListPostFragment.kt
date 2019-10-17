@@ -12,6 +12,8 @@ import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.common.ItemRecyclerViewDecoration
 import com.example.anothertimdatxe.entity.UserListPostEntity
+import com.example.anothertimdatxe.extension.invisible
+import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
@@ -56,6 +58,10 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
         }
         swipe_refresh.setOnRefreshListener {
             mPresenter?.refreshData()
+        }
+        imv_close.setOnClickListener {
+            hideIconClose()
+            setDate("")
         }
     }
 
@@ -106,8 +112,21 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
 
     override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
         val date = "${DateUtil.formatValue(dayOfMonth.toString())}/${DateUtil.formatValue(month.toString())}/${DateUtil.formatValue(year.toString())}"
+        showIconClose()
+        setDate(date)
+    }
+
+    private fun setDate(date: String) {
         tv_date.setText(date)
         mPresenter?.setDate(date)
+    }
+
+    private fun showIconClose() {
+        imv_close.visible()
+    }
+
+    private fun hideIconClose() {
+        imv_close.invisible()
     }
 
     override fun enableLoadingMore(enable: Boolean) {

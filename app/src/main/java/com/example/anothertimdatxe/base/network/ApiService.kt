@@ -283,4 +283,9 @@ interface ApiService {
     @GET(ApiConstant.USER_LIST_POST_CREATED)
     @Headers("Content-Type: application/json")
     fun getUserListPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.USER_ID) user_id: Int, @QueryMap data: MutableMap<String, Any?>): Single<BaseResult<List<UserListPostEntity>>>
+
+    //User List Book
+    @GET(ApiConstant.USER_BOOKS)
+    @Headers("Content-Type: application/json")
+    fun getListUserBook(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @QueryMap data: MutableMap<String, Any?>): Single<BaseResult<List<ListUserBookResponse>>>
 }

@@ -479,4 +479,10 @@ object RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun getUserListBook(data: MutableMap<String, Any?>): Single<BaseResult<List<ListUserBookResponse>>> {
+        return apiService.getListUserBook(CarBookingSharePreference.getAccessToken(), data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }
