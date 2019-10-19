@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_10dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="@dimen/margin_8_dp"
+        android:paddingEnd="@dimen/margin_8_dp"
+        android:src="@drawable/ic_close" />
+
+    <ImageView
+        android:id="@+id/imv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/icon_logo_direct" />
+
+    <TextView
+        android:id="@+id/tv_title_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:text="@string/user_request_detail_cancel_booking_step_one_title"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_title_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_one"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_4_dp"
+        android:text="@string/user_request_detail_cancel_booking_step_one_title_two"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_condition_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title_two"
+        android:layout_marginTop="@dimen/margin_4_dp"
+        android:gravity="center"
+        android:text="@string/user_request_detail_cancel_booking_condition_one" />
+
+    <TextView
+        android:id="@+id/tv_condition_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_condition_one"
+        android:layout_marginTop="@dimen/margin_4_dp"
+        android:gravity="center"
+        android:text="@string/user_request_detail_cancel_booking_step_one_condition_two" />
+
+    <TextView
+        android:id="@+id/tv_condition_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_condition_two"
+        android:layout_marginStart="@dimen/margin_32_dp"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:layout_marginEnd="@dimen/margin_32_dp"
+        android:background="@drawable/bg_btn_update_profile"
+        android:gravity="center"
+        android:padding="@dimen/element_padding_normal"
+        android:text="@string/user_request_detail_cancel_booking_step_one_condition_three"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_8_dp"
+        android:layout_below="@id/tv_condition_three"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:background="@color/colorPrimary" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:background="@drawable/bg_cancel_booking_step_one"
+        android:padding="@dimen/content_padding_normal">
+
+        <TextView
+            android:id="@+id/btn_step_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_cancel_booking_step_one"
+            android:gravity="center"
+            android:padding="@dimen/element_padding_normal"
+            android:text="@string/user_request_detail_cancel_booking_step_one_btn"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

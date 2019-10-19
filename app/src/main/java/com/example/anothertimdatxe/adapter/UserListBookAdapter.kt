@@ -16,7 +16,7 @@ import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class UserListBookAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return LoadingViewHolder(context!!.inflate(R.layout.loading))
+        return LoadingViewHolder(context!!.inflate(R.layout.loading, parent, false))
     }
 
     override fun bindLoadingViewHolder(loadingViewHolder: LoadingViewHolder, position: Int) {

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/element_padding_small">
+
+        <ImageView
+            android:id="@+id/imv_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            tools:src="@drawable/ic_machuyendi" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_toRightOf="@id/imv_icon"
+            tools:text="@string/user_request_detail_starting_point" />
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_32_dp"
+            android:layout_toRightOf="@id/tv_title"
+            android:gravity="end"
+            android:paddingEnd="@dimen/element_padding_normal"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:text="UB191919191919191" />
+    </RelativeLayout>
+
+    <View style="@style/LineView" />
+</LinearLayout>

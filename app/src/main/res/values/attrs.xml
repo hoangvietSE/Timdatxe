@@ -169,4 +169,10 @@
         <attr name="create_post_enable_importance" format="boolean" />
         <attr name="create_post_row_icon" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="BaseItemUserRequestDetail">
+        <attr name="ubd_icon" format="integer|reference" />
+        <attr name="ubd_title" format="string" />
+        <attr name="ubd_detail" format="string" />
+    </declare-styleable>
 </resources>

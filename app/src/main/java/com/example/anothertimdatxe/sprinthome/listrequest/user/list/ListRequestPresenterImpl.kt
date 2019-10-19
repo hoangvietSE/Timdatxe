@@ -9,7 +9,7 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
     private var bookTime: String = ""
     private var startPoint: String = ""
     private var endPoint: String = ""
-    private var limit: Int = 6
+    private var limit: Int = 10
     private var totalPage: Int = 0
     private var pageIndex = 1
     private var status: String = ""
@@ -40,7 +40,9 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
         setQueryParams()
         addDispose(RetrofitManager.getUserListBook(data)
                 .doOnSubscribe {
-                    mView!!.showRefreshing()
+                    if (pageIndex == 1 && mView != null){
+                        mView!!.showRefreshing()
+                    }
                 }
                 .doFinally {
                     mView!!.hideRefreshing()
@@ -84,7 +86,7 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
     override fun setDate(date: String) {
         if (!date.isNullOrEmpty()) {
             bookTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
-        }else{
+        } else {
             bookTime = ""
         }
         resetData()

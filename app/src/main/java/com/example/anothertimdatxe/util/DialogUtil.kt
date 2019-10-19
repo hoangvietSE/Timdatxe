@@ -19,6 +19,17 @@ object DialogUtil {
         return dialog
     }
 
+    fun showConfirmDialog(context: Context, layout: Int, setCancel: Boolean, resBackground: Int, mListener: BaseDialogListener): Dialog {
+        var dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(layout)
+        dialog.setCancelable(setCancel)
+        dialog.window.setBackgroundDrawableResource(resBackground)
+        mListener.onAddDataToDialog(context, dialog)
+        dialog.show()
+        return dialog
+    }
+
     private fun showMessageDialog(context: Context, msg: Int, title: Int, okListener: DialogInterface.OnClickListener?): AlertDialog {
         var builder = AlertDialog.Builder(context)
         builder.setCancelable(false)
