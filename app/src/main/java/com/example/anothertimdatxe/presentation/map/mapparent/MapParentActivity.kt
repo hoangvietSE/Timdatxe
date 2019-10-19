@@ -10,6 +10,8 @@ import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.presentation.drivercreatepost.DriverCreatePostActivity
 import com.example.anothertimdatxe.presentation.map.mapsearch.MapSearchActivity
+import com.example.anothertimdatxe.presentation.usercreatepost.UserCreatePostActivity
+import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.ToastUtil
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -28,7 +30,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     private var mLocationStartingPoint: String? = null
     private var mLocationEndingPoint: String? = null
     private var mDistance: String? = null
-    private var mDuration: String? = null
+    private var mDuration: Int? = null
     private var mList: ArrayList<LatLng> = arrayListOf()
 
     override val layoutRes: Int
@@ -49,14 +51,25 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
             gpsLocation()
         }
         btn_confirm.setOnClickListener {
-            startActivityForResult(Intent(this, DriverCreatePostActivity::class.java).apply {
-                putExtra(DriverCreatePostActivity.EXTRA_STARTING_POINT, mLocationStartingPoint)
-                putExtra(DriverCreatePostActivity.EXTRA_ENDING_POINT, mLocationEndingPoint)
-                putExtra(DriverCreatePostActivity.EXTRA_DISTANCE, mDistance)
-                putExtra(DriverCreatePostActivity.EXTRA_DURATION, mDuration)
-                putParcelableArrayListExtra(DriverCreatePostActivity.EXTRA_LIST_WAYPOINT, mList)
-                putExtra(DriverCreatePostActivity.EXTRA_IS_CREATE_POST,true)
-            }, REQUEST_CODE_CREATE_POST)
+            if (CarBookingSharePreference.getUserData()?.isUser!!) {
+                startActivity(Intent(this, UserCreatePostActivity::class.java).apply {
+                    putExtra(UserCreatePostActivity.EXTRA_STARTING_POINT, mLocationStartingPoint)
+                    putExtra(UserCreatePostActivity.EXTRA_ENDING_POINT, mLocationEndingPoint)
+                    putExtra(UserCreatePostActivity.EXTRA_DISTANCE, mDistance)
+                    putExtra(UserCreatePostActivity.EXTRA_DURATION, mDuration)
+                    putParcelableArrayListExtra(UserCreatePostActivity.EXTRA_LIST_WAYPOINT, mList)
+                    putExtra(UserCreatePostActivity.EXTRA_IS_CREATE_POST, true)
+                })
+            } else {
+                startActivityForResult(Intent(this, DriverCreatePostActivity::class.java).apply {
+                    putExtra(DriverCreatePostActivity.EXTRA_STARTING_POINT, mLocationStartingPoint)
+                    putExtra(DriverCreatePostActivity.EXTRA_ENDING_POINT, mLocationEndingPoint)
+                    putExtra(DriverCreatePostActivity.EXTRA_DISTANCE, mDistance)
+                    putExtra(DriverCreatePostActivity.EXTRA_DURATION, mDuration)
+                    putParcelableArrayListExtra(DriverCreatePostActivity.EXTRA_LIST_WAYPOINT, mList)
+                    putExtra(DriverCreatePostActivity.EXTRA_IS_CREATE_POST, true)
+                }, REQUEST_CODE_CREATE_POST)
+            }
         }
     }
 
@@ -102,7 +115,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
                 }
             }
             REQUEST_CODE_CREATE_POST -> {
-                setResult(Activity.RESULT_OK,Intent())
+                setResult(Activity.RESULT_OK, Intent())
                 finish()
             }
         }

@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome.listrequest.user.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -14,6 +15,7 @@ import com.example.anothertimdatxe.common.ItemRecyclerViewDecoration
 import com.example.anothertimdatxe.entity.response.ListUserBookResponse
 import com.example.anothertimdatxe.extension.invisible
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.sprinthome.listrequest.user.detail.UserRequestDetailActivity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
@@ -28,6 +30,7 @@ class ListRequestFragment : BaseFragment<ListRequestPresenter>(), ListRequestVie
     private var mSpinnerStats: SpinnserStatus? = null
 
     companion object {
+        const val REQUEST_CODE_USRE_REQUEST = 9001
         fun getInstance(): ListRequestFragment {
             val bundle = Bundle()
             val listRequestFragment = ListRequestFragment()
@@ -54,7 +57,7 @@ class ListRequestFragment : BaseFragment<ListRequestPresenter>(), ListRequestVie
             }
         }
         swipe_refresh.setOnRefreshListener {
-            mPresenter?.refreshData()
+            refreshData()
         }
         imv_close.setOnClickListener {
             hideIconClose()
@@ -118,16 +121,16 @@ class ListRequestFragment : BaseFragment<ListRequestPresenter>(), ListRequestVie
 
     }
 
-    private fun setDate(date:String){
+    private fun setDate(date: String) {
         tv_date.setText(date)
         mPresenter?.setDate(date)
     }
 
-    private fun showIconClose(){
+    private fun showIconClose() {
         imv_close.visible()
     }
 
-    private fun hideIconClose(){
+    private fun hideIconClose() {
         imv_close.invisible()
     }
 
@@ -144,20 +147,28 @@ class ListRequestFragment : BaseFragment<ListRequestPresenter>(), ListRequestVie
     }
 
     override fun onLoadMore() {
+        showLoadingMore()
         fetchUserListPost()
     }
 
     override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
-
+        val data = mUserListBookAdapter?.getItem(position, ListUserBookResponse::class.java)
+        activity?.startActivityForResult(Intent(context, UserRequestDetailActivity::class.java).apply {
+            putExtra(UserRequestDetailActivity.EXTRA_POST_ID, data?.id)
+        }, REQUEST_CODE_USRE_REQUEST)
     }
 
     override fun showListUserPost(list: List<ListUserBookResponse>) {
+        hideLoadingMore()
         if (swipe_refresh.isRefreshing) {
             mUserListBookAdapter?.clear()
         }
         mUserListBookAdapter?.addModels(list, false)
         hideRefreshing()
-        hideLoadingMore()
+    }
+
+    fun refreshData(){
+        mPresenter?.refreshData()
     }
 
     override fun showRefreshing() {

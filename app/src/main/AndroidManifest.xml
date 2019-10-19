@@ -122,6 +122,12 @@
         <activity
             android:name=".presentation.drivercreatepost.DriverCreatePostActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".sprinthome.listrequest.user.detail.UserRequestDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.usercreatepost.UserCreatePostActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

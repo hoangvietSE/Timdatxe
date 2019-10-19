@@ -288,4 +288,19 @@ interface ApiService {
     @GET(ApiConstant.USER_BOOKS)
     @Headers("Content-Type: application/json")
     fun getListUserBook(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @QueryMap data: MutableMap<String, Any?>): Single<BaseResult<List<ListUserBookResponse>>>
+
+    //User Book Detail
+    @GET(ApiConstant.USER_BOOKS_DETAILS)
+    @Headers("Content-Type: application/json")
+    fun getUserRequestDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<UserRequestDetailResponse>>>
+
+    //User Cancel User Book
+    @POST(ApiConstant.USER_CANCEL_USER_BOOK)
+    @Multipart
+    fun userCancelUserBook(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part(RequestParam.ID) id: RequestBody): Single<Response<BaseResult<UserCancelUserBookResponse>>>
+
+    //User Create Post
+    @POST(ApiConstant.USER_CREATE_POSTS)
+    @Headers("Content-Type: application/json")
+    fun userCreatePost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody): Single<Response<BaseResult<UserCreatePostResponse>>>
 }

@@ -16,6 +16,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -90,6 +91,10 @@ object RetrofitManager {
     private fun createPostRequest(request: Any): RequestBody {
         var requestInJson: String = Gson().toJson(request)
         return RequestBody.create(MultipartBody.FORM, requestInJson) //data is divided to many part
+    }
+
+    private fun createRequestBody(data: Any): RequestBody {
+        return RequestBody.create(MediaType.parse("text/plain"), data.toString())
     }
 
     //Utilize RxJava2 to run this on another thread and get result in Main Thread by Obverser
@@ -484,5 +489,29 @@ object RetrofitManager {
         return apiService.getListUserBook(CarBookingSharePreference.getAccessToken(), data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun fetchUserRequestDetail(postId: Int, iCallBack: ICallBack<BaseResult<UserRequestDetailResponse>>): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.getUserRequestDetail(CarBookingSharePreference.getAccessToken(), postId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscriber)
+    }
+
+    fun userCancelUserBook(userBookId: Int, iCallBack: ICallBack<BaseResult<UserCancelUserBookResponse>>): Disposable {
+        val subscriber = getSubcriber(iCallBack)
+        return apiService.userCancelUserBook(CarBookingSharePreference.getAccessToken(), createRequestBody(userBookId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscriber)
+    }
+
+    fun userCreatePost(data: UserCreatePostRequest, iCallBack: ICallBack<BaseResult<UserCreatePostResponse>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.userCreatePost(CarBookingSharePreference.getAccessToken(), createPostRequest(data))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
     }
 }

@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.entity.response.DriverCar
+import com.example.anothertimdatxe.entity.response.DriverCarDetail
 
-class SpinnerCarAdapter(var context: Context, var data: ArrayList<DriverCar>) : BaseAdapter() {
+class SpinnerCarAdapter(var context: Context, var data: ArrayList<DriverCarDetail>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: TextView = convertView as TextView?
                 ?: LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false) as TextView

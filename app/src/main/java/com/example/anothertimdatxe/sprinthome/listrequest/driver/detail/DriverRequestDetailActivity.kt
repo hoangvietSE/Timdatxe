@@ -14,7 +14,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.SpinnerCarAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.util.GlideApp
-import com.example.anothertimdatxe.entity.response.DriverCar
+import com.example.anothertimdatxe.entity.response.DriverCarDetail
 import com.example.anothertimdatxe.entity.response.UserPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
@@ -200,7 +200,6 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
             tv_request.setOnClickListener {
                 if (!avoidDoubleClick()) {
                     if (data.driverCarPending == 1) {
-                        showConfirmRequestDialog(data.driverCars)
                     } else if (data.driverCarPending == 0) {
                         ToastUtil.show(data.driverCarMsg!!)
                     } else {
@@ -285,7 +284,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         }
     }
 
-    private fun showConfirmRequestDialog(driverCars: ArrayList<DriverCar>?) {
+    private fun showConfirmRequestDialog(driverCars: ArrayList<DriverCarDetail>?) {
         var mCarId = -1
         if (driverCars?.size == 0) {
             ToastUtil.show(resources.getString(R.string.driver_request_detail_no_regis_car))

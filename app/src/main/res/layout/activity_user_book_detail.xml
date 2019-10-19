@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:padding="@dimen/element_padding_small">
+
+        <ImageView
+            android:id="@+id/imv_starting_point"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_starting_point_two" />
+
+        <TextView
+            android:id="@+id/tv_starting_point_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_toRightOf="@id/imv_starting_point"
+            android:text="@string/user_request_detail_starting_point" />
+
+        <TextView
+            android:id="@+id/tv_starting_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_32_dp"
+            android:layout_toRightOf="@id/tv_starting_point_title"
+            android:gravity="end"
+            android:paddingEnd="@dimen/element_padding_normal"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:text="Hà Nội, Hoàn Kiếm, Hà Nội, Việt Nam" />
+    </RelativeLayout>
+
+    <View style="@style/LineView" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="@dimen/element_padding_small">
+
+        <ImageView
+            android:id="@+id/imv_ending_point"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_end" />
+
+        <TextView
+            android:id="@+id/tv_ending_point_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_toRightOf="@id/imv_ending_point"
+            android:text="@string/user_request_detail_starting_point" />
+
+        <TextView
+            android:id="@+id/tv_ending_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_32_dp"
+            android:layout_toRightOf="@id/tv_ending_point_title"
+            android:gravity="end"
+            android:paddingEnd="@dimen/element_padding_normal"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:text="Hà Nội, Hoàn Kiếm, Hà Nội, Việt Nam" />
+    </RelativeLayout>
+
+    <View style="@style/LineView" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_machuyendi"
+        app:ubd_title="@string/user_request_detail_code" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_icon_ngay_di"
+        app:ubd_title="@string/user_request_detail_date" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_seat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_icon_ghe_muon_dat"
+        app:ubd_title="@string/user_request_detail_number_seat" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_type_trip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_ic_baoxe"
+        app:ubd_title="@string/user_request_detail_type_trip" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_way"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_detail="Cao tốc"
+        app:ubd_icon="@drawable/ic_cao_toc_tt"
+        app:ubd_title="@string/user_request_detail_way" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_one_seat_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_money"
+        app:ubd_title="@string/user_request_detail_one_seat_money" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_money"
+        app:ubd_title="@string/user_request_detail_money" />
+
+    <RelativeLayout
+        android:id="@+id/row_phone_driver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/element_padding_small">
+
+        <ImageView
+            android:id="@+id/imv_icon_phone_driver"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_dt" />
+
+        <TextView
+            android:id="@+id/tv_title_phone_driver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_toRightOf="@id/imv_icon_phone_driver"
+            android:text="@string/user_request_detail_phone_driver" />
+
+        <TextView
+            android:id="@+id/tv_phone_driver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_32_dp"
+            android:layout_toRightOf="@id/tv_title_phone_driver"
+            android:gravity="end"
+            android:maxLength="10"
+            android:paddingEnd="@dimen/element_padding_normal"
+            android:textColor="@color/blue_text"
+            android:textStyle="bold"
+            tools:text="UB191919191919191" />
+    </RelativeLayout>
+
+    <View style="@style/LineView" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_name_driver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_person_black_24dp"
+        app:ubd_title="@string/user_request_detail_name_driver" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/element_padding_small">
+
+        <ImageView
+            android:id="@+id/imv_icon_name_car"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_car" />
+
+        <TextView
+            android:id="@+id/tv_name_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_toRightOf="@id/imv_icon_name_car"
+            android:text="@string/user_request_detail_name_car" />
+
+        <TextView
+            android:id="@+id/tv_detail_name_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_32_dp"
+            android:layout_toRightOf="@id/tv_name_car"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLength="10"
+            android:paddingEnd="@dimen/element_padding_normal"
+            android:textColor="@color/blue_text"
+            android:textStyle="bold"
+            tools:text="UB191919191919191" />
+    </RelativeLayout>
+
+    <View style="@style/LineView" />
+
+    <com.example.anothertimdatxe.widget.RowUserRequestDetail
+        android:id="@+id/row_license_plate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ubd_icon="@drawable/ic_biensoxe"
+        app:ubd_title="@string/user_request_detail_license_plate" />
+
+    <TextView
+        android:id="@+id/btn_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:layout_marginEnd="@dimen/margin_16_dp"
+        android:background="@drawable/bg_button_update_version"
+        android:gravity="center"
+        android:text="@string/user_request_detail_cancel_trip"
+        android:textAllCaps="true"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_size_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:text="@string/user_request_detail_condition"
+        android:textColor="@color/red_text" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_show_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:layout_marginEnd="@dimen/margin_16_dp"
+        android:background="@drawable/ic_button_lo_trinh_chuyen_di"
+        android:paddingTop="@dimen/content_padding_resend"
+        android:paddingBottom="@dimen/content_padding_resend">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lộ trình chuyến đi"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

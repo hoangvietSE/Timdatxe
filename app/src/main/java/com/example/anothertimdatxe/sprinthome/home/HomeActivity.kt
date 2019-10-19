@@ -352,6 +352,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                     }
                 }
             }
+            ListRequestFragment.REQUEST_CODE_USRE_REQUEST -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    if (mListFragment[2] is ListRequestFragment) {
+                        (mListFragment[2] as ListRequestFragment).refreshData()
+                    }
+                }
+            }
         }
     }
 
