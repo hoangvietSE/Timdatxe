@@ -452,5 +452,5 @@
     <string name="user_request_detail_cancel_booking_step_two_date_current">Ngày hiện tại</string>
     <string name="user_request_detail_cancel_booking_step_two_date_time_remain">Thời gian còn lại</string>
     <string name="user_request_detail_cancel_booking_step_two_date_money_refund">Số tiền được hoàn</string>
-    <string name="user_request_detail_cancel_booking_error">Hủy chuyến đi thất bại</string>
+    <string name="user_request_detail_cancel_booking_error">Hủy chuyến đi thất bại. Vui lòng thử lại sau</string>
 </resources>
