@@ -298,4 +298,9 @@ interface ApiService {
     @POST(ApiConstant.USER_CANCEL_USER_BOOK)
     @Multipart
     fun userCancelUserBook(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Part(RequestParam.ID) id: RequestBody): Single<Response<BaseResult<UserCancelUserBookResponse>>>
+
+    //User Create Post
+    @POST(ApiConstant.USER_CREATE_POSTS)
+    @Headers("Content-Type: application/json")
+    fun userCreatePost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody): Single<Response<BaseResult<UserCreatePostResponse>>>
 }

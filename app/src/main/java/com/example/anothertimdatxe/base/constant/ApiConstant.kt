@@ -17,6 +17,7 @@ object ApiConstant {
     const val USER_BOOKS = "v1/user_books"
     const val USER_BOOKS_DETAILS = "/v1/user_books/{${RequestParam.ID}}"
     const val USER_CANCEL_USER_BOOK = "/v1/user_cancel_user_book"
+    const val USER_CREATE_POSTS = "/v1/user_posts"
 
     //[DRIVER]
     const val DRIVER_SESSIONS = "v1/driver_sessions"

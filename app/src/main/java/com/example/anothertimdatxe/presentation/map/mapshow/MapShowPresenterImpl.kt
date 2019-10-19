@@ -21,7 +21,7 @@ class MapShowPresenterImpl(mView: MapShowView) : BasePresenterImpl<MapShowView>(
                                 it.get(0)?.overviewPolyline?.points!!,
                                 it.get(0)?.legs!![0]?.steps!!,
                                 it.get(0)?.legs!![0]?.distance?.text!!,
-                                it.get(0)?.legs!![0]?.duration?.text!!
+                                it.get(0)?.legs!![0]?.duration?.value!!
                         ))
                     } else {
                         mView!!.routeFail()

@@ -506,4 +506,12 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscriber)
     }
+
+    fun userCreatePost(data: UserCreatePostRequest, iCallBack: ICallBack<BaseResult<UserCreatePostResponse>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.userCreatePost(CarBookingSharePreference.getAccessToken(), createPostRequest(data))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
 }

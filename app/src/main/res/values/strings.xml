@@ -364,6 +364,20 @@
 
     <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
 
+    //user create post
+    <string name="user_create_post_row_number_seat">Số chỗ muốn đặt</string>
+    <string name="user_create_post_row_number_seat_hint">Nhập số ghế</string>
+    <string name="user_create_post_row_starting_date">Ngày xuất phát</string>
+    <string name="user_create_post_title_empty">Vui lòng nhập tiêu đề</string>
+    <string name="user_create_post_title_error">Tiêu đề không được chứa số</string>
+    <string name="user_create_post_date_empty">Vui lòng chọn thời gian</string>
+    <string name="user_create_post_date_error">Không được chọn thời gian trong quá khứ</string>
+    <string name="user_create_post_time_empty">Vui lòng chọn thời gian</string>
+    <string name="user_create_post_seat_empty">Vui lòng nhập số ghế</string>
+    <string name="user_create_post_seat_error">Vui lòng nhập số ghế lớn hơn 0</string>
+    <string name="user_create_post_success">Tạo bài đăng thành công</string>
+    <string name="user_create_post_error">Tạo bài đăng thất bại</string>
+
     //driver create post
     <string name="driver_create_post_title">Đăng tin chuyến đi</string>
     <string name="driver_create_post_row_title">Tiêu đề</string>

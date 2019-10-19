@@ -8,4 +8,4 @@ class Route(
         val overviewPolyline: String,
         val steps: List<StepsItem?>,
         val distance: String,
-        val time: String)
+        val time: Int)

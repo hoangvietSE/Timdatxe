@@ -22,7 +22,7 @@ class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParent
                                 it.get(0)?.overviewPolyline?.points!!,
                                 it.get(0)?.legs!![0]?.steps!!,
                                 it.get(0)?.legs!![0]?.distance?.text!!,
-                                it.get(0)?.legs!![0]?.duration?.text!!
+                                it.get(0)?.legs!![0]?.duration?.value!!
                         ))
                         var listWayPoint: ArrayList<LatLng> = arrayListOf()
                         listWayPoint.add(LatLng(it.get(0)?.legs!![0]?.startLocation?.lat!!, it.get(0)?.legs!![0]?.startLocation?.lng!!))

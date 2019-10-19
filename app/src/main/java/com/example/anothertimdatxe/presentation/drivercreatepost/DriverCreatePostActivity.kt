@@ -47,7 +47,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     private var startingPoint: String? = null
     private var endingPoint: String? = null
     private var distance: String? = null
-    private var duration: String? = null
+    private var duration: Int? = null
     private var listWayPoint: ArrayList<LatLng> = arrayListOf()
     private var mSpinnerCarBrandAdapter: SpinnerSeatAdapter? = null
     private var mSpinnerSeatAdapter: SpinnerSeatAdapter? = null
@@ -215,7 +215,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         startingPoint = intent.getStringExtra(EXTRA_STARTING_POINT)
         endingPoint = intent.getStringExtra(EXTRA_ENDING_POINT)
         distance = intent.getStringExtra(EXTRA_DISTANCE)
-        duration = intent.getStringExtra(EXTRA_DURATION)
+        duration = intent.getIntExtra(EXTRA_DURATION, -1)
         driverId = intent.getIntExtra(EXTRA_POST_ID, -1)
         if (intent.getBooleanExtra(EXTRA_IS_CREATE_POST, false)) {
             listWayPoint = intent.extras.getParcelableArrayList(EXTRA_LIST_WAYPOINT)

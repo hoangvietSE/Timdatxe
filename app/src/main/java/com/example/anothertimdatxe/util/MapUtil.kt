@@ -56,4 +56,12 @@ object MapUtil {
         return getListAddress(context, lat, lng).get(0).countryName
     }
 
+    fun getDistance(value: String): String {
+        return try {
+            return value.replace(" km", "")
+        } catch (e: Exception) {
+            ""
+        }
+    }
+
 }
