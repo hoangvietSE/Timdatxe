@@ -42,7 +42,6 @@ android {
         debug {
             minifyEnabled false
             debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"http://api-staging.timdatxe.com/"'
             buildConfigField 'String', 'MAP_BASE_URL', '"https://maps.googleapis.com/"'
             signingConfig signingConfigs.debug

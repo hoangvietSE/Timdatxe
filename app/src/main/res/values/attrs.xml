@@ -175,4 +175,11 @@
         <attr name="ubd_title" format="string" />
         <attr name="ubd_detail" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="BaseItemUserPostDetail">
+        <attr name="upd_icon" format="integer|reference" />
+        <attr name="upd_title" format="string" />
+        <attr name="upd_detail" format="string" />
+        <attr name="upd_enable_line_view" format="boolean" />
+    </declare-styleable>
 </resources>

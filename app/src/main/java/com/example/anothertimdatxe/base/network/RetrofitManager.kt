@@ -514,4 +514,20 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
+
+    fun getUserPostDetail(userPostId: Int, iCallBack: ICallBack<BaseResult<PostDetailResponse>>): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.getUserPostDetail(CarBookingSharePreference.getAccessToken(), userPostId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun deleteUserPost(userPostId: Int, iCallBack: ICallBack<BaseResult<PostDetailResponse>>) : Disposable{
+        val subscribe = getSubcriber(iCallBack)
+        return apiService.deleteUserPost(CarBookingSharePreference.getAccessToken(), userPostId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
 }

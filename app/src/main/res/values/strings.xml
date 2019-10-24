@@ -453,4 +453,19 @@
     <string name="user_request_detail_cancel_booking_step_two_date_time_remain">Thời gian còn lại</string>
     <string name="user_request_detail_cancel_booking_step_two_date_money_refund">Số tiền được hoàn</string>
     <string name="user_request_detail_cancel_booking_error">Hủy chuyến đi thất bại. Vui lòng thử lại sau</string>
+
+    //User Post Detail
+    <string name="user_post_detail_toolbar_title">Chi tiết chuyến di</string>
+    <string name="user_post_detail_title_starting_point">Điểm xuất phát:</string>
+    <string name="user_post_detail_title_ending_point">Điểm kết thúc:</string>
+    <string name="user_post_detail_title_distance">Khoảng cách:</string>
+    <string name="user_post_detail_title_time">Thời gian:</string>
+    <string name="user_post_detail_title_time_estimate">Thời gian dự kiến (h):</string>
+    <string name="user_post_detail_title_number_seat">Số ghế đặt:</string>
+    <string name="user_post_detail_title_status">Trạng thái:</string>
+    <string name="user_post_detail_title_reason">Nguyên nhân:</string>
+    <string name="user_post_detail_title_requirement">Yêu cầu chuyến đi:</string>
+    <string name="user_post_detail_btn_edit">Chỉnh sửa chuyến đi</string>
+    <string name="user_post_detail_list_driver">Danh sách tài xế ứng tuyển</string>
+    <string name="user_post_detail_delete_success">Xóa bài đăng thành công</string>
 </resources>

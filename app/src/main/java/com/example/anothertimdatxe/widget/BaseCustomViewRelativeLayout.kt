@@ -10,13 +10,13 @@ abstract class BaseCustomViewRelativeLayout : RelativeLayout {
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        attrs?.let {
-            initStyleable(it)
-        }
         setLayout()
         initView()
         initData()
         initListener()
+        attrs?.let {
+            initStyleable(it)
+        }
     }
 
     private fun initStyleable(attrs: AttributeSet) {
@@ -27,7 +27,7 @@ abstract class BaseCustomViewRelativeLayout : RelativeLayout {
         }
     }
 
-    private fun initDataStyleable(a: TypedArray?) {
+    protected open fun initDataStyleable(a: TypedArray?) {
     }
 
     protected open val styleableId: IntArray? = null

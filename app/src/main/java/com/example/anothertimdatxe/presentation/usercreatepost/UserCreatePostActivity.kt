@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.presentation.usercreatepost
 
+import android.app.Activity
 import android.util.Log
 import android.widget.TimePicker
 import com.example.anothertimdatxe.R
@@ -135,7 +136,7 @@ class UserCreatePostActivity : BaseActivity<UserCreatePostPresenter>(), UserCrea
     override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
         val calendar = Calendar.getInstance(TimeZone.getDefault())
         val startingCalendar = Calendar.getInstance()
-        startingCalendar.set(year, month-1, dayOfMonth)
+        startingCalendar.set(year, month - 1, dayOfMonth)
         if (calendar.after(startingCalendar) || calendar.equals(startingCalendar)) {
             onDateError()
             return
@@ -185,5 +186,7 @@ class UserCreatePostActivity : BaseActivity<UserCreatePostPresenter>(), UserCrea
 
     override fun onCreatePostSuccess() {
         ToastUtil.show(resources.getString(R.string.user_create_post_success))
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 }
