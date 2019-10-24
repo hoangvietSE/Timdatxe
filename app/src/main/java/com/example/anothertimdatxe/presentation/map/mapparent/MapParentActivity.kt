@@ -52,14 +52,14 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
         }
         btn_confirm.setOnClickListener {
             if (CarBookingSharePreference.getUserData()?.isUser!!) {
-                startActivity(Intent(this, UserCreatePostActivity::class.java).apply {
+                startActivityForResult(Intent(this, UserCreatePostActivity::class.java).apply {
                     putExtra(UserCreatePostActivity.EXTRA_STARTING_POINT, mLocationStartingPoint)
                     putExtra(UserCreatePostActivity.EXTRA_ENDING_POINT, mLocationEndingPoint)
                     putExtra(UserCreatePostActivity.EXTRA_DISTANCE, mDistance)
                     putExtra(UserCreatePostActivity.EXTRA_DURATION, mDuration)
                     putParcelableArrayListExtra(UserCreatePostActivity.EXTRA_LIST_WAYPOINT, mList)
                     putExtra(UserCreatePostActivity.EXTRA_IS_CREATE_POST, true)
-                })
+                }, REQUEST_CODE_CREATE_POST)
             } else {
                 startActivityForResult(Intent(this, DriverCreatePostActivity::class.java).apply {
                     putExtra(DriverCreatePostActivity.EXTRA_STARTING_POINT, mLocationStartingPoint)

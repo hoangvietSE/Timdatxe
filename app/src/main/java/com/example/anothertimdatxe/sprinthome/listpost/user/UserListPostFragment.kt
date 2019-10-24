@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.sprinthome.listpost.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -14,6 +15,7 @@ import com.example.anothertimdatxe.common.ItemRecyclerViewDecoration
 import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.extension.invisible
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.sprinthome.listpost.user.detail.UserPostDetailActivity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
@@ -30,6 +32,7 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
         get() = R.layout.fragment_user_list_post
 
     companion object {
+        const val REQUEST_CODE_USER_LIST_POST = 9009
         fun getInstance(): UserListPostFragment {
             val fragment = UserListPostFragment()
             val bundle = Bundle()
@@ -57,7 +60,7 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
             }
         }
         swipe_refresh.setOnRefreshListener {
-            mPresenter?.refreshData()
+            refreshData()
         }
         imv_close.setOnClickListener {
             hideIconClose()
@@ -129,6 +132,10 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
         imv_close.invisible()
     }
 
+    fun refreshData() {
+        mPresenter?.refreshData()
+    }
+
     override fun enableLoadingMore(enable: Boolean) {
         mUserListPostAdapter?.enableLoadingMore(enable)
     }
@@ -142,20 +149,24 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
     }
 
     override fun onLoadMore() {
+        showLoadingMore()
         fetchUserListPost()
     }
 
     override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
-
+        val data = mUserListPostAdapter?.getItem(position, UserListPostEntity::class.java)
+        activity?.startActivityForResult(Intent(context, UserPostDetailActivity::class.java).apply {
+            putExtra(UserPostDetailActivity.EXTRA_USER_POST_ID, data?.id)
+        }, REQUEST_CODE_USER_LIST_POST)
     }
 
     override fun showListUserPost(list: List<UserListPostEntity>) {
+        hideLoadingMore()
         if (swipe_refresh.isRefreshing) {
             mUserListPostAdapter?.clear()
         }
-        mUserListPostAdapter?.addModels(list, false)
         hideRefreshing()
-        hideLoadingMore()
+        mUserListPostAdapter?.addModels(list, false)
     }
 
     override fun showRefreshing() {

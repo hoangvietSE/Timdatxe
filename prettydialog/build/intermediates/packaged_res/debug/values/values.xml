@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pdlg_color_black">#212121</color>
+    <color name="pdlg_color_blue">#1976D2</color>
+    <color name="pdlg_color_gray">#9E9E9E</color>
+    <color name="pdlg_color_green">#388E3C</color>
+    <color name="pdlg_color_red">#d50000</color>
+    <color name="pdlg_color_white">#eeeeee</color>
+    <color name="pdlg_color_yellow">#FFEB3B</color>
+    <style name="pdlg_default_animation">
+        <item name="android:windowEnterAnimation">@anim/pdlg_anim_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/pdlg_anim_fade_out</item>
+    </style>
+    <style name="pdlg_no_animation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
+</resources>

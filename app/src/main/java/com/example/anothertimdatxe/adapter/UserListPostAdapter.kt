@@ -43,7 +43,7 @@ class UserListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(
             }
             Constant.USER_POST_PUBLISHED -> {
                 viewHolder.imvStatus.setImageResource(R.drawable.ic_status)
-                setColorStatus(viewHolder.formStatus, R.color.color_pending)
+                setColorStatus(viewHolder.formStatus, R.color.colorPrimary)
             }
             Constant.USER_POST_DONE -> {
                 viewHolder.imvStatus.setImageResource(R.drawable.ic_status_reject)

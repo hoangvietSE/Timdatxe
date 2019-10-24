@@ -343,10 +343,14 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             REQUEST_CODE_FOR_CREATE_POST -> {
                 if (resultCode == Activity.RESULT_OK) {
 //                    onCurrentItem(VP_ITEM_NEWS)
-                    vp_home.currentItem = VP_ITEM_NEWS
+                    bottom_bar.selectedItemId = R.id.item_list_post
                     when {
                         CarBookingSharePreference.getUserData()!!.isDriver -> {
                             val fragment = mListFragment[VP_ITEM_NEWS] as DriverListPostFragment
+                            fragment.refreshData()
+                        }
+                        CarBookingSharePreference.getUserData()!!.isUser -> {
+                            val fragment = mListFragment[VP_ITEM_NEWS] as UserListPostFragment
                             fragment.refreshData()
                         }
                     }
@@ -356,6 +360,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
                 if (resultCode == Activity.RESULT_OK) {
                     if (mListFragment[2] is ListRequestFragment) {
                         (mListFragment[2] as ListRequestFragment).refreshData()
+                    }
+                }
+            }
+            UserListPostFragment.REQUEST_CODE_USER_LIST_POST -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    if (mListFragment[1] is UserListPostFragment) {
+                        (mListFragment[1] as UserListPostFragment).refreshData()
                     }
                 }
             }

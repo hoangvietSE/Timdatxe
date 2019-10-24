@@ -9,7 +9,7 @@ class UserListPostPresenterImpl(mView: UserListPostView) : BasePresenterImpl<Use
     private var startTime: String = ""
     private var startPoint: String = ""
     private var endPoint: String = ""
-    private var limit: Int = 6
+    private var limit: Int = 10
     private var totalPage: Int = 0
     private var pageIndex = 1
     private var status: String = ""
@@ -41,7 +41,9 @@ class UserListPostPresenterImpl(mView: UserListPostView) : BasePresenterImpl<Use
         setQueryParams()
         addDispose(RetrofitManager.getUserListPost(data)
                 .doOnSubscribe {
-                    mView!!.showRefreshing()
+                    if (pageIndex == 1 && mView != null) {
+                        mView!!.showRefreshing()
+                    }
                 }
                 .doFinally {
                     mView!!.hideRefreshing()
@@ -85,7 +87,7 @@ class UserListPostPresenterImpl(mView: UserListPostView) : BasePresenterImpl<Use
     override fun setDate(date: String) {
         if (!date.isNullOrEmpty()) {
             startTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
-        }else{
+        } else {
             startTime = ""
         }
         resetData()

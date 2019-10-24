@@ -303,4 +303,14 @@ interface ApiService {
     @POST(ApiConstant.USER_CREATE_POSTS)
     @Headers("Content-Type: application/json")
     fun userCreatePost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Body requestBody: RequestBody): Single<Response<BaseResult<UserCreatePostResponse>>>
+
+    //User Post Detail
+    @GET(ApiConstant.USER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun getUserPostDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<PostDetailResponse>>>
+
+    //Delete user post
+    @DELETE(ApiConstant.USER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun deleteUserPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<PostDetailResponse>>>
 }
