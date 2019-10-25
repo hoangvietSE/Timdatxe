@@ -468,4 +468,18 @@
     <string name="user_post_detail_btn_edit">Chỉnh sửa chuyến đi</string>
     <string name="user_post_detail_list_driver">Danh sách tài xế ứng tuyển</string>
     <string name="user_post_detail_delete_success">Xóa bài đăng thành công</string>
+
+    //User Booked Detail
+    <string name="user_booked_detail_list_review">Xem đánh giá</string>
+    <string name="user_booked_detail_condition">*Chú ý: Giá được chia theo tỉ lệ % quãng đường</string>
+    <string name="user_booked_detail_booked">Đặt chuyến</string>
+    <string name="user_booked_detail_title_info">Thông tin chuyến đi</string>
+    <string name="user_booked_detail_starting_point">Điểm xuất phát</string>
+    <string name="user_booked_detail_ending_point">Điểm kết thúc</string>
+    <string name="user_booked_detail_type_car">Loại xe</string>
+    <string name="user_booked_detail_date">Ngày xuất phát</string>
+    <string name="user_booked_detail_distance">Khoảng cách</string>
+    <string name="user_booked_detail_number_seat">Số ghế trống</string>
+    <string name="user_booked_detail_way">Đường đi</string>
+    <string name="user_booked_detail_requirement">Yêu cầu chuyến đi</string>
 </resources>

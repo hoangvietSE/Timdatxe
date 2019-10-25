@@ -14,5 +14,10 @@ data class Car(
 	val id: Int? = null,
 
 	@field:SerializedName("car_id")
-	val carId: Int? = null
+	val carId: Int? = null,
+
+	@field:SerializedName("full_name")
+	val fullName: String? = null
+
+
 )

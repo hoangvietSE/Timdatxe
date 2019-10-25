@@ -313,4 +313,9 @@ interface ApiService {
     @DELETE(ApiConstant.USER_POST_DETAIL)
     @Headers("Content-Type: application/json")
     fun deleteUserPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<PostDetailResponse>>>
+
+    //User Book Detail
+    @GET(ApiConstant.DRIVER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun getUserBookDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<DriverPostDetailResponse>>>
 }
