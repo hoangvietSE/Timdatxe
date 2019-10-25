@@ -7,6 +7,8 @@
     android:layout_marginEnd="@dimen/margin_16_dp"
     android:layout_marginBottom="@dimen/margin_8_dp"
     android:background="@drawable/bg_item_post_created_find_car"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <TextView
@@ -29,10 +31,10 @@
         android:paddingBottom="@dimen/margin_4_dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_centerVertical="true"
             android:id="@+id/formAvatar"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/margin_4_dp"
             android:scaleX="0.9"
             android:scaleY="0.9"
@@ -247,13 +249,13 @@
         </LinearLayout>
 
         <TextView
-            android:padding="@dimen/margin_4_dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/margin_8_dp"
             android:background="@drawable/bg_btn_book_car"
+            android:padding="@dimen/margin_4_dp"
             android:text="@string/book_car"
             android:textAllCaps="true"
             android:textColor="@color/black"

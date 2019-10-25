@@ -20,6 +20,7 @@ import com.example.anothertimdatxe.entity.response.HotCitiesResponse
 import com.example.anothertimdatxe.entity.response.UserPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.presentation.book.user.UserBookDetailActivity
 import com.example.anothertimdatxe.sprinthome.carfinduser.CarFindUserFragment
 import com.example.anothertimdatxe.sprinthome.city_post.CityPostActivity
 import com.example.anothertimdatxe.sprinthome.homefragment.listener.OnItemListner
@@ -29,11 +30,13 @@ import com.example.anothertimdatxe.sprintsearch.driver.driversearch.DriverSearch
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.widget.UltraViewPager
 import com.example.anothertimdatxe.widget.transformer.UltraDepthScaleTransformer
+import com.example.kotlinapplication.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
+class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView,
+        RecyclerViewAdapter.OnItemClickListener {
     private var mListHotCities: ArrayList<HotCitiesResponse>? = null
     private var mBannerHomeAdapter: BannerHomeAdapter? = null
     private var mTimer: Timer? = null
@@ -77,10 +80,10 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
             swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
         }
         swipeRefresh.setOnRefreshListener {
-            if(CarBookingSharePreference?.getUserData()?.isDriver!!){
+            if (CarBookingSharePreference?.getUserData()?.isDriver!!) {
                 mUserFindCarFragment!!.clear()
                 mCarFindUserFragment!!.clear()
-            }else{
+            } else {
                 mPostCreatedMoreFindUserAdapter?.clear()
             }
             mPresenter?.getData(true)
@@ -300,6 +303,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
         } else {
             mPostCreatedMoreFindUserAdapter = PostCreatedMoreFindUserAdapter(context!!)
             mPostCreatedMoreFindUserAdapter!!.addModels(list, false)
+            mPostCreatedMoreFindUserAdapter!!.addOnItemClickListener(this)
             recycler_view_home.adapter = mPostCreatedMoreFindUserAdapter!!
             recycler_view_home.layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
             if (list.size == 0) {
@@ -308,6 +312,13 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView {
                 no_result_home.gone()
             }
         }
+    }
+
+    override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
+        val data = mPostCreatedMoreFindUserAdapter?.getItem(position, DriverPostResponse::class.java)
+        startActivity(Intent(activity, UserBookDetailActivity::class.java).apply {
+            putExtra(UserBookDetailActivity.EXTRA_POST_ID, data?.id)
+        })
     }
 
     override fun onDestroyView() {

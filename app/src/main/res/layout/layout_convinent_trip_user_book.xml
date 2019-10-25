@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_convenient_trip"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/margin_8_dp"
+        android:text="Tiện chuyến (Giá trên 1 ghế)"
+        android:textColor="@color/black" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8_dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_30_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_user_book"
+            android:padding="@dimen/element_padding_normal"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toStartOf="@id/rl_50_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_convinent_30_percent"
+                style="@style/TextViewMoneyTypeTrip"
+                tools:text="55,555,555 VNĐ" />
+
+            <TextView
+                style="@style/TextViewPercentTypeTrip"
+                android:text="(30%)" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_50_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_user_book"
+            android:padding="@dimen/element_padding_normal"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rl_30_percent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_convinent_50_percent"
+                style="@style/TextViewMoneyTypeTrip"
+                tools:text="55,555,555 VNĐ" />
+
+            <TextView
+                style="@style/TextViewPercentTypeTrip"
+                android:text="(70%)" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8_dp"
+        app:layout_constraintEnd_toEndOf="@+id/edt_70_percent"
+        app:layout_constraintStart_toEndOf="@+id/edt_70_percent">
+
+        <RelativeLayout
+            android:id="@+id/rl_70_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_user_book"
+            android:padding="@dimen/element_padding_normal"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toStartOf="@id/rl_100_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_convinent_70_percent"
+                style="@style/TextViewMoneyTypeTrip"
+                tools:text="55,555,555 VNĐ" />
+
+            <TextView
+                style="@style/TextViewPercentTypeTrip"
+                android:text="(70%)" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_100_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:layout_marginEnd="@dimen/margin_8_dp"
+            android:background="@drawable/bg_type_trip_user_book"
+            android:padding="@dimen/element_padding_normal"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rl_70_percent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_convinent_100_percent"
+                style="@style/TextViewMoneyTypeTrip"
+                tools:text="55,555,555 VNĐ" />
+
+            <TextView
+                style="@style/TextViewPercentTypeTrip"
+                android:text="(100%)" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

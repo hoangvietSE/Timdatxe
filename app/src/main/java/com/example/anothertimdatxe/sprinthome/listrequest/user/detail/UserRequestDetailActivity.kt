@@ -9,7 +9,7 @@ import com.example.anothertimdatxe.entity.response.UserRequestDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.*
-import kotlinx.android.synthetic.main.activity_user_book_detail.*
+import kotlinx.android.synthetic.main.activity_user_request_detail.*
 import kotlinx.android.synthetic.main.dialog_confirm_cancel_booking_step_one.*
 import kotlinx.android.synthetic.main.dialog_confirm_cancel_booking_step_two.*
 import java.util.*
@@ -27,7 +27,7 @@ class UserRequestDetailActivity : BaseActivity<UserRequestDetailPresenter>(), Us
     private var mDialogStepTwo: Dialog? = null
 
     override val layoutRes: Int
-        get() = R.layout.activity_user_book_detail
+        get() = R.layout.activity_user_request_detail
 
     override fun getPresenter(): UserRequestDetailPresenter {
         return UserRequestDetailPresenterImpl(this)
