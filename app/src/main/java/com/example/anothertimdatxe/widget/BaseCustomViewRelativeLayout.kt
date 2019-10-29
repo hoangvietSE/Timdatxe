@@ -37,7 +37,7 @@ abstract class BaseCustomViewRelativeLayout : RelativeLayout {
     protected abstract fun initData()
     protected abstract fun initListener()
 
-    private fun setLayout() {
+    internal fun setLayout() {
         var inflater = LayoutInflater.from(context)
         inflater.inflate(mLayoutId, this, true)
     }

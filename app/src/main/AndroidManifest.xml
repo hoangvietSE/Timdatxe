@@ -134,6 +134,9 @@
         <activity
             android:name=".presentation.book.user.UserBookDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.book.user.confirm.UserConfirmBookingActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -182,4 +182,22 @@
         <attr name="upd_detail" format="string" />
         <attr name="upd_enable_line_view" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="BaseItemUserConfirmBooking">
+        <attr name="ucb_title" format="string" />
+        <attr name="ucb_detail" format="string" />
+        <attr name="ucb_enable_line" format="boolean" />
+        <attr name="ucb_type_detail" format="enum">
+            <enum name="edittext" value="1" />
+            <enum name="textview" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="UnderlineText">
+        <attr name="ut_title" format="string"/>
+        <attr name="ut_detail" format="string"/>
+        <attr name="ut_color_title" format="integer|reference"/>
+        <attr name="ut_color_detail" format="integer|reference"/>
+        <attr name="ut_visible_detail" format="boolean"/>
+    </declare-styleable>
 </resources>

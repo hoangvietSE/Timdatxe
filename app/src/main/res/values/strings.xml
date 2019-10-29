@@ -482,4 +482,23 @@
     <string name="user_booked_detail_number_seat">Số ghế trống</string>
     <string name="user_booked_detail_way">Đường đi</string>
     <string name="user_booked_detail_requirement">Yêu cầu chuyến đi</string>
+
+    //User Confirm Booking
+    <string name="user_confirm_booking_toolbar_title">Đặt chuyến đi</string>
+    <string name="user_confirm_booking_form_one_title">Thông tin khách hàng</string>
+    <string name="user_confirm_booking_form_one_name">Họ và tên:</string>
+    <string name="user_confirm_booking_form_one_phone">Số điện thoại:</string>
+    <string name="user_confirm_booking_form_one_email">Email:</string>
+    <string name="user_confirm_booking_form_one_date_starting">Ngày xuất phát:</string>
+    <string name="user_confirm_booking_form_one_date_estimate">Thời gian dự kiến:</string>
+    <string name="user_confirm_booking_form_two_title">Chọn điểm xuất phát và điểm kết thúc</string>
+    <string name="user_confirm_booking_form_two_date">Chọn ngày xuất phát</string>
+    <string name="user_confirm_booking_form_two_hour">Chọn giờ xuất phát</string>
+    <string name="user_confirm_booking_form_two_distance">Khoảng cách</string>
+    <string name="user_confirm_booking_form_two_percent">Phần trăm quãng đường</string>
+    <string name="user_confirm_booking_form_two_type">Loại Booking</string>
+    <string name="user_confirm_booking_form_two_number_seat">Số ghế muốn đặt</string>
+    <string name="user_confirm_booking_form_two_condition_one">Tôi đã đọc và hoàn toàn chấp nhận với</string>
+    <string name="user_confirm_booking_form_two_condition_two"><u>điều khoản và dịch vụ</u></string>
+    <string name="user_confirm_booking_payment">Thanh toán</string>
 </resources>

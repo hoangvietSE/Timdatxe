@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.presentation.book.user
 
+import android.content.Intent
 import com.example.anothertimdatxe.BuildConfig
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
@@ -7,6 +8,7 @@ import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.DriverPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.presentation.book.user.confirm.UserConfirmBookingActivity
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NumberUtil
@@ -35,6 +37,14 @@ class UserBookDetailActivity : BaseActivity<UserBookDetailPresenter>(), UserBook
         setLayoutToolbar()
         setBanner()
         fetchUserBookDetail()
+    }
+
+    override fun setListener() {
+        btn_book.setOnClickListener {
+            startActivity(Intent(this, UserConfirmBookingActivity::class.java).apply {
+                putExtra(UserConfirmBookingActivity.EXTRA_DRIVER_POST_ID, postId)
+            })
+        }
     }
 
     private fun getDataIntent() {
@@ -96,7 +106,7 @@ class UserBookDetailActivity : BaseActivity<UserBookDetailPresenter>(), UserBook
         } else {
             row_way.gone()
         }
-        tv_requirement.text = data?.description.toString()
+        tv_requirement.text = data?.description ?: ""
     }
 
     private fun showPriceConvinent() {
