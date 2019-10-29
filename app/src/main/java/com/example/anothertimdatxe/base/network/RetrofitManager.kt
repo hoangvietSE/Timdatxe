@@ -7,6 +7,7 @@ import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.entity.response.*
+import com.example.anothertimdatxe.entity.response.confirmbooking.ConfirmBookingResponse
 import com.example.anothertimdatxe.request.*
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.google.gson.Gson
@@ -114,8 +115,8 @@ object RetrofitManager {
         return disposable
     }
 
-    fun getBanners(iCallBack: ICallBack<BaseResult<List<BannerHomeResponse>>>): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun getBanners(callBack: ICallBack<BaseResult<List<BannerHomeResponse>>>): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.getBanners()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -195,8 +196,8 @@ object RetrofitManager {
     }
 
     //user change password
-    fun userChangePassWord(iCallBack: ICallBack<BaseResult<UserData>>, request: ChangePasswordRequest): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun userChangePassWord(callBack: ICallBack<BaseResult<UserData>>, request: ChangePasswordRequest): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.userChangePassword(
                 CarBookingSharePreference.getUserId(),
                 createPostRequest(request)
@@ -214,32 +215,32 @@ object RetrofitManager {
                 .subscribeWith(subscriber)
     }
 
-    fun onGetFaqs(iCallBack: ICallBack<BaseResult<List<FaqsResponse>>>, request: MutableMap<String, Any>): Disposable {
-        val subcriber = getSubcriber(iCallBack)
+    fun onGetFaqs(callBack: ICallBack<BaseResult<List<FaqsResponse>>>, request: MutableMap<String, Any>): Disposable {
+        val subcriber = getSubcriber(callBack)
         return apiService.onGetFaqs(request)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subcriber)
     }
 
-    fun getUserPostCreated(iCallBack: ICallBack<BaseResult<List<UserListPostEntity>>>): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun getUserPostCreated(callBack: ICallBack<BaseResult<List<UserListPostEntity>>>): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.getUserPostCreated(CarBookingSharePreference.getUserId())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subscriber)
     }
 
-    fun getUserInfo(iCallBack: ICallBack<BaseResult<UserData>>): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun getUserInfo(callBack: ICallBack<BaseResult<UserData>>): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.getUserInfo(CarBookingSharePreference.getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscriber)
     }
 
-    fun getDriverInfo(iCallBack: ICallBack<BaseResult<DriverProfileResponse>>): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun getDriverInfo(callBack: ICallBack<BaseResult<DriverProfileResponse>>): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.getDriverInfo(CarBookingSharePreference.getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -280,32 +281,32 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getUserHistory(iCallBack: ICallBack<BaseResponse<List<UserHistoryResponse>>>, id: Int): Disposable {
-        var subscribe = getSubcriber(iCallBack)
+    fun getUserHistory(callBack: ICallBack<BaseResponse<List<UserHistoryResponse>>>, id: Int): Disposable {
+        var subscribe = getSubcriber(callBack)
         return apiService.getUserHistory(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
 
-    fun getDriverHistory(iCallBack: ICallBack<BaseResponse<List<DriverHistoryResponse>>>, id: Int): Disposable {
-        var subscribe = getSubcriber(iCallBack)
+    fun getDriverHistory(callBack: ICallBack<BaseResponse<List<DriverHistoryResponse>>>, id: Int): Disposable {
+        var subscribe = getSubcriber(callBack)
         return apiService.getDriverHistory(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
 
-    fun getDriverRevenue(iCallBack: ICallBack<BaseRevenueResponse<List<DriverRevenueResponse>>>, month: Int): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun getDriverRevenue(callBack: ICallBack<BaseRevenueResponse<List<DriverRevenueResponse>>>, month: Int): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.getDriverRevenue(CarBookingSharePreference.getAccessToken(), CarBookingSharePreference.getUserId(), month)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
 
-    fun sendContactSystem(iCallBack: ICallBack<BaseResult<ContactSystemResponse>>, request: ContactRequest): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun sendContactSystem(callBack: ICallBack<BaseResult<ContactSystemResponse>>, request: ContactRequest): Disposable {
+        val subscribe = getSubcriber(callBack)
         val request = createPostRequest(request)
         return apiService.sendContactSystem(CarBookingSharePreference.getAccessToken(), request)
                 .subscribeOn(Schedulers.io())
@@ -313,24 +314,24 @@ object RetrofitManager {
                 .subscribeWith(subscribe)
     }
 
-    fun getVersionApp(iCallBack: ICallBack<BaseResult<List<VersionAppResponse>>>): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun getVersionApp(callBack: ICallBack<BaseResult<List<VersionAppResponse>>>): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.getVersionApp()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subscriber)
     }
 
-    fun getTermAndCondition(iCallBack: ICallBack<BaseResult<TermAndConditionResponse>>, slug: String): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun getTermAndCondition(callBack: ICallBack<BaseResult<TermAndConditionResponse>>, slug: String): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.getTermAndCondition(slug)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subscriber)
     }
 
-    fun getListHotCities(iCallBack: ICallBack<BaseResult<ArrayList<HotCitiesResponse>>>): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun getListHotCities(callBack: ICallBack<BaseResult<ArrayList<HotCitiesResponse>>>): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.getHotCities(CarBookingSharePreference.getAccessToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -370,8 +371,8 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun userPostDetail(iCallBack: ICallBack<BaseResult<UserPostDetailResponse>>, id: Int): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun userPostDetail(callBack: ICallBack<BaseResult<UserPostDetailResponse>>, id: Int): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.userPostDetail(CarBookingSharePreference.getAccessToken(), id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -441,16 +442,16 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun driverCarInfo(iCallBack: ICallBack<BaseResult<List<DriverCarResponse>>>): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun driverCarInfo(callBack: ICallBack<BaseResult<List<DriverCarResponse>>>): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.driverCarInfo(CarBookingSharePreference.getAccessToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
 
-    fun driverCreatePost(iCallBack: ICallBack<BaseResult<DriverCreatePostResponse>>, request: DriverCreatePostRequest): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun driverCreatePost(callBack: ICallBack<BaseResult<DriverCreatePostResponse>>, request: DriverCreatePostRequest): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.driverCreatePost(CarBookingSharePreference.getAccessToken(), createPostRequest(request))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -491,41 +492,57 @@ object RetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun fetchUserRequestDetail(postId: Int, iCallBack: ICallBack<BaseResult<UserRequestDetailResponse>>): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun fetchUserRequestDetail(postId: Int, callBack: ICallBack<BaseResult<UserRequestDetailResponse>>): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.getUserRequestDetail(CarBookingSharePreference.getAccessToken(), postId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscriber)
     }
 
-    fun userCancelUserBook(userBookId: Int, iCallBack: ICallBack<BaseResult<UserCancelUserBookResponse>>): Disposable {
-        val subscriber = getSubcriber(iCallBack)
+    fun userCancelUserBook(userBookId: Int, callBack: ICallBack<BaseResult<UserCancelUserBookResponse>>): Disposable {
+        val subscriber = getSubcriber(callBack)
         return apiService.userCancelUserBook(CarBookingSharePreference.getAccessToken(), createRequestBody(userBookId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscriber)
     }
 
-    fun userCreatePost(data: UserCreatePostRequest, iCallBack: ICallBack<BaseResult<UserCreatePostResponse>>): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun userCreatePost(data: UserCreatePostRequest, callBack: ICallBack<BaseResult<UserCreatePostResponse>>): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.userCreatePost(CarBookingSharePreference.getAccessToken(), createPostRequest(data))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
 
-    fun getUserPostDetail(userPostId: Int, iCallBack: ICallBack<BaseResult<PostDetailResponse>>): Disposable {
-        val subscribe = getSubcriber(iCallBack)
+    fun getUserPostDetail(userPostId: Int, callBack: ICallBack<BaseResult<PostDetailResponse>>): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.getUserPostDetail(CarBookingSharePreference.getAccessToken(), userPostId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
 
-    fun deleteUserPost(userPostId: Int, iCallBack: ICallBack<BaseResult<PostDetailResponse>>) : Disposable{
-        val subscribe = getSubcriber(iCallBack)
+    fun deleteUserPost(userPostId: Int, callBack: ICallBack<BaseResult<PostDetailResponse>>): Disposable {
+        val subscribe = getSubcriber(callBack)
         return apiService.deleteUserPost(CarBookingSharePreference.getAccessToken(), userPostId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun getUserBookDetail(postId: Int, callBack: ICallBack<BaseResult<DriverPostDetailResponse>>): Disposable {
+        val subscribe = getSubcriber(callBack)
+        return apiService.getUserBookDetail(CarBookingSharePreference.getAccessToken(), postId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
+    fun getUserConfirmBooking(driverPostId: Int, callBack: ICallBack<BaseResult<ConfirmBookingResponse>>): Disposable {
+        val subscribe = getSubcriber(callBack)
+        return apiService.getUserConfirmBooking(CarBookingSharePreference.getAccessToken(), driverPostId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e6e6e6"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/content_padding_normal">
+
+    <include layout="@layout/toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8_dp"
+                android:orientation="vertical"
+                app:cardCornerRadius="@dimen/margin_4_dp"
+                app:cardElevation="@dimen/margin_8_dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_type_trip"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/content_padding_normal"
+                        android:text="@string/user_confirm_booking_form_one_title"
+                        android:textColor="@color/white"
+                        android:textStyle="bold|italic" />
+
+                    <com.example.anothertimdatxe.widget.BaseConfirmBookingRow
+                        android:id="@+id/row_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ucb_title="@string/user_confirm_booking_form_one_name"
+                        app:ucb_type_detail="edittext" />
+
+                    <com.example.anothertimdatxe.widget.BaseConfirmBookingRow
+                        android:id="@+id/row_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ucb_title="@string/user_confirm_booking_form_one_phone"
+                        app:ucb_type_detail="edittext" />
+
+                    <com.example.anothertimdatxe.widget.BaseConfirmBookingRow
+                        android:id="@+id/row_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ucb_title="@string/user_confirm_booking_form_one_email"
+                        app:ucb_type_detail="edittext" />
+
+                    <com.example.anothertimdatxe.widget.BaseConfirmBookingRow
+                        android:id="@+id/row_starting_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ucb_title="@string/user_confirm_booking_form_one_date_starting"
+                        app:ucb_type_detail="textview" />
+
+                    <com.example.anothertimdatxe.widget.BaseConfirmBookingRow
+                        android:id="@+id/row_time_estimate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ucb_title="@string/user_confirm_booking_form_one_date_estimate"
+                        app:ucb_type_detail="textview" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8_dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_8_dp"
+                android:background="@drawable/bg_white"
+                app:cardCornerRadius="@dimen/margin_4_dp"
+                app:cardElevation="@dimen/margin_8_dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/element_padding_normal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_32_dp"
+                        android:background="@drawable/bg_booking"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/element_padding_normal"
+                        android:text="@string/user_confirm_booking_form_two_title"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_8_dp">
+
+                        <ImageView
+                            android:id="@+id/imv_starting_point"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8_dp"
+                            android:layout_marginTop="@dimen/margin_16_dp"
+                            android:src="@drawable/ic_starting_point_two"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.anothertimdatxe.widget.DashView
+                            android:id="@+id/dash_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:layout_marginTop="@dimen/margin_4_dp"
+                            android:layout_marginBottom="@dimen/margin_4_dp"
+                            app:dashLineColor="@color/color_bg"
+                            app:dashLineWidth="2dp"
+                            app:dashOrientation="1"
+                            app:dashWidth="2dp"
+                            app:layout_constraintBottom_toTopOf="@id/imv_ending_point"
+                            app:layout_constraintEnd_toEndOf="@id/imv_starting_point"
+                            app:layout_constraintStart_toStartOf="@id/imv_starting_point"
+                            app:layout_constraintTop_toBottomOf="@id/imv_starting_point"
+                            app:lineHeight="2dp" />
+
+                        <ImageView
+                            android:id="@+id/imv_ending_point"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8_dp"
+                            android:layout_marginBottom="@dimen/margin_16_dp"
+                            android:src="@drawable/ic_end"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/dash_view" />
+
+                        <TextView
+                            android:id="@+id/tv_starting_point"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@id/imv_starting_point"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.3"
+                            app:layout_constraintStart_toEndOf="@id/imv_starting_point"
+                            app:layout_constraintTop_toTopOf="@id/imv_starting_point"
+                            app:layout_constraintWidth_percent="0.6"
+                            tools:text="Hà Nội, Hoàn Kiếm, Hà Nội, Việt Nam" />
+
+                        <TextView
+                            android:id="@+id/tv_ending_point"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@id/imv_ending_point"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.3"
+                            app:layout_constraintStart_toEndOf="@id/imv_ending_point"
+                            app:layout_constraintTop_toTopOf="@id/imv_ending_point"
+                            app:layout_constraintWidth_percent="0.6"
+                            tools:text="Hải Phòng, Việt Nam" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="@color/color_bg"
+                            app:layout_constraintBottom_toTopOf="@id/tv_ending_point"
+                            app:layout_constraintEnd_toEndOf="@id/tv_starting_point"
+                            app:layout_constraintStart_toStartOf="@id/tv_starting_point"
+                            app:layout_constraintTop_toBottomOf="@id/tv_starting_point" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_white_20dp_stroke_1dp"
+                        android:padding="@dimen/element_padding_normal">
+
+                        <ImageView
+                            android:id="@+id/imv_date"
+                            android:layout_width="@dimen/margin_16_dp"
+                            android:layout_height="@dimen/margin_16_dp"
+                            android:layout_marginStart="@dimen/margin_4_dp"
+                            android:src="@drawable/ic_calendar" />
+
+                        <TextView
+                            android:id="@+id/tv_starting_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8_dp"
+                            android:layout_toRightOf="@id/imv_date"
+                            android:text="@string/user_confirm_booking_form_two_date"
+                            android:textColor="@color/black"
+                            android:textStyle="bold|italic" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_8_dp"
+                        android:background="@drawable/bg_white_20dp_stroke_1dp"
+                        android:padding="@dimen/element_padding_normal">
+
+                        <ImageView
+                            android:id="@+id/imv_time"
+                            android:layout_width="@dimen/margin_16_dp"
+                            android:layout_height="@dimen/margin_16_dp"
+                            android:layout_marginStart="@dimen/margin_4_dp"
+                            android:src="@drawable/ic_time_start" />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8_dp"
+                            android:layout_toRightOf="@id/imv_time"
+                            android:text="@string/user_confirm_booking_form_two_hour"
+                            android:textColor="@color/black"
+                            android:textStyle="bold|italic" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_8_dp"
+                        android:orientation="horizontal">
+
+                        <com.example.anothertimdatxe.customview.UnderlineText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:ut_title="@string/user_confirm_booking_form_two_distance" />
+
+                        <TextView
+                            android:id="@+id/tv_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_16_dp"
+                            android:background="@drawable/bg_grey_20dp_stroke_1dp"
+                            android:paddingStart="@dimen/content_padding_normal"
+                            android:paddingTop="@dimen/element_padding_small"
+                            android:paddingEnd="@dimen/content_padding_normal"
+                            android:paddingBottom="@dimen/element_padding_small"
+                            tools:text="156 km" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_8_dp"
+                        android:orientation="horizontal">
+
+                        <com.example.anothertimdatxe.customview.UnderlineText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:ut_title="@string/user_confirm_booking_form_two_percent" />
+
+                        <TextView
+                            android:id="@+id/tv_percent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_16_dp"
+                            android:background="@drawable/bg_grey_20dp_stroke_1dp"
+                            android:paddingStart="@dimen/content_padding_normal"
+                            android:paddingTop="@dimen/element_padding_small"
+                            android:paddingEnd="@dimen/content_padding_normal"
+                            android:paddingBottom="@dimen/element_padding_small"
+                            android:textColor="@color/red_text"
+                            tools:text="100%" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_32_dp"
+                        android:layout_marginTop="@dimen/margin_8_dp"
+                        android:background="@drawable/bg_booking"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/element_padding_normal"
+                        android:text="@string/user_confirm_booking_form_two_type"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/element_padding_normal">
+
+                        <TextView
+                            android:id="@+id/tv_convinent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_8_dp"
+                            android:background="@drawable/bg_btn_search"
+                            android:paddingStart="@dimen/content_padding_normal"
+
+                            android:paddingTop="@dimen/element_padding_small"
+                            android:paddingEnd="@dimen/content_padding_normal"
+                            android:paddingBottom="@dimen/element_padding_small"
+                            android:text="Tiện chuyến"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_private"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_btn_search"
+                            android:paddingStart="@dimen/content_padding_normal"
+                            android:paddingTop="@dimen/element_padding_small"
+                            android:paddingEnd="@dimen/content_padding_normal"
+                            android:paddingBottom="@dimen/element_padding_small"
+                            android:text="Xe riêng"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_confirm_booking_form_two_number_seat" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:textStyle="bold|italic"
+                            android:textColor="@color/black"
+                            android:id="@+id/edt_number_seat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:gravity="center"
+                            android:hint="Số ghế muốn"
+                            tools:text="3" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_number_seat"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            >
+
+                            <Spinner
+                                android:id="@+id/sp_number_seat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/bg_grey_20dp_stroke_1dp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_drop_down" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <com.example.anothertimdatxe.widget.BaseDialogRow
+                        android:id="@+id/row_one_seat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:row_title="@string/user_request_detail_one_seat_money" />
+
+                    <com.example.anothertimdatxe.widget.BaseDialogRow
+                        android:id="@+id/row_total_money"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:row_title="@string/user_request_detail_money" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_8_dp"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cb_condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimary" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8_dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/user_confirm_booking_form_two_condition_one" />
+
+                            <TextView
+                                android:id="@+id/tv_condition"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/user_confirm_booking_form_two_condition_two"
+                                android:textColor="@color/blue_text" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_16_dp">
+
+                        <TextView
+                            android:id="@+id/btn_payment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_btn_book_car"
+                            android:gravity="center"
+                            android:padding="@dimen/element_padding_normal"
+                            android:text="@string/user_confirm_booking_payment"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/margin_16_dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.6" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_show_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16_dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_16_dp"
+                android:background="@drawable/ic_button_lo_trinh_chuyen_di"
+                android:paddingTop="@dimen/content_padding_resend"
+                android:paddingBottom="@dimen/content_padding_resend">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lộ trình chuyến đi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_18"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

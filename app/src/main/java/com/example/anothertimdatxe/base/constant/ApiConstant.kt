@@ -15,9 +15,10 @@ object ApiConstant {
     const val USER_SEARCH_CITY_POST = "v1/searches/city_user_post"
     const val USER_REFRESH_TOKEN = "v1/user_refresh"
     const val USER_BOOKS = "v1/user_books"
-    const val USER_BOOKS_DETAILS = "/v1/user_books/{${RequestParam.ID}}"
-    const val USER_CANCEL_USER_BOOK = "/v1/user_cancel_user_book"
-    const val USER_CREATE_POSTS = "/v1/user_posts"
+    const val USER_BOOKS_DETAILS = "v1/user_books/{${RequestParam.ID}}"
+    const val USER_CANCEL_USER_BOOK = "v1/user_cancel_user_book"
+    const val USER_CREATE_POSTS = "v1/user_posts"
+    const val USER_CONFIRM_BOOKING = "v1/user_books/new"
 
     //[DRIVER]
     const val DRIVER_SESSIONS = "v1/driver_sessions"
@@ -41,27 +42,27 @@ object ApiConstant {
     const val DRIVER_LIST_POST = "v1/drivers/{${RequestParam.ID}}/posts"
 
     //Login Soical
-    const val LOGIN_SOCIAL = "/v1/login_social"
+    const val LOGIN_SOCIAL = "v1/login_social"
 
     //Term and Condition
-    const val TERM_AND_CONDITION = "/v1/page/{${RequestParam.SLUG}}"
+    const val TERM_AND_CONDITION = "v1/page/{${RequestParam.SLUG}}"
 
     //Version App
-    const val VERSION_APP = "/v1/versions"
+    const val VERSION_APP = "v1/versions"
 
     //FAQS
-    const val SHOW_FAQS = "/v1/faqs"
+    const val SHOW_FAQS = "v1/faqs"
 
     //Contact
-    const val CONTACT_SYSTEM = "/v1/contact_system"
+    const val CONTACT_SYSTEM = "v1/contact_system"
 
     //Hot Cities
-    const val HOT_CITIES = "/v1/cities"
-    const val HOT_BANNERS = "/v1/banners"
+    const val HOT_CITIES = "v1/cities"
+    const val HOT_BANNERS = "v1/banners"
 
     //Driver Car
-    const val CAR_BRAND = "/v1/cars_brand"
-    const val CAR_NAME = "/v1/cars_brand/{id}/show"
+    const val CAR_BRAND = "v1/cars_brand"
+    const val CAR_NAME = "v1/cars_brand/{id}/show"
 
     interface httpStatusCode {
         companion object {

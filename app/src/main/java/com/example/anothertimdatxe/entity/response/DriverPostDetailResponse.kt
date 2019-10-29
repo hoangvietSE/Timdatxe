@@ -26,7 +26,7 @@ data class DriverPostDetailResponse(
         val flagShowListBook: Int? = null,
 
         @field:SerializedName("description")
-        val description: Any? = null,
+        val description: String? = null,
 
         @field:SerializedName("created_at")
         val createdAt: String? = null,
@@ -119,7 +119,7 @@ data class DriverPostDetailResponse(
         val startPoint: String? = null,
 
         @field:SerializedName("duration_time")
-        val durationTime: Int? = null,
+        val durationTime: Double? = null,
 
         @field:SerializedName("status")
         val status: Int? = null,

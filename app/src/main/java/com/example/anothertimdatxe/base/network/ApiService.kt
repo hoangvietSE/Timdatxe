@@ -7,6 +7,7 @@ import com.example.anothertimdatxe.entity.RegisResult
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.entity.response.*
+import com.example.anothertimdatxe.entity.response.confirmbooking.ConfirmBookingResponse
 import com.example.anothertimdatxe.request.DriverBookUserPostRequest
 import com.example.anothertimdatxe.request.DriverFinishTripRequest
 import io.reactivex.Single
@@ -313,4 +314,15 @@ interface ApiService {
     @DELETE(ApiConstant.USER_POST_DETAIL)
     @Headers("Content-Type: application/json")
     fun deleteUserPost(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<PostDetailResponse>>>
+
+    //User Book Detail
+    @GET(ApiConstant.DRIVER_POST_DETAIL)
+    @Headers("Content-Type: application/json")
+    fun getUserBookDetail(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Path(RequestParam.ID) id: Int): Single<Response<BaseResult<DriverPostDetailResponse>>>
+
+    //User Confirm Booking
+    @GET(ApiConstant.USER_CONFIRM_BOOKING)
+    @Headers("Content-Type: application/json")
+    fun getUserConfirmBooking(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Query(RequestParam.DRIVER_POST_ID) id: Int): Single<Response<BaseResult<ConfirmBookingResponse>>>
+
 }
