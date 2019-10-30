@@ -25,6 +25,7 @@ class BaseConfirmBookingRow : BaseCustomViewRelativeLayout {
     private var rowEdittext: EditText? = null
     private var rowTextView: TextView? = null
     private var divider: View? = null
+    private var type: Int? = -1
 
     override fun initView() {
         rowTitle = findViewById(R.id.row_title)
@@ -64,6 +65,15 @@ class BaseConfirmBookingRow : BaseCustomViewRelativeLayout {
         }
     }
 
+    fun getDetail(): String? {
+        if(rowEdittext?.isShown!!){
+            return rowEdittext?.text.toString()
+        }else{
+            return rowTextView?.text.toString()
+        }
+    }
+
+
     fun setDivider(enable: Boolean?) {
         if (enable!!) {
             divider?.visible()
@@ -73,6 +83,7 @@ class BaseConfirmBookingRow : BaseCustomViewRelativeLayout {
     }
 
     fun setType(type: Int?) {
+        this.type = type
         when (type) {
             TYPE_EDITTEXT -> {
                 rowEdittext?.visible()
@@ -83,6 +94,15 @@ class BaseConfirmBookingRow : BaseCustomViewRelativeLayout {
                 rowTextView?.visible()
             }
         }
+    }
+
+    fun requestFocus(error: String) {
+        rowEdittext?.error = error
+        rowEdittext?.requestFocus()
+    }
+
+    fun clearError() {
+        rowEdittext?.error = null
     }
 
     constructor(context: Context?) : this(context, null)

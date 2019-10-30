@@ -1,5 +1,6 @@
 package com.example.anothertimdatxe.util
 
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -29,6 +30,7 @@ object DateUtil {
     val DATE_FORMAT_21 = "dd-MM-yyyy"
     val DATE_FORMAT_23 = "dd/MM/yyyy"
     val DATE_FORMAT_24 = "hh:mm a - dd/MM/yyyy"
+    val DATE_FORMAT_25 = "dd/MM/yyyy HH:mm"
 
     val TIME_0H = "00:00:00"
     val TIME_7H = "07:00:00"
@@ -119,5 +121,17 @@ object DateUtil {
         } catch (e: Exception) {
             -1
         }
+    }
+
+    fun getCalendarByStamp(stamp: String, pattern: String): Calendar {
+        try {
+            val c = Calendar.getInstance()
+            c.time = SimpleDateFormat(pattern, Locale.getDefault()).parse(stamp)
+            return c
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+
+        return Calendar.getInstance()
     }
 }

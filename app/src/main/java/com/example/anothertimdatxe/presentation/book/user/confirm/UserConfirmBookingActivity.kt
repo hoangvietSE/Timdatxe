@@ -10,11 +10,10 @@ import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.entity.response.confirmbooking.ConfirmBookingResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.request.TimeBookingRequest
+import com.example.anothertimdatxe.request.UserBookingRequest
 import com.example.anothertimdatxe.sprinthome.condition.ConditionActivity
-import com.example.anothertimdatxe.util.CarBookingSharePreference
-import com.example.anothertimdatxe.util.Constant
-import com.example.anothertimdatxe.util.DateUtil
-import com.example.anothertimdatxe.util.NumberUtil
+import com.example.anothertimdatxe.util.*
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.TimePickerDialogWidget
 import kotlinx.android.synthetic.main.activity_user_confirm_booking.*
@@ -61,7 +60,11 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
     }
 
     override fun setListener() {
-        tv_condition.setOnClickListener {
+        tv_condition_one.setOnClickListener {
+            cb_condition.isChecked = true
+        }
+        tv_condition_two.setOnClickListener {
+            cb_condition.isChecked = true
             startActivity(Intent(this, ConditionActivity::class.java))
         }
         tv_starting_date.setOnClickListener {
@@ -70,6 +73,57 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         tv_time.setOnClickListener {
             mTimePickerDialogWidget?.showTimePickerDialog()
         }
+        btn_payment.setOnClickListener {
+            if(onCheckedCondition()){
+                payment()
+            }else{
+                ToastUtil.show(resources.getString(R.string.user_confirm_booking_not_check_condition))
+            }
+        }
+    }
+
+    private fun payment() {
+        val userBookingRequest = UserBookingRequest()
+        val timeBookingRequest = TimeBookingRequest()
+        userBookingRequest.distance = mUserConfirmBookingResponse?.distance
+        userBookingRequest.driverId = mUserConfirmBookingResponse?.driverId
+        userBookingRequest.driverPostId = mUserConfirmBookingResponse?.id
+        userBookingRequest.email = row_email.getDetail()
+        userBookingRequest.phone = row_phone.getDetail()
+        userBookingRequest.fullName = row_name.getDetail()
+        userBookingRequest.emptySeat = mUserConfirmBookingResponse?.emptySeat
+        userBookingRequest.startPoint = tv_starting_point.text.toString()
+        userBookingRequest.endPoint = tv_ending_point.text.toString()
+        userBookingRequest.latFrom = mUserConfirmBookingResponse?.latFrom
+        userBookingRequest.lngFrom = mUserConfirmBookingResponse?.lngFrom
+        userBookingRequest.latTo = mUserConfirmBookingResponse?.latTo
+        userBookingRequest.lngTo = mUserConfirmBookingResponse?.lngTo
+        userBookingRequest.note = mUserConfirmBookingResponse?.description ?: ""
+        userBookingRequest.numberSeat = edt_number_seat.text.toString().toInt()
+        userBookingRequest.type = mUserConfirmBookingResponse?.type
+        if (mUserConfirmBookingResponse?.type == Constant.CONVENIENT_TRIP) {
+            userBookingRequest.price = mUserConfirmBookingResponse?.regularPrice
+            userBookingRequest.totalPrice = mUserConfirmBookingResponse?.regularPrice?.toInt()?.times(edt_number_seat.text.toString().toInt())?.toString()
+        } else {
+            userBookingRequest.totalPrice = mUserConfirmBookingResponse?.privatePrice2
+        }
+        userBookingRequest.userId = CarBookingSharePreference.getUserId()
+        userBookingRequest?.waypoints = ""
+        userBookingRequest?.canBook = 0
+        timeBookingRequest.bookDate = tv_starting_date.text.toString()
+        timeBookingRequest.bookHour = tv_time.text.toString()
+        timeBookingRequest.startTime = mUserConfirmBookingResponse?.startTime
+        timeBookingRequest.endTime = mUserConfirmBookingResponse?.endTime
+        clearAllRequestFocus()
+        mPresenter?.paymentBooking(userBookingRequest,timeBookingRequest)
+    }
+
+    private fun clearAllRequestFocus() {
+        row_name.clearError()
+        row_phone.clearError()
+        row_email.clearError()
+        tv_starting_date.error = null
+        tv_time.error = null
     }
 
     private fun setToolbar() {
@@ -140,5 +194,79 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
 
     override fun addSeatToSpinner(data: MutableList<String>) {
         mNumberSeatAdapter?.addAll(data)
+    }
+
+    override fun onNameEmpty() {
+        row_name.requestFocus(resources.getString(R.string.user_confirm_booking_name_empty))
+    }
+
+    override fun onNameError() {
+        row_name.requestFocus(resources.getString(R.string.user_confirm_booking_name_error))
+    }
+
+    override fun onPhoneEmpty() {
+        row_phone.requestFocus(resources.getString(R.string.user_confirm_booking_phone_empty))
+    }
+
+    override fun onPhoneError() {
+        row_phone.requestFocus(resources.getString(R.string.user_confirm_booking_phone_error))
+    }
+
+    override fun onEmailError() {
+        row_email.requestFocus(resources.getString(R.string.user_confirm_booking_email_empty))
+    }
+
+    override fun onEmailEmpty() {
+        row_email.requestFocus(resources.getString(R.string.user_confirm_booking_email_error))
+    }
+
+    override fun onStartingPointEmpty() {
+
+    }
+
+    override fun onEndingPointEmpty() {
+
+    }
+
+    override fun onDateEmpty() {
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_empty))
+    }
+
+    override fun onDateInPast() {
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_in_past))
+    }
+
+    override fun onDateBeforeStartingTime() {
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_before_start_time))
+    }
+
+    override fun onDateAfterEndingTime() {
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_after_end_time))
+    }
+
+    override fun onHourEmpty() {
+        onHourRequestFocus(resources.getString(R.string.user_confirm_booking_hour_empty))
+    }
+
+    override fun onHourBeforeStartingTime() {
+        onHourRequestFocus(resources.getString(R.string.user_confirm_booking_hour_before_start_time))
+    }
+
+    override fun onHourAfterEndingTime() {
+        onHourRequestFocus(resources.getString(R.string.user_confirm_booking_hour_after_end_time))
+    }
+
+    private fun onDateRequestFocus(error:String){
+        tv_starting_date.error = error
+        tv_starting_date.requestFocus()
+    }
+
+    private fun onHourRequestFocus(error:String){
+        tv_time.error = error
+        tv_time.requestFocus()
+    }
+
+    private fun onCheckedCondition(): Boolean {
+        return cb_condition.isChecked
     }
 }
