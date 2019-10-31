@@ -195,13 +195,17 @@
                             android:src="@drawable/ic_calendar" />
 
                         <TextView
+                            android:clickable="true"
                             android:id="@+id/tv_starting_date"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_8_dp"
                             android:layout_toRightOf="@id/imv_date"
-                            android:text="@string/user_confirm_booking_form_two_date"
+                            android:focusable="true"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/user_confirm_booking_form_two_date"
                             android:textColor="@color/black"
+                            android:textColorHint="@color/black"
                             android:textStyle="bold|italic" />
                     </RelativeLayout>
 
@@ -220,13 +224,17 @@
                             android:src="@drawable/ic_time_start" />
 
                         <TextView
+                            android:clickable="true"
                             android:id="@+id/tv_time"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_8_dp"
                             android:layout_toRightOf="@id/imv_time"
-                            android:text="@string/user_confirm_booking_form_two_hour"
+                            android:focusable="true"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/user_confirm_booking_form_two_hour"
                             android:textColor="@color/black"
+                            android:textColorHint="@color/black"
                             android:textStyle="bold|italic" />
                     </RelativeLayout>
 
@@ -303,7 +311,6 @@
                             android:layout_marginEnd="@dimen/margin_8_dp"
                             android:background="@drawable/bg_btn_search"
                             android:paddingStart="@dimen/content_padding_normal"
-
                             android:paddingTop="@dimen/element_padding_small"
                             android:paddingEnd="@dimen/content_padding_normal"
                             android:paddingBottom="@dimen/element_padding_small"
@@ -336,22 +343,21 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:textStyle="bold|italic"
-                            android:textColor="@color/black"
                             android:id="@+id/edt_number_seat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:gravity="center"
                             android:hint="Số ghế muốn"
+                            android:textColor="@color/black"
+                            android:textStyle="bold|italic"
                             tools:text="3" />
 
                         <RelativeLayout
                             android:id="@+id/rl_number_seat"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            >
+                            android:layout_gravity="center_vertical">
 
                             <Spinner
                                 android:id="@+id/sp_number_seat"
@@ -400,12 +406,13 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_condition_one"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/user_confirm_booking_form_two_condition_one" />
 
                             <TextView
-                                android:id="@+id/tv_condition"
+                                android:id="@+id/tv_condition_two"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/user_confirm_booking_form_two_condition_two"

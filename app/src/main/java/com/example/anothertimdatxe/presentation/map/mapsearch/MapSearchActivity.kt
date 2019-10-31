@@ -33,6 +33,8 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
     private var mList: List<AutocompletePrediction>? = null
     private var mLocationStarting: MutableMap<String, String> = mutableMapOf()
     private var mLocationEnding: MutableMap<String, String> = mutableMapOf()
+    private var mStartingPoint: String? = null
+    private var mEndingPoint: String? = null
 
     override fun getPresenter(): MapSearchPresenter {
         return MapSearchPresenterImpl(this)
@@ -40,8 +42,16 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
 
     override fun initView() {
         setUpToolbar()
+        getDataIntent()
         initAdapter()
         initBaseMapSearch()
+    }
+
+    private fun getDataIntent() {
+        mStartingPoint = intent.getStringExtra(STARTING_LOCATION_POINT)
+        mEndingPoint = intent.getStringExtra(ENDING_LOCATION_POINT)
+        edt_starting_point.setText(mStartingPoint)
+        edt_ending_point.setText(mEndingPoint)
     }
 
     override fun setListener() {
@@ -59,6 +69,8 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
                     intent.putExtra(ENDING_LOCATION_POINT, mLocationEnding.get(keyEnding))
                 }
                 setResult(RESULT_CODE, intent)
+                finish()
+            } else {
                 finish()
             }
         }

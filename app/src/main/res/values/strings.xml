@@ -501,4 +501,18 @@
     <string name="user_confirm_booking_form_two_condition_one">Tôi đã đọc và hoàn toàn chấp nhận với</string>
     <string name="user_confirm_booking_form_two_condition_two"><u>điều khoản và dịch vụ</u></string>
     <string name="user_confirm_booking_payment">Thanh toán</string>
+    <string name="user_confirm_booking_name_empty">Vui lòng nhập họ và tên</string>
+    <string name="user_confirm_booking_name_error">Họ và tên không được chứa số</string>
+    <string name="user_confirm_booking_email_empty">Vui lòng nhập email</string>
+    <string name="user_confirm_booking_email_error">Vui lòng nhập email đúng định dạng</string>
+    <string name="user_confirm_booking_phone_empty">Vui lòng nhập số điện thoại</string>
+    <string name="user_confirm_booking_phone_error">Vui lòng nhập số điện thoại hợp lệ</string>
+    <string name="user_confirm_booking_not_check_condition">Vui lòng đọc và đồng ý với các điều khoản của chúng tôi</string>
+    <string name="user_confirm_booking_date_empty">Thời gian đón không được để trống</string>
+    <string name="user_confirm_booking_date_in_past">Ngày đón không được chọn thời gian trong quá khứ</string>
+    <string name="user_confirm_booking_date_before_start_time">Ngày đón không được chọn trước khi chuyến đi bắt đầu</string>
+    <string name="user_confirm_booking_date_after_end_time">Ngày đón không được chọn sau thời gian kết thúc</string>
+    <string name="user_confirm_booking_hour_empty">Thời gian đón không được để trống</string>
+    <string name="user_confirm_booking_hour_before_start_time">Giờ đón không được chọn trước thời gian xuất phát</string>
+    <string name="user_confirm_booking_hour_after_end_time">Giờ đón không được chọn sau thời gian kết thúc dự kiến</string>
 </resources>

@@ -22,6 +22,10 @@ object NumberUtil {
         return value + " km"
     }
 
+    fun showPercentage(percent: Double): String {
+        return "${(percent*100).toInt()}%"
+    }
+
     fun isNumberString(input: String): Boolean {
         return Pattern.matches(STRING_PARTTERN, input)
     }
