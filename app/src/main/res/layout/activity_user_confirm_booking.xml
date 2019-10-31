@@ -311,7 +311,6 @@
                             android:layout_marginEnd="@dimen/margin_8_dp"
                             android:background="@drawable/bg_btn_search"
                             android:paddingStart="@dimen/content_padding_normal"
-
                             android:paddingTop="@dimen/element_padding_small"
                             android:paddingEnd="@dimen/content_padding_normal"
                             android:paddingBottom="@dimen/element_padding_small"

@@ -5,7 +5,12 @@ import com.example.anothertimdatxe.request.TimeBookingRequest
 import com.example.anothertimdatxe.request.UserBookingRequest
 
 interface UserConfirmBookingPresenter : BasePresenter {
-    fun fetchDataBooking(driverPostId:Int)
+    fun fetchDataBooking(driverPostId: Int)
     fun setSeatSpinner(emptySeat: Int?)
     fun paymentBooking(userBookRequest: UserBookingRequest, timeBookingRequest: TimeBookingRequest)
+    fun setTypeTrip(type: Int)
+    fun setNumberSeat(seat: Int)
+    fun getPrice()
+    fun getPercentDistance()
+    fun fetchDataPlaceById(mLocationStartingPointId: String?, mLocationEndingPointId: String?)
 }

@@ -1,27 +1,40 @@
 package com.example.anothertimdatxe.presentation.book.user.confirm
 
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
-import com.example.anothertimdatxe.base.network.ApiException
-import com.example.anothertimdatxe.base.network.BaseResult
-import com.example.anothertimdatxe.base.network.ICallBack
-import com.example.anothertimdatxe.base.network.RetrofitManager
+import com.example.anothertimdatxe.base.network.*
 import com.example.anothertimdatxe.entity.response.confirmbooking.ConfirmBookingResponse
 import com.example.anothertimdatxe.extension.isValidEmail
 import com.example.anothertimdatxe.extension.isValidEmailTwo
 import com.example.anothertimdatxe.extension.isValidPhone
+import com.example.anothertimdatxe.map.entity.Route
+import com.example.anothertimdatxe.map.response.GoogleMapDirectionResponse
 import com.example.anothertimdatxe.request.TimeBookingRequest
 import com.example.anothertimdatxe.request.UserBookingRequest
+import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NumberUtil
 import java.util.*
 
 class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePresenterImpl<UserConfirmBookingView>(mView), UserConfirmBookingPresenter {
+    private var mUserBookingRequest: UserBookingRequest? = null
     private var currentCalendar = Calendar.getInstance()
+    private var mUserConfirmBookingResponse: ConfirmBookingResponse? = null
+    private var typeTrip: Int? = -1
+    private var distance: Double = 0.0
+    private var currentPrice: Int = 0
+    private var numberSeat: Int = -1
+    private var percentage: Double = 0.0
+
     override fun fetchDataBooking(driverPostId: Int) {
         mView!!.showLoading()
         addDispose(RetrofitManager.getUserConfirmBooking(driverPostId, object : ICallBack<BaseResult<ConfirmBookingResponse>> {
             override fun onSuccess(result: BaseResult<ConfirmBookingResponse>?) {
-                mView!!.showDataBooking(result?.data!!)
+                mUserConfirmBookingResponse = result?.data
+                typeTrip = mUserConfirmBookingResponse?.type
+                distance = mUserConfirmBookingResponse?.distance!!
+                currentPrice = getCurrentPrice()
+                numberSeat = mUserConfirmBookingResponse?.emptySeat!!
+                mView!!.showDataBooking(mUserConfirmBookingResponse!!)
                 mView!!.hideLoading()
             }
 
@@ -41,27 +54,46 @@ class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePrese
     }
 
     override fun paymentBooking(userBookRequest: UserBookingRequest, timeBookingRequest: TimeBookingRequest) {
-        if (userBookRequest.fullName.isNullOrEmpty()) {
+        mUserBookingRequest = userBookRequest
+        mUserBookingRequest?.distance = mUserConfirmBookingResponse?.distance
+        mUserBookingRequest?.driverId = mUserConfirmBookingResponse?.driverId
+        mUserBookingRequest?.driverPostId = mUserConfirmBookingResponse?.id
+        mUserBookingRequest?.emptySeat = mUserConfirmBookingResponse?.emptySeat
+        mUserBookingRequest?.latFrom = mUserConfirmBookingResponse?.latFrom
+        mUserBookingRequest?.lngFrom = mUserConfirmBookingResponse?.lngFrom
+        mUserBookingRequest?.latTo = mUserConfirmBookingResponse?.latTo
+        mUserBookingRequest?.lngTo = mUserConfirmBookingResponse?.lngTo
+        mUserBookingRequest?.note = mUserConfirmBookingResponse?.description ?: ""
+        mUserBookingRequest?.type = mUserConfirmBookingResponse?.type
+//        if (mUserConfirmBookingResponse?.type == Constant.CONVENIENT_TRIP) {
+//            mUserBookingRequest?.price = mUserConfirmBookingResponse?.regularPrice
+//            mUserBookingRequest?.totalPrice = mUserConfirmBookingResponse?.regularPrice?.toInt()?.times(edt_number_seat.text.toString().toInt())?.toString()
+//        } else {
+//            mUserBookingRequest?.totalPrice = mUserConfirmBookingResponse?.privatePrice2
+//        }
+        timeBookingRequest.startTime = mUserConfirmBookingResponse?.startTime
+        timeBookingRequest.endTime = mUserConfirmBookingResponse?.endTime
+        if (mUserBookingRequest?.fullName.isNullOrEmpty()) {
             mView!!.onNameEmpty()
             return
         }
-        if (NumberUtil.isNumberString(userBookRequest.fullName!!)) {
+        if (NumberUtil.isNumberString(mUserBookingRequest?.fullName!!)) {
             mView!!.onNameError()
             return
         }
-        if (userBookRequest.phone.isNullOrEmpty()) {
+        if (mUserBookingRequest?.phone.isNullOrEmpty()) {
             mView!!.onPhoneEmpty()
             return
         }
-        if (!userBookRequest.phone!!.isValidPhone()) {
+        if (!mUserBookingRequest?.phone!!.isValidPhone()) {
             mView!!.onPhoneError()
             return
         }
-        if (userBookRequest.email.isNullOrEmpty()) {
+        if (mUserBookingRequest?.email.isNullOrEmpty()) {
             mView!!.onEmailEmpty()
             return
         }
-        if (!userBookRequest.email!!.isValidEmail() && !userBookRequest.email!!.isValidEmailTwo()) {
+        if (!mUserBookingRequest?.email!!.isValidEmail() && !mUserBookingRequest?.email!!.isValidEmailTwo()) {
             mView!!.onEmailError()
             return
         }
@@ -110,5 +142,94 @@ class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePrese
             mView!!.onHourAfterEndingTime()
             return
         }
+    }
+
+    override fun setTypeTrip(type: Int) {
+        typeTrip = type
+    }
+
+    override fun setNumberSeat(seat: Int) {
+        numberSeat = seat
+        getPrice()
+    }
+
+    override fun getPrice() {
+        if (typeTrip == Constant.PRIVATE_TRIP) {
+            if (percentage < 0.5) {
+                currentPrice = mUserConfirmBookingResponse?.privatePrice1?.toInt()!!
+            } else {
+                currentPrice = mUserConfirmBookingResponse?.privatePrice2?.toInt()!!
+            }
+            numberSeat = mUserConfirmBookingResponse?.emptySeat!!
+            mView!!.showPricePrivate(currentPrice)
+            mView!!.showNumberSeat(numberSeat)
+        } else {
+            if (percentage < 0.3) {
+                currentPrice = mUserConfirmBookingResponse?.priceLevel1?.toInt()!!
+            } else if (percentage >= 0.3 && percentage < 0.5) {
+                currentPrice = mUserConfirmBookingResponse?.priceLevel2?.toInt()!!
+            } else if (percentage >= 0.5 && percentage < 0.7) {
+                currentPrice = mUserConfirmBookingResponse?.priceLevel3?.toInt()!!
+            } else {
+                currentPrice = mUserConfirmBookingResponse?.regularPrice?.toInt()!!
+            }
+            mView!!.showPriceConvenient(currentPrice, currentPrice * numberSeat)
+        }
+    }
+
+    private fun getCurrentPrice(): Int {
+        percentage = distance / mUserConfirmBookingResponse?.distance!!
+        if (typeTrip == Constant.PRIVATE_TRIP) {
+            if (percentage < 0.5) {
+                currentPrice = mUserConfirmBookingResponse?.privatePrice1?.toInt()!!
+            } else {
+                currentPrice = mUserConfirmBookingResponse?.privatePrice2?.toInt()!!
+            }
+        } else {
+            if (percentage < 0.3) {
+                currentPrice = mUserConfirmBookingResponse?.priceLevel1?.toInt()!!
+            } else if (percentage >= 0.3 && percentage < 0.5) {
+                currentPrice = mUserConfirmBookingResponse?.priceLevel2?.toInt()!!
+            } else if (percentage >= 0.5 && percentage < 0.7) {
+                currentPrice = mUserConfirmBookingResponse?.priceLevel3?.toInt()!!
+            } else {
+                currentPrice = mUserConfirmBookingResponse?.regularPrice?.toInt()!!
+            }
+        }
+        return currentPrice
+    }
+
+    override fun getPercentDistance() {
+        mView!!.showPercentDistance(percentage)
+    }
+
+    override fun fetchDataPlaceById(mLocationStartingPointId: String?, mLocationEndingPointId: String?) {
+        mView!!.showLoading()
+        addDispose(MapRetrofitManager.fetchWayPoints(object : ICallBack<GoogleMapDirectionResponse> {
+            override fun onSuccess(result: GoogleMapDirectionResponse?) {
+                mView!!.hideLoading()
+                result?.routes?.let {
+                    if (it.size > 0) {
+                        mView!!.routeSuccess(Route(
+                                it.get(0)?.legs!![0]?.startLocation?.lat!!,
+                                it.get(0)?.legs!![0]?.startLocation?.lng!!,
+                                it.get(0)?.legs!![0]?.endLocation?.lat!!,
+                                it.get(0)?.legs!![0]?.endLocation?.lng!!,
+                                it.get(0)?.overviewPolyline?.points!!,
+                                it.get(0)?.legs!![0]?.steps!!,
+                                it.get(0)?.legs!![0]?.distance?.text!!,
+                                it.get(0)?.legs!![0]?.duration?.value!!
+                        ))
+                    } else {
+                        mView!!.routeFail()
+                    }
+                } ?: mView!!.routeFail()
+            }
+
+            override fun onError(e: ApiException) {
+                mView!!.hideLoading()
+                mView!!.routeFail()
+            }
+        }, "place_id:${mLocationStartingPointId}", "place_id:${mLocationEndingPointId}"))
     }
 }

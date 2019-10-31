@@ -1,15 +1,19 @@
 package com.example.anothertimdatxe.presentation.book.user.confirm
 
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TimePicker
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.SpinnerSeatAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
+import com.example.anothertimdatxe.entity.WrapperItem
 import com.example.anothertimdatxe.entity.response.confirmbooking.ConfirmBookingResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.map.entity.Route
+import com.example.anothertimdatxe.presentation.map.mapsearch.MapSearchActivity
 import com.example.anothertimdatxe.request.TimeBookingRequest
 import com.example.anothertimdatxe.request.UserBookingRequest
 import com.example.anothertimdatxe.sprinthome.condition.ConditionActivity
@@ -23,6 +27,7 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         TimePickerDialogWidget.onTimeSetListener {
     companion object {
         const val EXTRA_DRIVER_POST_ID = "extra_driver_post_id"
+        const val REQUEST_CODE_MAP_SEARCH = 9009
     }
 
     override val layoutRes: Int
@@ -31,7 +36,11 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
     private var mDatePickerDialogWidget: DatePickerDialogWidget? = null
     private var mTimePickerDialogWidget: TimePickerDialogWidget? = null
     private var mNumberSeatAdapter: SpinnerSeatAdapter? = null
-    private var mUserConfirmBookingResponse: ConfirmBookingResponse? = null
+    private var mLocationStartingPointId: String? = null
+    private var mLocationEndingPointId: String? = null
+    private var mLocationStartingPoint: String? = null
+    private var mLocationEndingPoint: String? = null
+    private var listItem: MutableList<WrapperItem> = mutableListOf()
 
     override fun getPresenter(): UserConfirmBookingPresenter {
         return UserConfirmBookingPresenterImpl(this)
@@ -53,7 +62,8 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                showPrice(position + 1)
+                edt_number_seat.setText((position + 1).toString())
+                mPresenter?.setNumberSeat(position + 1)
             }
 
         }
@@ -73,10 +83,28 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         tv_time.setOnClickListener {
             mTimePickerDialogWidget?.showTimePickerDialog()
         }
+        tv_convinent.setOnClickListener {
+            onConvenientTrip(true)
+        }
+        tv_private.setOnClickListener {
+            onPrivateTrip(true)
+        }
+        tv_starting_point.setOnClickListener {
+            startActivityForResult(Intent(this, MapSearchActivity::class.java).apply {
+                putExtra(MapSearchActivity.STARTING_LOCATION_POINT, tv_starting_point.text.toString())
+                putExtra(MapSearchActivity.ENDING_LOCATION_POINT, tv_ending_point.text.toString())
+            }, REQUEST_CODE_MAP_SEARCH)
+        }
+        tv_ending_point.setOnClickListener {
+            startActivityForResult(Intent(this, MapSearchActivity::class.java).apply {
+                putExtra(MapSearchActivity.STARTING_LOCATION_POINT, tv_starting_point.text.toString())
+                putExtra(MapSearchActivity.ENDING_LOCATION_POINT, tv_ending_point.text.toString())
+            }, REQUEST_CODE_MAP_SEARCH)
+        }
         btn_payment.setOnClickListener {
-            if(onCheckedCondition()){
+            if (onCheckedCondition()) {
                 payment()
-            }else{
+            } else {
                 ToastUtil.show(resources.getString(R.string.user_confirm_booking_not_check_condition))
             }
         }
@@ -85,37 +113,19 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
     private fun payment() {
         val userBookingRequest = UserBookingRequest()
         val timeBookingRequest = TimeBookingRequest()
-        userBookingRequest.distance = mUserConfirmBookingResponse?.distance
-        userBookingRequest.driverId = mUserConfirmBookingResponse?.driverId
-        userBookingRequest.driverPostId = mUserConfirmBookingResponse?.id
         userBookingRequest.email = row_email.getDetail()
         userBookingRequest.phone = row_phone.getDetail()
         userBookingRequest.fullName = row_name.getDetail()
-        userBookingRequest.emptySeat = mUserConfirmBookingResponse?.emptySeat
         userBookingRequest.startPoint = tv_starting_point.text.toString()
         userBookingRequest.endPoint = tv_ending_point.text.toString()
-        userBookingRequest.latFrom = mUserConfirmBookingResponse?.latFrom
-        userBookingRequest.lngFrom = mUserConfirmBookingResponse?.lngFrom
-        userBookingRequest.latTo = mUserConfirmBookingResponse?.latTo
-        userBookingRequest.lngTo = mUserConfirmBookingResponse?.lngTo
-        userBookingRequest.note = mUserConfirmBookingResponse?.description ?: ""
         userBookingRequest.numberSeat = edt_number_seat.text.toString().toInt()
-        userBookingRequest.type = mUserConfirmBookingResponse?.type
-        if (mUserConfirmBookingResponse?.type == Constant.CONVENIENT_TRIP) {
-            userBookingRequest.price = mUserConfirmBookingResponse?.regularPrice
-            userBookingRequest.totalPrice = mUserConfirmBookingResponse?.regularPrice?.toInt()?.times(edt_number_seat.text.toString().toInt())?.toString()
-        } else {
-            userBookingRequest.totalPrice = mUserConfirmBookingResponse?.privatePrice2
-        }
         userBookingRequest.userId = CarBookingSharePreference.getUserId()
         userBookingRequest?.waypoints = ""
         userBookingRequest?.canBook = 0
         timeBookingRequest.bookDate = tv_starting_date.text.toString()
         timeBookingRequest.bookHour = tv_time.text.toString()
-        timeBookingRequest.startTime = mUserConfirmBookingResponse?.startTime
-        timeBookingRequest.endTime = mUserConfirmBookingResponse?.endTime
         clearAllRequestFocus()
-        mPresenter?.paymentBooking(userBookingRequest,timeBookingRequest)
+        mPresenter?.paymentBooking(userBookingRequest, timeBookingRequest)
     }
 
     private fun clearAllRequestFocus() {
@@ -146,7 +156,6 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
     }
 
     override fun showDataBooking(data: ConfirmBookingResponse) {
-        mUserConfirmBookingResponse = data
         val user = CarBookingSharePreference.getUserData()
         row_name.setDetail(user?.full_name ?: "")
         row_phone.setDetail(user?.phone ?: "")
@@ -156,32 +165,118 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         tv_starting_point.text = data?.startPoint
         tv_ending_point.text = data?.endPoint
         tv_distance.text = NumberUtil.showDistance(data?.distance?.toString()!!)
-        tv_percent.text = "100%"
+        mPresenter?.getPercentDistance()
         when (data?.type) {
             Constant.CONVENIENT_TRIP -> {
-                tv_convinent.visible()
-                tv_private.gone()
-                row_one_seat.visible()
-                rl_number_seat.visible()
-                row_one_seat.setContent(NumberUtil.formatNumber(data?.regularPrice.toString()))
-                showPrice(data?.emptySeat!!)
+                onConvenientTrip(false)
             }
             Constant.PRIVATE_TRIP -> {
-                tv_convinent.gone()
-                tv_private.visible()
-                row_one_seat.gone()
-                rl_number_seat.gone()
-                row_total_money.setContent(NumberUtil.formatNumber(data?.privatePrice2.toString()))
+                onPrivateTrip(false)
+            }
+            Constant.BOTH_CONVENIENT_AND_PRIVATE -> {
+                if (data?.userBooks?.size == 0) {
+                    initWrapperItem()
+                    onBothTrip()
+                } else {
+                    onConvenientTrip(true)
+                }
             }
         }
         edt_number_seat.setText(data?.emptySeat?.toString())
         mPresenter?.setSeatSpinner(data?.emptySeat)
     }
 
-    private fun showPrice(seat: Int) {
-        edt_number_seat.setText(seat.toString())
-        val totalMoney = mUserConfirmBookingResponse?.regularPrice?.toInt()?.times(seat)
-        row_total_money.setContent(NumberUtil.formatNumber(totalMoney?.toString()!!))
+    private fun initWrapperItem() {
+        listItem.add(WrapperItem(tv_convinent, Constant.CONVENIENT_TRIP, true))
+        listItem.add(WrapperItem(tv_private, Constant.PRIVATE_TRIP, true))
+    }
+
+    private fun onConvenientTrip(isBoth: Boolean) {
+        if (!isBoth) {
+            tv_convinent.visible()
+            tv_private.gone()
+        }
+        row_one_seat.visible()
+        rl_number_seat.visible()
+        setBackgroundTypeTrip(Constant.CONVENIENT_TRIP)
+        mPresenter?.getPrice()
+    }
+
+    private fun onPrivateTrip(isBoth: Boolean) {
+        if (!isBoth) {
+            tv_convinent.gone()
+            tv_private.visible()
+        }
+        row_one_seat.gone()
+        rl_number_seat.gone()
+        setBackgroundTypeTrip(Constant.PRIVATE_TRIP)
+        mPresenter?.getPrice()
+    }
+
+    private fun onBothTrip() {
+        tv_convinent.visible()
+        tv_private.visible()
+        rl_number_seat.visible()
+        row_one_seat.visible()
+        mPresenter?.getPrice()
+        setBackgroundTypeTrip(Constant.CONVENIENT_TRIP)
+    }
+
+    override fun showPriceConvenient(oneSeatPrice: Int, totalPrice: Int) {
+        row_one_seat.setContent(NumberUtil.formatNumber(oneSeatPrice.toString()))
+        row_total_money.setContent(NumberUtil.formatNumber(totalPrice.toString()))
+    }
+
+    override fun showPricePrivate(totalPrice: Int) {
+        row_total_money.setContent(NumberUtil.formatNumber(totalPrice.toString()))
+    }
+
+    private fun setBackgroundTypeTrip(type: Int?) {
+        mPresenter?.setTypeTrip(type!!)
+        for ((index, item) in listItem.withIndex()) {
+            if (item.item == type) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    item.textView.background = resources.getDrawable(R.drawable.bg_btn_search, null)
+                } else {
+                    item.textView.background = resources.getDrawable(R.drawable.bg_btn_search)
+                }
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    item.textView.background = resources.getDrawable(R.drawable.bg_btn_no_active_confirm_booking, null)
+                } else {
+                    item.textView.background = resources.getDrawable(R.drawable.bg_btn_no_active_confirm_booking)
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == MapSearchActivity.RESULT_CODE) {
+            if (requestCode == REQUEST_CODE_MAP_SEARCH) {
+                mLocationStartingPointId = data?.extras?.getString(MapSearchActivity.STARTING_LOCATION_POINT_ID)
+                mLocationEndingPointId = data?.extras?.getString(MapSearchActivity.ENDING_LOCATION_POINT_ID)
+                mLocationStartingPoint = data?.extras?.getString(MapSearchActivity.STARTING_LOCATION_POINT)
+                mLocationEndingPoint = data?.extras?.getString(MapSearchActivity.ENDING_LOCATION_POINT)
+                if (!mLocationEndingPoint.isNullOrEmpty() && !mLocationEndingPoint.isNullOrEmpty()) {
+                    tv_starting_point.text = (mLocationStartingPoint)
+                    tv_ending_point.text = (mLocationEndingPoint)
+                    mPresenter?.fetchDataPlaceById(mLocationStartingPointId, mLocationEndingPointId)
+                }
+            }
+        }
+    }
+
+    override fun routeSuccess(route: Route) {
+        tv_distance.text = route.distance
+    }
+
+    override fun showNumberSeat(numberSeat: Int) {
+        edt_number_seat.setText(numberSeat.toString())
+    }
+
+    override fun routeFail() {
+        ToastUtil.show("Có lỗi xảy ra, vui lòng thử lại sau!")
     }
 
     override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
@@ -256,17 +351,21 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         onHourRequestFocus(resources.getString(R.string.user_confirm_booking_hour_after_end_time))
     }
 
-    private fun onDateRequestFocus(error:String){
+    private fun onDateRequestFocus(error: String) {
         tv_starting_date.error = error
         tv_starting_date.requestFocus()
     }
 
-    private fun onHourRequestFocus(error:String){
+    private fun onHourRequestFocus(error: String) {
         tv_time.error = error
         tv_time.requestFocus()
     }
 
     private fun onCheckedCondition(): Boolean {
         return cb_condition.isChecked
+    }
+
+    override fun showPercentDistance(percentage: Double) {
+        tv_percent.text = NumberUtil.showPercentage(percentage)
     }
 }
