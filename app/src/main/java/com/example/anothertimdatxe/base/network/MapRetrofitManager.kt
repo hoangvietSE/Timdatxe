@@ -84,4 +84,16 @@ object MapRetrofitManager {
                 .subscribeWith(subscribe)
     }
 
+    fun fetchWayPoints(iCallBack: ICallBack<GoogleMapDirectionResponse>, origin: String, destination: String, waypoints: String): Disposable {
+        val subscribe = getSubcriber(iCallBack)
+        return mapApiService.getDirection(
+                origin,
+                destination,
+                waypoints,
+                CarBookingApplication.instance.resources.getString(R.string.google_services_api_key)
+        ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(subscribe)
+    }
+
 }
