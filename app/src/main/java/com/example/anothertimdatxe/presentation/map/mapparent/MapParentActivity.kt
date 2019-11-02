@@ -122,9 +122,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     }
 
     private fun setMarkerLocation(mLocationStartingPointId: String, mLocationEndingPointId: String) {
-        fetchPlaceById(mLocationStartingPointId, mListenerFetchPlaceStartingById)
-        fetchPlaceById(mLocationEndingPointId, mListenerFetchPlaceEndingById)
-        mPresenter?.fetchWayPoints(mLocationStartingPoint!!, mLocationEndingPoint!!)
+        mPresenter?.fetchWayPoints(mLocationStartingPointId!!, mLocationEndingPointId!!)
     }
 
     val mListenerFetchPlaceStartingById = object : FetchPlaceListener {
@@ -155,10 +153,21 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     }
 
     override fun routeSuccess(route: Route) {
+        addMarkerMap(LatLng(route.originLat,route.originLng),LatLng(route.destinationLat,route.destinationLng))
         drawRouteSuccess(route)
         moveCameraBound(route)
         mDistance = route.distance
         mDuration = route.time
+    }
+
+    private fun addMarkerMap(originLatLng: LatLng, destinationLatLng: LatLng) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            addMarker(originLatLng, "Điểm xuất phát", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_start_point_new, null)))
+            addMarker(destinationLatLng, "Điểm kết thúc", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_end_point_new, null)))
+        } else {
+            addMarker(originLatLng, "Điểm xuất phát", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_start_point_new)))
+            addMarker(destinationLatLng, "Điểm kết thúc", getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_end_point_new, null)))
+        }
     }
 
     override fun routeFail() {

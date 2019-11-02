@@ -83,5 +83,4 @@ object MapRetrofitManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscribe)
     }
-
 }

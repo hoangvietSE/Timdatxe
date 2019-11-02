@@ -12,7 +12,8 @@ import retrofit2.http.Query
 interface MapApiService {
     @GET(MapApiConstant.MAP_DIRECTION)
     @Headers("Content-type:application/json")
-    fun getDirection(@Query(RequestParam.ORIGIN) origin: String,
-                     @Query(RequestParam.DESTINATION) destination: String,
-                     @Query(RequestParam.KEY) key: String): Single<Response<GoogleMapDirectionResponse>>
+    fun getDirection(
+            @Query(RequestParam.ORIGIN) origin: String,
+            @Query(RequestParam.DESTINATION) destination: String,
+            @Query(RequestParam.KEY) key: String): Single<Response<GoogleMapDirectionResponse>>
 }

@@ -42,7 +42,7 @@ class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParent
                 mView!!.routeFail()
             }
 
-        }, origin, destination)
+        }, "place_id:${origin}", "place_id:${destination}")
         addDispose(disposable)
     }
 }

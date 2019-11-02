@@ -9,6 +9,7 @@ import com.example.anothertimdatxe.entity.response.DriverPostDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.presentation.book.user.confirm.UserConfirmBookingActivity
+import com.example.anothertimdatxe.presentation.map.mapshow.MapShowActivity
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NumberUtil
@@ -43,6 +44,16 @@ class UserBookDetailActivity : BaseActivity<UserBookDetailPresenter>(), UserBook
         btn_book.setOnClickListener {
             startActivity(Intent(this, UserConfirmBookingActivity::class.java).apply {
                 putExtra(UserConfirmBookingActivity.EXTRA_DRIVER_POST_ID, postId)
+            })
+        }
+        btn_show_map.setOnClickListener {
+            startActivity(Intent(this, MapShowActivity::class.java).apply {
+                putExtra(MapShowActivity.LAT_FROM, mDriverPostDetailResponse?.latFrom?.toDouble())
+                putExtra(MapShowActivity.LNG_FROM, mDriverPostDetailResponse?.lngFrom?.toDouble())
+                putExtra(MapShowActivity.LAT_TO, mDriverPostDetailResponse?.latTo?.toDouble())
+                putExtra(MapShowActivity.LNG_TO, mDriverPostDetailResponse?.lngTo?.toDouble())
+                putExtra(MapShowActivity.ORIGIN_LOCATION, mDriverPostDetailResponse?.startPoint)
+                putExtra(MapShowActivity.DESTINATION_LOCATION, mDriverPostDetailResponse?.endPoint)
             })
         }
     }

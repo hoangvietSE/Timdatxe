@@ -60,7 +60,7 @@ class MapShowActivity : TimDatXeBaseMap<MapShowPresenter>(), MapShowView {
         lngTo = intent.getDoubleExtra(LNG_TO, 0.0)
         mOrigin = intent.getStringExtra(ORIGIN_LOCATION)
         mDestination = intent.getStringExtra(DESTINATION_LOCATION)
-        mPresenter?.fetchWayPoints(mOrigin!!, mDestination!!)
+        mPresenter?.fetchWayPoints(LatLng(latFrom!!, lngFrom!!), LatLng(latTo!!, lngTo!!))
     }
 
     override fun routeSuccess(route: Route) {

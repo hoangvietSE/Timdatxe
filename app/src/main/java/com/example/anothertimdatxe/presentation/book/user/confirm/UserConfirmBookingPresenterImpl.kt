@@ -161,8 +161,8 @@ class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePrese
                 currentPrice = mUserConfirmBookingResponse?.privatePrice2?.toInt()!!
             }
             numberSeat = mUserConfirmBookingResponse?.emptySeat!!
-            mView!!.showPricePrivate(currentPrice)
             mView!!.showNumberSeat(numberSeat)
+            mView!!.showPricePrivate(currentPrice)
         } else {
             if (percentage < 0.3) {
                 currentPrice = mUserConfirmBookingResponse?.priceLevel1?.toInt()!!
