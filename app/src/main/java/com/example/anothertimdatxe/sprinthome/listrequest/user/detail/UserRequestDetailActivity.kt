@@ -3,11 +3,13 @@ package com.example.anothertimdatxe.sprinthome.listrequest.user.detail
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.entity.response.UserRequestDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.presentation.map.mapshow.MapShowActivity
 import com.example.anothertimdatxe.util.*
 import kotlinx.android.synthetic.main.activity_user_request_detail.*
 import kotlinx.android.synthetic.main.dialog_confirm_cancel_booking_step_one.*
@@ -44,6 +46,16 @@ class UserRequestDetailActivity : BaseActivity<UserRequestDetailPresenter>(), Us
             if (mUserRequestDetailResponse?.canCancelBooking == ALLOW_CANCEL_BOOKING) {
                 showPolicyStepOne()
             }
+        }
+        btn_show_map.setOnClickListener {
+            startActivity(Intent(this, MapShowActivity::class.java).apply {
+                putExtra(MapShowActivity.LAT_FROM, mUserRequestDetailResponse?.driverPost?.latFrom?.toDouble())
+                putExtra(MapShowActivity.LNG_FROM, mUserRequestDetailResponse?.driverPost?.lngFrom?.toDouble())
+                putExtra(MapShowActivity.LAT_TO, mUserRequestDetailResponse?.driverPost?.latTo?.toDouble())
+                putExtra(MapShowActivity.LNG_TO, mUserRequestDetailResponse?.driverPost?.lngTo?.toDouble())
+                putExtra(MapShowActivity.ORIGIN_LOCATION, mUserRequestDetailResponse?.driverPost?.startPoint)
+                putExtra(MapShowActivity.DESTINATION_LOCATION, mUserRequestDetailResponse?.driverPost?.endPoint)
+            })
         }
     }
 
