@@ -5,5 +5,5 @@ import com.google.android.gms.maps.model.LatLng
 
 interface MapShowPresenter : BasePresenter {
     fun fetchWayPoints(origin: String, destination: String)
-    fun fetchWayPoints(originString: String, destinationString: String, origin: LatLng, destination: LatLng)
+    fun fetchWayPoints(originLatLng: LatLng, destinationLatLng: LatLng)
 }

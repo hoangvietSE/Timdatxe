@@ -9,7 +9,7 @@ import com.example.anothertimdatxe.map.response.GoogleMapDirectionResponse
 import com.google.android.gms.maps.model.LatLng
 
 class MapShowPresenterImpl(mView: MapShowView) : BasePresenterImpl<MapShowView>(mView), MapShowPresenter {
-    override fun fetchWayPoints(originString: String, destinationString: String, origin: LatLng, destination: LatLng) {
+    override fun fetchWayPoints(originLatLng: LatLng, destinationLatLng: LatLng) {
         val disposable = fetchWayPoints(object : ICallBack<GoogleMapDirectionResponse> {
             override fun onSuccess(result: GoogleMapDirectionResponse?) {
                 result?.routes?.let {
@@ -34,7 +34,7 @@ class MapShowPresenterImpl(mView: MapShowView) : BasePresenterImpl<MapShowView>(
                 mView!!.routeFail()
             }
 
-        }, originString, destinationString, "via:${origin.latitude},${origin.longitude}|via:${destination.latitude},${destination.longitude}")
+        }, "${originLatLng.latitude},${originLatLng.longitude}","${destinationLatLng.latitude},${destinationLatLng.longitude}")
         addDispose(disposable)
     }
 
