@@ -12,6 +12,13 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.base.mvp.BaseView
 import com.example.anothertimdatxe.customview.CarBookingLoading
+import com.example.anothertimdatxe.eventbus.RefreshTokenFailure
+import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
+import com.example.anothertimdatxe.util.CarBookingSharePreference
+import com.example.anothertimdatxe.util.ToastUtil
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
@@ -38,6 +45,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
             it.start()
         }
         setListener()
+        EventBus.getDefault().register(this);
     }
 
     abstract fun getPresenter(): T
@@ -47,6 +55,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         mPresenter!!.let {
             it.destroy()
         }
+        EventBus.getDefault().unregister(this);
     }
 
     override fun showLoading() {
@@ -124,5 +133,13 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         startActivity(Intent(context, cls).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         })
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun failRefershToken(event: RefreshTokenFailure) {
+        ToastUtil.show("Phiên đăng nhập đã hết. Vui lòng đăng nhập!")
+        CarBookingSharePreference.clearAllPreference()
+        startActivityAndClearTaskOrNewTask(this, LoginActivity::class.java)
+        finish()
     }
 }
