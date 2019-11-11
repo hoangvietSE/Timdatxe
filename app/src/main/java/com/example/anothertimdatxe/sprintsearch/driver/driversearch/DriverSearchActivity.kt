@@ -8,11 +8,12 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.adapter.*
+import com.example.anothertimdatxe.adapter.DriverSearchUserPostAdapter
+import com.example.anothertimdatxe.adapter.MapSearchAdapter
+import com.example.anothertimdatxe.adapter.SpinnerSeatSearchAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
 import com.example.anothertimdatxe.common.BaseMapSearch
-import com.example.anothertimdatxe.common.ItemRecyclerViewDecoration
 import com.example.anothertimdatxe.common.MapSearchListener
 import com.example.anothertimdatxe.entity.response.DriverSearchResponse
 import com.example.anothertimdatxe.extension.gone
@@ -172,7 +173,7 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
         mDriverSearchUserPostAdapter = DriverSearchUserPostAdapter(this)
         mDriverSearchUserPostAdapter?.setLoadingMoreListener(this)
         mDriverSearchUserPostAdapter?.addOnItemClickListener(this)
-        recyclerView.addItemDecoration(ItemRecyclerViewDecoration(this, R.dimen.spacing_16_dp))
+//        recyclerView.addItemDecoration(ItemRecyclerViewDecoration(this, R.dimen.spacing_16_dp))
         recyclerView.adapter = mDriverSearchUserPostAdapter
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }

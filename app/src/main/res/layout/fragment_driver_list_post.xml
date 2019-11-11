@@ -155,8 +155,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/formSearch"
+                android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/item_driver_list_request"></androidx.recyclerview.widget.RecyclerView>
+                android:padding="@dimen/content_padding_normal"
+                tools:listitem="@layout/item_driver_list_post"></androidx.recyclerview.widget.RecyclerView>
 
             <include
                 layout="@layout/shimmer_layout"

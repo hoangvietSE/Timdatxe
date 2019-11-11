@@ -517,22 +517,22 @@
                 android:textSize="@dimen/text_size_16"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/btn_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8_dp"
-                android:layout_marginTop="@dimen/margin_16_dp"
-                android:layout_marginEnd="@dimen/margin_8_dp"
-                android:layout_marginBottom="@dimen/margin_16_dp"
-                android:background="@drawable/bg_btn_create_post"
-                android:gravity="center"
-                android:paddingTop="@dimen/content_padding_normal"
-                android:paddingBottom="@dimen/content_padding_normal"
-                android:text="@string/driver_create_post_btn_create"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/btn_status"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="@dimen/margin_8_dp"-->
+                <!--android:layout_marginTop="@dimen/margin_16_dp"-->
+                <!--android:layout_marginEnd="@dimen/margin_8_dp"-->
+                <!--android:layout_marginBottom="@dimen/margin_16_dp"-->
+                <!--android:background="@drawable/bg_btn_create_post"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingTop="@dimen/content_padding_normal"-->
+                <!--android:paddingBottom="@dimen/content_padding_normal"-->
+                <!--android:text="@string/driver_create_post_btn_create"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="@dimen/text_size_16"-->
+                <!--android:textStyle="bold" />-->
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
