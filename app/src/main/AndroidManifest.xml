@@ -120,6 +120,7 @@
             android:name=".introduce.IntroduceActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:name=".presentation.drivercreatepost.DriverCreatePostActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -3,7 +3,7 @@ package com.example.anothertimdatxe.util
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
-import java.util.regex.Pattern;
+import java.util.regex.Pattern
 
 object NumberUtil {
     const val STRING_PARTTERN = "(.)*(\\d)(.)*"
@@ -35,5 +35,23 @@ object NumberUtil {
             return value.replace(oldChar, newChar)
         }
         return value
+    }
+
+    fun formatValue(value: String): String {
+        try {
+            return formatter.format(removeSpecialCharacters(value).toInt())
+        } catch (e: NumberFormatException) {
+            return ""
+        }
+    }
+
+    private fun removeSpecialCharacters(value: String): String {
+        val resultString = StringBuilder("")
+        for (i in value) {
+            if (i.isDigit()) {
+                resultString.append(i)
+            }
+        }
+        return resultString.toString()
     }
 }
