@@ -45,7 +45,6 @@ import com.example.anothertimdatxe.widget.BottomTabLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_nav_menu.*
-import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.Serializable
@@ -141,11 +140,9 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
-        EventBus.getDefault().unregister(this)
         super.onStop()
     }
 

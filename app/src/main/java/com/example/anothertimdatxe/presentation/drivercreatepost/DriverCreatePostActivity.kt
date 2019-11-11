@@ -11,6 +11,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.SpinnerSeatAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.util.GlideApp
+import com.example.anothertimdatxe.common.AmountTextWatcher
 import com.example.anothertimdatxe.entity.WrapperItem
 import com.example.anothertimdatxe.entity.response.DriverCarResponse
 import com.example.anothertimdatxe.entity.response.DriverPostDetailResponse
@@ -62,6 +63,13 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     private var carId: Int? = null
     private var data: DriverPostDetailResponse? = null
 
+    private var convenient30TextWatcher: AmountTextWatcher? = null
+    private var convenient50TextWatcher: AmountTextWatcher? = null
+    private var convenient70TextWatcher: AmountTextWatcher? = null
+    private var convenient100TextWatcher: AmountTextWatcher? = null
+    private var private50TextWatcher: AmountTextWatcher? = null
+    private var private100TextWatcher: AmountTextWatcher? = null
+
     override val layoutRes: Int
         get() = R.layout.activity_driver_create_post
 
@@ -74,7 +82,6 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         setBanner()
         initWrapperItem()
         getDataIntent()
-
     }
 
     override fun setListener() {
@@ -102,9 +109,11 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         }
         tv_convinent_trip.setOnClickListener {
             onSelectedItem(ITEM_TYPE_CONVINENT)
+
         }
         tv_private_trip.setOnClickListener {
             onSelectedItem(ITEM_TYPE_PRIVATE)
+
         }
         tv_both_trip.setOnClickListener {
             onSelectedItem(ITEM_TYPE_BOTH)
@@ -306,11 +315,11 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
             enableWidget(false)
         }
         if (data.flagDelete == 1) {
-            btn_status.visible()
-            btn_status.text = "XÓA BÀI ĐĂNG"
+//            btn_status.visible()
+//            btn_status.text = "XÓA BÀI ĐĂNG"
             btn_create_post.background.level = 1
         } else if (data.flagDelete == 0) {
-            btn_status.gone()
+//            btn_status.gone()
         }
         if (data.flagShowListBook == 1) {
             btn_create_post.visible()
@@ -322,18 +331,18 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         if (data.status == Constant.DRIVER_POST_CANCEL) {
             when (data.reason) {
                 Constant.DRIVER_CANCEL_POST -> {
-                    btn_status.visible()
-                    btn_status.text = "TÀI XE HỦY BÀI ĐĂNG"
+//                    btn_status.visible()
+//                    btn_status.text = "TÀI XE HỦY BÀI ĐĂNG"
                     btn_create_post.background.level = 1
                 }
                 Constant.DRIVER_CANCEL_BOOKING -> {
-                    btn_status.visible()
-                    btn_status.text = "TÀI XẾ HỦY BOOKING"
+//                    btn_status.visible()
+//                    btn_status.text = "TÀI XẾ HỦY BOOKING"
                     btn_create_post.background.level = 1
                 }
                 Constant.POST_EXPIRE -> {
-                    btn_status.visible()
-                    btn_status.text = "CHUYẾN ĐI HẾT HẠN"
+//                    btn_status.visible()
+//                    btn_status.text = "CHUYẾN ĐI HẾT HẠN"
                     btn_create_post.background.level = 1
                 }
             }
@@ -425,15 +434,87 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
             ITEM_TYPE_CONVINENT -> {
                 form_convinent.visible()
                 form_private.gone()
+                addTextWatcherConvinentTrip()
+                removeTextWatcherPrivateTrip()
             }
             ITEM_TYPE_PRIVATE -> {
                 form_convinent.gone()
                 form_private.visible()
+                removeTextWatcherConvinentTrip()
+                addTextWatcherPrivateTrip()
             }
             ITEM_TYPE_BOTH -> {
                 form_convinent.visible()
                 form_private.visible()
+                addTextWatcherConvinentTrip()
+                addTextWatcherPrivateTrip()
             }
+        }
+    }
+
+    private fun addTextWatcherConvinentTrip() {
+        convenient30TextWatcher?.let {
+            edt_30_percent.addTextChangedListener(it)
+        } ?: run {
+            convenient30TextWatcher = AmountTextWatcher(edt_30_percent)
+            edt_30_percent.addTextChangedListener(convenient30TextWatcher)
+        }
+        convenient50TextWatcher?.let {
+            edt_50_percent.addTextChangedListener(it)
+        } ?: run {
+            convenient50TextWatcher = AmountTextWatcher(edt_50_percent)
+            edt_50_percent.addTextChangedListener(convenient50TextWatcher)
+        }
+        convenient70TextWatcher?.let {
+            edt_70_percent.addTextChangedListener(it)
+        } ?: run {
+            convenient70TextWatcher = AmountTextWatcher(edt_70_percent)
+            edt_70_percent.addTextChangedListener(convenient70TextWatcher)
+        }
+        convenient100TextWatcher?.let {
+            edt_100_percent.addTextChangedListener(it)
+        } ?: run {
+            convenient100TextWatcher = AmountTextWatcher(edt_100_percent)
+            edt_100_percent.addTextChangedListener(convenient100TextWatcher)
+        }
+    }
+
+    private fun addTextWatcherPrivateTrip() {
+        private50TextWatcher?.let {
+            edt_private_50_percent.addTextChangedListener(it)
+        } ?: run {
+            private50TextWatcher = AmountTextWatcher(edt_private_50_percent)
+            edt_private_50_percent.addTextChangedListener(private50TextWatcher)
+        }
+        private100TextWatcher?.let {
+            edt_private_100_percent.addTextChangedListener(it)
+        } ?: run {
+            private100TextWatcher = AmountTextWatcher(edt_private_100_percent)
+            edt_private_100_percent.addTextChangedListener(private100TextWatcher)
+        }
+    }
+
+    private fun removeTextWatcherConvinentTrip() {
+        convenient30TextWatcher?.let {
+            edt_30_percent.removeTextChangedListener(it)
+        }
+        convenient50TextWatcher?.let {
+            edt_50_percent.removeTextChangedListener(it)
+        }
+        convenient70TextWatcher?.let {
+            edt_70_percent.removeTextChangedListener(it)
+        }
+        convenient100TextWatcher?.let {
+            edt_100_percent.removeTextChangedListener(it)
+        }
+    }
+
+    private fun removeTextWatcherPrivateTrip() {
+        private50TextWatcher?.let {
+            edt_private_50_percent.removeTextChangedListener(it)
+        }
+        private100TextWatcher?.let {
+            edt_private_100_percent.removeTextChangedListener(it)
         }
     }
 
@@ -470,11 +551,18 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     }
 
     fun getDistance(distance: String): Double? {
-        var newDistance: String? = null
-        if (distance.contains(" km")) {
-            newDistance = distance.replace(" km", "")
+        return try {
+            var newDistance: String? = null
+            if (distance.contains(" km")) {
+                newDistance = distance.replace(" km", "")
+            }
+            if (distance.contains(",")) {
+                newDistance = distance.replace(",", "")
+            }
+            return newDistance?.toDouble()
+        } catch (e: NumberFormatException) {
+            return 0.0;
         }
-        return newDistance?.toDouble()
     }
 
     fun getDuration(time: String): Double {

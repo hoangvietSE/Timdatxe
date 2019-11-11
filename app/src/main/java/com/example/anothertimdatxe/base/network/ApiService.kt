@@ -13,6 +13,7 @@ import com.example.anothertimdatxe.request.DriverFinishTripRequest
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -325,4 +326,12 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun getUserConfirmBooking(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String, @Query(RequestParam.DRIVER_POST_ID) id: Int): Single<Response<BaseResult<ConfirmBookingResponse>>>
 
+    //User Refresh Token
+    @GET(ApiConstant.USER_REFRESH_TOKEN)
+    @Headers("Content-Type: application/json")
+    fun userRefreshTokenInterceptor(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String) : Call<BaseResponse<RefreshTokenResponse>>
+    //Driver Refresh Token
+    @GET(ApiConstant.DRIVER_REFRESH_TOEKN)
+    @Headers("Content-Type: application/json")
+    fun driverRefreshTokenInterceptor(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String) : Call<BaseResponse<RefreshTokenResponse>>
 }
