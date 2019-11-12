@@ -23,7 +23,6 @@ import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -551,39 +550,11 @@ object RetrofitManager {
                 .subscribeWith(subscribe)
     }
 
-    fun userRefreshTokenInterceptor(accessToken: String, callBack: ICallBack<BaseResponse<RefreshTokenResponse>>) {
-        val call = apiService.userRefreshTokenInterceptor(accessToken)
-        call.enqueue(object : Callback<BaseResponse<RefreshTokenResponse>> {
-            override fun onFailure(call: Call<BaseResponse<RefreshTokenResponse>>, t: Throwable) {
-                callBack.onError(ApiException(t.message, t))
-            }
-
-            override fun onResponse(call: Call<BaseResponse<RefreshTokenResponse>>, response: Response<BaseResponse<RefreshTokenResponse>>) {
-                if (response?.isSuccessful && response?.body() != null) {
-                    callBack.onSuccess(response?.body())
-                } else {
-                    callBack.onError(ApiException("Error Refresh Token", Throwable()))
-                }
-            }
-
-        })
+    fun userRefreshTokenInterceptor(accessToken: String): Call<BaseResponse<RefreshTokenResponse>> {
+        return apiService.userRefreshTokenInterceptor(accessToken)
     }
 
-    fun driverRefreshTokenInterceptor(accessToken: String, callBack: ICallBack<BaseResponse<RefreshTokenResponse>>) {
-        val call = apiService.driverRefreshTokenInterceptor(accessToken)
-        call.enqueue(object : Callback<BaseResponse<RefreshTokenResponse>> {
-            override fun onFailure(call: Call<BaseResponse<RefreshTokenResponse>>, t: Throwable) {
-                callBack.onError(ApiException(t.message, t))
-            }
-
-            override fun onResponse(call: Call<BaseResponse<RefreshTokenResponse>>, response: Response<BaseResponse<RefreshTokenResponse>>) {
-                if (response?.isSuccessful && response?.body() != null) {
-                    callBack.onSuccess(response?.body())
-                } else {
-                    callBack.onError(ApiException("Error Refresh Token", Throwable()))
-                }
-            }
-
-        })
+    fun driverRefreshTokenInterceptor(accessToken: String): Call<BaseResponse<RefreshTokenResponse>> {
+        return apiService.driverRefreshTokenInterceptor(accessToken)
     }
 }
