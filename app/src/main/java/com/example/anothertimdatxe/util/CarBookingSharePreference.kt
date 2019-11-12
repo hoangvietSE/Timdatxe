@@ -12,7 +12,6 @@ object CarBookingSharePreference {
     private const val WELCOME_DRIVER_APP = "welcome_driver_app"
     private const val WELCOME_USER_APP = "welcome_user_app"
     private var mUserId: Int? = null
-    private var mAccessToken: String? = null
 
 
     fun setStringPreference(key: String?, data: String?) {
@@ -73,8 +72,7 @@ object CarBookingSharePreference {
     }
 
     fun getAccessToken(): String {
-        if (mAccessToken == null) getUserData()?.let { mAccessToken = RequestParam.BEARER + it.session_token }
-        return mAccessToken ?: ""
+        return getUserData()?.let { RequestParam.BEARER + it.session_token } ?: ""
     }
 
 
@@ -82,7 +80,6 @@ object CarBookingSharePreference {
         var preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
         var editor = preference.edit()
         mUserId = null
-        mAccessToken = null
         editor.clear()
         editor.putBoolean(WELCOME_USER_APP, false)
         editor.putBoolean(WELCOME_DRIVER_APP, false)

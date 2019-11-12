@@ -141,5 +141,6 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         CarBookingSharePreference.clearAllPreference()
         startActivityAndClearTaskOrNewTask(this, LoginActivity::class.java)
         finish()
+        EventBus.getDefault().removeStickyEvent(event)
     }
 }
