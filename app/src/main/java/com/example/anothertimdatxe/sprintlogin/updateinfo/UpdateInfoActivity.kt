@@ -89,6 +89,9 @@ class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, 
                 onCheckBoxError()
             }
         }
+        leftbutton?.setOnClickListener {
+            startActivityAndClearTaskOrNewTask(this, HomeActivity::class.java)
+        }
     }
 
     override fun onFullNameError() {

@@ -6,7 +6,6 @@ import android.content.Intent
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.entity.response.PostDetailResponse
-import com.example.anothertimdatxe.entity.response.UserPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.invisible
 import com.example.anothertimdatxe.extension.visible
@@ -22,7 +21,7 @@ class UserPostDetailActivity : BaseActivity<UserPostDetailPresenter>(), UserPost
     }
 
     private var userPostId: Int? = null
-    private var mUserPostResponse: UserPostResponse? = null
+    private var mUserPostResponse: PostDetailResponse? = null
 
     override val layoutRes: Int
         get() = R.layout.activity_user_post_detail
@@ -57,12 +56,12 @@ class UserPostDetailActivity : BaseActivity<UserPostDetailPresenter>(), UserPost
         }
         btn_show_map.setOnClickListener {
             startActivity(Intent(this, MapShowActivity::class.java).apply {
-                putExtra(MapShowActivity.LAT_FROM, mUserPostResponse?.lat_from?.toDouble())
-                putExtra(MapShowActivity.LNG_FROM, mUserPostResponse?.lng_from?.toDouble())
-                putExtra(MapShowActivity.LAT_TO, mUserPostResponse?.lat_to?.toDouble())
-                putExtra(MapShowActivity.LNG_TO, mUserPostResponse?.lng_to?.toDouble())
-                putExtra(MapShowActivity.ORIGIN_LOCATION, mUserPostResponse?.start_point)
-                putExtra(MapShowActivity.DESTINATION_LOCATION, mUserPostResponse?.end_point)
+                putExtra(MapShowActivity.LAT_FROM, mUserPostResponse?.latFrom?.toDouble())
+                putExtra(MapShowActivity.LNG_FROM, mUserPostResponse?.lngFrom?.toDouble())
+                putExtra(MapShowActivity.LAT_TO, mUserPostResponse?.latTo?.toDouble())
+                putExtra(MapShowActivity.LNG_TO, mUserPostResponse?.lngTo?.toDouble())
+                putExtra(MapShowActivity.ORIGIN_LOCATION, mUserPostResponse?.startPoint)
+                putExtra(MapShowActivity.DESTINATION_LOCATION, mUserPostResponse?.endPoint)
             })
         }
     }
@@ -90,7 +89,7 @@ class UserPostDetailActivity : BaseActivity<UserPostDetailPresenter>(), UserPost
     }
 
     override fun showUserPostDetail(data: PostDetailResponse) {
-
+        mUserPostResponse = data
         row_starting_point.setRowDetail(data.startPoint)
         row_ending_point.setRowDetail(data.endPoint)
         row_distance.setRowDetail(NumberUtil.showDistance(data.distance.toString()))
