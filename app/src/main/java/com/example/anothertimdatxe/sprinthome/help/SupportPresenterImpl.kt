@@ -11,13 +11,13 @@ import com.example.anothertimdatxe.request.ContactRequest
 
 class SupportPresenterImpl(mView: SupportView) : BasePresenterImpl<SupportView>(mView), SupportPresenter {
     override fun sendSupport(data: ContactEntity) {
-        if (data.phone.isNullOrEmpty() || data.phone.isNullOrBlank()) {
+        if (data.phone.isEmpty() || data.phone.isNullOrBlank()) {
             mView!!.onPhoneError()
-        } else if (data.email.isNullOrEmpty() || data.email.isNullOrBlank()) {
+        } else if (data.email.isEmpty() || data.email.isNullOrBlank()) {
             mView!!.onEmailError()
-        } else if (data.address.isNullOrEmpty() || data.address.isNullOrBlank()) {
+        } else if (data.address.isEmpty() || data.address.isNullOrBlank()) {
             mView!!.onAddressError()
-        } else if (data.content.isNullOrEmpty() || data.content.isNullOrBlank()) {
+        } else if (data.content.isEmpty() || data.content.isNullOrBlank()) {
             mView!!.onEdittextError()
         } else {
             mView!!.showLoading()

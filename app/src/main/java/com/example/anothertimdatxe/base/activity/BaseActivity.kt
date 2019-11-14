@@ -41,11 +41,9 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         mPresenter = getPresenter()
         dialog = CarBookingLoading.getInstance(this)
         initToolBar()
-        mPresenter?.let {
-            it.start()
-        }
+        mPresenter?.start()
         setListener()
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this)
     }
 
     abstract fun getPresenter(): T
@@ -55,7 +53,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
         mPresenter!!.let {
             it.destroy()
         }
-        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this)
     }
 
     override fun showLoading() {

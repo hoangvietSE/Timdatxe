@@ -16,7 +16,7 @@ class CityPostPresenterImpl(mView: CityPostView) : BasePresenterImpl<CityPostVie
         data["limit"] = limit
         val disposable = RetrofitManager.getUserSearchCityPost(data)
                 .doOnSubscribe {
-                    if (mView != null && pageIndex == 1) {
+                    if (mView != null && pageIndex == 1 && !isRefreshing) {
                         mView!!.showLoadingIndicatior()
                     }
                 }
@@ -52,7 +52,7 @@ class CityPostPresenterImpl(mView: CityPostView) : BasePresenterImpl<CityPostVie
         data["limit"] = limit
         val disposable = RetrofitManager.getDriverSearchCityPost(data)
                 .doOnSubscribe {
-                    if (mView != null && pageIndex == 1) {
+                    if (mView != null && pageIndex == 1 && !isRefreshing) {
                         mView!!.showLoadingIndicatior()
                     }
                 }
@@ -77,5 +77,6 @@ class CityPostPresenterImpl(mView: CityPostView) : BasePresenterImpl<CityPostVie
                             //do-something
                         }
                 )
+        addDispose(disposable)
     }
 }

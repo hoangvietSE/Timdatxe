@@ -78,9 +78,9 @@ object RetrofitManager {
 
     private fun <T> handleResponse(callBack: ICallBack<T>, response: Response<T>) {
         when {
-            response.code() == ApiConstant.httpStatusCode.OK -> callBack.onSuccess(response.body()!!)
-            response.code() == ApiConstant.httpStatusCode.CREATE -> callBack.onSuccess(response.body()!!)
-            response.code() == ApiConstant.httpStatusCode.UNAUTHORIZED -> handleErrorResponse(callBack, response)
+            response.code() == ApiConstant.HttpStatusCode.OK -> callBack.onSuccess(response.body()!!)
+            response.code() == ApiConstant.HttpStatusCode.CREATE -> callBack.onSuccess(response.body()!!)
+            response.code() == ApiConstant.HttpStatusCode.UNAUTHORIZED -> handleErrorResponse(callBack, response)
             else -> handleErrorResponse(callBack, response)
         }
     }
@@ -104,7 +104,7 @@ object RetrofitManager {
     fun loginUser(callBack: ICallBack<BaseResult<UserData>>, request: LoginRequest): Disposable {
         val requestBody = createPostRequest(request)
         val subcribe = getSubcriber(callBack)
-        var disposable: Disposable = apiService.loginUser(requestBody)
+        return apiService.loginUser(requestBody)
                 //Observable: I/O thread
                 //request will be execute in I/O thread
                 //Schedulers.io(): network call, file, database...
@@ -114,7 +114,6 @@ object RetrofitManager {
                 //AndroidSchedulers.mainThread(): allow in UI thread
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(subcribe)
-        return disposable
     }
 
     fun getBanners(callBack: ICallBack<BaseResult<List<BannerHomeResponse>>>): Disposable {

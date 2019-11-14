@@ -13,6 +13,6 @@ class LoginFacebookRequest {
     var device_token: String = ""
     @SerializedName("email")
     var email: String = ""
-    @SerializedName("full_name")
-    var full_name: String = ""
+    @SerializedName("fullName")
+    var fullName: String = ""
 }

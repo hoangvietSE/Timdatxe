@@ -3,7 +3,6 @@ package com.example.anothertimdatxe.sprintlogin.confirm
 import android.content.Context
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
-import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 import com.example.anothertimdatxe.base.network.ApiException
 import com.example.anothertimdatxe.base.network.BaseResult

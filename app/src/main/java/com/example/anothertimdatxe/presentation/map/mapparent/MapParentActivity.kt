@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_base_map.*
 
 class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     companion object {
-        val TAG = MapParentActivity::class.java.simpleName
+        val TAG: String = MapParentActivity::class.java.simpleName
         const val REQUEST_CODE_LOCATION = 9001
         const val REQUEST_CODE_CREATE_POST = 9002
     }
@@ -122,7 +122,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     }
 
     private fun setMarkerLocation(mLocationStartingPointId: String, mLocationEndingPointId: String) {
-        mPresenter?.fetchWayPoints(mLocationStartingPointId!!, mLocationEndingPointId!!)
+        mPresenter?.fetchWayPoints(mLocationStartingPointId, mLocationEndingPointId)
     }
 
     val mListenerFetchPlaceStartingById = object : FetchPlaceListener {

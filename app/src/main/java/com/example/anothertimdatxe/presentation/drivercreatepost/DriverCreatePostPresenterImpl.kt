@@ -32,7 +32,7 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
     }
 
     override fun driverCreatePost(request: DriverCreatePostRequest) {
-        if (request.title?.isNullOrEmpty()!!) {
+        if (request.title.isNullOrEmpty()!!) {
             mView!!.onErrorNoTitle()
             return
         }
@@ -40,11 +40,11 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
             mView!!.onErrorTitleHaveNumber()
             return
         }
-        if (request.date?.isNullOrEmpty()!!) {
+        if (request.date.isNullOrEmpty()!!) {
             mView!!.onErrorNoDate()
             return
         }
-        if (request.time?.isNullOrEmpty()!!) {
+        if (request.time.isNullOrEmpty()!!) {
             mView!!.onErrorNoTime()
             return
         }
@@ -165,7 +165,7 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
         val disposable = Single.zip(
                 RetrofitManager.driverCarInfoV1(),
                 RetrofitManager.driverPostDetailV1(id),
-                BiFunction<BaseResult<List<DriverCarResponse>>, BaseResult<DriverPostDetailResponse>, joinResult> { carInfoResponse, driverPostDetailResponse -> joinResult(carInfoResponse, driverPostDetailResponse) }
+                BiFunction<BaseResult<List<DriverCarResponse>>, BaseResult<DriverPostDetailResponse>, JoinResult> { carInfoResponse, driverPostDetailResponse -> JoinResult(carInfoResponse, driverPostDetailResponse) }
         )
                 .doOnSubscribe {
                     mView!!.showLoading()
@@ -200,7 +200,7 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
         return false
     }
 
-    class joinResult(val carInfoResponse: BaseResult<List<DriverCarResponse>>,
+    class JoinResult(val carInfoResponse: BaseResult<List<DriverCarResponse>>,
                      val driverPostDetailResponse: BaseResult<DriverPostDetailResponse>)
 
 }

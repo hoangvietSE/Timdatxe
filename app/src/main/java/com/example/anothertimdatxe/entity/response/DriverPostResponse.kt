@@ -26,8 +26,8 @@ class DriverPostResponse {
     var start_point: String? = null
     @SerializedName("end_point")
     var end_point: String? = null
-    @SerializedName("full_name")
-    var full_name: String? = null
+    @SerializedName("fullName")
+    var fullName: String? = null
     @SerializedName("avatar")
     var avatar: String? = null
     @SerializedName("regular_price")

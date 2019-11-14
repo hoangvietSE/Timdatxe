@@ -70,7 +70,7 @@ data class Driver(
 	@field:SerializedName("instagram_id")
 	val instagramId: Any? = null,
 
-	@field:SerializedName("full_name")
+	@field:SerializedName("fullName")
 	val fullName: String? = null,
 
 	@field:SerializedName("zalo_id")

@@ -1,7 +1,6 @@
 package com.example.anothertimdatxe.sprintlogin.changepassword
 
 import android.text.TextUtils
-import android.view.View
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidStrongPassword
@@ -17,14 +16,14 @@ class ChangePasswordActivity : TimdatxeBaseActivity<ChangePasswordPresenter>(), 
     }
 
     override fun initView() {
-        tv_save_change_password.setOnClickListener(View.OnClickListener {
+        tv_save_change_password.setOnClickListener {
             if (isValidate()) {
                 mPresenter!!.userChangePassword(
-                    et_change_password_old.getText().toString(),
-                    et_change_password_new.getText().toString()
+                        et_change_password_old.getText().toString(),
+                        et_change_password_new.getText().toString()
                 )
             }
-        })
+        }
         toolbarTitle?.let {
             it.text = getString(R.string.toolbar_title_change_password)
         }

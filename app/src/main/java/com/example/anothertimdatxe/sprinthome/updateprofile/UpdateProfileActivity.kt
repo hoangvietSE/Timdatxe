@@ -41,7 +41,7 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
         setData()
         setToolbar()
         edt_dob.setOnClickListener {
-            var datePickerDialog = DatePickerDialogWidget(this, object : DatePickerDialogWidget.onSetDateSuccessListener {
+            var datePickerDialog = DatePickerDialogWidget(this, object : DatePickerDialogWidget.OnSetDateSuccessListener {
                 override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
                     val calendar = Calendar.getInstance()
                     val dateInCurrent = Calendar.getInstance(TimeZone.getDefault())
@@ -52,7 +52,7 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
                         var day: Int = calendar.get(Calendar.DAY_OF_MONTH)
                         var month: Int = calendar.get(Calendar.MONTH)
                         var year: Int = calendar.get(Calendar.YEAR)
-                        edt_dob.text = "${day}/${month + 1}/${year}"
+                        edt_dob.text = "$day/${month + 1}/$year"
                     }
                 }
             }).showDatePickerDialog()
@@ -61,7 +61,7 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
             handlePermission()
         }
         btn_save.setOnClickListener {
-            mUserProfile?.full_name = edt_name.text.toString()
+            mUserProfile?.fullName = edt_name.text.toString()
             mUserProfile?.email = edt_email.text.toString()
             mUserProfile?.phone = edt_phone.text.toString()
             mUserProfile?.address = edt_address.text.toString()
@@ -159,10 +159,8 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
 
     private fun setData() {
         mUserProfile = intent.getSerializableExtra(USER_PROFILE) as UserData
-        imv_avatar.let {
-            it.setAvatar(this, mUserProfile?.avatar)
-        }
-        edt_name.text = mUserProfile?.full_name
+        imv_avatar.setAvatar(this, mUserProfile?.avatar)
+        edt_name.text = mUserProfile?.fullName
         edt_email.text = mUserProfile?.email
         edt_phone.text = mUserProfile?.phone
         edt_dob.text = mUserProfile?.birthday

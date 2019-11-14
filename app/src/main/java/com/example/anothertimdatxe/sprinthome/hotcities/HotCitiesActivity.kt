@@ -17,8 +17,8 @@ class HotCitiesActivity : BaseActivity<HotCitiesPresenter>(), HotCitiesView, Bas
     private var mSpacing: Int? = null
     override fun onItemClick(position: Int) {
         startActivity(Intent(this@HotCitiesActivity, CityPostActivity::class.java).apply {
-            putExtra(CityPostActivity.BANNER_CITY_POST, mListHotCities!![position]?.app_image)
-            putExtra(CityPostActivity.CITY_POST, mListHotCities!![position]?.name)
+            putExtra(CityPostActivity.BANNER_CITY_POST, mListHotCities!![position].app_image)
+            putExtra(CityPostActivity.CITY_POST, mListHotCities!![position].name)
         })
     }
 
@@ -49,9 +49,7 @@ class HotCitiesActivity : BaseActivity<HotCitiesPresenter>(), HotCitiesView, Bas
 
     private fun setAdapter() {
         mHotCitiesAdapter = HotCitiesAdapter(this, this)
-        mHotCitiesAdapter?.let {
-            it.setListItems(mListHotCities!!)
-        }
+        mHotCitiesAdapter?.setListItems(mListHotCities!!)
     }
 
     private fun initListHotCities() {

@@ -21,7 +21,7 @@ class RowUserRequestDetail(context: Context?, attrs: AttributeSet?) : BaseCustom
     override fun initDataFromStyleable(ta: TypedArray?) {
         val icon = ta?.getResourceId(R.styleable.BaseItemUserRequestDetail_ubd_icon, 0)
         icon?.let {
-            setIcon(it!!)
+            setIcon(it)
         }
         val title = ta?.getString(R.styleable.BaseItemUserRequestDetail_ubd_title)
         title?.let {

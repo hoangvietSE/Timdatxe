@@ -46,7 +46,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     private var mCarID: Int? = null
     private var isSpinnerCarName: Boolean = true
     override val layoutRes: Int
-        get() = com.example.anothertimdatxe.R.layout.activity_update_driver_car
+        get() = R.layout.activity_update_driver_car
 
     companion object {
         const val REQUEST_PERMISSION_ALBUM = 1000
@@ -82,7 +82,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
             }
         }
         edt_date_regis.setOnClickListener {
-            var mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.onSetDateSuccessListener {
+            var mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.OnSetDateSuccessListener {
                 override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
                     edt_date_regis.setText("${DateUtil.formatValue(dayOfMonth.toString())}/${DateUtil.formatValue(month.toString())}" +
                             "/${DateUtil.formatValue(year.toString())}")
@@ -91,7 +91,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
             mDatePickerDialogWidget.showDatePickerDialog()
         }
         edt_handangkiem.setOnClickListener {
-            var mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.onSetDateSuccessListener {
+            var mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.OnSetDateSuccessListener {
                 override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
                     edt_handangkiem.setText("${DateUtil.formatValue(dayOfMonth.toString())}/${DateUtil.formatValue(month.toString())}" +
                             "/${DateUtil.formatValue(year.toString())}")
@@ -116,7 +116,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     private fun initDoiXeAdapter() {
         mListDoiXe.add("Chọn đời xe")
         for (i in 2019 downTo 1990 step 1) {
-            mListDoiXe.add("${i}")
+            mListDoiXe.add("$i")
         }
         mSpinnerDoiXe = SpinnerSeatAdapter(this, mListDoiXe)
         sp_doixe.adapter = mSpinnerDoiXe
@@ -134,16 +134,16 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     private fun setUpToolbar() {
         toolbar?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                it.setBackgroundColor(resources.getColor(com.example.anothertimdatxe.R.color.colorPrimary, null))
+                it.setBackgroundColor(resources.getColor(R.color.colorPrimary, null))
             } else {
-                it.setBackgroundColor(resources.getColor(com.example.anothertimdatxe.R.color.colorPrimary))
+                it.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             }
         }
         leftbutton?.setOnClickListener {
             finish()
         }
         toolbarTitle?.let {
-            it.text = resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_title).toUpperCase()
+            it.text = resources.getString(R.string.update_driver_car_title).toUpperCase()
 
         }
     }
@@ -176,7 +176,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
         when (requestCode) {
             REQUEST_PERMISSION_ALBUM -> {
                 if (grantResults != null && grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                    ToastUtil.show(resources.getString(com.example.anothertimdatxe.R.string.request_read_external_storeage))
+                    ToastUtil.show(resources.getString(R.string.request_read_external_storeage))
                 } else {
                     selectImageFromAlbum()
                 }
@@ -195,7 +195,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
                 .countable(true)
                 .maxSelectable(5)
                 .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                .gridExpectedSize(resources.getDimensionPixelSize(com.example.anothertimdatxe.R.dimen.grid_expected_size))
+                .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                 .thumbnailScale(0.85f)
                 .imageEngine(Glide4Engine())
@@ -252,7 +252,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
         val view = this.inflate(R.layout.item_add)
         val btnAdd: ImageView = view.iv_add
         val params: LinearLayout.LayoutParams = btnAdd.layoutParams as LinearLayout.LayoutParams
-        params.marginEnd = resources.getDimensionPixelSize(com.example.anothertimdatxe.R.dimen.margin_8_dp)
+        params.marginEnd = resources.getDimensionPixelSize(R.dimen.margin_8_dp)
         btnAdd.layoutParams = params
         btnAdd.setImageResource(R.drawable.bg_add_button_not_active)
         if (btnAdd.parent != null) {
@@ -341,54 +341,54 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     }
 
     override fun onCarBrandError() {
-        ToastUtil.show(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_car_brand))
+        ToastUtil.show(resources.getString(R.string.update_driver_car_error_car_brand))
     }
 
     override fun onCarNameSpinnerError() {
-        ToastUtil.show(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_car_name_spinner))
+        ToastUtil.show(resources.getString(R.string.update_driver_car_error_car_name_spinner))
     }
 
     override fun onCarNameEdittextError() {
-        edt_car_name.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_car_name_edittext))
+        edt_car_name.setError(resources.getString(R.string.update_driver_car_error_car_name_edittext))
         edt_car_name.requestFocus()
     }
 
     override fun onDoixeError() {
-        ToastUtil.show(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_doixe))
+        ToastUtil.show(resources.getString(R.string.update_driver_car_error_doixe))
     }
 
     override fun onNumberSeatError() {
-        edt_number_seat.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_number_seat))
+        edt_number_seat.setError(resources.getString(R.string.update_driver_car_error_number_seat))
         edt_number_seat.requestFocus()
     }
 
     override fun onLicensePlateError() {
-        edt_license_plate.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_license_plate))
+        edt_license_plate.setError(resources.getString(R.string.update_driver_car_error_license_plate))
         edt_license_plate.requestFocus()
     }
 
     override fun onColorError() {
-        edt_color.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_color))
+        edt_color.setError(resources.getString(R.string.update_driver_car_error_color))
         edt_color.requestFocus()
     }
 
     override fun onRegistrationNotLessThanRegiterDate() {
-        edt_handangkiem.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_registration_not_less_than_regiter_date))
+        edt_handangkiem.setError(resources.getString(R.string.update_driver_car_error_registration_not_less_than_regiter_date))
         edt_handangkiem.requestFocus()
     }
 
     override fun onDateRegisEmptyError() {
-        edt_date_regis.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_date_regis_empty))
+        edt_date_regis.setError(resources.getString(R.string.update_driver_car_error_date_regis_empty))
         edt_date_regis.requestFocus()
     }
 
     override fun onDateRegisInFutureError() {
-        edt_date_regis.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_date_regis_future))
+        edt_date_regis.setError(resources.getString(R.string.update_driver_car_error_date_regis_future))
         edt_date_regis.requestFocus()
     }
 
     override fun onDateRegistrationEmptyError() {
-        edt_handangkiem.setError(resources.getString(com.example.anothertimdatxe.R.string.update_driver_car_error_registration_not_less_than_regiter_date))
+        edt_handangkiem.setError(resources.getString(R.string.update_driver_car_error_registration_not_less_than_regiter_date))
         edt_handangkiem.requestFocus()
     }
 }

@@ -98,7 +98,7 @@ class WrappingViewPager : ViewPager, Animation.AnimationListener {
             this.heightChange = targetHeight - currentHeight
         }
 
-        protected override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
+        override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
             if (interpolatedTime >= 1) {
                 layoutParams.height = targetHeight
             } else {

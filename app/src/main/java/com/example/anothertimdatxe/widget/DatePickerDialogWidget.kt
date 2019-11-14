@@ -6,12 +6,12 @@ import android.widget.DatePicker
 import com.example.anothertimdatxe.R
 import java.util.*
 
-class DatePickerDialogWidget(var context: Context, var mListener: onSetDateSuccessListener) : DatePickerDialog.OnDateSetListener {
+class DatePickerDialogWidget(var context: Context, var mListener: OnSetDateSuccessListener) : DatePickerDialog.OnDateSetListener {
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         mListener.onSetDateSuccess(year, month + 1, dayOfMonth)
     }
 
-    val calendar = Calendar.getInstance(TimeZone.getDefault())
+    val calendar: Calendar = Calendar.getInstance(TimeZone.getDefault())
     fun showDatePickerDialog() {
         var dialog = DatePickerDialog(
                 context,
@@ -23,7 +23,7 @@ class DatePickerDialogWidget(var context: Context, var mListener: onSetDateSucce
         dialog.show()
     }
 
-    interface onSetDateSuccessListener {
+    interface OnSetDateSuccessListener {
         fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int)
     }
 }

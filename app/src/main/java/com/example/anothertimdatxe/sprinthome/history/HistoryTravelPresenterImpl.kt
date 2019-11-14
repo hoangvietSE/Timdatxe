@@ -23,7 +23,7 @@ class HistoryTravelPresenterImpl(mView: HistoryTravelView) : BasePresenterImpl<H
         val disposable = RetrofitManager.getUserHistory(object : ICallBack<BaseResponse<List<UserHistoryResponse>>> {
             override fun onSuccess(result: BaseResponse<List<UserHistoryResponse>>?) {
                 mView!!.showUserHistory(result?.data!!,isFreshing)
-                mView!!.setNumberTrip(result?.count_books!!)
+                mView!!.setNumberTrip(result.count_books!!)
                 mView!!.hideLoading()
             }
 
@@ -38,7 +38,7 @@ class HistoryTravelPresenterImpl(mView: HistoryTravelView) : BasePresenterImpl<H
         val disposable = RetrofitManager.getDriverHistory(object : ICallBack<BaseResponse<List<DriverHistoryResponse>>> {
             override fun onSuccess(result: BaseResponse<List<DriverHistoryResponse>>?) {
                 mView!!.showDriverHistory(result?.data!!,isFreshing)
-                mView!!.setNumberTrip(result?.count_books!!)
+                mView!!.setNumberTrip(result.count_books!!)
                 mView!!.hideLoading()
             }
 

@@ -1,9 +1,6 @@
-package com.example.anothertimdatxe.sprinthome.condition
+package com.example.anothertimdatxe.sprinthome.settings.condition
 
 import android.graphics.Color
-import beetech.com.carbooking.sprinthome.condition.ConditionPresenter
-import beetech.com.carbooking.sprinthome.condition.ConditionPresenterImpl
-import beetech.com.carbooking.sprinthome.condition.ConditionView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.entity.response.TermAndConditionResponse

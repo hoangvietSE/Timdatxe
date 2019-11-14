@@ -5,7 +5,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.extension.setAvatar
-import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -41,16 +41,14 @@ class UserProfileFragment : BaseFragment<UserProfilePresenter>(), UserProfileVie
 
     override fun showData(userData: UserData) {
         mUserProfile = userData
-        imv_avatar.let {
-            it.setAvatar(context!!, userData.avatar)
-        }
-        tv_fullname.text = userData.full_name
+        imv_avatar.setAvatar(context!!, userData.avatar)
+        tv_fullname.text = userData.fullName
         userData.count_books.let {
             if (it != null) {
                 tv_number_trip.text = it.toString()
             }
         }
-        rowFullName.setContent(userData.full_name)
+        rowFullName.setContent(userData.fullName)
         rowEmail.setContent(userData.email)
         rowPhoneNumber.setContent(userData.phone)
         rowDateOfBirth.setContent(userData.birthday)
@@ -64,14 +62,14 @@ class UserProfileFragment : BaseFragment<UserProfilePresenter>(), UserProfileVie
         }
         rowAddress.setContent(userData.address)
         userData.description?.let {
-            tv_des.text = (if (it.isNullOrEmpty() || it.isNullOrBlank()) resources.getString(R.string.user_profile_des) else it).toString()
+            tv_des.text = (if (it.isEmpty() || it.isNullOrBlank()) resources.getString(R.string.user_profile_des) else it).toString()
         }
     }
 
     @Subscribe(sticky = true)
     fun updateUserProfile(userData: UserData) {
         showData(userData)
-        (activity as HomeActivity).updateHeaderMenu(userData.full_name, userData.avatar!!)
+        (activity as HomeActivity).updateHeaderMenu(userData.fullName, userData.avatar!!)
         EventBus.getDefault().removeStickyEvent(userData)
     }
 

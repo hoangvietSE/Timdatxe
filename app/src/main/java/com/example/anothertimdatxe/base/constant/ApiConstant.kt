@@ -64,7 +64,7 @@ object ApiConstant {
     const val CAR_BRAND = "v1/cars_brand"
     const val CAR_NAME = "v1/cars_brand/{id}/show"
 
-    interface httpStatusCode {
+    interface HttpStatusCode {
         companion object {
             const val OK = 200
             const val CREATE = 201

@@ -18,8 +18,6 @@ import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NumberUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
-import com.example.kotlinapplication.RecyclerViewAdapter
 
 class DriverListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     companion object {
@@ -53,7 +51,7 @@ class DriverListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapte
         viewHolder.numberSeat.text = data?.empty_seat.toString()
         viewHolder.status.text = data?.str_status
         viewHolder.time.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-        viewHolder.date.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+        viewHolder.date.text = DateUtil.formatDate(data.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
         when (data?.status) {
             Constant.DRIVER_POST_PENDING -> {
                 setTextColor(viewHolder.status, R.color.color_pending)
@@ -72,11 +70,7 @@ class DriverListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapte
                 setImageStatus(viewHolder.imvStatus, R.drawable.ic_status_cancel)
             }
         }
-        if (data.high_way == 0) {
-            viewHolder.formHighway.gone()
-        } else {
-            viewHolder.formHighway.visible()
-        }
+        viewHolder.formHighway.gone()
         when (data.type) {
             TYPE_CONVINENT, TYPE_BOTH -> {
                 viewHolder.money.text = NumberUtil.formatNumber(data.regular_price!!)

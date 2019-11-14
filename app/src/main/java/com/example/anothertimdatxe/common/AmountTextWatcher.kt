@@ -6,7 +6,6 @@ import android.widget.EditText
 import com.example.anothertimdatxe.util.NumberUtil
 
 class AmountTextWatcher(val editText: EditText) : TextWatcher {
-    private val LOG = AmountTextWatcher::class.java.simpleName
     private var beforeText = ""
     override fun afterTextChanged(s: Editable?) {
     }

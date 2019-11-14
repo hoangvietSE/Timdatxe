@@ -97,7 +97,7 @@ class UserPostDetailActivity : BaseActivity<UserPostDetailPresenter>(), UserPost
         row_time.setRowDetail(DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_24))
         row_time_estimate.setRowDetail(data.durationTime.toString())
         row_number_seat.setRowDetail(data.numberSeat.toString())
-        row_status.setRowDetail(data?.strStatus)
+        row_status.setRowDetail(data.strStatus)
         when (data.status) {
             Constant.USER_POST_PENDING -> {
                 row_status.setRowIcon(R.drawable.ic_status_pending)

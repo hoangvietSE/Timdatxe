@@ -2,7 +2,6 @@ package com.example.anothertimdatxe.sprintlogin.changepassword
 
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import com.example.anothertimdatxe.R

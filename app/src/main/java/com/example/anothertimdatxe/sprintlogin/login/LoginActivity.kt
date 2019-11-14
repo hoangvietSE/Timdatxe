@@ -14,7 +14,7 @@ import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidEmail
 import com.example.anothertimdatxe.extension.isValidPhone
 import com.example.anothertimdatxe.introduce.IntroduceActivity
-import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import com.example.anothertimdatxe.sprintlogin.forgotpassword.ForgotActivity
 import com.example.anothertimdatxe.sprintlogin.register.RegisterActivity
 import com.example.anothertimdatxe.sprintlogin.updateinfo.UpdateInfoActivity
@@ -157,8 +157,8 @@ class LoginActivity : TimdatxeBaseActivity<LoginPresenter>(), LoginView, LoginSo
         mLoginSocial.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun onVerifyLoginSocialSuccess(socialId: String, full_name: String, email: String, socialType: String) {
-        mPresenter!!.loginSocial(socialId, full_name, email, socialType)
+    override fun onVerifyLoginSocialSuccess(socialId: String, fullName: String, email: String, socialType: String) {
+        mPresenter!!.loginSocial(socialId, fullName, email, socialType)
     }
 
     override fun goToUpdateInfo() {

@@ -27,7 +27,7 @@ class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParent
                         var listWayPoint: ArrayList<LatLng> = arrayListOf()
                         listWayPoint.add(LatLng(it.get(0)?.legs!![0]?.startLocation?.lat!!, it.get(0)?.legs!![0]?.startLocation?.lng!!))
                         it.get(0)?.legs!![0]?.steps?.let {
-                            for (i in 0..it.size!! - 1) {
+                            for (i in 0..it.size - 1) {
                                 listWayPoint.add(LatLng(it.get(i)?.endLocation?.lat!!, it.get(i)?.endLocation?.lng!!))
                             }
                         }
@@ -42,7 +42,7 @@ class MapParentPresenterImpl(mView: MapParentView) : BasePresenterImpl<MapParent
                 mView!!.routeFail()
             }
 
-        }, "place_id:${origin}", "place_id:${destination}")
+        }, "place_id:$origin", "place_id:$destination")
         addDispose(disposable)
     }
 }

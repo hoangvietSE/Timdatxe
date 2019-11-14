@@ -8,7 +8,7 @@
         android:layout_height="?attr/actionBarSize">
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_faqs_number"
+            android:id="@+id/tvFaqsNumber"
             android:textColor="@color/black"
             android:textSize="@dimen/text_big"
             android:text="1) "
@@ -22,9 +22,9 @@
     <androidx.appcompat.widget.AppCompatTextView
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_faqs_number"
+            app:layout_constraintStart_toStartOf="@id/tvFaqsNumber"
             android:layout_marginEnd="@dimen/content_padding_extraLarge"
-            android:id="@+id/tv_list_group"
+            android:id="@+id/tvListGroup"
             android:textSize="@dimen/text_big"
             android:textColor="@color/black"
             android:text="Tại sao tôi phải cung cấp thông tin tài khoản cá nhân"

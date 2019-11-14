@@ -31,7 +31,7 @@ data class UserUpdateInfoResponse(
 	@field:SerializedName("session_token")
 	val sessionToken: String? = null,
 
-	@field:SerializedName("full_name")
+	@field:SerializedName("fullName")
 	val fullName: String? = null,
 
 	@field:SerializedName("zalo_id")

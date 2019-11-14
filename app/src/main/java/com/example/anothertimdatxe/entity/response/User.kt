@@ -7,7 +7,7 @@ data class User(
 	@field:SerializedName("birthday")
 	val birthday: String? = null,
 
-	@field:SerializedName("full_name")
+	@field:SerializedName("fullName")
 	val fullName: String? = null,
 
 	@field:SerializedName("address")

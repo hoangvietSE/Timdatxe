@@ -10,14 +10,9 @@ import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
-import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.activity.BaseActivity
-import kotlinx.android.synthetic.main.acitivity_register.*
-import kotlinx.android.synthetic.main.toolbar.*
 import android.text.TextUtils
-import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.anothertimdatxe.base.network.RetrofitManager
+import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
 import com.example.anothertimdatxe.extension.isValidEmail
 import com.example.anothertimdatxe.extension.isValidPhone
@@ -25,7 +20,8 @@ import com.example.anothertimdatxe.extension.isValidStrongPassword
 import com.example.anothertimdatxe.request.RegisterRequest
 import com.example.anothertimdatxe.sprintlogin.confirm.ConfirmActivity
 import com.example.anothertimdatxe.util.PhoneSms
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.acitivity_register.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class RegisterActivity : TimdatxeBaseActivity<RegisterPresenter>(), RegisterView {
     private var checkRegister: Boolean = false
@@ -49,7 +45,7 @@ class RegisterActivity : TimdatxeBaseActivity<RegisterPresenter>(), RegisterView
 
     override fun initView() {
         initData()
-        toolbar_title.let { it.text = getString(R.string.register_title) }
+        toolbar_title.text = getString(R.string.register_title)
         btn_register.let {
             it.setOnClickListener {
                 if (isValidate()) {
@@ -90,7 +86,7 @@ class RegisterActivity : TimdatxeBaseActivity<RegisterPresenter>(), RegisterView
             putExtra(REGISTER_TOKEN, token_register)
         }
         var pendingIntent = PendingIntent.getActivities(this, 0, arrayOf(intent), PendingIntent.FLAG_UPDATE_CURRENT)
-        var defaultSoundUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        var defaultSoundUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         var notificationCompat: NotificationCompat.Builder = NotificationCompat.Builder(this, "CHANNEL ID")
                 .setSmallIcon(R.drawable.ic_avatar)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_avatar))
@@ -120,11 +116,7 @@ class RegisterActivity : TimdatxeBaseActivity<RegisterPresenter>(), RegisterView
     private fun initListener() {
         tvTerm.let {
             it.setOnClickListener {
-                if (cbRegister.isChecked) {
-                    cbRegister.isChecked = false
-                } else {
-                    cbRegister.isChecked = true
-                }
+                cbRegister.isChecked = !cbRegister.isChecked
             }
         }
     }

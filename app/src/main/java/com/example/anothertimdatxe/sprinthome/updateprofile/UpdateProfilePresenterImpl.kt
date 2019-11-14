@@ -15,7 +15,7 @@ class UpdateProfilePresenterImpl(mView: UpdateProfileView) : BasePresenterImpl<U
     private var part: MultipartBody.Part? = null
     private var request: MutableMap<String, RequestBody> = mutableMapOf()
     override fun updateUserProfile(data: UserData) {
-        if (data.full_name.isNullOrEmpty() || data.full_name.isNullOrBlank()) {
+        if (data.fullName.isEmpty() || data.fullName.isNullOrBlank()) {
             mView!!.onFullNameError()
             return
         } else if (data.address.isNullOrEmpty() || data.address.isNullOrBlank()) {
@@ -29,11 +29,11 @@ class UpdateProfilePresenterImpl(mView: UpdateProfileView) : BasePresenterImpl<U
             val partRequestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), mFilePart)
             part = MultipartBody.Part.createFormData("app_avatar", mFilePart!!.name, partRequestBody)
         }
-        request["full_name"] = createRequestBody(data.full_name!!)
+        request["fullName"] = createRequestBody(data.fullName)
         request["birthday"] = createRequestBody(data.birthday!!)
         request["gender"] = createRequestBody(data.gender!!)
         request["address"] = createRequestBody(data.address!!)
-        request["phone"] = createRequestBody(data.phone!!)
+        request["phone"] = createRequestBody(data.phone)
         request["description"] = createRequestBody(data.description!!)
         request["_method"] = createRequestBody("PUT")
         val disposable = RetrofitManager.userUpdateProfile(part, request)
@@ -48,9 +48,9 @@ class UpdateProfilePresenterImpl(mView: UpdateProfileView) : BasePresenterImpl<U
                             mView!!.backUserProfile()
                             val userData = CarBookingSharePreference.getUserData()
                             userData!!.avatar = it.data!!.avatar
-                            userData!!.full_name = it.data!!.full_name
-                            userData!!.birthday = it.data!!.birthday
-                            userData!!.address = it.data!!.address
+                            userData.fullName = it.data!!.fullName
+                            userData.birthday = it.data!!.birthday
+                            userData.address = it.data!!.address
                             CarBookingSharePreference.setUserData(userData)
                             EventBus.getDefault().postSticky(it.data)
                         },

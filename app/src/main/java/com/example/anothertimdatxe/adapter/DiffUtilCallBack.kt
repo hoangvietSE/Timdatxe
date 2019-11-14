@@ -1,11 +1,11 @@
-package com.example.kotlinapplication
+package com.example.anothertimdatxe.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 
 
 class DiffUtilCallBack(
-    private val oldItems: List<RecyclerViewAdapter.ModelWrapper>,
-    private val newItems: List<RecyclerViewAdapter.ModelWrapper>
+        private val oldItems: List<RecyclerViewAdapter.ModelWrapper>,
+        private val newItems: List<RecyclerViewAdapter.ModelWrapper>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {

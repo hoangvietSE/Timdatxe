@@ -18,11 +18,11 @@ import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.sprinthome.listpost.user.detail.UserPostDetailActivity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
-import com.example.kotlinapplication.RecyclerViewAdapter
+import com.example.anothertimdatxe.adapter.EndlessLoadingRecyclerViewAdapter
+import com.example.anothertimdatxe.adapter.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_user_list_post.*
 
-class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPostView, DatePickerDialogWidget.onSetDateSuccessListener,
+class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPostView, DatePickerDialogWidget.OnSetDateSuccessListener,
         EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener,
         RecyclerViewAdapter.OnItemClickListener {
     private var mUserListPostAdapter: UserListPostAdapter? = null
@@ -55,9 +55,7 @@ class UserListPostFragment : BaseFragment<UserListPostPresenter>(), UserListPost
 
     override fun initListener() {
         tv_date.setOnClickListener {
-            mDatePickerDialogWidget?.let {
-                it.showDatePickerDialog()
-            }
+            mDatePickerDialogWidget?.showDatePickerDialog()
         }
         swipe_refresh.setOnRefreshListener {
             refreshData()

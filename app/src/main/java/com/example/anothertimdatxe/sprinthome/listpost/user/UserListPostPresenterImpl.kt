@@ -85,7 +85,7 @@ class UserListPostPresenterImpl(mView: UserListPostView) : BasePresenterImpl<Use
     }
 
     override fun setDate(date: String) {
-        if (!date.isNullOrEmpty()) {
+        if (!date.isEmpty()) {
             startTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
         } else {
             startTime = ""

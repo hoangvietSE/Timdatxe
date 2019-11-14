@@ -81,13 +81,13 @@ class UserBookDetailActivity : BaseActivity<UserBookDetailPresenter>(), UserBook
     override fun showUserBookDetail(data: DriverPostDetailResponse) {
         mDriverPostDetailResponse = data
         GlideApp.with(this)
-                .load(BuildConfig.BASE_URL + "/${data?.driver?.avatar}")
+                .load(BuildConfig.BASE_URL + "/${data.driver?.avatar}")
                 .placeholder(R.drawable.ic_avatar)
                 .error(R.drawable.ic_avatar)
                 .into(imv_avatar)
-        tv_name.text = data?.driver?.fullName
-        rating_bar.rating = data?.driver?.vote!!
-        when (data?.type) {
+        tv_name.text = data.driver?.fullName
+        rating_bar.rating = data.driver?.vote!!
+        when (data.type) {
             Constant.CONVENIENT_TRIP -> {
                 layout_convinent_trip.visible()
                 layout_private_trip.gone()
@@ -105,19 +105,19 @@ class UserBookDetailActivity : BaseActivity<UserBookDetailPresenter>(), UserBook
                 showPricePrivate()
             }
         }
-        row_starting_point.setRowDetail(data?.startPoint)
-        row_ending_point.setRowDetail(data?.endPoint)
-        row_car.setRowDetail(data?.car?.fullName)
-        row_date.setRowDetail(DateUtil.formatDate(data?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_24))
-        row_distance.setRowDetail(NumberUtil.showDistance(data?.distance?.toString()!!))
-        row_number_seat.setRowDetail(data?.emptySeat.toString())
+        row_starting_point.setRowDetail(data.startPoint)
+        row_ending_point.setRowDetail(data.endPoint)
+        row_car.setRowDetail(data.car?.fullName)
+        row_date.setRowDetail(DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_24))
+        row_distance.setRowDetail(NumberUtil.showDistance(data.distance?.toString()!!))
+        row_number_seat.setRowDetail(data.emptySeat.toString())
         if (data.high_way == HIGH_WAY) {
             row_way.visible()
             row_way.setRowDetail("Cao tốc")
         } else {
             row_way.gone()
         }
-        tv_requirement.text = data?.description ?: ""
+        tv_requirement.text = data.description ?: ""
     }
 
     private fun showPriceConvinent() {

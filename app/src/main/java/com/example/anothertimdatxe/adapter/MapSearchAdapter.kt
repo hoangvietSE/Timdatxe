@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_search_prediction.view.*
 
 class MapSearchAdapter(context: Context, var mListener: BaseRvListener) : BaseAdapter<AutocompletePrediction, MapSearchAdapter.MapSearchViewHolder>(context) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapSearchViewHolder {
-        return MapSearchViewHolder(context!!.inflate(R.layout.item_search_prediction, parent, false), mListener)
+        return MapSearchViewHolder(context.inflate(R.layout.item_search_prediction, parent, false), mListener)
     }
 
     class MapSearchViewHolder(itemView: View, mListener: BaseRvListener) : BaseViewHolder<AutocompletePrediction>(itemView, mListener) {

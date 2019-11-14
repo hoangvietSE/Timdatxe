@@ -84,7 +84,7 @@ class ListRequestPresenterImpl(mView: ListRequestView) : BasePresenterImpl<ListR
     }
 
     override fun setDate(date: String) {
-        if (!date.isNullOrEmpty()) {
+        if (!date.isEmpty()) {
             bookTime = DateUtil.formatDate(date, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
         } else {
             bookTime = ""

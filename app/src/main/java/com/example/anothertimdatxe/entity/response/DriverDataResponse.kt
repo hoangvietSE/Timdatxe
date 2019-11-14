@@ -10,7 +10,7 @@ class DriverDataResponse {
     var email: String? = ""
     var phone: String? = ""
     var description: String? = ""
-    @SerializedName("full_name")
+    @SerializedName("fullName")
     var fullName: String? = ""
     @SerializedName("avatar")
     var avatar: String = ""

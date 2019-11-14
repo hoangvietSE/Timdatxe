@@ -1,4 +1,4 @@
-package beetech.com.carbooking.sprinthome.settings.adapter
+package com.example.anothertimdatxe.sprinthome.settings.settingsummary.adapter
 
 import android.content.Context
 import android.view.View

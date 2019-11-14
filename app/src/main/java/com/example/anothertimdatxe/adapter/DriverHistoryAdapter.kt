@@ -13,7 +13,6 @@ import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MapUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_history_travel.view.*
 
 class DriverHistoryAdapter(context: Context, enableSelectedMode: Boolean) : EndlessLoadingRecyclerViewAdapter(context, enableSelectedMode) {
@@ -31,8 +30,8 @@ class DriverHistoryAdapter(context: Context, enableSelectedMode: Boolean) : Endl
     override fun bindNormalViewHolder(holder: NormalViewHolder, position: Int) {
         val data: DriverHistoryResponse? = getItem(position, DriverHistoryResponse::class.java)
         val viewHolder: DriverHistoryViewHolder = holder as DriverHistoryViewHolder
-        viewHolder.start_point.text = MapUtil.getLocationState(context!!, data?.lat_from!!.toDouble(), data?.lng_from!!.toDouble())
-        viewHolder.end_point.text = MapUtil.getLocationState(context!!, data?.lat_to!!.toDouble(), data?.lng_to!!.toDouble())
+        viewHolder.start_point.text = MapUtil.getLocationState(context!!, data?.lat_from!!.toDouble(), data.lng_from!!.toDouble())
+        viewHolder.end_point.text = MapUtil.getLocationState(context!!, data.lat_to!!.toDouble(), data?.lng_to!!.toDouble())
         viewHolder.itemView.layout_seat.gone()
         viewHolder.time.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_7)
         viewHolder.date.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)

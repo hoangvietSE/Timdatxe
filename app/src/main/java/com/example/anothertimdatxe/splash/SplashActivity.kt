@@ -7,7 +7,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.customview.CarBookingLoading
-import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.sprintlogin.updateinfo.UpdateInfoActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference

@@ -35,11 +35,11 @@ abstract class WrappingFragmentPagerAdapter(fm: FragmentManager) : FragmentPager
 
 
         val fragment = `object` as Fragment
-        if (fragment != null && fragment!!.getView() != null) {
+        if (fragment != null && fragment.getView() != null) {
             if (position != mCurrentPosition) {
                 mCurrentPosition = position
             }
-            container.onPageChanged(fragment!!.getView()!!)
+            container.onPageChanged(fragment.getView()!!)
         }
     }
 }

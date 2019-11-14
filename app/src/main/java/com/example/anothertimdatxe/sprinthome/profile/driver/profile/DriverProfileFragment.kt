@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.adapter.EndlessLoadingRecyclerViewAdapter
 import com.example.anothertimdatxe.adapter.UserReviewDriverAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.response.DriverProfileResponse
@@ -13,9 +14,8 @@ import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.setlicenseImage
 import com.example.anothertimdatxe.extension.visible
-import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import com.example.anothertimdatxe.sprinthome.profile.driver.updatecar.UpdateDriverCarActivity
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_driver_profile.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -105,9 +105,7 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
             rowGender.setContent("Nữ")
         }
         rowAddress.setContent(data.address)
-        tv_des.text = data.description?.let {
-            it.toString()
-        } ?: "Mô tả bản thân"
+        tv_des.text = data.description?.toString() ?: "Mô tả bản thân"
         imv_before.setlicenseImage(context!!, data.beforeLicenseImage)
         imv_after.setlicenseImage(context!!, data.afterLicenseImage)
     }
@@ -152,7 +150,7 @@ class DriverProfileFragment : BaseFragment<DriverProfilePresenter>(), DriverProf
     @Subscribe(sticky = true)
     fun updateDriverProfile(data: DriverProfileResponse?) {
         showDriverInfo(data!!)
-        (context as HomeActivity).updateHeaderMenu(data!!.fullName!!, data!!.avatar)
+        (context as HomeActivity).updateHeaderMenu(data.fullName!!, data!!.avatar)
         EventBus.getDefault().removeStickyEvent(data)
     }
 

@@ -48,7 +48,7 @@ class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePrese
     override fun setSeatSpinner(emptySeat: Int?) {
         val data = mutableListOf<String>()
         for (i in 1..emptySeat!!) {
-            data?.add(i.toString())
+            data.add(i.toString())
         }
         mView!!.addSeatToSpinner(data)
     }
@@ -230,6 +230,6 @@ class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePrese
                 mView!!.hideLoading()
                 mView!!.routeFail()
             }
-        }, "place_id:${mLocationStartingPointId}", "place_id:${mLocationEndingPointId}"))
+        }, "place_id:$mLocationStartingPointId", "place_id:$mLocationEndingPointId"))
     }
 }

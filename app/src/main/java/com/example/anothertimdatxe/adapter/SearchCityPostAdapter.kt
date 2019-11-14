@@ -14,10 +14,10 @@ import com.example.anothertimdatxe.entity.response.SearchCityPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MyApp
 import com.example.anothertimdatxe.util.NumberUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_search_city_post.view.*
 
 class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingRecyclerViewAdapter(context, false) {
@@ -107,6 +107,9 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
             cityPostHolder.tvTime.text = DateUtil.formatDate(dataUser!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
             cityPostHolder.tvDate.text = DateUtil.formatDate(dataUser!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
             cityPostHolder.formMoney.gone()
+            if (CarBookingSharePreference.getUserData()?.isDriver!!) {
+                cityPostHolder.btnRecruitment.gone()
+            }
             when (dataUser!!.status) {
                 MyApp.KEY_PENDING -> {
                     setColorStatus(cityPostHolder.tvStatus, R.color.color_pending)
@@ -161,5 +164,6 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
         val tvDate: TextView = itemView.findViewById(R.id.tv_date)
         val tvMoney: TextView = itemView.findViewById(R.id.tv_money)
         val formMoney: LinearLayout = itemView.formMoney
+        val btnRecruitment: TextView = itemView.findViewById(R.id.btn_recruitment)
     }
 }

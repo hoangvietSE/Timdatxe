@@ -8,7 +8,7 @@ import com.example.anothertimdatxe.adapter.RedirectListener
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
-import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import kotlinx.android.synthetic.main.activity_introduce.*
 

@@ -10,7 +10,7 @@
             android:layout_marginStart="@dimen/content_padding_large"
             android:layout_centerVertical="true"
             android:textColor="@color/color_999"
-            android:id="@+id/tv_list_item"
+            android:id="@+id/tvListItem"
             android:textSize="@dimen/text_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

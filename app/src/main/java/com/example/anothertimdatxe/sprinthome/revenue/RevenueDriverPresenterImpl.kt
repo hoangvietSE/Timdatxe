@@ -13,8 +13,8 @@ class RevenueDriverPresenterImpl(mView: RevenueDriverView) : BasePresenterImpl<R
         val disposable = RetrofitManager.getDriverRevenue(object : ICallBack<BaseRevenueResponse<List<DriverRevenueResponse>>> {
             override fun onSuccess(result: BaseRevenueResponse<List<DriverRevenueResponse>>?) {
                 mView!!.hideLoading()
-                mView!!.showDetail(result?.total_number_of_trips!!, result?.total_money!!)
-                mView!!.showDataByMonth(result?.data!!, isRefreshing)
+                mView!!.showDetail(result?.total_number_of_trips!!, result.total_money!!)
+                mView!!.showDataByMonth(result.data!!, isRefreshing)
             }
 
             override fun onError(e: ApiException) {

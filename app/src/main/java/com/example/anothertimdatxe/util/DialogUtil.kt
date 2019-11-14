@@ -37,8 +37,7 @@ object DialogUtil {
         builder.setIcon(R.mipmap.ic_launcher)
         builder.setMessage(msg)
         builder.setPositiveButton("OK", okListener)
-        var alertDialog = builder.create()
-        return alertDialog
+        return builder.create()
     }
 
     fun customBaseAlertDialog(context: Context, title: String, msg: String, cancelable: Boolean, positiveButton: String, negativeButton: String, mListener: BaseAlertDialogListener) {

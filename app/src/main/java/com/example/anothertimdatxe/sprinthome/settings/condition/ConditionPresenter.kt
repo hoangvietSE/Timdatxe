@@ -1,4 +1,4 @@
-package beetech.com.carbooking.sprinthome.condition
+package com.example.anothertimdatxe.sprinthome.settings.condition
 
 import com.example.anothertimdatxe.base.mvp.BasePresenter
 

@@ -18,11 +18,11 @@ import com.example.anothertimdatxe.request.PostCreatedFindCarRequest
 import com.example.anothertimdatxe.request.PostCreatedFindUserRequest
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
+import com.example.anothertimdatxe.adapter.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_post_created_more.*
 
 class PostCreatedMoreActivity : BaseActivity<PostCreatedMorePresenter>(), PostCreatedMoreView,
-        DatePickerDialogWidget.onSetDateSuccessListener,
+        DatePickerDialogWidget.OnSetDateSuccessListener,
         EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener {
 
     companion object {
@@ -197,7 +197,7 @@ class PostCreatedMoreActivity : BaseActivity<PostCreatedMorePresenter>(), PostCr
 
     fun setValue(value: String): String {
         if (value.length == 1) {
-            return "0${value}"
+            return "0$value"
         } else {
             return value
         }

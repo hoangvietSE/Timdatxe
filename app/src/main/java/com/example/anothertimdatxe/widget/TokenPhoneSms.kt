@@ -10,7 +10,7 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
-class TokenPhoneSms(var mActivity: AppCompatActivity, var mListener: TokenPhoneSms.SendTokenSmsListener) {
+class TokenPhoneSms(var mActivity: AppCompatActivity, var mListener: SendTokenSmsListener) {
 
     private lateinit var mAuth: FirebaseAuth
     private var verificationInProgress = false

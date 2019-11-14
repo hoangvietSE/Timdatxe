@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Driver(
 
-        @field:SerializedName("full_name")
+        @field:SerializedName("fullName")
         val fullName: String? = null,
 
         @field:SerializedName("phone")

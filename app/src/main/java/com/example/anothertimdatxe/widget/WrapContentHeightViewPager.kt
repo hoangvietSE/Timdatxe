@@ -29,17 +29,17 @@ class WrapContentHeightViewPager : ViewPager {
      */
     private fun measureHeight(measureSpec: Int, view: View?): Int {
         var result = 0
-        val specMode = View.MeasureSpec.getMode(measureSpec)
-        val specSize = View.MeasureSpec.getSize(measureSpec)
+        val specMode = MeasureSpec.getMode(measureSpec)
+        val specSize = MeasureSpec.getSize(measureSpec)
 
-        if (specMode == View.MeasureSpec.EXACTLY) {
+        if (specMode == MeasureSpec.EXACTLY) {
             result = specSize
         } else {
             // set the height from the base view if available
             if (view != null) {
-                result = view!!.getMeasuredHeight()
+                result = view.getMeasuredHeight()
             }
-            if (specMode == View.MeasureSpec.AT_MOST) {
+            if (specMode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize)
             }
         }

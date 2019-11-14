@@ -13,7 +13,6 @@ import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class DriverSearchUserPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -40,7 +39,7 @@ class DriverSearchUserPostAdapter(context: Context) : EndlessLoadingRecyclerView
         driverSearchHolder.tvEndingPoint.text = data.appEndProvince
         driverSearchHolder.tvNumberSeat.text = data.numberSeat!!.toString()
         driverSearchHolder.tvTime.text = DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-        driverSearchHolder.tvDate.text = DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+        driverSearchHolder.tvDate.text = DateUtil.formatDate(data.startTime, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
         if (data.status == Constant.USER_POST_PUBLISHED) {
             holder.btnBook.visible()
         }

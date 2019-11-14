@@ -38,7 +38,7 @@ class UserBookingRequest{
 	@SerializedName("book_time")
 	var bookTime: String? = null
 
-	@SerializedName("full_name")
+	@SerializedName("fullName")
 	var fullName: String? = null
 
 	@SerializedName("phone")

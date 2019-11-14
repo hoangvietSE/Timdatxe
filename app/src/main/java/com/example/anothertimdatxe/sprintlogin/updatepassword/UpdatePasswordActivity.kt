@@ -1,23 +1,17 @@
 package com.example.anothertimdatxe.sprintlogin.updatepassword
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.CountDownTimer
+import android.text.TextUtils
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxePhoneSmsBaseActivity
+import com.example.anothertimdatxe.extension.isValidStrongPassword
 import com.example.anothertimdatxe.sprintlogin.forgotpassword.ForgotActivity
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.DialogUtil
 import com.example.anothertimdatxe.util.MyApp
 import com.example.anothertimdatxe.util.PhoneSms
 import com.example.anothertimdatxe.util.ToastUtil
-import android.text.TextUtils
-import android.view.Window
-import com.example.anothertimdatxe.extension.isValidStrongPassword
 import kotlinx.android.synthetic.main.activity_update_password.*
 
 class UpdatePasswordActivity : TimdatxePhoneSmsBaseActivity<UpdatePasswordPresenter>(), UpdatePasswordView {
@@ -90,8 +84,8 @@ class UpdatePasswordActivity : TimdatxePhoneSmsBaseActivity<UpdatePasswordPresen
     }
 
     private fun initData() {
-        mCheckDirectForgot = intent.getIntExtra(UpdatePasswordActivity.FORGOT_PASSWORD_DIRECT, -1)
-        mCheckEmailOrPhone = intent.getIntExtra(UpdatePasswordActivity.FORGOT_PASSWORD_PHONE_OR_EMAIL, -1)
+        mCheckDirectForgot = intent.getIntExtra(FORGOT_PASSWORD_DIRECT, -1)
+        mCheckEmailOrPhone = intent.getIntExtra(FORGOT_PASSWORD_PHONE_OR_EMAIL, -1)
         mToken = intent.getStringExtra(ForgotActivity.FORGOT_PASSWORD_TOKEN)
         mEmail = intent.getStringExtra(ForgotActivity.FORGOT_PASSWORD_EMAIL)
         mTokenPhoneSms.initDataPhoneSms()

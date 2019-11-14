@@ -9,10 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.adapter.BannerHomeAdapter
-import com.example.anothertimdatxe.adapter.HomeAdapter
-import com.example.anothertimdatxe.adapter.HotCitiesHomeAdapter
-import com.example.anothertimdatxe.adapter.PostCreatedMoreFindUserAdapter
+import com.example.anothertimdatxe.adapter.*
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.response.BannerHomeResponse
 import com.example.anothertimdatxe.entity.response.DriverPostResponse
@@ -30,7 +27,6 @@ import com.example.anothertimdatxe.sprintsearch.driver.driversearch.DriverSearch
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.widget.UltraViewPager
 import com.example.anothertimdatxe.widget.transformer.UltraDepthScaleTransformer
-import com.example.kotlinapplication.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -80,7 +76,7 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView,
             swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
         }
         swipeRefresh.setOnRefreshListener {
-            if (CarBookingSharePreference?.getUserData()?.isDriver!!) {
+            if (CarBookingSharePreference.getUserData()?.isDriver!!) {
                 mUserFindCarFragment!!.clear()
                 mCarFindUserFragment!!.clear()
             } else {
@@ -136,14 +132,14 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView,
                         if (positionOffset > 0.5) {
                             // Closer to next screen than to current
                             if (position + 1 != mNextSelectedScreen) {
-                                mNextSelectedScreen = position + 1;
-                                updateState(mNextSelectedScreen);
+                                mNextSelectedScreen = position + 1
+                                updateState(mNextSelectedScreen)
                             }
                         } else {
                             // Closer to current screen than to next
                             if (position != mNextSelectedScreen) {
-                                mNextSelectedScreen = position;
-                                updateState(mNextSelectedScreen);
+                                mNextSelectedScreen = position
+                                updateState(mNextSelectedScreen)
                             }
                         }
                     } else {
@@ -151,14 +147,14 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView,
                         if (positionOffset > 0.5) {
                             // Closer to current screen than to next
                             if (position + 1 != mNextSelectedScreen) {
-                                mNextSelectedScreen = position + 1;
-                                updateState(mNextSelectedScreen);
+                                mNextSelectedScreen = position + 1
+                                updateState(mNextSelectedScreen)
                             }
                         } else {
                             // Closer to next screen than to current
                             if (position != mNextSelectedScreen) {
-                                mNextSelectedScreen = position;
-                                updateState(mNextSelectedScreen);
+                                mNextSelectedScreen = position
+                                updateState(mNextSelectedScreen)
                             }
                         }
                     }

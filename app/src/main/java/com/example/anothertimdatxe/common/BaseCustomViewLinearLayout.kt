@@ -39,6 +39,6 @@ abstract class BaseCustomViewLinearLayout : LinearLayout {
     abstract fun initDataFromStyleable(ta: TypedArray?)
 
     private fun setLayout() {
-        context.inflate(mLayoutRes!!, this, true)
+        context.inflate(mLayoutRes, this, true)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.sprinthome
+package com.example.anothertimdatxe.sprinthome.home
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -27,15 +27,15 @@ import com.example.anothertimdatxe.sprinthome.history.HistoryTravelActivity
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemAdapter
 import com.example.anothertimdatxe.sprinthome.home.adapter.MenuItemData
 import com.example.anothertimdatxe.sprinthome.homefragment.HomeFragment
+import com.example.anothertimdatxe.sprinthome.listpost.driver.DriverListPostFragment
 import com.example.anothertimdatxe.sprinthome.listpost.user.UserListPostFragment
-import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListPostFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.driver.DriverListRequestFragment
 import com.example.anothertimdatxe.sprinthome.listrequest.user.list.ListRequestFragment
 import com.example.anothertimdatxe.sprinthome.profile.driver.profile.DriverProfileFragment
 import com.example.anothertimdatxe.sprinthome.profile.driver.updateprofile.DriverUpdateProfileActivity
 import com.example.anothertimdatxe.sprinthome.profile.user.UserProfileFragment
 import com.example.anothertimdatxe.sprinthome.revenue.RevenueDriverActivity
-import com.example.anothertimdatxe.sprinthome.settings.SettingActivity
+import com.example.anothertimdatxe.sprinthome.settings.settingsummary.SettingActivity
 import com.example.anothertimdatxe.sprinthome.updateprofile.UpdateProfileActivity
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
@@ -136,14 +136,6 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             ToastUtil.show(resources.getString(R.string.home_back_press))
         }
         backPressTime = System.currentTimeMillis()
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 
     override fun initView() {
@@ -513,15 +505,13 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 //        mAdapter.add(itemLogout)
         rv_menu.adapter = mAdapter
         rv_menu.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        updateHeaderMenu(CarBookingSharePreference.getUserData()!!.full_name, CarBookingSharePreference.getUserData()!!.avatar)
+        updateHeaderMenu(CarBookingSharePreference.getUserData()!!.fullName, CarBookingSharePreference.getUserData()!!.avatar)
         onSettingClick()
     }
 
-    fun updateHeaderMenu(full_name: String, avatar: String?) {
-        imv_avatar.let {
-            it.setAvatar(this, avatar)
-        }
-        tv_user_name.text = full_name
+    fun updateHeaderMenu(fullName: String, avatar: String?) {
+        imv_avatar.setAvatar(this, avatar)
+        tv_user_name.text = fullName
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -572,7 +562,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
 
     private fun goToHistoryTravelActivity() {
         startActivity(Intent(this@HomeActivity, HistoryTravelActivity::class.java).apply {
-            putExtra(HistoryTravelActivity.HISTORY_TRAVEL, if (CarBookingSharePreference.getUserData()!!.isUser) true else false)
+            putExtra(HistoryTravelActivity.HISTORY_TRAVEL, CarBookingSharePreference.getUserData()!!.isUser)
         })
     }
 
@@ -603,19 +593,19 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
         try {
             startActivity(Intent().apply {
                 action = Intent.ACTION_VIEW
-                data = Uri.parse("market://details?id=${packageName}")
+                data = Uri.parse("market://details?id=$packageName")
             })
         } catch (e: ActivityNotFoundException) {
             startActivity(Intent().apply {
                 action = Intent.ACTION_VIEW
-                data = Uri.parse("https://play.google.com/store/apps/details?id=${packageName}")
+                data = Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
             })
         }
     }
 
     private fun goToshareApp() {
         val intentShare = Intent(Intent.ACTION_SEND)
-        intentShare.setType("text/plain");
+        intentShare.setType("text/plain")
         val intentChooser = Intent.createChooser(intentShare, "Chia sẻ ứng ụng Tìm Đặt Xe")
         //Verify the original intent will resolve to at least one activity
         if (intentChooser.resolveActivity(packageManager) != null) {

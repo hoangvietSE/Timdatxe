@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.sprinthome.listrequest.driver
+package com.example.anothertimdatxe.sprinthome.listpost.driver
 
 import android.content.Intent
 import android.os.Build
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.DriverListPostAdapter
+import com.example.anothertimdatxe.adapter.EndlessLoadingRecyclerViewAdapter
+import com.example.anothertimdatxe.adapter.RecyclerViewAdapter
 import com.example.anothertimdatxe.adapter.SpinnserStatus
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.base.util.GlideApp
@@ -19,8 +21,6 @@ import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.presentation.drivercreatepost.DriverCreatePostActivity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
-import com.example.kotlinapplication.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_driver_list_post.*
 import kotlinx.android.synthetic.main.layout_no_result.*
 
@@ -37,7 +37,7 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
         get() = R.layout.fragment_driver_list_post
 
     companion object {
-        fun getInstance(): DriverListPostFragment{
+        fun getInstance(): DriverListPostFragment {
             val fragment = DriverListPostFragment()
             val bundle = Bundle()
             fragment.arguments = bundle
@@ -122,12 +122,12 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
     }
 
     private fun setDatePicker() {
-        mDatePickerDialogWidget = DatePickerDialogWidget(context!!, object : DatePickerDialogWidget.onSetDateSuccessListener {
+        mDatePickerDialogWidget = DatePickerDialogWidget(context!!, object : DatePickerDialogWidget.OnSetDateSuccessListener {
             override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
                 tv_date.setText(
                         "${DateUtil.formatValue(dayOfMonth.toString())}/" +
                                 "${DateUtil.formatValue(month.toString())}/" +
-                                "${DateUtil.formatValue(year.toString())}")
+                                DateUtil.formatValue(year.toString()))
                 imv_close.visible()
                 imv_close.setOnClickListener {
                     tv_date.setText("")
@@ -208,11 +208,7 @@ class DriverListPostFragment : BaseFragment<DriverListPostPresenter>(), DriverLi
     }
 
     fun enableRefreshLoading(enable: Boolean) {
-        if (enable) {
-            swipeRefresh.isRefreshing = true
-        } else {
-            swipeRefresh.isRefreshing = false
-        }
+        swipeRefresh.isRefreshing = enable
     }
 
     fun clearData() {

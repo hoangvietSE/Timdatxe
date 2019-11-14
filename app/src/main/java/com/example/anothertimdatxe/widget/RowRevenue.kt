@@ -39,13 +39,13 @@ class RowRevenue : LinearLayout {
 
     private fun setDataFromTypedArray(ta: TypedArray) {
         val title: String = ta.getString(R.styleable.BaseRevenue_mTitle)
-        if (!title.isNullOrEmpty() || !title.isNullOrBlank()) {
+        if (!title.isEmpty() || !title.isNullOrBlank()) {
             row_title.text = title
         }
     }
 
     fun setContent(data: String) {
-        if (!data.isNullOrEmpty() || !data.isNullOrBlank()) {
+        if (!data.isEmpty() || !data.isNullOrBlank()) {
             row_value.text = data
         }
     }

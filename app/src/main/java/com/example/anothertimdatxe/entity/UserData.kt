@@ -10,11 +10,11 @@ class UserData : Serializable {
     @SerializedName("email")
     var email: String = ""
 
-    @SerializedName("full_name")
-    var full_name: String = ""
+    @SerializedName("fullName")
+    var fullName: String = ""
 
     @SerializedName("birthday")
-    var birthday: String ?= null
+    var birthday: String? = null
 
     @SerializedName("gender")
     var gender: String? = null
@@ -42,6 +42,12 @@ class UserData : Serializable {
 
     @SerializedName("description")
     var description: String? = null
+
+    @SerializedName("before_license_image")
+    var beforeLicenseImage: String? = ""
+
+    @SerializedName("after_license_image")
+    var afterLicenseImage: String? = ""
 
     var isUser: Boolean = false
     var isDriver: Boolean = false

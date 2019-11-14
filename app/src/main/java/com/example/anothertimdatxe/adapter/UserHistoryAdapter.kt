@@ -12,7 +12,6 @@ import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MapUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class UserHistoryAdapter(context: Context, enableSelectedMode: Boolean) : EndlessLoadingRecyclerViewAdapter(context, enableSelectedMode) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -29,14 +28,14 @@ class UserHistoryAdapter(context: Context, enableSelectedMode: Boolean) : Endles
     override fun bindNormalViewHolder(holder: NormalViewHolder, position: Int) {
         val data: UserHistoryResponse? = getItem(position, UserHistoryResponse::class.java)
         val viewHolder: UserHistoryViewHolder = holder as UserHistoryViewHolder
-        viewHolder.start_point.text = MapUtil.getLocationState(context!!, data?.lat_from!!.toDouble(), data?.lng_from!!.toDouble())
-        viewHolder.end_point.text = MapUtil.getLocationState(context!!, data?.lat_to!!.toDouble(), data?.lng_to!!.toDouble())
-        viewHolder.money.text = data?.total_price
-        viewHolder.time.text = DateUtil.formatDate(data?.book_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_7)
-        viewHolder.date.text = DateUtil.formatDate(data?.book_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
-        viewHolder.imv_avatar.setAvatar(context!!, data?.avatar)
-        viewHolder.title.text = data?.title
-        viewHolder.number_seat.text = data?.number_seat!!.toString()
+        viewHolder.start_point.text = MapUtil.getLocationState(context!!, data?.lat_from!!.toDouble(), data.lng_from!!.toDouble())
+        viewHolder.end_point.text = MapUtil.getLocationState(context!!, data.lat_to!!.toDouble(), data.lng_to!!.toDouble())
+        viewHolder.money.text = data.total_price
+        viewHolder.time.text = DateUtil.formatDate(data.book_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_7)
+        viewHolder.date.text = DateUtil.formatDate(data.book_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+        viewHolder.imv_avatar.setAvatar(context!!, data.avatar)
+        viewHolder.title.text = data.title
+        viewHolder.number_seat.text = data.number_seat!!.toString()
     }
 
     class UserHistoryViewHolder(itemView: View) : NormalViewHolder(itemView) {

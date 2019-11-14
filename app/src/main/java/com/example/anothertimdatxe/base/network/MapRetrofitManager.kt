@@ -37,7 +37,7 @@ object MapRetrofitManager {
                 .build()
     }
 
-    val mapApiService = createRetrofit(BuildConfig.MAP_BASE_URL).create(MapApiService::class.java)
+    val mapApiService: MapApiService = createRetrofit(BuildConfig.MAP_BASE_URL).create(MapApiService::class.java)
 
     private fun <T> getSubcriber(callBack: ICallBack<T>): DisposableSingleObserver<Response<T>> {
         return object : DisposableSingleObserver<Response<T>>() {
@@ -62,9 +62,9 @@ object MapRetrofitManager {
 
     private fun <T> handleResponse(callBack: ICallBack<T>, response: Response<T>) {
         when {
-            response.code() == ApiConstant.httpStatusCode.OK -> callBack.onSuccess(response.body()!!)
-            response.code() == ApiConstant.httpStatusCode.CREATE -> callBack.onSuccess(response.body()!!)
-            response.code() == ApiConstant.httpStatusCode.UNAUTHORIZED -> handleErrorResponse(callBack, response)
+            response.code() == ApiConstant.HttpStatusCode.OK -> callBack.onSuccess(response.body()!!)
+            response.code() == ApiConstant.HttpStatusCode.CREATE -> callBack.onSuccess(response.body()!!)
+            response.code() == ApiConstant.HttpStatusCode.UNAUTHORIZED -> handleErrorResponse(callBack, response)
             else -> handleErrorResponse(callBack, response)
         }
     }

@@ -25,7 +25,7 @@ class SupportActivity : BaseActivity<SupportPresenter>(), SupportView {
             data.address = tv_address.text?.toString() ?: ""
             data.phone = tv_phone.text?.toString() ?: ""
             data.email = tv_email.text?.toString() ?: ""
-            data.content = edt_content?.text.toString() ?: ""
+            data.content = edt_content?.text.toString()
             mPresenter!!.sendSupport(data)
         }
     }

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_revenue_detail.view.*
 
 class RevenueDetailAdapter(context: Context, var mListener: BaseRvListener) : BaseAdapter<DriverRevenueResponse, RevenueDetailAdapter.RevenueDetailViewHolder>(context) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RevenueDetailViewHolder {
-        return RevenueDetailViewHolder(context!!.inflate(R.layout.item_revenue_detail, parent, false), mListener)
+        return RevenueDetailViewHolder(context.inflate(R.layout.item_revenue_detail, parent, false), mListener)
     }
 
     class RevenueDetailViewHolder(itemView: View, mListener: BaseRvListener) : BaseViewHolder<DriverRevenueResponse>(itemView, mListener) {

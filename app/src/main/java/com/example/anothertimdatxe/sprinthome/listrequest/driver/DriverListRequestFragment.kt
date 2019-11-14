@@ -19,8 +19,8 @@ import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.sprinthome.listrequest.driver.detail.DriverRequestDetailActivity
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
-import com.example.kotlinapplication.RecyclerViewAdapter
+import com.example.anothertimdatxe.adapter.EndlessLoadingRecyclerViewAdapter
+import com.example.anothertimdatxe.adapter.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_driver_list_request.*
 import kotlinx.android.synthetic.main.layout_no_result.*
 
@@ -117,12 +117,12 @@ class DriverListRequestFragment : BaseFragment<DriverListRequestPresenter>(), Dr
     }
 
     private fun setDatePicker() {
-        mDatePickerDialogWidget = DatePickerDialogWidget(context!!, object : DatePickerDialogWidget.onSetDateSuccessListener {
+        mDatePickerDialogWidget = DatePickerDialogWidget(context!!, object : DatePickerDialogWidget.OnSetDateSuccessListener {
             override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
                 tv_date.setText(
                         "${DateUtil.formatValue(dayOfMonth.toString())}/" +
                                 "${DateUtil.formatValue(month.toString())}/" +
-                                "${DateUtil.formatValue(year.toString())}")
+                                DateUtil.formatValue(year.toString()))
                 imv_close.visible()
                 imv_close.setOnClickListener {
                     tv_date.setText("")
@@ -200,11 +200,7 @@ class DriverListRequestFragment : BaseFragment<DriverListRequestPresenter>(), Dr
     }
 
     fun enableRefreshLoading(enable: Boolean) {
-        if (enable) {
-            swipeRefresh.isRefreshing = true
-        } else {
-            swipeRefresh.isRefreshing = false
-        }
+        swipeRefresh.isRefreshing = enable
     }
 
     fun clearData() {

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_map_search.*
 
 class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
     companion object {
-        val TAG = MapSearchActivity::class.java.simpleName
+        val TAG: String = MapSearchActivity::class.java.simpleName
         const val RESULT_CODE = 1998
         const val STARTING_LOCATION_POINT = "starting_location_point"
         const val ENDING_LOCATION_POINT = "ending_location_point"
@@ -126,14 +126,14 @@ class MapSearchActivity : BaseActivity<MapSearchPresenter>(), MapSearchView {
     override fun showLocationStarting(location: String, placeId: String) {
         hideLoading()
         edt_starting_point.setText(location)
-        mLocationStarting?.clear()
-        mLocationStarting?.put(placeId, location)
+        mLocationStarting.clear()
+        mLocationStarting.put(placeId, location)
     }
 
     override fun showLocationEnding(location: String, placeId: String) {
         hideLoading()
         edt_ending_point.setText(location)
-        mLocationEnding?.clear()
-        mLocationEnding?.put(placeId, location)
+        mLocationEnding.clear()
+        mLocationEnding.put(placeId, location)
     }
 }
