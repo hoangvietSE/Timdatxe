@@ -13,10 +13,7 @@ import com.example.anothertimdatxe.entity.response.DriverPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.extension.visible
-import com.example.anothertimdatxe.util.Constant
-import com.example.anothertimdatxe.util.DateUtil
-import com.example.anothertimdatxe.util.MapUtil
-import com.example.anothertimdatxe.util.NumberUtil
+import com.example.anothertimdatxe.util.*
 
 class PostCreatedMoreFindUserAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -63,6 +60,9 @@ class PostCreatedMoreFindUserAdapter(context: Context) : EndlessLoadingRecyclerV
             mHolder.formHightWay.gone()
         } else {
             mHolder.formHightWay.visible()
+        }
+        if(CarBookingSharePreference.getUserData()?.isDriver!!){
+            mHolder.btnBook.gone()
         }
 
     }

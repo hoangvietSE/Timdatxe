@@ -341,7 +341,7 @@
                 android:textSize="@dimen/text_size_14" />
 
             <TextView
-                android:id="@+id/btn_status"
+                android:id="@+id/btn_create_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16_dp"

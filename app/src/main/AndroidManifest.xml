@@ -120,15 +120,16 @@
             android:name=".introduce.IntroduceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:windowSoftInputMode="adjustResize|stateHidden"
             android:name=".presentation.drivercreatepost.DriverCreatePostActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".sprinthome.listrequest.user.detail.UserRequestDetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.usercreatepost.UserCreatePostActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".sprinthome.listpost.user.detail.UserPostDetailActivity"
             android:screenOrientation="portrait" />
