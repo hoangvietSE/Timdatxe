@@ -12,7 +12,6 @@ import com.example.anothertimdatxe.entity.response.ListUserBookResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class UserListBookAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {

@@ -7,7 +7,7 @@ data class DriverCarResponse(
         @field:SerializedName("car_name")
         val carName: String? = null,
 
-        @field:SerializedName("full_name")
+        @field:SerializedName("fullName")
         val fullName: String? = null,
 
         @field:SerializedName("seat_number")

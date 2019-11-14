@@ -54,7 +54,7 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
                         .error(R.drawable.img_default)
                         .into(imageHolder.imvCar)
                 if (imageHolder.btnCancel != null) {
-                    imageHolder.btnCancel?.setOnClickListener {
+                    imageHolder.btnCancel.setOnClickListener {
                         mListener.onCancelClick(imageHolder.adapterPosition)
                     }
                 }

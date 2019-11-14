@@ -18,7 +18,7 @@ class GpsUtil(context: Context) {
     private var locationRequest: LocationRequest? = null
 
     companion object {
-        val TAG = GpsUtil::class.java.simpleName
+        val TAG: String = GpsUtil::class.java.simpleName
         const val GPS_REQUEST = 9001
     }
 
@@ -41,9 +41,9 @@ class GpsUtil(context: Context) {
     }
 
     // method for turn on GPS
-    fun turnGPSOn(onGpsListener: onGpsListener?, mGoogleApiClient: GoogleApiClient) {
+    fun turnGPSOn(OnGpsListener: OnGpsListener?, mGoogleApiClient: GoogleApiClient) {
         if (locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            onGpsListener?.gpsStatus(true)
+            OnGpsListener?.gpsStatus(true)
         } else {
             val result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, mLocationSettingsRequest)
             result.setResultCallback(object : ResultCallback<LocationSettingsResult> {
@@ -52,7 +52,7 @@ class GpsUtil(context: Context) {
                     val states = result.locationSettingsStates
                     when (status.statusCode) {
                         LocationSettingsStatusCodes.SUCCESS -> {
-                            onGpsListener?.gpsStatus(true)
+                            OnGpsListener?.gpsStatus(true)
                         }
                         LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
                             // Location settings are not satisfied. But could be fixed by showing the user
@@ -60,14 +60,14 @@ class GpsUtil(context: Context) {
                             try {
                                 // Show the dialog by calling startResolutionForResult(),
                                 // and check the result in onActivityResult().
-                                onGpsListener?.startResolution(status)
+                                OnGpsListener?.startResolution(status)
                             } catch (e: IntentSender.SendIntentException) {
                             }
                         }
                         LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
                             // Location settings are not satisfied. However, we have no way to fix the
                             // settings so we won't show the dialog.
-                            onGpsListener?.startSettingGps()
+                            OnGpsListener?.startSettingGps()
                         }
                     }
                 }
@@ -77,7 +77,7 @@ class GpsUtil(context: Context) {
         }
     }
 
-    interface onGpsListener {
+    interface OnGpsListener {
         fun gpsStatus(isGPSEnable: Boolean)
         fun startResolution(status: Status)
         fun startSettingGps()

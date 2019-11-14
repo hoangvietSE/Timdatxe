@@ -15,7 +15,7 @@ class TokenInterceptor : Interceptor {
         val builder = origin.newBuilder()
         val request = builder.build()
         response = chain.proceed(request)
-        if (response?.code() == ApiConstant.httpStatusCode.UNAUTHORIZED) {
+        if (response?.code() == ApiConstant.HttpStatusCode.UNAUTHORIZED) {
             val accessToken = CarBookingSharePreference.getAccessToken()
             if (!TextUtils.isEmpty(accessToken)) {
                 val responseRefreshToken = if (CarBookingSharePreference.getUserData()?.isUser!!) {
@@ -23,7 +23,7 @@ class TokenInterceptor : Interceptor {
                 } else {
                     RetrofitManager.driverRefreshTokenInterceptor(accessToken).execute()
                 }
-                if (responseRefreshToken.code() == ApiConstant.httpStatusCode.INTERNAL_ERROR_SERVER) {
+                if (responseRefreshToken.code() == ApiConstant.HttpStatusCode.INTERNAL_ERROR_SERVER) {
                     EventBus.getDefault().postSticky(RefreshTokenFailure())
                 }
                 if (responseRefreshToken?.isSuccessful!! && responseRefreshToken.body() != null) {

@@ -14,7 +14,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.PlacesClient
 
 class BaseMapSearch(context: Context, var mListener: MapSearchListener) {
-    val TAG = BaseMapSearch::class.java.simpleName
+    val TAG: String = BaseMapSearch::class.java.simpleName
     private var mPlacesClient: PlacesClient? = null
     private var token: AutocompleteSessionToken? = null
     private var bounds: RectangularBounds? = null

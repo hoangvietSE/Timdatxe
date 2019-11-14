@@ -116,7 +116,7 @@ class DriverRequestDetailPresenterImpl(mView: DriverRequestDetailView) : BasePre
                                 mView!!.finishBookSuccess(true)
                             } else if (it?.status == 412 && it.data != null) {
                                 canBook = 1
-                                ToastUtil.show(it!!.msg!!)
+                                ToastUtil.show(it.msg!!)
                             }
                         },
                         {

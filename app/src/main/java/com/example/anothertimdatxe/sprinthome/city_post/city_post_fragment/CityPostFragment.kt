@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
+import com.example.anothertimdatxe.adapter.EndlessLoadingRecyclerViewAdapter
 import com.example.anothertimdatxe.adapter.SearchCityPostAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.response.SearchCityPostResponse
@@ -14,7 +15,6 @@ import com.example.anothertimdatxe.extension.hideRefreshing
 import com.example.anothertimdatxe.extension.showRefreshing
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.MyApp
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_city_post.*
 import kotlinx.android.synthetic.main.layout_no_result.*
 

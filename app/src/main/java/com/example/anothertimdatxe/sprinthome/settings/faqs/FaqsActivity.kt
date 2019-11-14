@@ -14,7 +14,7 @@ class FaqsActivity : TimdatxeBaseActivity<FaqsPresenter>(),
 
     override fun setView(result: List<FaqsResponse>?) {
         for (i in result!!) {
-            expandableListDetail.put(i!!.title, i!!.content)
+            expandableListDetail.put(i.title, i.content)
         }
         expandableListTitle = expandableListDetail.keys.toMutableList()
         expandableListAdapter = ExpandableListViewAdapter(this, expandableListTitle, expandableListDetail)
@@ -39,9 +39,9 @@ class FaqsActivity : TimdatxeBaseActivity<FaqsPresenter>(),
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            elv_faqs.setIndicatorBounds(elv_faqs.getMeasuredWidth() - 80, elv_faqs.getMeasuredWidth());
+            elv_faqs.setIndicatorBounds(elv_faqs.getMeasuredWidth() - 80, elv_faqs.getMeasuredWidth())
         } else {
-            elv_faqs.setIndicatorBoundsRelative(elv_faqs.getMeasuredWidth() - 80, elv_faqs.getMeasuredWidth());
+            elv_faqs.setIndicatorBoundsRelative(elv_faqs.getMeasuredWidth() - 80, elv_faqs.getMeasuredWidth())
         }
     }
 

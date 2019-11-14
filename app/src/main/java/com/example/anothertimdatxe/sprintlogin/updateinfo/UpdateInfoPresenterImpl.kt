@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException
 
 class UpdateInfoPresenterImpl(mView: UpdateInfoView) : BasePresenterImpl<UpdateInfoView>(mView), UpdateInfoPresenter {
     override fun updateInfo(userData: UserData) {
-        if(userData.full_name!!.isNullOrEmpty()||userData.full_name!!.isNullOrBlank()){
+        if(userData.fullName!!.isEmpty()||userData.fullName!!.isNullOrBlank()){
             mView!!.onFullNameError()
         }else{
             if (CarBookingSharePreference.getUserData()!!.isUser) {
@@ -34,7 +34,7 @@ class UpdateInfoPresenterImpl(mView: UpdateInfoView) : BasePresenterImpl<UpdateI
         val disposable = RetrofitManager.userUpdateInfo(object : ICallBack<BaseResult<UserUpdateInfoResponse>> {
             override fun onSuccess(result: BaseResult<UserUpdateInfoResponse>?) {
                 mView!!.hideLoading()
-                userData.full_name = result?.data!!.fullName!!
+                userData.fullName = result?.data!!.fullName!!
                 userData.birthday = result?.data!!.birthday!!
                 userData.gender = result?.data!!.gender!!.toString()
                 CarBookingSharePreference.setUserData(userData)
@@ -54,7 +54,7 @@ class UpdateInfoPresenterImpl(mView: UpdateInfoView) : BasePresenterImpl<UpdateI
         val disposable = RetrofitManager.driverUpdateInfo(object : ICallBack<BaseResult<DriverUpdateInfoResponse>> {
             override fun onSuccess(result: BaseResult<DriverUpdateInfoResponse>?) {
                 mView!!.hideLoading()
-                userData.full_name = result?.data!!.fullName!!
+                userData.fullName = result?.data!!.fullName!!
                 userData.birthday = result?.data!!.birthday!!
                 userData.gender = result?.data!!.gender!!.toString()
                 CarBookingSharePreference.setUserData(userData)

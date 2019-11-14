@@ -1,3 +1,3 @@
-package beetech.com.carbooking.sprinthome.settings.adapter
+package com.example.anothertimdatxe.sprinthome.settings.settingsummary.adapter
 
 class ItemData(var nameOfSetting: String? = "")

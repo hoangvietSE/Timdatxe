@@ -16,7 +16,7 @@ data class Car(
 	@field:SerializedName("car_id")
 	val carId: Int? = null,
 
-	@field:SerializedName("full_name")
+	@field:SerializedName("fullName")
 	val fullName: String? = null
 
 

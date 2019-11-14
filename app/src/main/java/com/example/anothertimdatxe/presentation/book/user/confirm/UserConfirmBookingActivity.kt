@@ -16,7 +16,7 @@ import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.presentation.map.mapsearch.MapSearchActivity
 import com.example.anothertimdatxe.request.TimeBookingRequest
 import com.example.anothertimdatxe.request.UserBookingRequest
-import com.example.anothertimdatxe.sprinthome.condition.ConditionActivity
+import com.example.anothertimdatxe.sprinthome.settings.condition.ConditionActivity
 import com.example.anothertimdatxe.util.*
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.TimePickerDialogWidget
@@ -24,15 +24,15 @@ import kotlinx.android.synthetic.main.activity_user_confirm_booking.*
 
 
 class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), UserConfirmBookingView,
-        DatePickerDialogWidget.onSetDateSuccessListener,
-        TimePickerDialogWidget.onTimeSetListener {
+        DatePickerDialogWidget.OnSetDateSuccessListener,
+        TimePickerDialogWidget.OnTimeSetListener {
     companion object {
         const val EXTRA_DRIVER_POST_ID = "extra_driver_post_id"
         const val REQUEST_CODE_MAP_SEARCH = 9009
     }
 
     override val layoutRes: Int
-        get() = com.example.anothertimdatxe.R.layout.activity_user_confirm_booking
+        get() = R.layout.activity_user_confirm_booking
     private var driverPostId: Int = -1
     private var mDatePickerDialogWidget: DatePickerDialogWidget? = null
     private var mTimePickerDialogWidget: TimePickerDialogWidget? = null
@@ -106,7 +106,7 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
             if (onCheckedCondition()) {
                 payment()
             } else {
-                ToastUtil.show(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_not_check_condition))
+                ToastUtil.show(resources.getString(R.string.user_confirm_booking_not_check_condition))
             }
         }
     }
@@ -121,8 +121,8 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         userBookingRequest.endPoint = tv_ending_point.text.toString()
         userBookingRequest.numberSeat = edt_number_seat.text.toString().toInt()
         userBookingRequest.userId = CarBookingSharePreference.getUserId()
-        userBookingRequest?.waypoints = ""
-        userBookingRequest?.canBook = 0
+        userBookingRequest.waypoints = ""
+        userBookingRequest.canBook = 0
         timeBookingRequest.bookDate = tv_starting_date.text.toString()
         timeBookingRequest.bookHour = tv_time.text.toString()
         clearAllRequestFocus()
@@ -139,7 +139,7 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
 
     private fun setToolbar() {
         toolbarTitle?.let {
-            it.text = resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_toolbar_title).toUpperCase()
+            it.text = resources.getString(R.string.user_confirm_booking_toolbar_title).toUpperCase()
         }
     }
 
@@ -158,16 +158,16 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
 
     override fun showDataBooking(data: ConfirmBookingResponse) {
         val user = CarBookingSharePreference.getUserData()
-        row_name.setDetail(user?.full_name ?: "")
+        row_name.setDetail(user?.fullName ?: "")
         row_phone.setDetail(user?.phone ?: "")
         row_email.setDetail(user?.email ?: "")
         row_starting_date.setDetail(DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_19))
         row_time_estimate.setDetail(DateUtil.formatDate(data.endTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_19))
-        tv_starting_point.text = data?.startPoint
-        tv_ending_point.text = data?.endPoint
-        tv_distance.text = NumberUtil.showDistance(data?.distance?.toString()!!)
+        tv_starting_point.text = data.startPoint
+        tv_ending_point.text = data.endPoint
+        tv_distance.text = NumberUtil.showDistance(data.distance?.toString()!!)
         mPresenter?.getPercentDistance()
-        when (data?.type) {
+        when (data.type) {
             Constant.CONVENIENT_TRIP -> {
                 onConvenientTrip(false)
             }
@@ -175,7 +175,7 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
                 onPrivateTrip(false)
             }
             Constant.BOTH_CONVENIENT_AND_PRIVATE -> {
-                if (data?.userBooks?.size == 0) {
+                if (data.userBooks?.size == 0) {
                     initWrapperItem()
                     onBothTrip()
                 } else {
@@ -183,8 +183,8 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
                 }
             }
         }
-        edt_number_seat.setText(data?.emptySeat?.toString())
-        mPresenter?.setSeatSpinner(data?.emptySeat)
+        edt_number_seat.setText(data.emptySeat?.toString())
+        mPresenter?.setSeatSpinner(data.emptySeat)
     }
 
     private fun initWrapperItem() {
@@ -241,9 +241,9 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         for ((index, item) in listItem.withIndex()) {
             if (item.item == type) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    item.textView.background = resources.getDrawable(com.example.anothertimdatxe.R.drawable.bg_btn_search, null)
+                    item.textView.background = resources.getDrawable(R.drawable.bg_btn_search, null)
                 } else {
-                    item.textView.background = resources.getDrawable(com.example.anothertimdatxe.R.drawable.bg_btn_search)
+                    item.textView.background = resources.getDrawable(R.drawable.bg_btn_search)
                 }
             } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -329,31 +329,31 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
     }
 
     override fun onDateEmpty() {
-        onDateRequestFocus(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_date_empty))
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_empty))
     }
 
     override fun onDateInPast() {
-        onDateRequestFocus(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_date_in_past))
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_in_past))
     }
 
     override fun onDateBeforeStartingTime() {
-        onDateRequestFocus(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_date_before_start_time))
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_before_start_time))
     }
 
     override fun onDateAfterEndingTime() {
-        onDateRequestFocus(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_date_after_end_time))
+        onDateRequestFocus(resources.getString(R.string.user_confirm_booking_date_after_end_time))
     }
 
     override fun onHourEmpty() {
-        onHourRequestFocus(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_hour_empty))
+        onHourRequestFocus(resources.getString(R.string.user_confirm_booking_hour_empty))
     }
 
     override fun onHourBeforeStartingTime() {
-        onHourRequestFocus(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_hour_before_start_time))
+        onHourRequestFocus(resources.getString(R.string.user_confirm_booking_hour_before_start_time))
     }
 
     override fun onHourAfterEndingTime() {
-        onHourRequestFocus(resources.getString(com.example.anothertimdatxe.R.string.user_confirm_booking_hour_after_end_time))
+        onHourRequestFocus(resources.getString(R.string.user_confirm_booking_hour_after_end_time))
     }
 
     private fun onDateRequestFocus(error: String) {

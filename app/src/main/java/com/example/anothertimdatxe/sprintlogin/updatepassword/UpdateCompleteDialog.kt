@@ -1,11 +1,8 @@
 package com.example.anothertimdatxe.sprintlogin.updatepassword
 
-import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.Window
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.extension.inflate

@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                app:row_title="@string/user_profile_full_name" />
+                app:row_title="@string/user_profile_fullName" />
 
             <com.example.anothertimdatxe.widget.BaseDialogRow
                 android:id="@+id/rowEmail"

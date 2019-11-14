@@ -22,7 +22,7 @@ data class UserReviewDriverResponse(
 	@field:SerializedName("driver_posst_id")
 	val driverPosstId: Any? = null,
 
-	@field:SerializedName("full_name")
+	@field:SerializedName("fullName")
 	val fullName: String? = null,
 
 	@field:SerializedName("updated_at")

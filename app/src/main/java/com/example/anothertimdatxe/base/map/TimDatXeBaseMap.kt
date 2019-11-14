@@ -48,7 +48,7 @@ import com.google.maps.android.PolyUtil
 abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener,
         GoogleMap.OnPolylineClickListener, OnMapReadyCallback {
     companion object {
-        val TAG = TimDatXeBaseMap::class.java.simpleName
+        val TAG: String = TimDatXeBaseMap::class.java.simpleName
         const val REQUEST_CODE_DIALOG_GOOGLE_PLAY_SERVICE = 9001
         const val REQUEST_CODE_PERMISSION = 1998
         const val REQUEST_CODE_SETTINGS_APP = 1999
@@ -239,7 +239,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
     }
 
     private fun checkGpsInDevice() {
-        GpsUtil(this).turnGPSOn(object : GpsUtil.onGpsListener {
+        GpsUtil(this).turnGPSOn(object : GpsUtil.OnGpsListener {
             override fun startSettingGps() {
                 startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
             }
@@ -269,7 +269,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                 location?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         mLastKnowLocation = task.result
-                        LatLng(mLastKnowLocation?.latitude!!, mLastKnowLocation?.longitude!!)?.let {
+                        LatLng(mLastKnowLocation?.latitude!!, mLastKnowLocation?.longitude!!).let {
                             moveCamera(
                                     it,
                                     ZOOM_CAMERA
@@ -392,7 +392,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         } catch (e: SecurityException) {
             Log.e(TAG, "Can't update location UI", e)
         } catch (rn: Resources.NotFoundException) {
-            Log.e(TAG, "Can't find style. Error: ", rn);
+            Log.e(TAG, "Can't find style. Error: ", rn)
         }
 
     }
@@ -465,7 +465,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
 
     protected fun drawRouteSuccess(route: Route) {
         val mPolylineOptions = styleWithPolyline()
-        route?.steps?.let {
+        route.steps.let {
             it.forEach {
                 val points = PolyUtil.decode(it?.polyline?.points)//List<LatLng>
                 for (point in points) {

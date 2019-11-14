@@ -9,7 +9,7 @@ import com.example.anothertimdatxe.adapter.UserHistoryAdapter
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.entity.response.DriverHistoryResponse
 import com.example.anothertimdatxe.entity.response.UserHistoryResponse
-import com.example.kotlinapplication.RecyclerViewAdapter
+import com.example.anothertimdatxe.adapter.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_history_travel.*
 
 class HistoryTravelActivity : BaseActivity<HistoryTravelPresenter>(), HistoryTravelView,

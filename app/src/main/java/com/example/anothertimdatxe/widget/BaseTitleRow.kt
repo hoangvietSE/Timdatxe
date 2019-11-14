@@ -40,7 +40,7 @@ class BaseTitleRow : RelativeLayout {
     }
 
     private fun setTitle(title: String) {
-        if (!title.isNullOrEmpty()!!) {
+        if (!title.isEmpty()) {
             tv_title.text = title
         }
     }

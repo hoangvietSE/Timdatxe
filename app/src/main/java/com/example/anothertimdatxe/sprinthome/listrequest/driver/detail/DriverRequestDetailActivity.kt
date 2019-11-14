@@ -73,9 +73,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         toolbarTitle?.let {
             it.text = resources.getString(R.string.driver_request_detail_toolbar_title).toUpperCase()
         }
-        leftbutton?.let {
-            it.setImageResource(R.drawable.ic_arrow_back_black_24dp)
-        }
+        leftbutton?.setImageResource(R.drawable.ic_arrow_back_black_24dp)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             toolbar?.setBackgroundColor(resources.getColor(R.color.colorPrimary, null))
         } else {
@@ -104,7 +102,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         tv_distance.text = NumberUtil.showDistance(data.distance!!.toString())
         if (data.driver_book != null) {
             formCar.visible()
-            tv_car_name.text = data.driver_book?.full_name
+            tv_car_name.text = data.driver_book?.fullName
             tv_car_name.paintFlags = (tv_car_name.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
             tv_car_name.setOnClickListener {
                 if (!avoidDoubleClick()) {
@@ -171,7 +169,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
         } else if (data.driver_book?.status == Constant.DRIVER_BOOK_PENDING) {
             formPhone.gone()
             formMoney.visible()
-            tv_money.text = NumberUtil.formatNumber(data.driver_book!!.price!!)
+            tv_money.text = NumberUtil.formatNumber(data.driver_book.price!!)
         } else {
             formMoney.gone()
             formPhone.gone()
@@ -314,7 +312,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                     override fun onClickDialog(dialog: Dialog) {
                         if (mCarId == -1) {
                             ToastUtil.show(resources.getString(R.string.dialog_driver_book_request_no_car))
-                        } else if (dialog.edt_money.text.toString().isNullOrEmpty() || dialog.edt_money.text.toString().isNullOrBlank()) {
+                        } else if (dialog.edt_money.text.toString().isEmpty() || dialog.edt_money.text.toString().isNullOrBlank()) {
                             dialog.edt_money.setError(resources.getString(R.string.dialog_driver_book_request_no_money))
                             dialog.edt_money.requestFocus()
                         } else if (NumberUtil.replaceNumber(dialog.edt_money.text.toString(), ",", "").toInt() < 1000) {

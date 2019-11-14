@@ -1,14 +1,12 @@
 package com.example.anothertimdatxe.sprintlogin.confirm
 
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.activity.BaseActivity
-import com.example.anothertimdatxe.base.mvp.BaseView
 import com.example.anothertimdatxe.common.TimdatxePhoneSmsBaseActivity
 import com.example.anothertimdatxe.sprintlogin.register.RegisterActivity
 import com.example.anothertimdatxe.util.PhoneSms
 import android.text.TextUtils
 import com.example.anothertimdatxe.request.ActiveRequest
-import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import com.example.anothertimdatxe.util.MyApp
 import kotlinx.android.synthetic.main.activity_confirm.*
 

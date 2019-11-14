@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.sprinthome
+package com.example.anothertimdatxe.sprinthome.home
 
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 

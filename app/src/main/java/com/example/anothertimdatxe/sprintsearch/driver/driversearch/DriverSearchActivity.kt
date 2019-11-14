@@ -8,9 +8,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.adapter.DriverSearchUserPostAdapter
-import com.example.anothertimdatxe.adapter.MapSearchAdapter
-import com.example.anothertimdatxe.adapter.SpinnerSeatSearchAdapter
+import com.example.anothertimdatxe.adapter.*
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
 import com.example.anothertimdatxe.common.BaseMapSearch
@@ -24,13 +22,11 @@ import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MapUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.MapSearchTextWatcher
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
-import com.example.kotlinapplication.RecyclerViewAdapter
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import kotlinx.android.synthetic.main.activity_driver_search.*
 
 class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearchView,
-        DatePickerDialogWidget.onSetDateSuccessListener,
+        DatePickerDialogWidget.OnSetDateSuccessListener,
         EndlessLoadingRecyclerViewAdapter.OnLoadingMoreListener,
         RecyclerViewAdapter.OnItemClickListener {
     private var mList: MutableList<DriverSearchResponse>? = mutableListOf()
@@ -109,7 +105,7 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
             request.startingPoint = edt_starting_point.text.toString()
             request.endingPoint = edt_ending_point.text.toString()
             request.seatNumber = seatNumber
-            request.date = tv_date.text.toString()?.let {
+            request.date = tv_date.text.toString().let {
                 if (!it.isNullOrEmpty() || !it.isNullOrBlank())
                     DateUtil.formatDate(it, DateUtil.DATE_FORMAT_23, DateUtil.DATE_FORMAT_1)
                 else
@@ -189,7 +185,7 @@ class DriverSearchActivity : BaseActivity<DriverSearchPresenter>(), DriverSearch
 
     fun formatDateValue(value: String): String {
         if (value.length == 1) {
-            return "0${value}"
+            return "0$value"
         }
         return value
     }

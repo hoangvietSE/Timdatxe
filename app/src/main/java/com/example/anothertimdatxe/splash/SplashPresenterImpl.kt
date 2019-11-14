@@ -18,7 +18,7 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
     private var mCompositeDisposable = CompositeDisposable()
     override fun refreshToken() {
         if (mUserData == null) {
-            mView!!.goToLoginScreen()
+            mView.goToLoginScreen()
         } else {
             if (DeviceUtil.isConnectedToNetword(mView as Context)) {
                 if (CarBookingSharePreference.getUserData()!!.isUser) {
@@ -27,7 +27,7 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
                     driverRefreshToken(mUserData!!)
                 }
             } else {
-                mView!!.showNoConnectedToNetword()
+                mView.showNoConnectedToNetword()
             }
         }
     }
@@ -41,21 +41,21 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
                     }
                 }
                 .doFinally {
-                    mView!!.hideLoading()
+                    mView.hideLoading()
                 }
                 .subscribe(
                         {
-                            if (it.status == ApiConstant.httpStatusCode.OK) {
+                            if (it.status == ApiConstant.HttpStatusCode.OK) {
                                 userData.session_token = it.data?.token!!
                                 CarBookingSharePreference.setUserData(userData)
-                                if (userData.full_name.isNullOrEmpty()) {
-                                    mView!!.goToUpdateInfoScreen()
+                                if (userData.fullName.isEmpty()) {
+                                    mView.goToUpdateInfoScreen()
                                 } else {
-                                    mView!!.goToHomeScreen()
+                                    mView.goToHomeScreen()
                                 }
-                            } else if (it.status == ApiConstant.httpStatusCode.INTERNAL_ERROR_SERVER) {
+                            } else if (it.status == ApiConstant.HttpStatusCode.INTERNAL_ERROR_SERVER) {
                                 //Phiên đăng nhập hết, login again
-                                mView!!.showDialogExpiredSessionLogin()
+                                mView.showDialogExpiredSessionLogin()
                             }
                         },
                         {
@@ -74,21 +74,21 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
                     }
                 }
                 .doFinally {
-                    mView!!.hideLoading()
+                    mView.hideLoading()
                 }
                 .subscribe(
                         {
-                            if (it.status == ApiConstant.httpStatusCode.OK) {
+                            if (it.status == ApiConstant.HttpStatusCode.OK) {
                                 userData.session_token = it.data?.token!!
                                 CarBookingSharePreference.setUserData(userData)
-                                if (userData.full_name.isNullOrEmpty()) {
-                                    mView!!.goToUpdateInfoScreen()
+                                if (userData.fullName.isEmpty()) {
+                                    mView.goToUpdateInfoScreen()
                                 } else {
-                                    mView!!.goToHomeScreen()
+                                    mView.goToHomeScreen()
                                 }
-                            } else if (it.status == ApiConstant.httpStatusCode.INTERNAL_ERROR_SERVER) {
+                            } else if (it.status == ApiConstant.HttpStatusCode.INTERNAL_ERROR_SERVER) {
                                 //Phiên đăng nhập hết, login again
-                                mView!!.showDialogExpiredSessionLogin()
+                                mView.showDialogExpiredSessionLogin()
                             }
                         },
                         {
@@ -99,11 +99,11 @@ class SplashPresenterImpl(private var mView: SplashView) : SplashPresenter {
 
     fun handlerError(mThrowable: Throwable) {
         if (mThrowable is NetworkConnectionInterceptor.NoConnectivityException) {
-            mView!!.refreshTokenError((mView as Context).resources.getString(R.string.no_connectivity_exception))
+            mView.refreshTokenError((mView as Context).resources.getString(R.string.no_connectivity_exception))
         } else if (mThrowable is ConnectException || mThrowable is UnknownHostException || mThrowable is SocketTimeoutException) {
-            mView!!.refreshTokenError((mView as Context).resources.getString(R.string.server_error))
+            mView.refreshTokenError((mView as Context).resources.getString(R.string.server_error))
         } else {
-            mView!!.showDialogExpiredSessionLogin()
+            mView.showDialogExpiredSessionLogin()
         }
     }
 

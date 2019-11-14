@@ -1,4 +1,4 @@
-package com.example.kotlinapplication
+package com.example.anothertimdatxe.adapter
 
 import android.content.Context
 import android.view.View
@@ -85,7 +85,7 @@ abstract class EndlessLoadingRecyclerViewAdapter(context: Context, enableSelecte
             }
 
             else -> {
-                bindNormalViewHolder(viewHolder as RecyclerViewAdapter.NormalViewHolder, position)
+                bindNormalViewHolder(viewHolder as NormalViewHolder, position)
             }
         }
     }

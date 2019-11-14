@@ -1,9 +1,6 @@
-package com.example.anothertimdatxe.sprinthome.version
+package com.example.anothertimdatxe.sprinthome.settings.version
 
 import android.os.Build
-import beetech.com.carbooking.sprinthome.version.VersionUpdatePresenter
-import beetech.com.carbooking.sprinthome.version.VersionUpdatePresenterImpl
-import beetech.com.carbooking.sprinthome.version.VersionUpdateView
 import com.example.anothertimdatxe.BuildConfig
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.common.TimdatxeBaseActivity
@@ -32,9 +29,7 @@ class VersionUpdateActivity : TimdatxeBaseActivity<VersionUpdatePresenter>(), Ve
     }
 
     private fun initToolbarTitle() {
-        toolbarTitle!!.let {
-            it.text = resources.getString(R.string.update_version_title)
-        }
+        toolbarTitle!!.text = resources.getString(R.string.update_version_title)
     }
 
     private fun getData() {

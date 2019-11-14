@@ -7,9 +7,7 @@ abstract class BaseViewHolder<T> : RecyclerView.ViewHolder {
     constructor(itemView: View, mListener: BaseRvListener?) : super(itemView) {
         itemView.let {
             it.setOnClickListener {
-                mListener!!.let {
-                    it.onItemClick(adapterPosition)
-                }
+                mListener!!.onItemClick(adapterPosition)
             }
         }
     }

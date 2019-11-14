@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_search_city_post"
-    android:paddingBottom="@dimen/margin_4_dp">
+    android:layout_marginBottom="@dimen/margin_8_dp"
+    android:background="@drawable/bg_search_city_post">
 
     <TextView
         android:id="@+id/tv_title"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline_imv"
         app:layout_constraintTop_toBottomOf="@id/tv_title">
 

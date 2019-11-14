@@ -86,7 +86,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
 
     override fun setListener() {
         edt_starting_point.setOnClickListener {
-            mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.onSetDateSuccessListener {
+            mDatePickerDialogWidget = DatePickerDialogWidget(this, object : DatePickerDialogWidget.OnSetDateSuccessListener {
                 override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
                     edt_starting_point.setText("" +
                             "${DateUtil.formatValue(dayOfMonth.toString())}/" +
@@ -98,10 +98,10 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
             mDatePickerDialogWidget?.showDatePickerDialog()
         }
         edt_time.setOnClickListener {
-            mTimePickerDialogWidget = TimePickerDialogWidget(this, object : TimePickerDialogWidget.onTimeSetListener {
+            mTimePickerDialogWidget = TimePickerDialogWidget(this, object : TimePickerDialogWidget.OnTimeSetListener {
                 override fun onSetTimeSuccess(view: TimePicker?, hourOfDay: Int, minute: Int) {
                     edt_time.setText(
-                            "${hourOfDay}:${minute}"
+                            "$hourOfDay:$minute"
                     )
                 }
             })
@@ -193,7 +193,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
             request.end_point = endingPoint
             request.waypoints = getWayPoints()
             request.distance = getDistance(distance!!)
-            request.duration_time = if (edt_estimate.text.toString().isNullOrEmpty()) null else edt_estimate.text.toString()?.toDouble()
+            request.duration_time = if (edt_estimate.text.toString().isEmpty()) null else edt_estimate.text.toString().toDouble()
             mPresenter?.driverCreatePost(request)
 
         }
@@ -265,7 +265,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 mSpinnerSeatAdapter?.clear()
-                mListSeat?.clear()
+                mListSeat.clear()
                 if (position == 0) {
                     sp_number_seat.isEnabled = false
                     carId = -1
@@ -293,7 +293,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
         edt_title.setText(data.title)
         tv_distance.text = data.distance.toString() + " km"
         edt_starting_point.setText(DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23))
-        edt_time.setText(DateUtil.formatDate(data.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_15))
+        edt_time.setText(DateUtil.formatDate(data.startTime, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_15))
         edt_estimate.setText(data.durationTime.toString())
         mListCarBrand.forEachIndexed { index, carName ->
             if (carName == data.car?.name) {
@@ -308,7 +308,7 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
             cb_highway.isChecked = false
         }
         handleTypeTrip(data.type)
-        edt_des.setText(data.description?.toString() ?: "")
+        edt_des.setText(data.description ?: "")
         if (data.flagEdit == 1) {
             enableWidget(true)
         } else if (data.flagEdit == 0) {
@@ -561,12 +561,12 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
             }
             return newDistance?.toDouble()
         } catch (e: NumberFormatException) {
-            return 0.0;
+            return 0.0
         }
     }
 
     fun getDuration(time: String): Double {
-        var newTime: String = ""
+        var newTime = ""
         for (i in 0..time.length - 1) {
             if (time.elementAt(i) == ' ') break
             newTime = newTime + time.elementAt(i)

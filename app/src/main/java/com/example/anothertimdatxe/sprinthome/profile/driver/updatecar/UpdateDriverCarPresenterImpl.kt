@@ -109,7 +109,7 @@ class UpdateDriverCarPresenterImpl(mView: UpdateDriverCarView) : BasePresenterIm
             }
         }
         if (isSpinnerCarName == false) {
-            if (carName.isNullOrEmpty()) {
+            if (carName.isEmpty()) {
                 mView!!.onCarNameEdittextError()
                 return
             }
@@ -118,23 +118,23 @@ class UpdateDriverCarPresenterImpl(mView: UpdateDriverCarView) : BasePresenterIm
             mView!!.onDoixeError()
             return
         }
-        if (seatNumber.isNullOrEmpty()) {
+        if (seatNumber.isEmpty()) {
             mView!!.onNumberSeatError()
             return
         }
-        if (licensePlate.isNullOrEmpty()) {
+        if (licensePlate.isEmpty()) {
             mView!!.onLicensePlateError()
             return
         }
-        if (color.isNullOrEmpty()) {
+        if (color.isEmpty()) {
             mView!!.onColorError()
             return
         }
-        if (registerDate.isNullOrEmpty()) {
+        if (registerDate.isEmpty()) {
             mView!!.onDateRegisEmptyError()
             return
         }
-        if (!registerDate.isNullOrEmpty()) {
+        if (!registerDate.isEmpty()) {
             val calendar = Calendar.getInstance()
             val currentDatTime = Calendar.getInstance(TimeZone.getDefault())
             val list = registerDate.split('/')
@@ -144,11 +144,11 @@ class UpdateDriverCarPresenterImpl(mView: UpdateDriverCarView) : BasePresenterIm
             }
             return
         }
-        if (registrationDate.isNullOrEmpty()) {
+        if (registrationDate.isEmpty()) {
             mView!!.onDateRegistrationEmptyError()
             return
         }
-        if (!registrationDate.isNullOrEmpty()) {
+        if (!registrationDate.isEmpty()) {
             val calendar = Calendar.getInstance()
             val regisDateCalendar = Calendar.getInstance()
             val list = registerDate.split('/')

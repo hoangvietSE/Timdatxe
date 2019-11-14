@@ -45,10 +45,9 @@ class LoginSocial(var mActivity: Activity, var mListener: LoginSocialListener) {
                         GraphRequest.Callback { response ->
                             var json = response.jsonObject.toString()
                             var facebookResponse: FacebookResponse = Gson().fromJson(json, FacebookResponse::class.java)
-                            var full_name: String = facebookResponse.name
+                            var fullName: String = facebookResponse.name
                             var email: String = facebookResponse.email
-                            mListener.onVerifyLoginSocialSuccess(facebookId!!, full_name
-                                    ?: "", email ?: "", "facebook")
+                            mListener.onVerifyLoginSocialSuccess(facebookId!!, fullName, email, "facebook")
                         }
                 ).executeAsync()
             }
@@ -77,7 +76,7 @@ class LoginSocial(var mActivity: Activity, var mListener: LoginSocialListener) {
     }
 
     private fun signInGoogle() {
-        var signIntent = mGoogleSignInClient!!.signInIntent
+        var signIntent = mGoogleSignInClient.signInIntent
         mActivity.startActivityForResult(signIntent, RC_SIGN_IN)
     }
 
@@ -101,6 +100,6 @@ class LoginSocial(var mActivity: Activity, var mListener: LoginSocialListener) {
     }
 
     interface LoginSocialListener {
-        fun onVerifyLoginSocialSuccess(socialId: String, full_name: String, email: String, socialType: String)
+        fun onVerifyLoginSocialSuccess(socialId: String, fullName: String, email: String, socialType: String)
     }
 }

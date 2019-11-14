@@ -1,4 +1,4 @@
-package com.example.kotlinapplication
+package com.example.anothertimdatxe.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

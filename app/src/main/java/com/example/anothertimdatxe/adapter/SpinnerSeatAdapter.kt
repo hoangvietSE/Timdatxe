@@ -36,12 +36,12 @@ class SpinnerSeatAdapter(var context: Context, var data: MutableList<String>) : 
     }
 
     fun clear() {
-        data?.clear()
+        data.clear()
         notifyDataSetChanged()
     }
 
     fun addAll(item: List<String>) {
-        data?.addAll(item)
+        data.addAll(item)
         notifyDataSetChanged()
     }
 }

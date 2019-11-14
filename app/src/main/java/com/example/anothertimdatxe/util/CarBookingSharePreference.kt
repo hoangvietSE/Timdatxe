@@ -47,8 +47,7 @@ object CarBookingSharePreference {
 
     fun getWelcomeDriverApp(): Boolean {
         val preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
-        val isWelcome = preference.getBoolean(WELCOME_DRIVER_APP, true)
-        return isWelcome
+        return preference.getBoolean(WELCOME_DRIVER_APP, true)
     }
 
     fun setWelcomeDriverApp() {

@@ -16,10 +16,10 @@ import kotlinx.android.synthetic.main.activity_user_create_post.*
 import java.util.*
 
 class UserCreatePostActivity : BaseActivity<UserCreatePostPresenter>(), UserCreatePostView,
-        DatePickerDialogWidget.onSetDateSuccessListener,
-        TimePickerDialogWidget.onTimeSetListener {
+        DatePickerDialogWidget.OnSetDateSuccessListener,
+        TimePickerDialogWidget.OnTimeSetListener {
     companion object {
-        val TAG = UserCreatePostActivity::class.java.simpleName
+        val TAG: String = UserCreatePostActivity::class.java.simpleName
         const val EXTRA_STARTING_POINT = "extra_starting_point"
         const val EXTRA_ENDING_POINT = "extra_ending_point"
         const val EXTRA_DISTANCE = "extra_distance"
@@ -73,15 +73,15 @@ class UserCreatePostActivity : BaseActivity<UserCreatePostPresenter>(), UserCrea
             data.distance = MapUtil.getDistance(distance!!).toDouble()
             data.title = edt_title.text.toString()
             data.slug = ""
-            if (tv_date.text.toString().isNullOrEmpty()) {
+            if (tv_date.text.toString().isEmpty()) {
                 onDateEmpty()
                 return
             }
-            if (tv_hour.text.toString().isNullOrEmpty()) {
+            if (tv_hour.text.toString().isEmpty()) {
                 onTimeEmpty()
                 return
             }
-            if (edt_number_seat.text.toString().isNullOrEmpty()) {
+            if (edt_number_seat.text.toString().isEmpty()) {
                 onSeatEmpty()
                 return
             }

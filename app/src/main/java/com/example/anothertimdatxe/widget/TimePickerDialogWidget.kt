@@ -6,12 +6,12 @@ import android.widget.TimePicker
 import com.example.anothertimdatxe.R
 import java.util.*
 
-class TimePickerDialogWidget(var context: Context, var mListener: onTimeSetListener) : TimePickerDialog.OnTimeSetListener {
+class TimePickerDialogWidget(var context: Context, var mListener: OnTimeSetListener) : TimePickerDialog.OnTimeSetListener {
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         mListener.onSetTimeSuccess(view, hourOfDay, minute)
     }
 
-    val calendar = Calendar.getInstance(TimeZone.getDefault())
+    val calendar: Calendar = Calendar.getInstance(TimeZone.getDefault())
     fun showTimePickerDialog() {
         val dialog = TimePickerDialog(
                 context,
@@ -24,7 +24,7 @@ class TimePickerDialogWidget(var context: Context, var mListener: onTimeSetListe
         dialog.show()
     }
 
-    interface onTimeSetListener {
+    interface OnTimeSetListener {
         fun onSetTimeSuccess(view: TimePicker?, hourOfDay: Int, minute: Int)
     }
 }

@@ -3,14 +3,14 @@ package com.example.anothertimdatxe.sprintlogin.updateinfo
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.entity.UserData
-import com.example.anothertimdatxe.sprinthome.HomeActivity
+import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import kotlinx.android.synthetic.main.activity_update_infomation.*
 import java.util.*
 
-class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, DatePickerDialogWidget.onSetDateSuccessListener {
+class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, DatePickerDialogWidget.OnSetDateSuccessListener {
     private var userData: UserData? = null
     private var mCalandar: Calendar? = null
     override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {
@@ -44,7 +44,7 @@ class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, 
     private fun initData() {
         userData = CarBookingSharePreference.getUserData()
         mCalandar = Calendar.getInstance()
-        edt_name.setText(userData?.full_name)
+        edt_name.setText(userData?.fullName)
         edt_email.setText(userData?.email)
         edt_phone.setText(userData?.phone)
         if (userData?.birthday.isNullOrEmpty()) {
@@ -52,10 +52,10 @@ class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, 
             tv_month.text = (mCalandar?.get(Calendar.MONTH)!!.plus(1)).toString()
             tv_year.text = mCalandar?.get(Calendar.YEAR).toString()
         } else {
-            val mList = userData?.birthday!!.split("-")
-            tv_year.text = mList[0]
+            val mList = userData?.birthday!!.split("/")
+            tv_day.text = mList[0]
             tv_month.text = mList[1]
-            tv_day.text = mList[2]
+            tv_year.text = mList[2]
         }
     }
 
@@ -80,7 +80,7 @@ class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, 
             mDatePickerDialogWidget?.showDatePickerDialog()
         }
         btn_login.setOnClickListener {
-            userData?.full_name = edt_name.text.toString()
+            userData?.fullName = edt_name.text.toString()
             userData?.birthday = "${tv_day.text}/${tv_month.text}/${tv_year.text}"
             userData?.gender = sp_gender.selectedItemPosition.toString()
             if (cb_condition.isChecked) {

@@ -10,13 +10,13 @@ import com.example.anothertimdatxe.extension.inflate
 
 class SpinnerSeatSearchAdapter(var context: Context, var data: List<String>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view : TextView = context!!.inflate(context, R.layout.item_spinner_search) as TextView
+        val view : TextView = context.inflate(context, R.layout.item_spinner_search) as TextView
         view.text = data[position]
         return view
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view : TextView = context!!.inflate(context, R.layout.item_spinner) as TextView
+        val view : TextView = context.inflate(context, R.layout.item_spinner) as TextView
         view.text = data[position]
         return view
     }

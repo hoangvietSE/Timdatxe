@@ -11,7 +11,6 @@ import com.example.anothertimdatxe.entity.response.UserReviewDriverResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.util.DateUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_review_driver.view.*
 
 class UserReviewDriverAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
@@ -30,10 +29,10 @@ class UserReviewDriverAdapter(context: Context) : EndlessLoadingRecyclerViewAdap
         val userReviewViewHolder = holder as UserReviewViewHolder
         val data = getItem(position, UserReviewDriverResponse::class.java)
         userReviewViewHolder.tvCustomer.text = data!!.fullName
-        userReviewViewHolder.rtbReview.rating = data!!.vote!!.toFloat()
-        userReviewViewHolder.tvRatingDate.text = DateUtil.formatDate(data!!.createdAt!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
-        userReviewViewHolder.imvAvatar.setAvatar(context!!, data!!.avatar)
-        userReviewViewHolder.tvReview.text = data!!.content
+        userReviewViewHolder.rtbReview.rating = data.vote!!.toFloat()
+        userReviewViewHolder.tvRatingDate.text = DateUtil.formatDate(data.createdAt!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+        userReviewViewHolder.imvAvatar.setAvatar(context!!, data.avatar)
+        userReviewViewHolder.tvReview.text = data.content
     }
 
     class UserReviewViewHolder(itemView: View) : NormalViewHolder(itemView) {

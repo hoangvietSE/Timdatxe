@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.sprinthome.listrequest.driver
+package com.example.anothertimdatxe.sprinthome.listpost.driver
 
 import com.example.anothertimdatxe.base.mvp.BaseView
 import com.example.anothertimdatxe.entity.response.DriverListPostResponse

@@ -13,7 +13,6 @@ import com.example.anothertimdatxe.entity.response.DriverListRequestResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class DriverListRequestAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -41,7 +40,7 @@ class DriverListRequestAdapter(context: Context) : EndlessLoadingRecyclerViewAda
         viewHolder.numberSeat.text = data?.userPost?.numberSeat.toString()
         viewHolder.status.text = data?.strStatus
         viewHolder.time.text = DateUtil.formatDate(data?.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-        viewHolder.date.text = DateUtil.formatDate(data?.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+        viewHolder.date.text = DateUtil.formatDate(data.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
         when (data?.status) {
             Constant.DRIVER_BOOK_PENDING -> {
                 setTextColor(viewHolder.status, R.color.color_pending)

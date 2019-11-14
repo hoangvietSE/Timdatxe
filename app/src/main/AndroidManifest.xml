@@ -40,7 +40,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".sprinthome.HomeActivity"
+            android:name=".sprinthome.home.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".sprintlogin.updateinfo.UpdateInfoActivity"
@@ -74,13 +74,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name=".sprinthome.settings.SettingActivity"
+            android:name=".sprinthome.settings.settingsummary.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".sprinthome.condition.ConditionActivity"
+            android:name=".sprinthome.settings.condition.ConditionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".sprinthome.version.VersionUpdateActivity"
+            android:name=".sprinthome.settings.version.VersionUpdateActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".sprintlogin.changepassword.ChangePasswordActivity"

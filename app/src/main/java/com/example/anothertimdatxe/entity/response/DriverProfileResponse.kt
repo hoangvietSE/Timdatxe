@@ -80,7 +80,7 @@ class DriverProfileResponse : Serializable {
     @SerializedName("instagram_id")
     var instagramId: Int? = null
 
-    @SerializedName("full_name")
+    @SerializedName("fullName")
     var fullName: String? = null
 
     @SerializedName("str_gender")

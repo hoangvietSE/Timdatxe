@@ -73,7 +73,7 @@ data class UserBook(
 	@field:SerializedName("can_finish")
 	val canFinish: Int? = null,
 
-	@field:SerializedName("full_name")
+	@field:SerializedName("fullName")
 	val fullName: String? = null,
 
 	@field:SerializedName("user_id")

@@ -113,7 +113,7 @@ class UserPostDetailResponse : Serializable {
 }
 
 class UserInfo : Serializable {
-        @SerializedName("full_name")
+        @SerializedName("fullName")
         val fullName: String? = ""
         val avatar: String? = ""
         val address: String? = ""
@@ -128,7 +128,7 @@ class DriverInfo : Serializable {
         @SerializedName("id")
         @Expose
         val id: Int? = null
-        @SerializedName("full_name")
+        @SerializedName("fullName")
         @Expose
         val fullName: String? = ""
         @SerializedName("email")
@@ -242,7 +242,7 @@ class DriverCar : Serializable {
         @SerializedName("car_name")
         @Expose
         val carName: String? = ""
-        @SerializedName("full_name")
+        @SerializedName("fullName")
         @Expose
         val fullName: String? = ""
         @SerializedName("driver_id")
@@ -290,8 +290,8 @@ class DriverBook : Serializable {
         val status: Int? = null
         @SerializedName("str_status")
         val str_status: String? = null
-        @SerializedName("full_name")
-        val full_name: String? = null
+        @SerializedName("fullName")
+        val fullName: String? = null
         @SerializedName("str_reason")
         @Expose
         val str_reason: String? = ""

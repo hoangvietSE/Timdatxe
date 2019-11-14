@@ -40,7 +40,7 @@ data class DriverCarDetail(
 	@field:SerializedName("registration_date")
 	val registrationDate: String? = null,
 
-	@field:SerializedName("full_name")
+	@field:SerializedName("fullName")
 	val fullName: String? = null,
 
 	@field:SerializedName("seat_number")

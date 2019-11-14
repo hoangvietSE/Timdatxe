@@ -14,7 +14,7 @@ class UserProfilePresenterImpl(mView: UserProfileView) : BasePresenterImpl<UserP
         val disposable = RetrofitManager.getUserInfo(object : ICallBack<BaseResult<UserData>> {
             override fun onSuccess(result: BaseResult<UserData>?) {
                 val userData = result?.data!!
-                userData.count_books = result?.count_books
+                userData.count_books = result.count_books
                 mView!!.showData(userData)
                 val getProfileSuccess = GetProfileSuccess(true)
                 EventBus.getDefault().post(getProfileSuccess)

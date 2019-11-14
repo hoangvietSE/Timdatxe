@@ -8,9 +8,7 @@ open class BasePresenterImpl<T : BaseView>(mView: T) : BasePresenter {
     private var compositeDisposable = CompositeDisposable()
 
     override fun start() {
-        mView!!.let {
-            it.initView()
-        }
+        mView!!.initView()
     }
 
     override fun destroy() {

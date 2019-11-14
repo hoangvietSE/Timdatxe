@@ -12,7 +12,6 @@ import com.example.anothertimdatxe.entity.response.UserPostResponse
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MapUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class PostCreatedMoreFindCarAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -31,7 +30,7 @@ class PostCreatedMoreFindCarAdapter(context: Context) : EndlessLoadingRecyclerVi
         val mHolder: FindCarViewHolder = holder as FindCarViewHolder
         mHolder.title.text = data?.title
         mHolder.avatar.setAvatar(context!!, data?.avatar)
-        mHolder.start_point.text = MapUtil.getLocationState(context!!, data?.lat_from?.toDouble()!!, data?.lng_from?.toDouble()!!)
+        mHolder.start_point.text = MapUtil.getLocationState(context!!, data?.lat_from?.toDouble()!!, data.lng_from?.toDouble()!!)
         mHolder.end_point.text = MapUtil.getLocationState(context!!, data?.lat_to?.toDouble()!!, data?.lng_to?.toDouble()!!)
         mHolder.seat.text = data!!.number_seat.toString()
         mHolder.time.text = DateUtil.formatDate(data!!.start_time.toString(), DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_7)

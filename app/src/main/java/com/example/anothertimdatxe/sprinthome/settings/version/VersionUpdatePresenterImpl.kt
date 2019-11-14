@@ -1,4 +1,4 @@
-package beetech.com.carbooking.sprinthome.version
+package com.example.anothertimdatxe.sprinthome.settings.version
 
 import com.example.anothertimdatxe.base.mvp.BasePresenterImpl
 import com.example.anothertimdatxe.base.network.ApiException
@@ -9,7 +9,7 @@ import com.example.anothertimdatxe.entity.response.VersionAppResponse
 import com.example.anothertimdatxe.util.ToastUtil
 
 class VersionUpdatePresenterImpl(mView: VersionUpdateView) : BasePresenterImpl<VersionUpdateView>(mView),
-    VersionUpdatePresenter {
+        VersionUpdatePresenter {
     override fun getVersionApp() {
         val disposable = RetrofitManager.getVersionApp(object : ICallBack<BaseResult<List<VersionAppResponse>>> {
             override fun onSuccess(result: BaseResult<List<VersionAppResponse>>?) {

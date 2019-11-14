@@ -12,7 +12,6 @@ import com.example.anothertimdatxe.entity.UserListPostEntity
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
-import com.example.kotlinapplication.EndlessLoadingRecyclerViewAdapter
 
 class UserListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -35,8 +34,8 @@ class UserListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(
         viewHolder.formSeat.text = data?.number_seat.toString()
         viewHolder.formStatus.text = data?.str_status
         viewHolder.formTime.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-        viewHolder.formDate.text = DateUtil.formatDate(data?.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
-        when (data?.status) {
+        viewHolder.formDate.text = DateUtil.formatDate(data.start_time!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+        when (data.status) {
             Constant.USER_POST_PENDING -> {
                 viewHolder.imvStatus.setImageResource(R.drawable.ic_status_pending)
                 setColorStatus(viewHolder.formStatus, R.color.color_pending)

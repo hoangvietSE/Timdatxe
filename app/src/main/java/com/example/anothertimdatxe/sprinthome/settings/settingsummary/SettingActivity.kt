@@ -1,4 +1,4 @@
-package com.example.anothertimdatxe.sprinthome.settings
+package com.example.anothertimdatxe.sprinthome.settings.settingsummary
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -6,16 +6,13 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import beetech.com.carbooking.sprinthome.settings.SettingPresenter
-import beetech.com.carbooking.sprinthome.settings.SettingPresenterImpl
-import beetech.com.carbooking.sprinthome.settings.SettingView
-import beetech.com.carbooking.sprinthome.settings.adapter.SettingAdapter
+import com.example.anothertimdatxe.sprinthome.settings.settingsummary.adapter.SettingAdapter
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.base.adapter.BaseRvListener
-import com.example.anothertimdatxe.sprinthome.condition.ConditionActivity
+import com.example.anothertimdatxe.sprinthome.settings.condition.ConditionActivity
 import com.example.anothertimdatxe.sprinthome.settings.faqs.FaqsActivity
-import com.example.anothertimdatxe.sprinthome.version.VersionUpdateActivity
+import com.example.anothertimdatxe.sprinthome.settings.version.VersionUpdateActivity
 import com.example.anothertimdatxe.sprintlogin.changepassword.ChangePasswordActivity
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
@@ -36,22 +33,22 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingView {
     private val mListener = object : BaseRvListener {
         override fun onItemClick(position: Int) {
             when (position) {
-                SettingActivity.CONDITION_ACTIVITY -> {
+                CONDITION_ACTIVITY -> {
                     startActivity(Intent(this@SettingActivity, ConditionActivity::class.java))
                 }
-                SettingActivity.CHANGE_LANGUAGE_ACTIVITY -> {
+                CHANGE_LANGUAGE_ACTIVITY -> {
                     Toast.makeText(this@SettingActivity, R.string.setting_developing, LENGTH_SHORT).show()
                 }
-                SettingActivity.CHANGE_PASSWORD_ACTIVITY -> {
+                CHANGE_PASSWORD_ACTIVITY -> {
                     startActivity(Intent(this@SettingActivity, ChangePasswordActivity::class.java))
                 }
-                SettingActivity.APPRICATE_APPS_ACTIVITY -> {
+                APPRICATE_APPS_ACTIVITY -> {
                     Toast.makeText(this@SettingActivity, R.string.setting_developing, LENGTH_SHORT).show()
                 }
-                SettingActivity.FAQS_ACTIVITY -> {
+                FAQS_ACTIVITY -> {
                     startActivity(Intent(this@SettingActivity, FaqsActivity::class.java))
                 }
-                SettingActivity.UPDATE_VERSION_ACTIVITY -> {
+                UPDATE_VERSION_ACTIVITY -> {
                     startActivity(Intent(this@SettingActivity, VersionUpdateActivity::class.java))
                 }
             }
@@ -70,7 +67,7 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingView {
         mAdapter = SettingAdapter(this, mListener)
         rv_settings.adapter = mAdapter
         rv_settings.layoutManager =
-                LinearLayoutManager(this, RecyclerView.VERTICAL, false) as RecyclerView.LayoutManager?
+                LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         toolbarTitle?.let {
             it.text = getString(R.string.setting_title)
         }

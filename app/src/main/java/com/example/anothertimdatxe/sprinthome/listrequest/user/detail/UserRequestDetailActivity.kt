@@ -89,7 +89,7 @@ class UserRequestDetailActivity : BaseActivity<UserRequestDetailPresenter>(), Us
                         dialog.tv_current_date.text = DateUtil.formatDateToString(calendar.time, DateUtil.DATE_FORMAT_24)
                         val day = DateUtil.calculateDayBetweenTwoDate(dialog.tv_current_date.text.toString(), dialog.tv_starting_date.text.toString(), DateUtil.DATE_FORMAT_24)
                         val hours = DateUtil.calculateHoursBetweenTwoDate(dialog.tv_current_date.text.toString(), dialog.tv_starting_date.text.toString(), DateUtil.DATE_FORMAT_24)
-                        dialog.tv_time_remain.text = "${day} ngày ${hours} giờ"
+                        dialog.tv_time_remain.text = "$day ngày $hours giờ"
                         dialog.tv_money_refund.text =
                                 if (day > 5) {
                                     NumberUtil.formatNumber(totalMoney.toString())
@@ -135,35 +135,35 @@ class UserRequestDetailActivity : BaseActivity<UserRequestDetailPresenter>(), Us
 
     override fun showUserRequestDetail(data: UserRequestDetailResponse) {
         mUserRequestDetailResponse = data
-        tv_starting_point.text = data?.driverPost?.startPoint
-        tv_ending_point.text = data?.driverPost?.endPoint
-        row_code.setDetail(data?.userBook?.code)
-        row_date.setDetail(DateUtil.formatDate(data?.userBook?.bookTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_24))
-        row_seat.setDetail(data?.userBook?.numberSeat.toString())
-        when (data?.driverPost?.type) {
+        tv_starting_point.text = data.driverPost?.startPoint
+        tv_ending_point.text = data.driverPost?.endPoint
+        row_code.setDetail(data.userBook?.code)
+        row_date.setDetail(DateUtil.formatDate(data.userBook?.bookTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_24))
+        row_seat.setDetail(data.userBook.numberSeat.toString())
+        when (data.driverPost?.type) {
             Constant.CONVENIENT_TRIP -> {
-                totalMoney = data?.driverPost?.regularPrice?.times(data?.userBook?.numberSeat!!)!!
+                totalMoney = data.driverPost.regularPrice?.times(data.userBook.numberSeat!!)!!
                 row_type_trip.setDetail("Tiện chuyến")
                 row_one_seat_money.visible()
-                row_one_seat_money.setDetail(NumberUtil.formatNumber(data?.driverPost?.regularPrice.toString()))
-                row_money.setDetail(NumberUtil.formatNumber(totalMoney?.toString()))
+                row_one_seat_money.setDetail(NumberUtil.formatNumber(data.driverPost.regularPrice.toString()))
+                row_money.setDetail(NumberUtil.formatNumber(totalMoney.toString()))
             }
             Constant.PRIVATE_TRIP -> {
                 row_type_trip.setDetail("Xe riêng")
                 row_one_seat_money.gone()
-                row_money.setDetail(NumberUtil.formatNumber(data?.driverPost?.privatePrice2.toString()))
+                row_money.setDetail(NumberUtil.formatNumber(data.driverPost.privatePrice2.toString()))
             }
         }
-        if (data?.driverPost?.highWay == 1) {
+        if (data.driverPost?.highWay == 1) {
             row_way.visible()
         } else {
             row_way.gone()
         }
-        tv_phone_driver.text = data?.driver?.phone
-        row_name_driver.setDetail(data?.driver?.fullName)
-        tv_detail_name_car.text = data?.driverCar?.fullName
-        row_license_plate.setDetail(data?.driverCar?.licensePlate)
-        when (data?.userBook?.status) {
+        tv_phone_driver.text = data.driver?.phone
+        row_name_driver.setDetail(data.driver?.fullName)
+        tv_detail_name_car.text = data.driverCar?.fullName
+        row_license_plate.setDetail(data.driverCar?.licensePlate)
+        when (data.userBook.status) {
             Constant.USER_BOOK_PENDING -> {
 
             }
@@ -179,7 +179,7 @@ class UserRequestDetailActivity : BaseActivity<UserRequestDetailPresenter>(), Us
                 hideInfo()
             }
         }
-        when (data?.driverPost?.status) {
+        when (data.driverPost?.status) {
             Constant.DRIVER_POST_PENDING -> {
             }
             Constant.DRIVER_POST_PUBLISHED -> {

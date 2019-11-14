@@ -37,12 +37,12 @@ class SpinnerCarNameAdapter(var context: Context, var mListName: MutableList<Dri
     }
 
     fun clear() {
-        mListName?.clear()
+        mListName.clear()
         notifyDataSetChanged()
     }
 
     fun addItem(item: DriverCarBrandDetailResponse) {
-        mListName?.add(item)
+        mListName.add(item)
         notifyDataSetChanged()
     }
 }

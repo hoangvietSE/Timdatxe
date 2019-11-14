@@ -37,8 +37,8 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
                 Toast.makeText(mView as Context, R.string.login_success, LENGTH_LONG).show()
                 mView!!.hideLoading()
                 result?.data!!.isUser = true
-                CarBookingSharePreference.setUserData(result?.data!!)
-                if(result?.data!!.full_name.isNullOrEmpty()){
+                CarBookingSharePreference.setUserData(result.data!!)
+                if(result?.data!!.fullName.isEmpty()){
                     mView!!.goToUpdateInfo()
                 }
                 mView!!.goToNextScreen()
@@ -60,7 +60,7 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
                 mView!!.hideLoading()
                 result?.data!!.isDriver = true
                 CarBookingSharePreference.setUserData(result?.data!!)
-                if(result?.data!!.full_name.isNullOrEmpty()){
+                if(result?.data!!.fullName.isNullOrEmpty()){
                     mView!!.goToUpdateInfo()
                 }
                 mView!!.goToNextScreen()
@@ -76,14 +76,14 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
         addDispose(disposable)
     }
 
-    override fun loginSocial(socialId: String, full_name: String, email: String, socialType: String) {
+    override fun loginSocial(socialId: String, fullName: String, email: String, socialType: String) {
         mView!!.showLoading()
         var request: LoginFacebookRequest = LoginFacebookRequest()
         request.social_id = socialId
         request.device = "android"
         request.device_token = ""
         request.email = email
-        request.full_name = full_name
+        request.fullName = fullName
         request.social_type = socialType
         var disposable = RetrofitManager.loginSocial(object : ICallBack<BaseResult<UserData>> {
             override fun onSuccess(result: BaseResult<UserData>?) {

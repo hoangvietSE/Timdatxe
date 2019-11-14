@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_driver_update_profile.*
 import java.util.*
 
 class DriverUpdateProfileActivity : BaseActivity<DriverUpdateProfilePresenter>(), DriverUpdateProfileView,
-        DatePickerDialogWidget.onSetDateSuccessListener {
+        DatePickerDialogWidget.OnSetDateSuccessListener {
     private var data: DriverProfileResponse? = null
     private var mListGender: ArrayList<String>? = null
     private var mSpinnerGenderAdapter: SpinnerGenderAdapter? = null
@@ -183,7 +183,7 @@ class DriverUpdateProfileActivity : BaseActivity<DriverUpdateProfilePresenter>()
 
     private fun setData(data: DriverProfileResponse?) {
         imv_avatar.setAvatar(this, data!!.avatar)
-        edt_name.text = data?.fullName ?: ""
+        edt_name.text = data.fullName ?: ""
         edt_email.text = data?.email ?: ""
         edt_phone.text = data?.phone ?: ""
         edt_dob.text = data?.birthday ?: ""
