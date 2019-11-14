@@ -58,7 +58,7 @@ object MapUtil {
 
     fun getDistance(value: String): String {
         return try {
-            return value.replace(" km", "")
+            return value.replace(" km","").replace(",",".")
         } catch (e: Exception) {
             ""
         }

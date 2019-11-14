@@ -56,7 +56,7 @@ class UserCreatePostActivity : BaseActivity<UserCreatePostPresenter>(), UserCrea
     }
 
     override fun setListener() {
-        btn_status.setOnClickListener {
+        btn_create_post.setOnClickListener {
             callApiCreatePost()
         }
         tv_date.setOnClickListener {

@@ -1,17 +1,21 @@
 package com.example.anothertimdatxe.sprinthome.userfindcar
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.PostCreatedMoreFindCarAdapter
+import com.example.anothertimdatxe.adapter.RecyclerViewAdapter
 import com.example.anothertimdatxe.base.fragment.BaseFragment
 import com.example.anothertimdatxe.entity.response.UserPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
+import com.example.anothertimdatxe.sprinthome.listrequest.driver.detail.DriverRequestDetailActivity
 import kotlinx.android.synthetic.main.fragment_user_find_car.*
 
-class UserFindCarFragment : BaseFragment<UserFindCarPresenter>(), UserFindCarView {
+class UserFindCarFragment : BaseFragment<UserFindCarPresenter>(), UserFindCarView,
+    RecyclerViewAdapter.OnItemClickListener{
     private var mPostCreatedMoreFindCarAdapter: PostCreatedMoreFindCarAdapter? = null
 
     override val layoutRes: Int
@@ -37,6 +41,7 @@ class UserFindCarFragment : BaseFragment<UserFindCarPresenter>(), UserFindCarVie
     private fun initAdapter() {
         mPostCreatedMoreFindCarAdapter = PostCreatedMoreFindCarAdapter(mContext)
         recycler_view_user_find_car.adapter = mPostCreatedMoreFindCarAdapter
+        mPostCreatedMoreFindCarAdapter?.addOnItemClickListener(this)
         recycler_view_user_find_car.layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
     }
 
@@ -53,6 +58,15 @@ class UserFindCarFragment : BaseFragment<UserFindCarPresenter>(), UserFindCarVie
             no_result_user_find_car.visible()
         } else {
             no_result_user_find_car.gone()
+        }
+    }
+
+    override fun onItemClick(adapter: RecyclerView.Adapter<*>, viewHolder: RecyclerView.ViewHolder?, viewType: Int, position: Int) {
+        val data = mPostCreatedMoreFindCarAdapter?.getItem(position, UserPostResponse::class.java)
+        if (!avoidDoubleClick()) {
+            startActivity(Intent(context, DriverRequestDetailActivity::class.java).apply {
+                putExtra(DriverRequestDetailActivity.USER_POST_ID, data?.id)
+            })
         }
     }
 }
