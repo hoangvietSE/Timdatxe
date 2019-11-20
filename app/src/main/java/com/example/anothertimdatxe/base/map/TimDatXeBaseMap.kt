@@ -29,7 +29,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.Status
+import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -157,7 +157,6 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
         when (requestCode) {
             REQUEST_CODE_PERMISSION -> {
                 val isHasPermission = false
-
                 if (grantResults.isNotEmpty()) {
                     grantResults.forEach {
                         if (it != PackageManager.PERMISSION_GRANTED) {
@@ -244,8 +243,8 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                 startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
             }
 
-            override fun startResolution(status: Status) {
-                status.startResolutionForResult(this@TimDatXeBaseMap, GpsUtil.GPS_REQUEST)
+            override fun startResolution(rea: ResolvableApiException) {
+                rea.startResolutionForResult(this@TimDatXeBaseMap, GpsUtil.GPS_REQUEST);
             }
 
             override fun gpsStatus(isGPSEnable: Boolean) {
