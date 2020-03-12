@@ -10,17 +10,11 @@ import com.example.anothertimdatxe.base.util.GlideApp
 import kotlinx.android.synthetic.main.item_driver_car_image.view.*
 
 class DriverCarPagerAdapter(var context: Context, var mListImage: ArrayList<String>) : PagerAdapter() {
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
-    }
+    override fun isViewFromObject(view: View, `object`: Any) = view == `object`
 
-    override fun getCount(): Int {
-        return mListImage.size
-    }
+    override fun getCount() = mListImage.size
 
-    override fun getItemPosition(`object`: Any): Int {
-        return POSITION_NONE
-    }
+    override fun getItemPosition(`object`: Any) = POSITION_NONE
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         var view = LayoutInflater.from(context).inflate(R.layout.item_driver_car_image, container, false)

@@ -4,7 +4,6 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.adapter.IntroduceAdapter
-import com.example.anothertimdatxe.adapter.RedirectListener
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
@@ -32,19 +31,17 @@ class IntroduceActivity : BaseActivity<IntroducePresenter>(), IntroduceView {
     }
 
     private fun initAdapter() {
-        mIntroduceAdapter = IntroduceAdapter(this, mListImage!!, object : RedirectListener {
-            override fun goToHomeScreen() {
-                if (CarBookingSharePreference.getUserData()?.isDriver!!) {
-                    CarBookingSharePreference.setWelcomeDriverApp()
-                } else {
-                    CarBookingSharePreference.setWelcomeUserApp()
-                }
-                startActivityAndClearTask(HomeActivity::class.java)
-                clearCache()
-                finish()
+        mIntroduceAdapter = IntroduceAdapter(this, mListImage!!)
+        mIntroduceAdapter?.onItemClick = {
+            if (CarBookingSharePreference.getUserData()?.isDriver!!) {
+                CarBookingSharePreference.setWelcomeDriverApp()
+            } else {
+                CarBookingSharePreference.setWelcomeUserApp()
             }
-
-        })
+            startActivityAndClearTask(HomeActivity::class.java)
+            clearCache()
+            finish()
+        }
         view_pager_introduce.adapter = mIntroduceAdapter
         indicator.setupWithViewPager(view_pager_introduce)
         view_pager_introduce.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

@@ -34,6 +34,7 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
     override val layoutRes: Int
         get() = R.layout.activity_user_confirm_booking
     private var driverPostId: Int = -1
+        get() = intent.getIntExtra(EXTRA_DRIVER_POST_ID, -1)
     private var mDatePickerDialogWidget: DatePickerDialogWidget? = null
     private var mTimePickerDialogWidget: TimePickerDialogWidget? = null
     private var mNumberSeatAdapter: SpinnerSeatAdapter? = null
@@ -49,7 +50,6 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
 
     override fun initView() {
         setToolbar()
-        getDataIntent()
         initDialog()
         initSpinner()
         fetchDataBooking()
@@ -141,10 +141,6 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
         toolbarTitle?.let {
             it.text = resources.getString(R.string.user_confirm_booking_toolbar_title).toUpperCase()
         }
-    }
-
-    private fun getDataIntent() {
-        driverPostId = intent.getIntExtra(EXTRA_DRIVER_POST_ID, -1)
     }
 
     private fun initDialog() {

@@ -54,17 +54,6 @@ class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePrese
     }
 
     override fun paymentBooking(userBookRequest: UserBookingRequest, timeBookingRequest: TimeBookingRequest) {
-        mUserBookingRequest = userBookRequest
-        mUserBookingRequest?.distance = mUserConfirmBookingResponse?.distance
-        mUserBookingRequest?.driverId = mUserConfirmBookingResponse?.driverId
-        mUserBookingRequest?.driverPostId = mUserConfirmBookingResponse?.id
-        mUserBookingRequest?.emptySeat = mUserConfirmBookingResponse?.emptySeat
-        mUserBookingRequest?.latFrom = mUserConfirmBookingResponse?.latFrom
-        mUserBookingRequest?.lngFrom = mUserConfirmBookingResponse?.lngFrom
-        mUserBookingRequest?.latTo = mUserConfirmBookingResponse?.latTo
-        mUserBookingRequest?.lngTo = mUserConfirmBookingResponse?.lngTo
-        mUserBookingRequest?.note = mUserConfirmBookingResponse?.description ?: ""
-        mUserBookingRequest?.type = mUserConfirmBookingResponse?.type
 //        if (mUserConfirmBookingResponse?.type == Constant.CONVENIENT_TRIP) {
 //            mUserBookingRequest?.price = mUserConfirmBookingResponse?.regularPrice
 //            mUserBookingRequest?.totalPrice = mUserConfirmBookingResponse?.regularPrice?.toInt()?.times(edt_number_seat.text.toString().toInt())?.toString()
@@ -98,6 +87,27 @@ class UserConfirmBookingPresenterImpl(mView: UserConfirmBookingView) : BasePrese
             return
         }
         validateTimeRequest(timeBookingRequest)
+        mUserBookingRequest = userBookRequest
+        mUserBookingRequest?.distance = distance
+        mUserBookingRequest?.driverId = mUserConfirmBookingResponse?.driverId
+        mUserBookingRequest?.driverPostId = mUserConfirmBookingResponse?.id
+        mUserBookingRequest?.emptySeat = mUserConfirmBookingResponse?.emptySeat
+        mUserBookingRequest?.numberSeat = numberSeat
+        mUserBookingRequest?.latFrom = mUserConfirmBookingResponse?.latFrom
+        mUserBookingRequest?.lngFrom = mUserConfirmBookingResponse?.lngFrom
+        mUserBookingRequest?.latTo = mUserConfirmBookingResponse?.latTo
+        mUserBookingRequest?.lngTo = mUserConfirmBookingResponse?.lngTo
+        mUserBookingRequest?.note = mUserConfirmBookingResponse?.description ?: ""
+        mUserBookingRequest?.type = typeTrip
+
+        if (typeTrip == Constant.PRIVATE_TRIP) {
+            mUserBookingRequest?.price = currentPrice.toString()
+            mUserBookingRequest?.totalPrice = currentPrice.toString()
+        } else {
+            mUserBookingRequest?.price = currentPrice.toString()
+            mUserBookingRequest?.totalPrice = (currentPrice * numberSeat).toString()
+        }
+
     }
 
     private fun validateTimeRequest(timeBookingRequest: TimeBookingRequest) {

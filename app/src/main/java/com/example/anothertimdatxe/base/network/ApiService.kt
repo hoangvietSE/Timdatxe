@@ -338,4 +338,7 @@ interface ApiService {
     fun driverRefreshTokenInterceptor(@Header(RequestParam.AUTHORIZATION_HEADER) authToken: String)
             : Call<BaseResponse<RefreshTokenResponse>>
 
+    @POST(ApiConstant.USER_BOOKS)
+    @Headers("Content-Type: application/json")
+    fun userBooks()
 }

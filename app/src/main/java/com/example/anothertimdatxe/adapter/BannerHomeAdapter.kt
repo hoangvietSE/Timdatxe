@@ -12,17 +12,13 @@ import com.example.anothertimdatxe.extension.setImageUrl
 import kotlinx.android.synthetic.main.item_home_banner.view.*
 
 class BannerHomeAdapter(var context: Context, var mListBanner: List<BannerHomeResponse>) : PagerAdapter() {
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object` as View
-    }
+    override fun isViewFromObject(view: View, `object`: Any) = view == `object` as View
 
-    override fun getCount(): Int {
-        return mListBanner.size
-    }
+    override fun getCount() = mListBanner.size
 
-    override fun getItemPosition(`object`: Any): Int {
-        return POSITION_NONE
-    }
+
+    override fun getItemPosition(`object`: Any) = POSITION_NONE
+
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)

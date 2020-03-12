@@ -12,18 +12,16 @@ import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.visible
 import kotlinx.android.synthetic.main.item_introduce.view.*
 
-class IntroduceAdapter(var context: Context, var mListImage: ArrayList<String>, var mListener: RedirectListener) : PagerAdapter() {
+class IntroduceAdapter(var context: Context, var mListImage: ArrayList<String>) : PagerAdapter() {
     companion object {
         const val toturial_url_prefix = "http://api.timdatxe.com/uploads/tutorials/"
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object` as View
-    }
+    var onItemClick: (() -> Unit)? = null
 
-    override fun getCount(): Int {
-        return mListImage.size
-    }
+    override fun isViewFromObject(view: View, `object`: Any) = view == `object` as View
+
+    override fun getCount() = mListImage.size
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
@@ -44,17 +42,11 @@ class IntroduceAdapter(var context: Context, var mListImage: ArrayList<String>, 
             view.btn_go_to_home.gone()
         }
         view.btn_go_to_home.setOnClickListener {
-            mListener.goToHomeScreen()
+            onItemClick?.invoke() ?: throw NullPointerException("Must be initialize item click listener")
         }
         container.addView(view)
         return view
     }
 
-    override fun getItemPosition(`object`: Any): Int {
-        return POSITION_NONE
-    }
-}
-
-interface RedirectListener {
-    fun goToHomeScreen()
+    override fun getItemPosition(`object`: Any) = POSITION_NONE
 }

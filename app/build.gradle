@@ -18,18 +18,17 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\Hoang Viet\\Desktop\\keydebug.jks')
+            storeFile file('../keystore/keydebug.jks')
             storePassword "Aa234566"
             keyAlias "keyDebug"
             keyPassword "Aa234566"
         }
         release {
-            storeFile file('C:\\Users\\Hoang Viet\\Desktop\\keyrelease.jks')
+            storeFile file('../keystore/keyrelease.jks')
             storePassword "Aa234566"
             keyAlias "keyRelease"
             keyPassword "Aa234566"
         }
-
     }
     buildTypes {
         release {
@@ -61,6 +60,10 @@ android {
             applicationId "com.example.anothertimdatxe"
             resValue "string", "app_name", "Tìm đặt xe"
         }
+    }
+
+    androidExtensions {
+        experimental = true
     }
 
 }

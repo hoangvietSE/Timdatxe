@@ -20,7 +20,6 @@ import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.presentation.book.user.UserBookDetailActivity
 import com.example.anothertimdatxe.sprinthome.carfinduser.CarFindUserFragment
 import com.example.anothertimdatxe.sprinthome.city_post.CityPostActivity
-import com.example.anothertimdatxe.sprinthome.homefragment.listener.OnItemListner
 import com.example.anothertimdatxe.sprinthome.hotcities.HotCitiesActivity
 import com.example.anothertimdatxe.sprinthome.userfindcar.UserFindCarFragment
 import com.example.anothertimdatxe.sprintsearch.driver.driversearch.DriverSearchActivity
@@ -229,15 +228,13 @@ class HomeFragment : BaseFragment<HomeFragmentPresenter>(), HomeFragmentView,
 
     override fun showListHotCities(data: ArrayList<HotCitiesResponse>) {
         mListHotCities = data
-        mHotCitiesHomeAdapter = HotCitiesHomeAdapter(context!!, mListHotCities!!, object : OnItemListner {
-            override fun onItemClick(position: Int) {
-                startActivity(Intent(context!!, CityPostActivity::class.java).apply {
-                    putExtra(CityPostActivity.BANNER_CITY_POST, mListHotCities!![position].app_image)
-                    putExtra(CityPostActivity.CITY_POST, mListHotCities!![position].name)
-                })
-            }
-
-        })
+        mHotCitiesHomeAdapter = HotCitiesHomeAdapter(context!!, mListHotCities!!)
+        mHotCitiesHomeAdapter?.onItemClick = { position ->
+            startActivity(Intent(context!!, CityPostActivity::class.java).apply {
+                putExtra(CityPostActivity.BANNER_CITY_POST, mListHotCities!![position].app_image)
+                putExtra(CityPostActivity.CITY_POST, mListHotCities!![position].name)
+            })
+        }
         vp_city.adapter = mHotCitiesHomeAdapter
         vp_city.setMultiScreen(0.7f)
         vp_city.setItemRatio(0.8)

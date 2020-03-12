@@ -9,26 +9,20 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.entity.response.HotCitiesResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.setImageUrl
-import com.example.anothertimdatxe.sprinthome.homefragment.listener.OnItemListner
 import kotlinx.android.synthetic.main.item_hot_cities_home.view.*
 
-class HotCitiesHomeAdapter(var context: Context, var mListHotCity: List<HotCitiesResponse>, var mOnItemListner: OnItemListner) : PagerAdapter() {
+class HotCitiesHomeAdapter(var context: Context, var mListHotCity: List<HotCitiesResponse>) : PagerAdapter() {
+    var onItemClick: ((Int) -> Unit)? = null
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object` as View
-    }
+    override fun isViewFromObject(view: View, `object`: Any) = view == `object` as View
 
-    override fun getCount(): Int {
-        return mListHotCity.size
-    }
+    override fun getCount() = mListHotCity.size
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
     }
 
-    override fun getItemPosition(`object`: Any): Int {
-        return POSITION_NONE
-    }
+    override fun getItemPosition(`object`: Any) = POSITION_NONE
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = context.inflate(R.layout.item_hot_cities_home, container, false)
@@ -37,7 +31,7 @@ class HotCitiesHomeAdapter(var context: Context, var mListHotCity: List<HotCitie
         val params = LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT)
         view.imv_home_banner.layoutParams = params
         view.imv_home_banner.setOnClickListener {
-            mOnItemListner.onItemClick(position)
+            onItemClick?.invoke(position)
         }
         container.addView(view)
         return view
