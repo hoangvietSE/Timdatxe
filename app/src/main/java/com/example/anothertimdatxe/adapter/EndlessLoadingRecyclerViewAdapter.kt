@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class EndlessLoadingRecyclerViewAdapter(context: Context, enableSelectedMode: Boolean) :
-    RecyclerViewAdapter(context, enableSelectedMode) {
+        RecyclerViewAdapter(context, enableSelectedMode) {
 
     private var loadingMoreListener: OnLoadingMoreListener? = null
     private var disableLoadMore = false

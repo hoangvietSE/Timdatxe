@@ -9,37 +9,43 @@ import com.example.anothertimdatxe.sprinthome.city_post.city_post_fragment.CityP
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 
 class CityPostAdapter(fm: FragmentManager, var context: Context, var city: String) : FragmentStatePagerAdapter(fm) {
-    private var mListFragment: ArrayList<CityPostFragment>? = null
+    companion object {
+        const val PAGE_INDEX_FIRST = 0
+        const val PAGE_INDEX_TWO = 1
+    }
+
+    private lateinit var tabFragmentCreators: Map<Int, () -> Fragment>
 
     init {
-        if(CarBookingSharePreference.getUserData()!!.isDriver){
-            mListFragment = arrayListOf(
-                    CityPostFragment.getInstance("user", city),
-                    CityPostFragment.getInstance("driver", city)
-            )
-        }else if(CarBookingSharePreference.getUserData()!!.isUser){
-            mListFragment = arrayListOf(
-                    CityPostFragment.getInstance("driver", city)
-            )
+        when {
+            CarBookingSharePreference.getUserData()!!.isDriver ->
+                tabFragmentCreators = mapOf(
+                        PAGE_INDEX_FIRST to { CityPostFragment.getInstance("user", city) },
+                        PAGE_INDEX_TWO to { CityPostFragment.getInstance("driver", city) })
+
+            CarBookingSharePreference.getUserData()!!.isUser ->
+                tabFragmentCreators = mapOf(
+                        PAGE_INDEX_FIRST to { CityPostFragment.getInstance("driver", city) }
+                )
         }
     }
 
-    override fun getItem(position: Int): Fragment {
-        return mListFragment!![position]
-    }
+    override fun getItem(position: Int) = tabFragmentCreators[position]?.invoke()
+            ?: throw IndexOutOfBoundsException()
 
-    override fun getCount(): Int {
-        return mListFragment?.size!!
-    }
+    override fun getCount() = tabFragmentCreators.size
 
     override fun getPageTitle(position: Int): CharSequence? {
-        if(CarBookingSharePreference.getUserData()!!.isDriver){
-            if (position == 0) {
-                return context.resources.getString(R.string.city_post_tab_one)
-            } else {
-                return context.resources.getString(R.string.city_post_tab_two)
+        return when {
+            CarBookingSharePreference.getUserData()!!.isDriver -> {
+                return when (position) {
+                    PAGE_INDEX_FIRST -> context.resources.getString(R.string.city_post_tab_one)
+                    else -> context.resources.getString(R.string.city_post_tab_two)
+                }
+            }
+            else -> {
+                context.resources.getString(R.string.city_post_tab_two)
             }
         }
-        return context.resources.getString(R.string.city_post_tab_two)
     }
 }

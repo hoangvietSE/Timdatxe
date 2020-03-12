@@ -16,7 +16,6 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
 
     private var listWrapperModels: ArrayList<ModelWrapper>? = null
     private var listWrapperModelsBackup: ArrayList<ModelWrapper>? = null
-
     val inflater: LayoutInflater
     private val onItemClickListeners: ArrayList<OnItemClickListener>
     private var onItemTouchChangeListener: OnItemTouchChangedListener? = null
@@ -383,7 +382,9 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
         fun onItemRelease(viewHolder: RecyclerView.ViewHolder?, viewType: Int)
     }
 
-    open class NormalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    open class NormalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        open fun bind(data: Any) {}
+    }
 
     class ModelWrapper(model: Any?, internal var viewType: Int) : Cloneable {
         internal var id = idGenerator.getAndIncrement()

@@ -13,9 +13,8 @@ import com.example.anothertimdatxe.extension.inflate
 import kotlinx.android.synthetic.main.item_hot_cities.view.*
 
 class HotCitiesAdapter(context: Context, var mListener: BaseRvListener) : BaseAdapter<HotCitiesResponse, HotCitiesAdapter.HotCitiesViewHolder>(context) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotCitiesViewHolder {
-        return HotCitiesViewHolder(context, context.inflate(R.layout.item_hot_cities, parent, false), mListener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            HotCitiesViewHolder(context, context.inflate(R.layout.item_hot_cities, parent, false), mListener)
 
     class HotCitiesViewHolder(var context: Context, itemView: View, mListener: BaseRvListener) : BaseViewHolder<HotCitiesResponse>(itemView, mListener) {
         override fun bindData(data: HotCitiesResponse) {
