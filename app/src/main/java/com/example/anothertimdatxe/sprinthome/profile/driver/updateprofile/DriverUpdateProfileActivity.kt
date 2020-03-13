@@ -23,6 +23,7 @@ import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.DialogUtil
 import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_driver_update_profile.*
 import java.util.*
 
@@ -269,7 +270,7 @@ class DriverUpdateProfileActivity : BaseActivity<DriverUpdateProfilePresenter>()
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-            ToastUtil.show(resources.getString(R.string.request_read_external_storeage))
+            toast(resources.getString(R.string.request_read_external_storeage))
         } else {
             selectImageFromAlbum(requestCode)
         }
@@ -337,7 +338,7 @@ class DriverUpdateProfileActivity : BaseActivity<DriverUpdateProfilePresenter>()
     }
 
     override fun onDateError() {
-        ToastUtil.show(resources.getString(R.string.driver_update_profile_date_error))
+        toast(resources.getString(R.string.driver_update_profile_date_error))
     }
 
     override fun onAddressError() {
@@ -350,7 +351,7 @@ class DriverUpdateProfileActivity : BaseActivity<DriverUpdateProfilePresenter>()
     }
 
     override fun onUpdateSuccess() {
-        ToastUtil.show(resources.getString(R.string.driver_update_profile_success))
+        toast(resources.getString(R.string.driver_update_profile_success))
         finish()
     }
 

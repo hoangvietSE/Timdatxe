@@ -24,15 +24,9 @@ class SpinnerCarAdapter(var context: Context, var data: ArrayList<DriverCar>) : 
         return view
     }
 
-    override fun getItem(position: Int): String {
-        return data[position].carName!!
-    }
+    override fun getItem(position: Int) = data[position].carName
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int) = position.toLong()
 
-    override fun getCount(): Int {
-        return data.size
-    }
+    override fun getCount() = data.size
 }

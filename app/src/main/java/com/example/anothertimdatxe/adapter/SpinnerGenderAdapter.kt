@@ -21,15 +21,9 @@ class SpinnerGenderAdapter(var context: Context, var mListItem: ArrayList<String
         return view
     }
 
-    override fun getItem(position: Int): Any {
-        return mListItem[position]
-    }
+    override fun getItem(position: Int) = mListItem[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int) = position.toLong()
 
-    override fun getCount(): Int {
-        return mListItem.size
-    }
+    override fun getCount() = mListItem.size
 }

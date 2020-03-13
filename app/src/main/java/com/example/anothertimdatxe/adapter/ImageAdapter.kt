@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.DriverCarImage
 import com.example.anothertimdatxe.extension.inflate
+import com.soict.hoangviet.baseproject.extension.loadImage
+import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_add.view.*
 import kotlinx.android.synthetic.main.item_car_image.view.*
 
@@ -19,21 +20,16 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == VIEW_TYPE_BTN_ADD) {
-            return AddButtonViewHolder(context.inflate(R.layout.item_add, parent, false))
-        } else if (viewType == VIEW_TYPE_IMAGE) {
-            return ImageViewHolder(context.inflate(R.layout.item_car_image, parent, false))
+        return when (viewType) {
+            VIEW_TYPE_BTN_ADD -> AddButtonViewHolder(context.inflate(R.layout.item_add, parent, false))
+            VIEW_TYPE_IMAGE -> ImageViewHolder(context.inflate(R.layout.item_car_image, parent, false))
+            else -> ImageViewHolder(context.inflate(R.layout.item_default, parent, false))
         }
-        return ImageViewHolder(context.inflate(R.layout.item_default, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return mList.size
-    }
+    override fun getItemCount() = mList.size
 
-    override fun getItemViewType(position: Int): Int {
-        return mList.get(position).type
-    }
+    override fun getItemViewType(position: Int) = mList.get(position).type
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (mList[position].type) {
@@ -48,11 +44,10 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
             }
             VIEW_TYPE_IMAGE -> {
                 val imageHolder = holder as ImageViewHolder
-                GlideApp.with(context)
-                        .load(mList[position].uriImage)
-                        .placeholder(R.drawable.img_default)
-                        .error(R.drawable.img_default)
-                        .into(imageHolder.imvCar)
+                imageHolder.imvCar.loadImage(
+                        context,
+                        mList[position].uriImage
+                )
                 if (imageHolder.btnCancel != null) {
                     imageHolder.btnCancel.setOnClickListener {
                         mListener.onCancelClick(imageHolder.adapterPosition)
@@ -63,13 +58,12 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
     }
 
 
-    class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ImageViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView!!), LayoutContainer {
         val btnCancel: ImageView = itemView.btn_cancel
         val imvCar: ImageView = itemView.iv_car
-
     }
 
-    class AddButtonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class AddButtonViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView!!), LayoutContainer {
         val imvAdd: ImageView = itemView.iv_add
     }
 
@@ -98,11 +92,7 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
         return false
     }
 
-    fun getListSize(): Int {
-        return mList.size
-    }
-
-
+    fun getListSize() = mList.size
 }
 
 interface OnClickListener {

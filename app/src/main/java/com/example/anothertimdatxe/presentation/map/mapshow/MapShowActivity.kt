@@ -8,6 +8,7 @@ import com.example.anothertimdatxe.util.ToastUtil
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_map_show.*
 
 class MapShowActivity : TimDatXeBaseMap<MapShowPresenter>(), MapShowView {
@@ -76,6 +77,6 @@ class MapShowActivity : TimDatXeBaseMap<MapShowPresenter>(), MapShowView {
     }
 
     override fun routeFail() {
-        ToastUtil.show("Có lỗi xảy ra, vui lòng thử lại sau!")
+        toast("Có lỗi xảy ra, vui lòng thử lại sau!")
     }
 }

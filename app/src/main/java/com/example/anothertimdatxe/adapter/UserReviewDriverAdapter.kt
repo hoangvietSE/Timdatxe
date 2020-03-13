@@ -3,15 +3,14 @@ package com.example.anothertimdatxe.adapter
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.entity.response.UserReviewDriverResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.util.DateUtil
-import kotlinx.android.synthetic.main.item_review_driver.view.*
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_review_driver.*
 
 class UserReviewDriverAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(context, false) {
     override fun initLoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -26,20 +25,18 @@ class UserReviewDriverAdapter(context: Context) : EndlessLoadingRecyclerViewAdap
     }
 
     override fun bindNormalViewHolder(holder: NormalViewHolder, position: Int) {
-        val userReviewViewHolder = holder as UserReviewViewHolder
         val data = getItem(position, UserReviewDriverResponse::class.java)
-        userReviewViewHolder.tvCustomer.text = data!!.fullName
-        userReviewViewHolder.rtbReview.rating = data.vote!!.toFloat()
-        userReviewViewHolder.tvRatingDate.text = DateUtil.formatDate(data.createdAt!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
-        userReviewViewHolder.imvAvatar.setAvatar(context!!, data.avatar)
-        userReviewViewHolder.tvReview.text = data.content
+        holder.bind(data!!)
     }
 
-    class UserReviewViewHolder(itemView: View) : NormalViewHolder(itemView) {
-        val tvCustomer: TextView = itemView.tv_customer
-        val rtbReview: me.zhanghai.android.materialratingbar.MaterialRatingBar = itemView.rtb_review
-        val tvRatingDate: TextView = itemView.tv_rating_date
-        val tvReview: TextView = itemView.tv_review
-        val imvAvatar: ImageView = itemView.imv_avatar
+    class UserReviewViewHolder(override val containerView: View?) : NormalViewHolder(containerView!!), LayoutContainer {
+        override fun bind(data: Any) {
+            data as UserReviewDriverResponse
+            tv_customer.text = data.fullName
+            rtb_review.rating = data.vote!!.toFloat()
+            tv_rating_date.text = DateUtil.formatDate(data.createdAt!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+            imv_avatar.setAvatar(itemView.context, data.avatar)
+            tv_review.text = data.content
+        }
     }
 }

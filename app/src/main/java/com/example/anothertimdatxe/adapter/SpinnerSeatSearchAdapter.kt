@@ -21,15 +21,9 @@ class SpinnerSeatSearchAdapter(var context: Context, var data: List<String>) : B
         return view
     }
 
-    override fun getItem(position: Int): Any {
-        return data[position]
-    }
+    override fun getItem(position: Int) = data[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int) = position.toLong()
 
-    override fun getCount(): Int {
-        return data.size
-    }
+    override fun getCount() = data.size
 }

@@ -27,6 +27,7 @@ import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.GifSizeFilter
 import com.example.anothertimdatxe.widget.Glide4Engine
+import com.soict.hoangviet.baseproject.extension.toast
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.filter.Filter
@@ -176,7 +177,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
         when (requestCode) {
             REQUEST_PERMISSION_ALBUM -> {
                 if (grantResults != null && grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                    ToastUtil.show(resources.getString(R.string.request_read_external_storeage))
+                    toast(resources.getString(R.string.request_read_external_storeage))
                 } else {
                     selectImageFromAlbum()
                 }
@@ -341,11 +342,11 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     }
 
     override fun onCarBrandError() {
-        ToastUtil.show(resources.getString(R.string.update_driver_car_error_car_brand))
+        toast(resources.getString(R.string.update_driver_car_error_car_brand))
     }
 
     override fun onCarNameSpinnerError() {
-        ToastUtil.show(resources.getString(R.string.update_driver_car_error_car_name_spinner))
+        toast(resources.getString(R.string.update_driver_car_error_car_name_spinner))
     }
 
     override fun onCarNameEdittextError() {
@@ -354,7 +355,7 @@ class UpdateDriverCarActivity : BaseActivity<UpdateDriverCarPresenter>(), Update
     }
 
     override fun onDoixeError() {
-        ToastUtil.show(resources.getString(R.string.update_driver_car_error_doixe))
+        toast(resources.getString(R.string.update_driver_car_error_doixe))
     }
 
     override fun onNumberSeatError() {

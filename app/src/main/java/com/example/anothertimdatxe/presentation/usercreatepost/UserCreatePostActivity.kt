@@ -12,6 +12,7 @@ import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.TimePickerDialogWidget
 import com.google.android.gms.maps.model.LatLng
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_user_create_post.*
 import java.util.*
 
@@ -153,39 +154,39 @@ class UserCreatePostActivity : BaseActivity<UserCreatePostPresenter>(), UserCrea
     }
 
     override fun onTitleEmpty() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_title_empty))
+        toast(resources.getString(R.string.user_create_post_title_empty))
     }
 
     override fun onTitleError() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_title_error))
+        toast(resources.getString(R.string.user_create_post_title_error))
     }
 
     override fun onDateEmpty() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_date_empty))
+        toast(resources.getString(R.string.user_create_post_date_empty))
     }
 
     override fun onDateError() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_date_error))
+        toast(resources.getString(R.string.user_create_post_date_error))
     }
 
     override fun onTimeEmpty() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_time_empty))
+        toast(resources.getString(R.string.user_create_post_time_empty))
     }
 
     override fun onSeatEmpty() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_seat_empty))
+        toast(resources.getString(R.string.user_create_post_seat_empty))
     }
 
     override fun onSeatError() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_seat_error))
+        toast(resources.getString(R.string.user_create_post_seat_error))
     }
 
     override fun onCreatePostError() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_error))
+        toast(resources.getString(R.string.user_create_post_error))
     }
 
     override fun onCreatePostSuccess() {
-        ToastUtil.show(resources.getString(R.string.user_create_post_success))
+        toast(resources.getString(R.string.user_create_post_success))
         setResult(Activity.RESULT_OK)
         finish()
     }

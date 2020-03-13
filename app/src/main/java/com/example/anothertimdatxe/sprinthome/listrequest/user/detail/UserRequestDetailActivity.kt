@@ -11,6 +11,7 @@ import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.presentation.map.mapshow.MapShowActivity
 import com.example.anothertimdatxe.util.*
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_user_request_detail.*
 import kotlinx.android.synthetic.main.dialog_confirm_cancel_booking_step_one.*
 import kotlinx.android.synthetic.main.dialog_confirm_cancel_booking_step_two.*
@@ -195,14 +196,14 @@ class UserRequestDetailActivity : BaseActivity<UserRequestDetailPresenter>(), Us
     }
 
     override fun userCancelUserRequestSuccess(msg: String) {
-        ToastUtil.show(msg)
+        toast(msg)
         mDialogStepTwo?.dismiss()
         setResult(Activity.RESULT_OK)
         finish()
     }
 
     override fun userCancelUserRequestError() {
-        ToastUtil.show(resources.getString(R.string.user_request_detail_cancel_booking_error))
+        toast(resources.getString(R.string.user_request_detail_cancel_booking_error))
     }
 
 

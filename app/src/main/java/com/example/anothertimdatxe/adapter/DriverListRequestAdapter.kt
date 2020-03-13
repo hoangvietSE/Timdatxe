@@ -8,11 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.DriverListRequestResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
+import com.soict.hoangviet.baseproject.extension.loadImage
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_driver_list_request.*
 
@@ -36,19 +36,19 @@ class DriverListRequestAdapter(context: Context) : EndlessLoadingRecyclerViewAda
     class ViewHolder(override val containerView: View?) : NormalViewHolder(containerView!!), LayoutContainer {
         override fun bind(data: Any) {
             data as DriverListRequestResponse
-            GlideApp.with(itemView.context!!)
-                    .load(data?.user?.avatar)
-                    .placeholder(R.drawable.ic_avatar)
-                    .error(R.drawable.ic_avatar)
-                    .into(imv_avatar)
-            tv_title.text = data?.userPost?.title
-            tv_starting_point.text = data?.userPost?.app_start_province
-            tv_ending_point.text = data?.userPost?.app_end_province
-            tv_number_seat.text = data?.userPost?.numberSeat.toString()
-            tv_status.text = data?.strStatus
-            tv_time.text = DateUtil.formatDate(data?.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-            tv_date.text = DateUtil.formatDate(data.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
-            when (data?.status) {
+            imv_avatar.loadImage(
+                    itemView.context,
+                    data.user?.avatar,
+                    R.drawable.ic_avatar,
+                    R.drawable.ic_avatar)
+            tv_title.text = data.userPost?.title
+            tv_starting_point.text = data.userPost?.app_start_province
+            tv_ending_point.text = data.userPost?.app_end_province
+            tv_number_seat.text = data.userPost?.numberSeat.toString()
+            tv_status.text = data.strStatus
+            tv_time.text = DateUtil.formatDate(data.userPost?.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
+            tv_date.text = DateUtil.formatDate(data.userPost.startTime, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+            when (data.status) {
                 Constant.DRIVER_BOOK_PENDING -> {
                     setTextColor(tv_status, R.color.color_pending)
                     setImageStatus(imv_status, R.drawable.ic_status)

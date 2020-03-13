@@ -21,10 +21,10 @@ import com.example.anothertimdatxe.request.DriverCreatePostRequest
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NumberUtil
-import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.TimePickerDialogWidget
 import com.google.android.gms.maps.model.LatLng
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_driver_create_post.*
 import kotlinx.android.synthetic.main.layout_convinent_trip.*
 import kotlinx.android.synthetic.main.layout_private_trip.*
@@ -575,47 +575,47 @@ class DriverCreatePostActivity : BaseActivity<DriverCreatePostPresenterImpl>(), 
     }
 
     override fun onErrorNoTitle() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_no_title))
+        toast(resources.getString(R.string.driver_create_post_no_title))
     }
 
     override fun onErrorTitleHaveNumber() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_have_number))
+        toast(resources.getString(R.string.driver_create_post_have_number))
     }
 
     override fun onErrorNoDate() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_no_date))
+        toast(resources.getString(R.string.driver_create_post_no_date))
     }
 
     override fun onErrorNoTime() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_no_time))
+        toast(resources.getString(R.string.driver_create_post_no_time))
     }
 
     override fun onErrorDateInPast() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_in_past))
+        toast(resources.getString(R.string.driver_create_post_in_past))
     }
 
     override fun onErrorNoEstimate() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_no_estimate))
+        toast(resources.getString(R.string.driver_create_post_no_estimate))
     }
 
     override fun onErrorInvalidEstimate() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_invalid_estimate))
+        toast(resources.getString(R.string.driver_create_post_invalid_estimate))
     }
 
     override fun onErrorNoCarBrand() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_no_car_brand))
+        toast(resources.getString(R.string.driver_create_post_no_car_brand))
     }
 
     override fun onErrorNoMoney() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_no_money))
+        toast(resources.getString(R.string.driver_create_post_no_money))
     }
 
     override fun onErrorInvalidMoney() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_invalid_money))
+        toast(resources.getString(R.string.driver_create_post_invalid_money))
     }
 
     override fun onErrorMinMoney() {
-        ToastUtil.show(resources.getString(R.string.driver_create_post_min_money))
+        toast(resources.getString(R.string.driver_create_post_min_money))
     }
 
     override fun onSuccessCreatePost() {

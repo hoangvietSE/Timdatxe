@@ -13,7 +13,6 @@ import com.example.anothertimdatxe.request.LoginFacebookRequest
 import com.example.anothertimdatxe.request.LoginRequest
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.ToastUtil
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 
 class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView), LoginPresenter {
     override fun login(email: String, password: String) {
@@ -29,12 +28,12 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
         request.remember = 1
         var disposable = RetrofitManager.loginUser(object : ICallBack<BaseResult<UserData>> {
             override fun onError(e: ApiException) {
-                Toast.makeText(mView as Context, e.apiError(), LENGTH_LONG).show()
+                Toast.makeText(mView as Context, e.apiError(), Toast.LENGTH_LONG).show()
                 mView!!.hideLoading()
             }
 
             override fun onSuccess(result: BaseResult<UserData>?) {
-                Toast.makeText(mView as Context, R.string.login_success, LENGTH_LONG).show()
+                Toast.makeText(mView as Context, R.string.login_success, Toast.LENGTH_LONG).show()
                 mView!!.hideLoading()
                 result?.data!!.isUser = true
                 CarBookingSharePreference.setUserData(result.data!!)
@@ -56,7 +55,7 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
         request.remember = 1
         var disposable = RetrofitManager.loginDriver(object : ICallBack<BaseResult<UserData>> {
             override fun onSuccess(result: BaseResult<UserData>?) {
-                Toast.makeText(mView as Context, R.string.login_success, LENGTH_LONG).show()
+                Toast.makeText(mView as Context, R.string.login_success, Toast.LENGTH_LONG).show()
                 mView!!.hideLoading()
                 result?.data!!.isDriver = true
                 CarBookingSharePreference.setUserData(result?.data!!)
@@ -67,7 +66,7 @@ class LoginPresenterImpl(mView: LoginView) : BasePresenterImpl<LoginView>(mView)
             }
 
             override fun onError(e: ApiException) {
-                Toast.makeText(mView as Context, e.apiError(), LENGTH_LONG).show()
+                Toast.makeText(mView as Context, e.apiError(), Toast.LENGTH_LONG).show()
                 mView!!.hideLoading()
             }
 
