@@ -24,15 +24,9 @@ class SpinnerCarBrandAdapter(var context: Context, var mListBrand: MutableList<D
         return view
     }
 
-    override fun getItem(position: Int): DriverCarBrandResponse {
-        return mListBrand[position]
-    }
+    override fun getItem(position: Int) = mListBrand[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int) = position.toLong()
 
-    override fun getCount(): Int {
-        return mListBrand.size
-    }
+    override fun getCount() = mListBrand.size
 }

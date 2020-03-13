@@ -5,7 +5,6 @@ import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
@@ -18,7 +17,8 @@ import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MyApp
 import com.example.anothertimdatxe.util.NumberUtil
-import kotlinx.android.synthetic.main.item_search_city_post.view.*
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_search_city_post.*
 
 class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingRecyclerViewAdapter(context, false) {
     private var dataUser: SearchCityPostResponse? = null
@@ -48,122 +48,120 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
 
     override fun bindNormalViewHolder(holder: NormalViewHolder, position: Int) {
         val cityPostHolder: SearchCityPostViewHolder = holder as SearchCityPostViewHolder
-        if (key != KEY_DRIVER_SEARCH) {
-            dataDriver = getItem(position, SearchCityPostResponse::class.java)
-            cityPostHolder.tvTitle.text = dataDriver!!.title
-            GlideApp.with(context!!)
-                    .load(dataDriver!!.avatar)
+        when (key) {
+            KEY_DRIVER_SEARCH -> {
+                dataUser = getItem(position, SearchCityPostResponse::class.java)
+                cityPostHolder.bindDataDriverSearch(dataUser!!)
+            }
+            KEY_USER_SEARCH -> {
+                dataDriver = getItem(position, SearchCityPostResponse::class.java)
+                cityPostHolder.bindDataUserSearch(dataDriver!!)
+            }
+        }
+    }
+
+    class SearchCityPostViewHolder(override val containerView: View?) : NormalViewHolder(containerView!!), LayoutContainer {
+        fun bindDataDriverSearch(dataUser: SearchCityPostResponse) {
+            tv_title.text = dataUser.title
+            GlideApp.with(itemView.context)
+                    .load(dataUser.avatar)
                     .placeholder(R.drawable.ic_avatar)
                     .error(R.drawable.ic_avatar)
-                    .into(cityPostHolder.imvAvatar)
-            cityPostHolder.tvStartingPoint.text = dataDriver!!.appStartProvince
-            cityPostHolder.tvEndingPoint.text = dataDriver!!.appEndProvince
-            cityPostHolder.tvNumberSeat.text = dataDriver!!.emptySeat.toString()
-            cityPostHolder.tvStatus.text = dataDriver!!.str_status
-            cityPostHolder.tvTime.text = DateUtil.formatDate(dataDriver!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-            cityPostHolder.tvDate.text = DateUtil.formatDate(dataDriver!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
-            cityPostHolder.formMoney.visible()
+                    .into(imv_avatar)
+            tv_starting_point.text = dataUser.appStartProvince
+            tv_ending_point.text = dataUser.appEndProvince
+            tv_number_seat.text = dataUser.numberSeat.toString()
+            tv_status.text = dataUser.str_status
+            tv_time.text = DateUtil.formatDate(dataUser.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
+            tv_date.text = DateUtil.formatDate(dataUser.startTime, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+            formMoney.gone()
+            if (CarBookingSharePreference.getUserData()?.isDriver!!) {
+                btn_recruitment.gone()
+            }
+            when (dataUser!!.status) {
+                MyApp.KEY_PENDING -> {
+                    setColorStatus(tv_status, R.color.color_pending)
+                    setImageStatus(imv_status, R.drawable.ic_status)
+
+                }
+                MyApp.KEY_PUBLISHED -> {
+                    setColorStatus(tv_status, R.color.colorPrimary)
+                    setImageStatus(imv_status, R.drawable.ic_status)
+                }
+                MyApp.KEY_DONE -> {
+                    setColorStatus(tv_status, R.color.color_reject)
+                    setImageStatus(imv_status, R.drawable.ic_status_reject)
+                }
+                MyApp.KEY_FINISH -> {
+                    setColorStatus(tv_status, R.color.color_finish)
+                    setImageStatus(imv_status, R.drawable.ic_status_finish)
+                }
+                MyApp.KEY_CANCEL -> {
+                    setColorStatus(tv_status, R.color.color_cancel)
+                    setImageStatus(imv_status, R.drawable.ic_status_cancel)
+                }
+            }
+        }
+
+        fun bindDataUserSearch(dataDriver: SearchCityPostResponse) {
+            tv_title.text = dataDriver.title
+            GlideApp.with(itemView.context)
+                    .load(dataDriver.avatar)
+                    .placeholder(R.drawable.ic_avatar)
+                    .error(R.drawable.ic_avatar)
+                    .into(imv_avatar)
+            tv_starting_point.text = dataDriver!!.appStartProvince
+            tv_ending_point.text = dataDriver!!.appEndProvince
+            tv_number_seat.text = dataDriver!!.emptySeat.toString()
+            tv_status.text = dataDriver!!.str_status
+            tv_time.text = DateUtil.formatDate(dataDriver!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
+            tv_date.text = DateUtil.formatDate(dataDriver!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+            formMoney.visible()
             when (dataDriver!!.type) {
                 MyApp.KEY_CONVENIENT_CAR -> {
-                    cityPostHolder.tvMoney.text = "${NumberUtil.formatNumber(dataDriver!!.regularPrice!!)}/Người"
+                    tv_money.text = "${NumberUtil.formatNumber(dataDriver!!.regularPrice!!)}/Người"
                 }
                 MyApp.KEY_PRIVATE_CAR -> {
-                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
+                    tv_money.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
                 }
                 MyApp.KEY_BOTH_CAR -> {
-                    cityPostHolder.tvMoney.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
+                    tv_money.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
                 }
             }
             when (dataDriver!!.status) {
                 KEY_DRIVER_POST_PENDING -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.color_pending)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status)
+                    setColorStatus(tv_status, R.color.color_pending)
+                    setImageStatus(imv_status, R.drawable.ic_status)
                 }
                 KEY_DRIVER_POST_PUBLISHED -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.colorPrimary)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status)
+                    setColorStatus(tv_status, R.color.colorPrimary)
+                    setImageStatus(imv_status, R.drawable.ic_status)
                 }
                 KEY_DRIVER_POST_FINISH -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.color_finish)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status_finish)
+                    setColorStatus(tv_status, R.color.color_finish)
+                    setImageStatus(imv_status, R.drawable.ic_status_finish)
                 }
                 KEY_DRIVER_POST_CANCEL -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.color_cancel)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status_cancel)
-                }
-            }
-        } else if (key != KEY_USER_SEARCH) {
-            dataUser = getItem(position, SearchCityPostResponse::class.java)
-            cityPostHolder.tvTitle.text = dataUser!!.title
-            GlideApp.with(context!!)
-                    .load(dataUser!!.avatar)
-                    .placeholder(R.drawable.ic_avatar)
-                    .error(R.drawable.ic_avatar)
-                    .into(cityPostHolder.imvAvatar)
-            cityPostHolder.tvStartingPoint.text = dataUser!!.appStartProvince
-            cityPostHolder.tvEndingPoint.text = dataUser!!.appEndProvince
-            cityPostHolder.tvNumberSeat.text = dataUser!!.numberSeat.toString()
-            cityPostHolder.tvStatus.text = dataUser!!.str_status
-            cityPostHolder.tvTime.text = DateUtil.formatDate(dataUser!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-            cityPostHolder.tvDate.text = DateUtil.formatDate(dataUser!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
-            cityPostHolder.formMoney.gone()
-            if (CarBookingSharePreference.getUserData()?.isDriver!!) {
-                cityPostHolder.btnRecruitment.gone()
-            }
-            when (dataUser!!.status) {
-                MyApp.KEY_PENDING -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.color_pending)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status)
-
-                }
-                MyApp.KEY_PUBLISHED -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.colorPrimary)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status)
-                }
-                MyApp.KEY_DONE -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.color_reject)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status_reject)
-                }
-                MyApp.KEY_FINISH -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.color_finish)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status_finish)
-                }
-                MyApp.KEY_CANCEL -> {
-                    setColorStatus(cityPostHolder.tvStatus, R.color.color_cancel)
-                    setImageStatus(cityPostHolder.imageStatus, R.drawable.ic_status_cancel)
+                    setColorStatus(tv_status, R.color.color_cancel)
+                    setImageStatus(imv_status, R.drawable.ic_status_cancel)
                 }
             }
         }
-    }
 
-    fun setImageStatus(imageStatus: ImageView, drawableRes: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            imageStatus.setImageDrawable(context!!.resources.getDrawable(drawableRes, null))
-        } else {
-            imageStatus.setImageDrawable(context!!.resources.getDrawable(drawableRes))
+        private fun setImageStatus(imageStatus: ImageView, drawableRes: Int) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                imageStatus.setImageDrawable(itemView.context.resources.getDrawable(drawableRes, null))
+            } else {
+                imageStatus.setImageDrawable(itemView.context.resources.getDrawable(drawableRes))
+            }
         }
-    }
 
-    fun setColorStatus(tvStatus: TextView, colorRes: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            tvStatus.setTextColor(context!!.resources.getColor(colorRes, null))
-        } else {
-            tvStatus.setTextColor(context!!.resources.getColor(colorRes))
+        private fun setColorStatus(tvStatus: TextView, colorRes: Int) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                tvStatus.setTextColor(itemView.context.resources.getColor(colorRes, null))
+            } else {
+                tvStatus.setTextColor(itemView.context.resources.getColor(colorRes))
+            }
         }
-    }
-
-    class SearchCityPostViewHolder(itemView: View) : NormalViewHolder(itemView) {
-        val tvTitle: TextView = itemView.findViewById(R.id.tv_title)
-        val imvAvatar: ImageView = itemView.findViewById(R.id.imv_avatar)
-        val tvStartingPoint: TextView = itemView.findViewById(R.id.tv_starting_point)
-        val tvEndingPoint: TextView = itemView.findViewById(R.id.tv_ending_point)
-        val tvNumberSeat: TextView = itemView.findViewById(R.id.tv_number_seat)
-        val imageStatus: ImageView = itemView.findViewById(R.id.imv_status)
-        val tvStatus: TextView = itemView.findViewById(R.id.tv_status)
-        val tvTime: TextView = itemView.findViewById(R.id.tv_time)
-        val tvDate: TextView = itemView.findViewById(R.id.tv_date)
-        val tvMoney: TextView = itemView.findViewById(R.id.tv_money)
-        val formMoney: LinearLayout = itemView.formMoney
-        val btnRecruitment: TextView = itemView.findViewById(R.id.btn_recruitment)
     }
 }

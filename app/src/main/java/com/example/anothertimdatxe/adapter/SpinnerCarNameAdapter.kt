@@ -24,17 +24,11 @@ class SpinnerCarNameAdapter(var context: Context, var mListName: MutableList<Dri
         return view
     }
 
-    override fun getItem(position: Int): DriverCarBrandDetailResponse {
-        return mListName[position]
-    }
+    override fun getItem(position: Int) = mListName[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int) = position.toLong()
 
-    override fun getCount(): Int {
-        return mListName.size
-    }
+    override fun getCount() = mListName.size
 
     fun clear() {
         mListName.clear()

@@ -12,26 +12,20 @@ class SpinnserStatus(var context: Context, var data: List<String>) : BaseAdapter
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: TextView = convertView as TextView?
                 ?: LayoutInflater.from(context).inflate(R.layout.item_spinner_status, parent, false) as TextView
-        view.text = getItem(position).toString()
+        view.text = getItem(position)
         return view
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: TextView = convertView as TextView?
                 ?: LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false) as TextView
-        view.text = getItem(position).toString()
+        view.text = getItem(position)
         return view
     }
 
-    override fun getItem(position: Int): Any {
-        return data[position]
-    }
+    override fun getItem(position: Int) = data[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int) = position.toLong()
 
-    override fun getCount(): Int {
-        return data.size
-    }
+    override fun getCount() = data.size
 }
