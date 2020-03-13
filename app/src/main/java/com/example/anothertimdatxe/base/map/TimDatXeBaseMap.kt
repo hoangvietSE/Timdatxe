@@ -24,7 +24,6 @@ import com.example.anothertimdatxe.base.mvp.BasePresenter
 import com.example.anothertimdatxe.map.entity.Route
 import com.example.anothertimdatxe.util.DialogUtil
 import com.example.anothertimdatxe.util.MapUtil
-import com.example.anothertimdatxe.util.ToastUtil
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.ApiException
@@ -44,6 +43,7 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.PolyUtil
+import com.soict.hoangviet.baseproject.extension.toast
 
 abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener,
         GoogleMap.OnPolylineClickListener, OnMapReadyCallback {
@@ -230,7 +230,7 @@ abstract class TimDatXeBaseMap<T : BasePresenter> : BaseActivity<T>(), GoogleMap
                 if (resultCode == Activity.RESULT_OK) {
                     initMap()
                 } else {
-                    ToastUtil.show("Vui lòng bật định vị trên thiết bị của bạn!")
+                    toast("Vui lòng bật định vị trên thiết bị của bạn!")
                     finish()
                 }
             }

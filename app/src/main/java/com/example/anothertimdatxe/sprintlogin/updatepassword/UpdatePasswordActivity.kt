@@ -12,6 +12,7 @@ import com.example.anothertimdatxe.util.DialogUtil
 import com.example.anothertimdatxe.util.MyApp
 import com.example.anothertimdatxe.util.PhoneSms
 import com.example.anothertimdatxe.util.ToastUtil
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_update_password.*
 
 class UpdatePasswordActivity : TimdatxePhoneSmsBaseActivity<UpdatePasswordPresenter>(), UpdatePasswordView {
@@ -98,7 +99,7 @@ class UpdatePasswordActivity : TimdatxePhoneSmsBaseActivity<UpdatePasswordPresen
 
     override fun onSendSmsFailed() {
         super.onSendSmsFailed()
-        ToastUtil.show("Vui lòng thử lại sau!")
+        toast("Vui lòng thử lại sau!")
     }
 
     override fun onVerifySmsSuccess() {
@@ -113,7 +114,7 @@ class UpdatePasswordActivity : TimdatxePhoneSmsBaseActivity<UpdatePasswordPresen
     }
 
     override fun onVerifySmsFailed() {
-        ToastUtil.show("Mã token không hợp lệ!")
+        toast("Mã token không hợp lệ!")
     }
 
     override fun showCompleteDiaglog() {

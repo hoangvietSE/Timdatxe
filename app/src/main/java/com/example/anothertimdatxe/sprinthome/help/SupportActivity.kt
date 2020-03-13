@@ -5,7 +5,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.base.activity.BaseActivity
 import com.example.anothertimdatxe.entity.ContactEntity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
-import com.example.anothertimdatxe.util.ToastUtil
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_support.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -76,12 +76,12 @@ class SupportActivity : BaseActivity<SupportPresenter>(), SupportView {
     }
 
     override fun showContactSuccess() {
-        ToastUtil.show(resources.getString(R.string.support_success))
+        toast(resources.getString(R.string.support_success))
         finish()
     }
 
     override fun showContactFail() {
-        ToastUtil.show(resources.getString(R.string.support_fail))
+        toast(resources.getString(R.string.support_fail))
     }
 
 }

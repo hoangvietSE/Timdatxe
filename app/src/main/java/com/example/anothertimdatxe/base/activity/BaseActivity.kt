@@ -15,7 +15,7 @@ import com.example.anothertimdatxe.customview.CarBookingLoading
 import com.example.anothertimdatxe.eventbus.RefreshTokenFailure
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
-import com.example.anothertimdatxe.util.ToastUtil
+import com.soict.hoangviet.baseproject.extension.toast
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -135,7 +135,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), BaseView {
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun failRefershToken(event: RefreshTokenFailure) {
-        ToastUtil.show("Phiên đăng nhập đã hết. Vui lòng đăng nhập!")
+        toast("Phiên đăng nhập đã hết. Vui lòng đăng nhập!")
         CarBookingSharePreference.clearAllPreference()
         startActivityAndClearTaskOrNewTask(this, LoginActivity::class.java)
         finish()

@@ -11,6 +11,7 @@ import com.example.anothertimdatxe.extension.invisible
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.presentation.map.mapshow.MapShowActivity
 import com.example.anothertimdatxe.util.*
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_user_post_detail.*
 
 class UserPostDetailActivity : BaseActivity<UserPostDetailPresenter>(), UserPostDetailView {
@@ -161,7 +162,7 @@ class UserPostDetailActivity : BaseActivity<UserPostDetailPresenter>(), UserPost
     }
 
     override fun onDeleteUserPostSuccess() {
-        ToastUtil.show(resources.getString(R.string.user_post_detail_delete_success))
+        toast(resources.getString(R.string.user_post_detail_delete_success))
         setResult(Activity.RESULT_OK)
         finish()
     }

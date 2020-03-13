@@ -56,11 +56,9 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), BaseView {
     }
 
     override fun hideLoading() {
-
     }
 
     override fun showLoading() {
-
     }
 
     abstract fun getPresenter(): T

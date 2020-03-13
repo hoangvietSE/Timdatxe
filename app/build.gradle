@@ -66,6 +66,10 @@ android {
         experimental = true
     }
 
+    dataBinding{
+        enabled = true
+    }
+
 }
 
 dependencies {

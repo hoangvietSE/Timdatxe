@@ -43,6 +43,7 @@ import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.BottomNavigationViewHelper
 import com.example.anothertimdatxe.widget.BottomTabLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_nav_menu.*
 import org.greenrobot.eventbus.Subscribe
@@ -133,7 +134,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeView, BottomTabLayout.Bo
             super.onBackPressed()
             return
         } else {
-            ToastUtil.show(resources.getString(R.string.home_back_press))
+            toast(resources.getString(R.string.home_back_press))
         }
         backPressTime = System.currentTimeMillis()
     }

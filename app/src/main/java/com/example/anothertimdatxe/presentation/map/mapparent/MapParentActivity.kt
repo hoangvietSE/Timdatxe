@@ -16,6 +16,7 @@ import com.example.anothertimdatxe.util.ToastUtil
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_base_map.*
 
 class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
@@ -80,7 +81,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
-        if (isTheFirstTime) ToastUtil.show("Map on ready")
+        if (isTheFirstTime) toast("Map on ready")
         mGoogleMap = googleMap
         mGoogleMap?.setOnMapClickListener(this)
         mGoogleMap?.setOnPolylineClickListener(this)
@@ -171,7 +172,7 @@ class MapParentActivity : TimDatXeBaseMap<MapParentPresenter>(), MapParentView {
     }
 
     override fun routeFail() {
-        ToastUtil.show("Có lỗi xảy ra, vui lòng thử lại sau!")
+        toast("Có lỗi xảy ra, vui lòng thử lại sau!")
     }
 
     override fun fetchWayPoint(list: ArrayList<LatLng>) {

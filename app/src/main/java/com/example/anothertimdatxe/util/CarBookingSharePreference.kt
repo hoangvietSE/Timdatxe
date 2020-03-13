@@ -14,6 +14,7 @@ object CarBookingSharePreference {
     private var mUserId: Int? = null
 
 
+
     fun setStringPreference(key: String?, data: String?) {
         var preference = PreferenceManager.getDefaultSharedPreferences(CarBookingApplication.instance)
         var editor = preference.edit()

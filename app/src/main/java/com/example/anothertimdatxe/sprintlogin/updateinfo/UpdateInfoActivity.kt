@@ -7,6 +7,7 @@ import com.example.anothertimdatxe.sprinthome.home.HomeActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_update_infomation.*
 import java.util.*
 
@@ -100,11 +101,11 @@ class UpdateInfoActivity : BaseActivity<UpdateInfoPresenter>(), UpdateInfoView, 
     }
 
     override fun onDateError() {
-        ToastUtil.show("Không chọn thời gian trong tương lai!")
+        toast("Không chọn thời gian trong tương lai!")
     }
 
     override fun onCheckBoxError() {
-        ToastUtil.show("Vui lòng đồng ý với các điều khoản của chúng tôi!")
+        toast("Vui lòng đồng ý với các điều khoản của chúng tôi!")
     }
 
     override fun onUpdateSuccess() {

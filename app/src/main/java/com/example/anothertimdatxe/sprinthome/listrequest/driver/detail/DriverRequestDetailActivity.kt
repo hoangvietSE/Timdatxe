@@ -22,6 +22,7 @@ import com.example.anothertimdatxe.presentation.map.mapshow.MapShowActivity
 import com.example.anothertimdatxe.sprinthome.profile.driver.driver_car.DriverCarActivity
 import com.example.anothertimdatxe.util.*
 import com.example.anothertimdatxe.widget.NumberTextWatcher
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_detail_request.*
 import kotlinx.android.synthetic.main.dialog_driver_book_request.*
 
@@ -200,9 +201,9 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
                     if (data.driverCarPending == 1) {
                         showConfirmRequestDialog(data.driverCars)
                     } else if (data.driverCarPending == 0) {
-                        ToastUtil.show(data.driverCarMsg!!)
+                        toast(data.driverCarMsg!!)
                     } else {
-                        ToastUtil.show(data.driverCarMsg!!)
+                        toast(data.driverCarMsg!!)
                     }
                 }
             }
@@ -286,7 +287,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
     private fun showConfirmRequestDialog(driverCars: ArrayList<DriverCar>?) {
         var mCarId = -1
         if (driverCars?.size == 0) {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_no_regis_car))
+            toast(resources.getString(R.string.driver_request_detail_no_regis_car))
             return
         }
         DialogUtil.showConfirmDialogDriverBookRequest(
@@ -312,7 +313,7 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
 
                     override fun onClickDialog(dialog: Dialog) {
                         if (mCarId == -1) {
-                            ToastUtil.show(resources.getString(R.string.dialog_driver_book_request_no_car))
+                            toast(resources.getString(R.string.dialog_driver_book_request_no_car))
                         } else if (dialog.edt_money.text.toString().isEmpty() || dialog.edt_money.text.toString().isNullOrBlank()) {
                             dialog.edt_money.setError(resources.getString(R.string.dialog_driver_book_request_no_money))
                             dialog.edt_money.requestFocus()
@@ -352,33 +353,33 @@ class DriverRequestDetailActivity : BaseActivity<DriverRequestDetailPresenter>()
 
     override fun cancelRequestSuccess(check: Boolean) {
         if (check) {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_request_success))
+            toast(resources.getString(R.string.driver_request_detail_cancel_request_success))
         } else {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_request_fail))
+            toast(resources.getString(R.string.driver_request_detail_cancel_request_fail))
         }
     }
 
     override fun cancelBookingSuccess(check: Boolean) {
         if (check) {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_booking_success))
+            toast(resources.getString(R.string.driver_request_detail_cancel_booking_success))
         } else {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_cancel_booking_fail))
+            toast(resources.getString(R.string.driver_request_detail_cancel_booking_fail))
         }
     }
 
     override fun finishTripSucceess(check: Boolean) {
         if (check) {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_success))
+            toast(resources.getString(R.string.driver_request_detail_finish_trip_success))
         } else {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_finish_trip_fail))
+            toast(resources.getString(R.string.driver_request_detail_finish_trip_fail))
         }
     }
 
     override fun finishBookSuccess(check: Boolean) {
         if (check) {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_apply_success))
+            toast(resources.getString(R.string.driver_request_detail_apply_success))
         } else {
-            ToastUtil.show(resources.getString(R.string.driver_request_detail_apply_fail))
+            toast(resources.getString(R.string.driver_request_detail_apply_fail))
         }
     }
 }

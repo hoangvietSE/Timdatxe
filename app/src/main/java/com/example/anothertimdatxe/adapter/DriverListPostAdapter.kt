@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.DriverListPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.inflate
@@ -16,6 +15,7 @@ import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.NumberUtil
+import com.soict.hoangviet.baseproject.extension.loadImage
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_driver_list_post.*
 
@@ -45,11 +45,11 @@ class DriverListPostAdapter(context: Context) : EndlessLoadingRecyclerViewAdapte
     class ViewHolder(override val containerView: View?) : RecyclerViewAdapter.NormalViewHolder(containerView!!), LayoutContainer {
         override fun bind(data: Any) {
             data as DriverListPostResponse
-            GlideApp.with(itemView.context)
-                    .load(CarBookingSharePreference.getUserData()?.avatar)
-                    .placeholder(R.drawable.ic_avatar)
-                    .error(R.drawable.ic_avatar)
-                    .into(formAvatar)
+            formAvatar.loadImage(
+                    itemView.context,
+                    CarBookingSharePreference.getUserData()?.avatar,
+                    R.drawable.ic_avatar,
+                    R.drawable.ic_avatar)
             formTitle.text = data?.title
             formStartingPoint.text = data?.app_start_province
             formEndingPoint.text = data?.app_end_province

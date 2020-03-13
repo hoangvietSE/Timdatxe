@@ -15,6 +15,7 @@ import com.example.anothertimdatxe.entity.UserData
 import com.example.anothertimdatxe.extension.setAvatar
 import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_update_profile.*
 import java.util.*
 
@@ -47,7 +48,7 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
                     val dateInCurrent = Calendar.getInstance(TimeZone.getDefault())
                     calendar.set(year, month, dayOfMonth)
                     if (calendar.time.after(dateInCurrent.time) || calendar.time.equals(dateInCurrent.time)) {
-                        ToastUtil.show("Không được chọn ngày trong tương lai!")
+                        toast("Không được chọn ngày trong tương lai!")
                     } else {
                         var day: Int = calendar.get(Calendar.DAY_OF_MONTH)
                         var month: Int = calendar.get(Calendar.MONTH)
@@ -106,7 +107,7 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     selectImageGallery()
                 } else {
-                    ToastUtil.show(resources.getString(R.string.request_read_external_storeage))
+                    toast(resources.getString(R.string.request_read_external_storeage))
                 }
             }
         }
@@ -193,11 +194,11 @@ class UpdateProfileActivity : BaseActivity<UpdateProfilePresenter>(), UpdateProf
     }
 
     override fun onUpdateProfileError() {
-        ToastUtil.show("Cập nhật dữ liệu không thành công!")
+        toast("Cập nhật dữ liệu không thành công!")
     }
 
     override fun backUserProfile() {
-        ToastUtil.show("Cập nhật thành công!")
+        toast("Cập nhật thành công!")
         finish()
     }
 }

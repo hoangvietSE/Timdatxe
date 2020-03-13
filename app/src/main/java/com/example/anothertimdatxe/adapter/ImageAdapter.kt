@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.DriverCarImage
 import com.example.anothertimdatxe.extension.inflate
+import com.soict.hoangviet.baseproject.extension.loadImage
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_add.view.*
 import kotlinx.android.synthetic.main.item_car_image.view.*
@@ -44,11 +44,10 @@ class ImageAdapter(var context: Context, var mList: MutableList<DriverCarImage>,
             }
             VIEW_TYPE_IMAGE -> {
                 val imageHolder = holder as ImageViewHolder
-                GlideApp.with(context)
-                        .load(mList[position].uriImage)
-                        .placeholder(R.drawable.img_default)
-                        .error(R.drawable.img_default)
-                        .into(imageHolder.imvCar)
+                imageHolder.imvCar.loadImage(
+                        context,
+                        mList[position].uriImage
+                )
                 if (imageHolder.btnCancel != null) {
                     imageHolder.btnCancel.setOnClickListener {
                         mListener.onCancelClick(imageHolder.adapterPosition)

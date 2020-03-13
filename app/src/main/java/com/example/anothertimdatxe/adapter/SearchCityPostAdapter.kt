@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.SearchCityPostResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.inflate
@@ -17,6 +16,7 @@ import com.example.anothertimdatxe.util.CarBookingSharePreference
 import com.example.anothertimdatxe.util.DateUtil
 import com.example.anothertimdatxe.util.MyApp
 import com.example.anothertimdatxe.util.NumberUtil
+import com.soict.hoangviet.baseproject.extension.loadImage
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_search_city_post.*
 
@@ -63,11 +63,12 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
     class SearchCityPostViewHolder(override val containerView: View?) : NormalViewHolder(containerView!!), LayoutContainer {
         fun bindDataDriverSearch(dataUser: SearchCityPostResponse) {
             tv_title.text = dataUser.title
-            GlideApp.with(itemView.context)
-                    .load(dataUser.avatar)
-                    .placeholder(R.drawable.ic_avatar)
-                    .error(R.drawable.ic_avatar)
-                    .into(imv_avatar)
+            imv_avatar.loadImage(
+                    itemView.context,
+                    dataUser.avatar,
+                    R.drawable.ic_avatar,
+                    R.drawable.ic_avatar
+            )
             tv_starting_point.text = dataUser.appStartProvince
             tv_ending_point.text = dataUser.appEndProvince
             tv_number_seat.text = dataUser.numberSeat.toString()
@@ -105,30 +106,31 @@ class SearchCityPostAdapter(context: Context, var key: String) : EndlessLoadingR
 
         fun bindDataUserSearch(dataDriver: SearchCityPostResponse) {
             tv_title.text = dataDriver.title
-            GlideApp.with(itemView.context)
-                    .load(dataDriver.avatar)
-                    .placeholder(R.drawable.ic_avatar)
-                    .error(R.drawable.ic_avatar)
-                    .into(imv_avatar)
-            tv_starting_point.text = dataDriver!!.appStartProvince
-            tv_ending_point.text = dataDriver!!.appEndProvince
-            tv_number_seat.text = dataDriver!!.emptySeat.toString()
-            tv_status.text = dataDriver!!.str_status
-            tv_time.text = DateUtil.formatDate(dataDriver!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
-            tv_date.text = DateUtil.formatDate(dataDriver!!.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
+            imv_avatar.loadImage(
+                    itemView.context,
+                    dataDriver.avatar,
+                    R.drawable.ic_avatar,
+                    R.drawable.ic_avatar
+            )
+            tv_starting_point.text = dataDriver.appStartProvince
+            tv_ending_point.text = dataDriver.appEndProvince
+            tv_number_seat.text = dataDriver.emptySeat.toString()
+            tv_status.text = dataDriver.str_status
+            tv_time.text = DateUtil.formatDate(dataDriver.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_3)
+            tv_date.text = DateUtil.formatDate(dataDriver.startTime!!, DateUtil.DATE_FORMAT_13, DateUtil.DATE_FORMAT_23)
             formMoney.visible()
-            when (dataDriver!!.type) {
+            when (dataDriver.type) {
                 MyApp.KEY_CONVENIENT_CAR -> {
-                    tv_money.text = "${NumberUtil.formatNumber(dataDriver!!.regularPrice!!)}/Người"
+                    tv_money.text = "${NumberUtil.formatNumber(dataDriver.regularPrice!!)}/Người"
                 }
                 MyApp.KEY_PRIVATE_CAR -> {
-                    tv_money.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
+                    tv_money.text = NumberUtil.formatNumber(dataDriver.privatePrice2!!)
                 }
                 MyApp.KEY_BOTH_CAR -> {
-                    tv_money.text = NumberUtil.formatNumber(dataDriver!!.privatePrice2!!)
+                    tv_money.text = NumberUtil.formatNumber(dataDriver.privatePrice2!!)
                 }
             }
-            when (dataDriver!!.status) {
+            when (dataDriver.status) {
                 KEY_DRIVER_POST_PENDING -> {
                     setColorStatus(tv_status, R.color.color_pending)
                     setImageStatus(imv_status, R.drawable.ic_status)

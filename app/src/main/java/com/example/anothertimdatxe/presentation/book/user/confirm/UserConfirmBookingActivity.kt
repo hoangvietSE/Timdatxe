@@ -20,6 +20,7 @@ import com.example.anothertimdatxe.sprinthome.settings.condition.ConditionActivi
 import com.example.anothertimdatxe.util.*
 import com.example.anothertimdatxe.widget.DatePickerDialogWidget
 import com.example.anothertimdatxe.widget.TimePickerDialogWidget
+import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_user_confirm_booking.*
 
 
@@ -106,7 +107,7 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
             if (onCheckedCondition()) {
                 payment()
             } else {
-                ToastUtil.show(resources.getString(R.string.user_confirm_booking_not_check_condition))
+                toast(resources.getString(R.string.user_confirm_booking_not_check_condition))
             }
         }
     }
@@ -277,7 +278,7 @@ class UserConfirmBookingActivity : BaseActivity<UserConfirmBookingPresenter>(), 
     }
 
     override fun routeFail() {
-        ToastUtil.show("Có lỗi xảy ra, vui lòng thử lại sau!")
+        toast("Có lỗi xảy ra, vui lòng thử lại sau!")
     }
 
     override fun onSetDateSuccess(year: Int, month: Int, dayOfMonth: Int) {

@@ -9,6 +9,7 @@ import com.example.anothertimdatxe.R
 import com.example.anothertimdatxe.entity.response.HotCitiesResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.setImageUrl
+import com.soict.hoangviet.baseproject.extension.displayWidth
 import kotlinx.android.synthetic.main.item_hot_cities_home.view.*
 
 class HotCitiesHomeAdapter(var context: Context, var mListHotCity: List<HotCitiesResponse>) : PagerAdapter() {
@@ -27,7 +28,7 @@ class HotCitiesHomeAdapter(var context: Context, var mListHotCity: List<HotCitie
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = context.inflate(R.layout.item_hot_cities_home, container, false)
         view.imv_home_banner.setImageUrl(context, mListHotCity[position].app_image!!)
-        val width = (container.resources.displayMetrics.widthPixels * 0.66666666666667).toInt()
+        val width = (context.displayWidth * 0.66666666666667).toInt()
         val params = LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT)
         view.imv_home_banner.layoutParams = params
         view.imv_home_banner.setOnClickListener {

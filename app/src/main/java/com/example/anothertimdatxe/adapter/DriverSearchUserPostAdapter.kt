@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anothertimdatxe.R
-import com.example.anothertimdatxe.base.util.GlideApp
 import com.example.anothertimdatxe.entity.response.DriverSearchResponse
 import com.example.anothertimdatxe.extension.inflate
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.util.Constant
 import com.example.anothertimdatxe.util.DateUtil
+import com.soict.hoangviet.baseproject.extension.loadImage
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_driver_search.*
 
@@ -34,11 +34,11 @@ class DriverSearchUserPostAdapter(context: Context) : EndlessLoadingRecyclerView
     class DriverSearchViewHolder(override val containerView: View?) : NormalViewHolder(containerView!!), LayoutContainer {
         override fun bind(data: Any) {
             data as DriverSearchResponse
-            GlideApp.with(itemView.context!!)
-                    .load(data.avatar)
-                    .placeholder(R.drawable.ic_avatar)
-                    .error(R.drawable.ic_avatar)
-                    .into(imv_avatar)
+            imv_avatar.loadImage(
+                    itemView.context,
+                    data.avatar,
+                    R.drawable.ic_avatar,
+                    R.drawable.ic_avatar)
             tv_title.text = data.title
             tv_starting_point.text = data.appStartProvince
             tv_ending_point.text = data.appEndProvince
