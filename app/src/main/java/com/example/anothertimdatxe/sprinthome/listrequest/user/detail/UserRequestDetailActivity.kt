@@ -10,7 +10,10 @@ import com.example.anothertimdatxe.entity.response.UserRequestDetailResponse
 import com.example.anothertimdatxe.extension.gone
 import com.example.anothertimdatxe.extension.visible
 import com.example.anothertimdatxe.presentation.map.mapshow.MapShowActivity
-import com.example.anothertimdatxe.util.*
+import com.example.anothertimdatxe.util.Constant
+import com.example.anothertimdatxe.util.DateUtil
+import com.example.anothertimdatxe.util.DialogUtil
+import com.example.anothertimdatxe.util.NumberUtil
 import com.soict.hoangviet.baseproject.extension.toast
 import kotlinx.android.synthetic.main.activity_user_request_detail.*
 import kotlinx.android.synthetic.main.dialog_confirm_cancel_booking_step_one.*
@@ -94,9 +97,9 @@ class UserRequestDetailActivity : BaseActivity<UserRequestDetailPresenter>(), Us
                         dialog.tv_money_refund.text =
                                 if (day > 5) {
                                     NumberUtil.formatNumber(totalMoney.toString())
-                                } else if (day >= 3 && day <= 5) {
+                                } else if (day in 4..5) {
                                     NumberUtil.formatNumber((totalMoney * 0.7).toString())
-                                } else if (day >= 1 && day <= 3) {
+                                } else if (day in 1..3) {
                                     NumberUtil.formatNumber((totalMoney * 0.5).toString())
                                 } else {
                                     NumberUtil.formatNumber((totalMoney * 0).toString())

@@ -39,7 +39,6 @@ import com.example.anothertimdatxe.sprinthome.settings.settingsummary.SettingAct
 import com.example.anothertimdatxe.sprinthome.updateprofile.UpdateProfileActivity
 import com.example.anothertimdatxe.sprintlogin.login.LoginActivity
 import com.example.anothertimdatxe.util.CarBookingSharePreference
-import com.example.anothertimdatxe.util.ToastUtil
 import com.example.anothertimdatxe.widget.BottomNavigationViewHelper
 import com.example.anothertimdatxe.widget.BottomTabLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView

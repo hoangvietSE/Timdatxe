@@ -165,7 +165,12 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
         val disposable = Single.zip(
                 RetrofitManager.driverCarInfoV1(),
                 RetrofitManager.driverPostDetailV1(id),
-                BiFunction<BaseResult<List<DriverCarResponse>>, BaseResult<DriverPostDetailResponse>, JoinResult> { carInfoResponse, driverPostDetailResponse -> JoinResult(carInfoResponse, driverPostDetailResponse) }
+                BiFunction<
+                        BaseResult<List<DriverCarResponse>>,
+                        BaseResult<DriverPostDetailResponse>,
+                        Pair<BaseResult<List<DriverCarResponse>>,BaseResult<DriverPostDetailResponse>>> { carInfoResponse, driverPostDetailResponse ->
+                    Pair(carInfoResponse, driverPostDetailResponse)
+                }
         )
                 .doOnSubscribe {
                     mView!!.showLoading()
@@ -175,8 +180,8 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
                 }
                 .subscribe(
                         {
-                            mView!!.initSpinner(it.carInfoResponse.data!!)
-                            mView!!.showDataCreatedPost(it.driverPostDetailResponse.data!!)
+                            mView!!.initSpinner(it.first.data!!)
+                            mView!!.showDataCreatedPost(it.second.data!!)
                         },
                         {
                             handleError(it)
@@ -199,8 +204,4 @@ class DriverCreatePostPresenterImpl(mView: DriverCreatePostView) : BasePresenter
         }
         return false
     }
-
-    class JoinResult(val carInfoResponse: BaseResult<List<DriverCarResponse>>,
-                     val driverPostDetailResponse: BaseResult<DriverPostDetailResponse>)
-
 }

@@ -24,8 +24,11 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
     private fun getPost(isRefreshing: Boolean) {
         //UserPostAndDriverPostResponse : Result value
         val disposable = Single.zip(RetrofitManager.userPostHome(), RetrofitManager.driverPostHome(),
-                BiFunction<BaseResult<List<UserPostResponse>>, BaseResult<List<DriverPostResponse>>, UserPostAndDriverPostResponse> { userPost, driverPost ->
-                    UserPostAndDriverPostResponse(userPost, driverPost)
+                BiFunction<
+                        BaseResult<List<UserPostResponse>>,
+                        BaseResult<List<DriverPostResponse>>,
+                        Pair<BaseResult<List<UserPostResponse>>,BaseResult<List<DriverPostResponse>>>> { userPost, driverPost ->
+                    Pair(userPost, driverPost)
                 }).doOnSubscribe {
             mView!!.showLoadingData()
         }
@@ -34,9 +37,9 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
                 }
                 .subscribe(
                         {
-                            if (it.userPost.status == 200 && it.driverPost.status == 200) {
-                                mView!!.showListUserPost(it.userPost.data!!, isRefreshing)
-                                mView!!.showListDriverPost(it.driverPost.data!!, isRefreshing)
+                            if (it.first.status == 200 && it.second.status == 200) {
+                                mView!!.showListUserPost(it.first.data!!, isRefreshing)
+                                mView!!.showListDriverPost(it.second.data!!, isRefreshing)
                             }
                         },
                         {
@@ -59,11 +62,6 @@ class HomeFragmentPresenterImpl(mView: HomeFragmentView) : BasePresenterImpl<Hom
         })
         addDispose(disposable)
     }
-
-    class UserPostAndDriverPostResponse(
-            val userPost: BaseResult<List<UserPostResponse>>,
-            val driverPost: BaseResult<List<DriverPostResponse>>
-    )
 
     private fun getHotCities() {
         val disposable = RetrofitManager.getListHotCities(object : ICallBack<BaseResult<ArrayList<HotCitiesResponse>>> {
