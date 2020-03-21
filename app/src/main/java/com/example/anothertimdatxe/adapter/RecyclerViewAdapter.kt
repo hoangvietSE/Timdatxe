@@ -426,7 +426,6 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
     companion object {
         var TAG = "RecyclerViewAdapter"
         val VIEW_TYPE_NORMAL = 0
-
         var idGenerator = AtomicInteger()
     }
 }
